@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Professor</title>
+</h:head>
+<h:body>
+<table align="center">
+<tr><td>
+	<a href="/ProjectEnsino/Professor.xhtml" title="Professor">Professor</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Aluno.xhtml" title="Aluno">Aluno</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Questao.xhtml" title="Questao">Questão</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Disciplina.xhtml" title="Disciplina">Disciplina</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/TextoBase.xhtml" title="Texto Base">Texto Base</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Autor.xhtml" title="Autor">Autor</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Prova.xhtml" title="Prova">Prova</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/RealizarProva.xhtml" title="Realizar Prova">Realizar Prova</a>&nbsp;&nbsp;&nbsp;
+</td></tr>
+</table>
+<div align="center">
+<h:form>
+<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td><center><h2>Cadastro de Professor</h2></center></td></tr>
+</table>
+<table border="0">
+<tr align="left"><td colspan="2"><h3>Informações Pessoais</h3></td></tr>
+<tr align="left"><td colspan="2">
+	<p:outputLabel value="ID:"></p:outputLabel><p:inputText id="txtId" size="8"></p:inputText>&nbsp;&nbsp;&nbsp;
+</td></tr>
+<tr align="left"><td colspan="2">
+	<p:outputLabel value="Nome:"></p:outputLabel><p:inputText id="txtNome" size="70"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="CPF:"></p:outputLabel><p:inputText id="txtCpf" size="32"></p:inputText>
+</td></tr>
+<tr align="left"><td colspan="2">
+	<p:outputLabel value="Data de Nascimento:"></p:outputLabel><p:inputText id="txtNascimento" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="Telefone:"></p:outputLabel><p:inputText id="txtTelefone" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="Celular:"></p:outputLabel><p:inputText id="txtCelular" size="17"></p:inputText>
+</td></tr>
+<tr align="left"><td align="left" width="50">
+	<p:outputLabel value="Sexo"></p:outputLabel></td>
+	<td align="left"><p:selectOneRadio><f:selectItem itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemLabel="Feminino"></f:selectItem>
+	</p:selectOneRadio>
+</td></tr>
+<tr align="left"><td colspan="2"><h3>Endereço</h3></td></tr>
+<tr align="left"><td colspan="2">
+	<p:outputLabel value="Logradouro:"></p:outputLabel><p:inputText id="txtLogradouro" size="50"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="Nº:"></p:outputLabel><p:inputText id="txtNumero" size="10"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="Complemento:"></p:outputLabel><p:inputText id="txtComplemento" size="16"></p:inputText>
+</td></tr>
+<tr align="left"><td colspan="2">
+	<p:outputLabel value="Bairro:"></p:outputLabel><p:inputText id="txtBairro" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="Cidade:"></p:outputLabel><p:inputText id="txtCidade" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="UF:"></p:outputLabel><p:selectOneMenu style="vertical-align:bottom" id="slmUf">
+       <f:selectItem itemValue="0" itemLabel="--"/>
+       <f:selectItem itemValue="1" itemLabel="AC"/>
+       <f:selectItem itemValue="2" itemLabel="AL"/>
+       <f:selectItem itemValue="3" itemLabel="AM"/>
+       <f:selectItem itemValue="4" itemLabel="AP"/>
+       <f:selectItem itemValue="5" itemLabel="BA"/>
+       <f:selectItem itemValue="6" itemLabel="CE"/>
+       <f:selectItem itemValue="7" itemLabel="DF"/>
+       <f:selectItem itemValue="8" itemLabel="ES"/>
+       <f:selectItem itemValue="9" itemLabel="GO"/>
+       <f:selectItem itemValue="10" itemLabel="MA"/>
+       <f:selectItem itemValue="11" itemLabel="MG"/>
+       <f:selectItem itemValue="12" itemLabel="MS"/>
+       <f:selectItem itemValue="13" itemLabel="MT"/>
+       <f:selectItem itemValue="14" itemLabel="PA"/>
+       <f:selectItem itemValue="15" itemLabel="PB"/>
+       <f:selectItem itemValue="16" itemLabel="PE"/>
+       <f:selectItem itemValue="17" itemLabel="PI"/>
+       <f:selectItem itemValue="18" itemLabel="PR"/>
+       <f:selectItem itemValue="19" itemLabel="RJ"/>
+       <f:selectItem itemValue="20" itemLabel="RN"/>
+       <f:selectItem itemValue="21" itemLabel="RO"/>
+       <f:selectItem itemValue="22" itemLabel="RR"/>
+       <f:selectItem itemValue="23" itemLabel="RS"/>
+       <f:selectItem itemValue="24" itemLabel="SC"/>
+       <f:selectItem itemValue="25" itemLabel="SE"/>
+       <f:selectItem itemValue="26" itemLabel="SP"/>
+       <f:selectItem itemValue="27" itemLabel="TO"/>
+	</p:selectOneMenu>&nbsp;&nbsp;&nbsp;
+	<p:outputLabel value="CEP:"></p:outputLabel><p:inputText id="txtCep" size="23"></p:inputText>&nbsp;&nbsp;&nbsp;
+</td></tr>
+<tr align="left"><td colspan="2">
+	<p:outputLabel value="E-mail:"></p:outputLabel><p:inputText id="txtEmail" size="116"></p:inputText>
+</td></tr>
+</table>
+<br />
+<table align="center">
+	<tr><td>
+		<p:button id="btnSalvar" value="Salvar" onclick=""></p:button>&nbsp;
+		<p:button id="btnExcluir" value="Excluir" onclick=""></p:button>&nbsp;
+		<p:button id="btnProcurar" value="Procurar" onclick=""></p:button>&nbsp;
+	</td></tr>
+</table>
+</h:form>
+</div>
+</h:body>
+</html>
