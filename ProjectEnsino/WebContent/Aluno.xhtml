@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Aluno</title>
+</h:head>
+<h:body>
+<table align="center">
+<tr><td>
+	<a href="/ProjectEnsino/Professor.xhtml" title="Professor">Professor</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Aluno.xhtml" title="Aluno">Aluno</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Questao.xhtml" title="Questao">Questão</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Disciplina.xhtml" title="Disciplina">Disciplina</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/TextoBase.xhtml" title="Texto Base">Texto Base</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Autor.xhtml" title="Autor">Autor</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/Prova.xhtml" title="Prova">Prova</a>&nbsp;&nbsp;&nbsp;
+	<a href="/ProjectEnsino/RealizarProva.xhtml" title="Realizar Prova">Realizar Prova</a>&nbsp;&nbsp;&nbsp;
+</td></tr>
+</table>
+<div align="center">
+<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td><center><h2>Cadastro de Alunos</h2></center></td></tr>
+</table>
+<table>
+<tr><td><h3>Informações Pessoais</h3></td></tr>
+<tr><td>
+	<h:outputText value="RA:"></h:outputText><h:inputText id="txtRa" size="70"></h:inputText>&nbsp;&nbsp;&nbsp;
+</td></tr>
+<tr><td>
+	<h:outputText value="Nome:"></h:outputText><h:inputText id="txtNome" size="70"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="CPF:"></h:outputText><h:inputText id="txtCpf" size="32"></h:inputText>
+</td></tr>
+<tr><td>
+	<h:outputText value="Data de Nascimento:"></h:outputText><h:inputText id="txtNascimento" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Telefone:"></h:outputText><h:inputText id="txtTelefone" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Celular:"></h:outputText><h:inputText id="txtCelular" size="17"></h:inputText>
+</td></tr>
+<tr><td>
+	<h:outputText value="Sexo"></h:outputText>
+	<h:selectOneRadio><f:selectItem itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemLabel="Feminino"></f:selectItem>
+	</h:selectOneRadio>
+</td></tr>
+<tr><td><h3>Endereço</h3></td></tr>
+<tr><td>
+	<h:outputText value="Logradouro:"></h:outputText><h:inputText id="txtLogradouro" size="50"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Nº:"></h:outputText><h:inputText id="txtNumero" size="10"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Complemento:"></h:outputText><h:inputText id="txtComplemento" size="15"></h:inputText>
+</td></tr>
+<tr><td>
+	<h:outputText value="Bairro:"></h:outputText><h:inputText id="txtBairro" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Cidade:"></h:outputText><h:inputText id="txtCidade" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="UF:"></h:outputText><h:selectOneMenu id="slmUf">  
+       <f:selectItem itemValue="1" itemLabel="AC"/>
+       <f:selectItem itemValue="2" itemLabel="AL"/>
+       <f:selectItem itemValue="3" itemLabel="AM"/>
+       <f:selectItem itemValue="4" itemLabel="AP"/>
+       <f:selectItem itemValue="5" itemLabel="BA"/>
+       <f:selectItem itemValue="6" itemLabel="CE"/>
+       <f:selectItem itemValue="7" itemLabel="DF"/>
+       <f:selectItem itemValue="8" itemLabel="ES"/>
+       <f:selectItem itemValue="9" itemLabel="GO"/>
+       <f:selectItem itemValue="10" itemLabel="MA"/>
+       <f:selectItem itemValue="11" itemLabel="MG"/>
+       <f:selectItem itemValue="12" itemLabel="MS"/>
+       <f:selectItem itemValue="13" itemLabel="MT"/>
+       <f:selectItem itemValue="14" itemLabel="PA"/>
+       <f:selectItem itemValue="15" itemLabel="PB"/>
+       <f:selectItem itemValue="16" itemLabel="PE"/>
+       <f:selectItem itemValue="17" itemLabel="PI"/>
+       <f:selectItem itemValue="18" itemLabel="PR"/>
+       <f:selectItem itemValue="19" itemLabel="RJ"/>
+       <f:selectItem itemValue="20" itemLabel="RN"/>
+       <f:selectItem itemValue="21" itemLabel="RO"/>
+       <f:selectItem itemValue="22" itemLabel="RR"/>
+       <f:selectItem itemValue="23" itemLabel="RS"/>
+       <f:selectItem itemValue="24" itemLabel="SC"/>
+       <f:selectItem itemValue="25" itemLabel="SE"/>
+       <f:selectItem itemValue="26" itemLabel="SP"/>
+       <f:selectItem itemValue="27" itemLabel="TO"/>
+	</h:selectOneMenu>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="CEP:"></h:outputText><h:inputText id="txtCep" size="20"></h:inputText>&nbsp;&nbsp;&nbsp;
+</td></tr>
+<tr><td>
+	<h:outputText value="E-mail:"></h:outputText><h:inputText id="txtEmail" size="116"></h:inputText>
+</td></tr>
+</table>
+<br />
+<table align="center">
+	<tr><td>
+		<h:button id="btnSalvar" value="Salvar" onclick=""></h:button>&nbsp;
+		<h:button id="btnExcluir" value="Excluir" onclick=""></h:button>&nbsp;
+		<h:button id="btnProcurar" value="Procurar" onclick=""></h:button>&nbsp;
+	</td></tr>
+</table>
+</div>
+</h:body>
+</html>
