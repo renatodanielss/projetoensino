@@ -19,8 +19,6 @@ import br.fatec.model.Textobase;
 @ManagedBean(name="textobaseController")
 @SessionScoped
 public class TextobaseController {
-	 
-	
 	//private DataModel<Textobase> textosBases;
 	private TextobaseDAO textoBaseDao;
 	private Textobase currentTextoBase;
