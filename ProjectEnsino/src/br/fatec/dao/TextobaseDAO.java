@@ -1,11 +1,12 @@
 package br.fatec.dao;
 
-import java.util.List;
-
+import java.sql.ResultSet;
+//import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
 import br.fatec.model.Textobase;
 
 public class TextobaseDAO {
@@ -162,7 +163,7 @@ public class TextobaseDAO {
 		return listPokemons;
 	}*/
 	
-	private boolean contemNumero(Textobase textobase)
+	/*private boolean contemNumero(Textobase textobase)
 	{
 		Integer numero = textobase.getCodigo_textobase();
 		
@@ -176,6 +177,16 @@ public class TextobaseDAO {
             Query q = this.manager.createQuery("select object(c) from tbl_textobase as c");
  
         return q.getResultList();}
+        finally{
+        	this.manager.close();
+        }
+    }*/
+	
+	public ResultSet exibir(){
+        try{
+            Query q = this.manager.createQuery("select object(c) from tbl_textobase as c");
+ 
+        return (ResultSet)q.getResultList();}
         finally{
         	this.manager.close();
         }
