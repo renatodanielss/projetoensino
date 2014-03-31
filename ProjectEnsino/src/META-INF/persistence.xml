@@ -4,24 +4,23 @@
      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     version="2.0">
 
- <persistence-unit name="pokemon">
+ <persistence-unit name="projectensino">
 
    <!-- provedor/implementacao do JPA -->
    <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
    <!-- entidade mapeada -->
-   <class>br.fatec.programa.Pokemon</class>
+   <class>br.fatec.model.TextoBase</class>
 
    <properties>
   <!-- dados da conexao -->
-   <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-  <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=pokedex;" />
-  <property name="javax.persistence.jdbc.user" value="sa" />
-  <property name="javax.persistence.jdbc.password" value="123456" />
+  <property name="javax.persistence.jdbc.driver" value="org.hibernate.dialect.PostgreSQLDialect" />
+  <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dtb_projectensino;" />
+  <property name="javax.persistence.jdbc.user" value="pgpadrao" />
+  <property name="javax.persistence.jdbc.password" value="pgpadrao123" />
 
-   <!--  propriedades do hibernate -->
-   <property name="hibernate.dialect" 
-              value="org.hibernate.dialect.SQLServerDialect" />
+  <!--  propriedades do hibernate -->
+  <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
   <property name="hibernate.show_sql" value="true" />
   <property name="hibernate.format_sql" value="true" />
 
