@@ -1,25 +1,25 @@
 package br.fatec.controller;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+//import java.io.FileNotFoundException;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+//import java.util.ArrayList;
+//import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+//import javax.faces.context.FacesContext;
+//import javax.faces.model.DataModel;
+//import javax.faces.model.ListDataModel;
+//import org.primefaces.event.FileUploadEvent;
+//import org.primefaces.model.UploadedFile;
 import br.fatec.dao.TextobaseDAO;
 import br.fatec.model.Textobase;
 
 @ManagedBean(name="textobaseController")
 @SessionScoped
 public class TextobaseController {
-	private DataModel<Textobase> textosBases;
+	//private DataModel<Textobase> textosBases;
 	private TextobaseDAO textoBaseDao;
 	private Textobase currentTextoBase;
 	private Textobase newTextoBase;
