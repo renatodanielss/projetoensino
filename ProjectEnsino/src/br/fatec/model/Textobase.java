@@ -2,16 +2,21 @@ package br.fatec.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_textobase")
 public class Textobase {
-	@Id
-	@Column(name="codigo_textobase")
+	@Id  
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
+	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
+	@Column(name="codigo_textobase", nullable=false)
 	private Integer codigo_textobase;
 	
 	@Column(name="texto_textobase")
