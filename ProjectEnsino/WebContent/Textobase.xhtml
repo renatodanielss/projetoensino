@@ -11,6 +11,7 @@ xmlns:p="http://primefaces.org/ui">
 </h:head>
 <h:body>
 <h:form enctype="multipart/form-data">
+<p:panel>
 <table align="center">
 <tr><td>
 	<a href="/ProjectEnsino/Professor.xhtml" title="Professor">Professor</a>&nbsp;&nbsp;&nbsp;
@@ -30,19 +31,20 @@ xmlns:p="http://primefaces.org/ui">
 <table>
 <tr><td><h3>Detalhes do Texto Base</h3></td></tr>
 <tr><td colspan="2">
-	<h:outputText value="ID: "></h:outputText><p:inputText id="txtId" size="15" value="#{textoBaseController.newTextoBase.codigo}" />&nbsp;&nbsp;&nbsp;
+	<h:outputText value="ID: "></h:outputText><p:inputText id="txtId" size="15" value="#{textobaseController.newTextoBase.codigo_textobase}" />&nbsp;&nbsp;&nbsp;
 </td></tr>
-<tr><td valign="top" align="left"><h:outputText value="Texto: "></h:outputText><p:inputTextarea id="txtTexto" rows="10" cols="80" value="#{textoBaseController.newTextoBase.texto}"/></td></tr>
+<tr><td valign="top" align="left"><h:outputText value="Texto: "></h:outputText><p:inputTextarea id="txtTexto" rows="10" cols="80" value="#{textobaseController.newTextoBase.texto_textobase}"/></td></tr>
 </table>
 <br />
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnSalvar" value="Salvar" action="TextoBase.xhtml" actionListener="#{textoBaseController.cadastrar}" />&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" actionListener="#{textobaseController.cadastrar()}" ajax="false"/>&nbsp;
 		<p:button id="btnExcluir" value="Excluir"></p:button>&nbsp;
 		<p:button id="btnProcurar" value="Procurar"></p:button>&nbsp;
 	</td></tr>
 </table>
 </div>
+</p:panel>
 </h:form>
 </h:body>
 </html>
