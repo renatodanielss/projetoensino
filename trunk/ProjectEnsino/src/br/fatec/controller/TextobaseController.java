@@ -5,60 +5,58 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import br.fatec.dao.TextobaseDAO;
+import br.fatec.model.Textobase;
 
-import br.fatec.dao.TextoBaseDAO;
-import br.fatec.model.TextoBase;
-import br.fatec.model.TextoBase;
-
-@ManagedBean(name="textoBaseController")
+@ManagedBean(name="textobaseController")
 @SessionScoped
-public class TextoBaseController {
-	private List<TextoBase> TextosBases;
-	private TextoBaseDAO textoBaseDao;
-	private TextoBase currentTextoBase;
-	private TextoBase newTextoBase;
+public class TextobaseController {
+	private DataModel<Textobase> textosBases;
+	private TextobaseDAO textoBaseDao;
+	private Textobase currentTextoBase;
+	private Textobase newTextoBase;
 	
-	public TextoBaseController()
+	public TextobaseController()
 	{
 	}
 	
 	@PostConstruct
 	public void preparaDados()
 	{
-		textoBaseDao = new TextoBaseDAO();
-		this.newTextoBase = new TextoBase();
-		this.currentTextoBase = new TextoBase();
+		textoBaseDao = new TextobaseDAO();
+		this.newTextoBase = new Textobase();
+		this.currentTextoBase = new Textobase();
 	}
 	
-	public TextoBaseDAO getTextoBaseDao() {
+	public TextobaseDAO getTextoBaseDao() {
 		return textoBaseDao;
 	}
 
-	public void setTextoBaseDao(TextoBaseDAO textoBaseDao) {
+	public void setTextoBaseDao(TextobaseDAO textoBaseDao) {
 		this.textoBaseDao = textoBaseDao;
 	}
 
-	public TextoBase getCurrentTextoBase() {
+	public Textobase getCurrentTextoBase() {
 		return currentTextoBase;
 	}
 
-	public void setCurrentTextoBase(TextoBase currentTextoBase) {
+	public void setCurrentTextoBase(Textobase currentTextoBase) {
 		this.currentTextoBase = currentTextoBase;
 	}
 
-	public TextoBase getNewTextoBase() {
+	public Textobase getNewTextoBase() {
 		return newTextoBase;
 	}
 
-	public void setNewTextoBase(TextoBase newTextoBase) {
+	public void setNewTextoBase(Textobase newTextoBase) {
 		this.newTextoBase = newTextoBase;
 	}
 	
@@ -69,6 +67,6 @@ public class TextoBaseController {
 		else
 			System.out.println("Erro na inserção!");
 		
-		this.newTextoBase = new TextoBase();
+		this.newTextoBase = new Textobase();
 	}
 }

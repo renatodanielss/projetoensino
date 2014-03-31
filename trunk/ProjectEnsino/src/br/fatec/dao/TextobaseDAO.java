@@ -1,45 +1,38 @@
 package br.fatec.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import br.fatec.model.TextoBase;
+import javax.persistence.Query;
+import br.fatec.model.Textobase;
 
-public class TextoBaseDAO {
+public class TextobaseDAO {
 	private EntityManagerFactory factory;
 	private EntityManager manager;
 	
-	public TextoBaseDAO()
+	public TextobaseDAO()
 	{
 		open();
 	}
 	
-	public boolean inserir(TextoBase textobase)
+	public boolean inserir(Textobase textobase)
 	{	
-		if(contemNumero(textobase))
-			return false;
-		
-		boolean retorno = false;
-		
 		try
 		{
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(textobase);
 			this.manager.getTransaction().commit();
+			return true;
 		}
 		catch(Exception ex)
 		{
-			retorno = false;
+			return false;
 		}
-
-		if(contemNumero(textobase))
-			retorno = true;
-		
-		return retorno;
 	}
 	
-	public TextoBase buscar(Integer numero)
+	/*public TextoBase buscar(Integer numero)
 	{
 		TextoBase textobase = null;
 		
@@ -98,7 +91,7 @@ public class TextoBaseDAO {
 		return listTextoBase;
 	}
 	
-	/*public boolean alterar(Pokemon pokemon)
+	public boolean alterar(Pokemon pokemon)
 	{
 		if(!existePokemon(pokemon.getNumero()))
 			return false;
@@ -169,18 +162,28 @@ public class TextoBaseDAO {
 		return listPokemons;
 	}*/
 	
-	private boolean contemNumero(TextoBase textobase)
+	private boolean contemNumero(Textobase textobase)
 	{
-		Integer numero = textobase.getCodigo();
+		Integer numero = textobase.getCodigo_textobase();
 		
 		if(numero != null)
 			return true; 
 		return false;
 	}
 	
+	public List<Textobase> exibir(){
+        try{
+            Query q = this.manager.createQuery("select object(c) from tbl_textobase as c");
+ 
+        return q.getResultList();}
+        finally{
+        	this.manager.close();
+        }
+    }
+	
 	public void open()
 	{
-		this.factory = Persistence.createEntityManagerFactory("pokemon");
+		this.factory = Persistence.createEntityManagerFactory("projectensino");
 		this.manager = factory.createEntityManager();
 	}
 	
