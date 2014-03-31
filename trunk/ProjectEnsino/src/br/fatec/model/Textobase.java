@@ -33,7 +33,7 @@ public class Textobase {
 		this.texto_textobase = texto_textobase;
 	}
 
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -48,5 +48,5 @@ public class Textobase {
 		} else if (!texto_textobase.equals(other.texto_textobase))
 			return false;
 		return true;
-	}
+	}*/
 }
