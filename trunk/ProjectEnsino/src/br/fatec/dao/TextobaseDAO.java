@@ -1,11 +1,11 @@
 package br.fatec.dao;
 
-import java.sql.ResultSet;
-//import java.util.List;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
+//import javax.persistence.Query;
 
 import br.fatec.model.Textobase;
 
@@ -29,6 +29,7 @@ public class TextobaseDAO {
 		}
 		catch(Exception ex)
 		{
+			this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
@@ -92,18 +93,18 @@ public class TextobaseDAO {
 		return listTextoBase;
 	}
 	
-	public boolean alterar(Pokemon pokemon)
+	public boolean alterar(Textobase textobase)
 	{
-		if(!existePokemon(pokemon.getNumero()))
+		if(!existeTextobase(textobase.getNumero()))
 			return false;
 		
 		boolean retorno = false;
-		Pokemon pokemonAlterado = null;
+		Textobase textobaseAlterado = null;
 		
 		try
 		{
 			this.manager.getTransaction().begin();    
-			pokemonAlterado = this.manager.merge(pokemon);
+			textobaseAlterado = this.manager.merge(textobase);
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)
@@ -111,15 +112,15 @@ public class TextobaseDAO {
 			retorno = false;
 		}
 		
-		if(pokemonAlterado.equals(pokemon))
+		if(textobaseAlterado.equals(textobase))
 			retorno = true;
 		
 		return retorno;
 	}
 	
-	public boolean excluir(Pokemon pokemon)
+	public boolean excluir(Textobase textobase)
 	{
-		if(!existePokemon(pokemon.getNumero()))
+		if(!existeTextobase(textobase.getNumero()))
 			return false;
 		
 		boolean retorno = false;
@@ -127,7 +128,7 @@ public class TextobaseDAO {
 		try
 		{
 			this.manager.getTransaction().begin();    
-			this.manager.remove(manager.getReference(pokemon.getClass(), pokemon.getNumero()));
+			this.manager.remove(manager.getReference(textobase.getClass(), textobase.getNumero()));
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)
@@ -135,32 +136,32 @@ public class TextobaseDAO {
 			retorno = false;
 		}
 		
-		if(!existePokemon(pokemon.getNumero()))
+		if(!existeTextobase(textobase.getNumero()))
 		{
-			pokemon = new Pokemon();
+			textobase = new Textobase();
 			retorno = true;
 		}
 		
 		return retorno;
 	}
 	
-	public List<Pokemon> listar()
+	public List<Textobase> listar()
 	{		
-		List<Pokemon> listPokemons = null;
-		String query = "select * from pokemon";
+		List<Textobase> listTextobase = null;
+		String query = "select * from tbl_textobase";
 		
 		try
 		{
 			this.manager.getTransaction().begin();    
-			listPokemons = this.manager.createNativeQuery(query, new Pokemon().getClass()).getResultList();
+			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)
 		{
-			listPokemons = null;
+			listTextobase = null;
 		}
 		
-		return listPokemons;
+		return listTextobase;
 	}*/
 	
 	/*private boolean contemNumero(Textobase textobase)
@@ -182,15 +183,25 @@ public class TextobaseDAO {
         }
     }*/
 	
-	public ResultSet exibir(){
-        try{
-            Query q = this.manager.createQuery("select object(c) from tbl_textobase as c");
- 
-        return (ResultSet)q.getResultList();}
-        finally{
-        	this.manager.close();
-        }
-    }
+	//@SuppressWarnings("unchecked")
+	public List<Textobase> listar()
+	{		
+		List<Textobase> listTextobase = null;
+		String query = "select * from tbl_textobase";
+		
+		try
+		{
+			this.manager.getTransaction().begin();    
+			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listTextobase = null;
+		}
+		
+		return listTextobase;
+	}
 	
 	public void open()
 	{
@@ -206,9 +217,9 @@ public class TextobaseDAO {
 	
 	/*private boolean existePokemon(Integer numero)
 	{
-		Pokemon pokemon = buscar(numero);
+		Textobase textobase = buscar(numero);
 		
-		if(pokemon == null)
+		if(textobase == null)
 			return false;
 		return true;
 	}*/
