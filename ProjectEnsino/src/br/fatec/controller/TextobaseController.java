@@ -5,9 +5,14 @@ package br.fatec.controller;
 //import java.io.IOException;
 //import java.util.ArrayList;
 //import java.util.List;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+//import javax.faces.model.DataModel;
+//import javax.faces.model.ListDataModel;
+
 //import javax.faces.context.FacesContext;
 //import javax.faces.model.DataModel;
 //import javax.faces.model.ListDataModel;
@@ -19,7 +24,7 @@ import br.fatec.model.Textobase;
 @ManagedBean(name="textobaseController")
 @SessionScoped
 public class TextobaseController {
-	//private DataModel<Textobase> textosBases;
+	private List<Textobase> textosBases;
 	private TextobaseDAO textoBaseDao;
 	private Textobase currentTextoBase;
 	private Textobase newTextoBase;
@@ -31,7 +36,7 @@ public class TextobaseController {
 	@PostConstruct
 	public void preparaDados()
 	{
-		textoBaseDao = new TextobaseDAO();
+		this.textoBaseDao = new TextobaseDAO();
 		this.newTextoBase = new Textobase();
 		this.currentTextoBase = new Textobase();
 	}
@@ -68,5 +73,16 @@ public class TextobaseController {
 			System.out.println("Erro na inserção!");
 		
 		this.newTextoBase = new Textobase();
+	}
+	
+	public List<Textobase> getTextosBases() 
+	{
+		this.textosBases = textoBaseDao.listar();
+		return textosBases;
+	}
+    
+	public void setTextosBases(List<Textobase> TextobaseList) 
+	{
+		this.textosBases = TextobaseList;
 	}
 }

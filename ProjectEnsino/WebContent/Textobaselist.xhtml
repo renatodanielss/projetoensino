@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="icon" href="" type="image/ico" /><title>Texto Base</title>
+</h:head>
+<h:body>
+<h:form id="form"> 
+		<p:dataTable var="textobase" value="#{textobaseController.textosBases}" id="textobaseTable" rowKey="#{textobase.codigo_textobase}"
+		 selectionMode="single" selection="#{textobaseController.newTextoBase}" style="text-align:center" paginator="true" rows="10">  
+  
+	        <f:facet name="header">  
+	            Texto Base
+	            <br/>
+	            <div style="text-align: left;">
+	            <p:commandButton id="Cadastrar" value="Cadastrar" icon="ui-icon-disk" action = "cadastro.xhtml" ajax="false"/>
+	            <p:commandButton id="Alterar" value="Alterar" icon="ui-icon-arrowrefresh-1-n" action = "alterar.xhtml" ajax="false"/>
+	            <p:commandButton id="Excluir" value="Excluir" icon="ui-icon-trash" action = "" ajax="false"/>
+	            </div>
+	        </f:facet>  
+	        
+	        <p:column headerText="Código" sortBy="codigo_textobase" id="codigo_textobase">
+	            #{textobase.codigo_textobase}
+	        </p:column>
+	        
+	        <p:column headerText="Texto" sortBy="texto_textobase" id="texto_textobase">  
+	            #{textobase.text_textobase}
+	        </p:column>
+   		</p:dataTable>
+   	</h:form>
+</h:body>
+</html>
