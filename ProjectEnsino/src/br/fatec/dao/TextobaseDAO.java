@@ -1,6 +1,6 @@
 package br.fatec.dao;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
