@@ -1,6 +1,6 @@
 package br.fatec.dao;
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -181,7 +181,7 @@ public class TextobaseDAO {
         finally{
         	this.manager.close();
         }
-    }*/
+    }
 	
 	@SuppressWarnings("unchecked")
 	public List<Textobase> listar()
@@ -201,7 +201,7 @@ public class TextobaseDAO {
 		}
 		
 		return listTextobase;
-	}
+	}*/
 	
 	public void open()
 	{
@@ -215,7 +215,7 @@ public class TextobaseDAO {
 		this.factory.close();
 	}
 	
-	/*private boolean existePokemon(Integer numero)
+	/*private boolean existeTextobase(Integer numero)
 	{
 		Textobase textobase = buscar(numero);
 		

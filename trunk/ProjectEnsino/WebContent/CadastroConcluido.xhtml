@@ -13,21 +13,21 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <div align="center"><font face="Times New Roman">Cadastro concluído com Sucesso</font></div>
 <h:form>  
-    <p:dataTable var="textoBase" value="#{textobaseController.textosBases}">  
+    <p:dataTable var="textoBase" value="">  
         <p:column headerText="Model">  
             <h:outputText value="#{car.model}" />  
         </p:column>  
   
         <p:column headerText="Year">  
-            <h:outputText value="#{car.year}" />  
+            <h:outputText value="" />  
         </p:column>  
   
         <p:column headerText="Manufacturer">  
-            <h:outputText value="#{car.manufacturer}" />  
+            <h:outputText value="" />  
         </p:column>  
   
         <p:column headerText="Color">  
-            <h:outputText value="#{car.color}" />  
+            <h:outputText value="" />  
         </p:column>  
     </p:dataTable>  
 </h:form>  

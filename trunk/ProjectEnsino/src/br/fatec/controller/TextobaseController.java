@@ -5,8 +5,7 @@ package br.fatec.controller;
 //import java.io.IOException;
 //import java.util.ArrayList;
 //import java.util.List;
-import java.util.List;
-
+//import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -24,7 +23,7 @@ import br.fatec.model.Textobase;
 @ManagedBean(name="textobaseController")
 @SessionScoped
 public class TextobaseController {
-	private List<Textobase> textosBases;
+	//private List<Textobase> textosBases;
 	private TextobaseDAO textoBaseDao;
 	private Textobase currentTextoBase;
 	private Textobase newTextoBase;
@@ -75,7 +74,7 @@ public class TextobaseController {
 		this.newTextoBase = new Textobase();
 	}
 	
-	public List<Textobase> getTextosBases() 
+	/*public List<Textobase> getTextosBases() 
 	{
 		this.textosBases = textoBaseDao.listar();
 		return textosBases;
@@ -84,5 +83,5 @@ public class TextobaseController {
 	public void setTextosBases(List<Textobase> TextobaseList) 
 	{
 		this.textosBases = TextobaseList;
-	}
+	}*/
 }
