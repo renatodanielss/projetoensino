@@ -183,7 +183,7 @@ public class TextobaseDAO {
         }
     }*/
 	
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public List<Textobase> listar()
 	{		
 		List<Textobase> listTextobase = null;
@@ -192,7 +192,7 @@ public class TextobaseDAO {
 		try
 		{
 			this.manager.getTransaction().begin();    
-			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
+			listTextobase = this.manager.createNativeQuery(query, new Textobase.getClass()).getResultList();
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)
@@ -201,7 +201,7 @@ public class TextobaseDAO {
 		}
 		
 		return listTextobase;
-	}
+	}*/
 	
 	public void open()
 	{

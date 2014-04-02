@@ -7,30 +7,35 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="icon" href="" type="image/ico" /><title>Texto Base</title>
+<link rel="icon" href="" type="image/ico" /><title>Selecione o texto</title>
 </h:head>
 <h:body>
-<h:form enctype="multipart/form-data">
-<p:dataTable id="dt1" value="#{textobaseController.textosBases}" var="item" border="10" cellpadding="5" cellspacing="3" first="0" rows="4" width="50%" dir="LTR" frame="hsides" rules="all" >
-<f:facet name="header">
-  <h:outputText value="This is 'dataTable' demo" />
-</f:facet> 
-
-<h:column>
-  <h:outputText value="id" />
-   <h:outputText value="#{item.codigo_textobase}"></h:outputText>
-</h:column>
-
-<h:column>
-  <h:outputText value="name"/>
-   <h:outputText value="#{item.texto_textobase}"></h:outputText>
-</h:column>
-
-<f:facet name="footer">
-  <h:outputText value="The End" />
-</f:facet> 
-
-</p:dataTable>
-   	</h:form>
+<h:form id="form">
+<p:dataTable var="car" value="#{textobaseController.textosBases}" paginator="true" rows="10"  
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{textobaseController.currentTextoBase}" id="carTable" lazy="true">  
+  
+        <p:ajax event="rowSelect" listener="#{textobaseController.onRowSelect}" update=":form:display" oncomplete="PF('carDialog').show()" />  
+  
+        <p:column headerText="Model" sortBy="model" filterBy="#{car.model}">  
+            <h:outputText value="#{car.codigo_textobase}" />  
+        </p:column>  
+  
+        <p:column headerText="Year" sortBy="year" filterBy="#{car.year}">  
+            <h:outputText value="#{car.texto_textobase}" />  
+        </p:column>   
+    </p:dataTable>  
+  
+    <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false"  
+              showEffect="explode" hideEffect="explode">  
+  
+        <h:panelGrid id="display" columns="2" cellpadding="4">  
+  
+            
+  
+            
+        </h:panelGrid>  
+    </p:dialog> 
+</h:form>
 </h:body>
 </html>
