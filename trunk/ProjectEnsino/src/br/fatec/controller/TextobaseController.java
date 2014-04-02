@@ -3,13 +3,17 @@ package br.fatec.controller;
 //import java.io.FileNotFoundException;
 //import java.io.FileOutputStream;
 //import java.io.IOException;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 //import javax.faces.model.DataModel;
 //import javax.faces.model.ListDataModel;
+
+
+//import org.primefaces.model.LazyDataModel;
 
 //import javax.faces.context.FacesContext;
 //import javax.faces.model.DataModel;
@@ -29,6 +33,7 @@ public class TextobaseController {
 	
 	public TextobaseController()
 	{
+		
 	}
 	
 	@PostConstruct
@@ -37,6 +42,7 @@ public class TextobaseController {
 		this.textoBaseDao = new TextobaseDAO();
 		this.newTextoBase = new Textobase();
 		this.currentTextoBase = new Textobase();
+		this.textosBases = new ArrayList<Textobase>();
 	}
 	
 	public TextobaseDAO getTextoBaseDao() {
@@ -63,6 +69,17 @@ public class TextobaseController {
 		this.newTextoBase = newTextoBase;
 	}
 	
+	public List<Textobase> getTextosBases() 
+	{
+		//this.textosBases = textoBaseDao.listar();
+		return textosBases;
+	}
+    
+	public void setTextosBases(List<Textobase> TextobaseList) 
+	{
+		this.textosBases = TextobaseList;
+	}
+	
 	public void cadastrar()
 	{	
 		if (textoBaseDao.inserir(this.newTextoBase))
@@ -71,16 +88,5 @@ public class TextobaseController {
 			System.out.println("Erro na inserção!");
 		
 		this.newTextoBase = new Textobase();
-	}
-	
-	public List<Textobase> getTextosBases() 
-	{
-		this.textosBases = textoBaseDao.listar();
-		return textosBases;
-	}
-    
-	public void setTextosBases(List<Textobase> TextobaseList) 
-	{
-		this.textosBases = TextobaseList;
 	}
 }
