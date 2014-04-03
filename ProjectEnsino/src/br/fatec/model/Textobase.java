@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tbl_textobase")
 public class Textobase {
-	@Id  
+	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
 	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
 	@Column(name="codigo_textobase", nullable=false)
