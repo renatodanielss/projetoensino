@@ -11,17 +11,40 @@ xmlns:p="http://primefaces.org/ui">
 </h:head>
 <h:body>
 <h:form id="form">
+<p:dataTable var="textobase" value="#{textobaseController.textosBases}" id="textobaseTable" rowKey="#{textobase.codigo_textobase}"
+		 selectionMode="single" selection="#{textobaseController.currentTextoBase}" style="text-align:center" paginator="true" rows="10" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                 rowsPerPageTemplate="5,10,15">  
+  
+	        <f:facet name="header">  
+	            Textobase
+	            <br/>
+	            <div style="text-align: left;">
+	            <p:commandButton id="Cadastrar" value="Cadastrar" icon="ui-icon-disk" action = "Textobase.xhtml" ajax="false"/>
+	            <p:commandButton id="Alterar" value="Alterar" icon="ui-icon-arrowrefresh-1-n" action="Textobase.xhtml" ajax="false"/>
+	            <p:commandButton id="Excluir" value="Excluir" icon="ui-icon-trash" action = "Textobase.xhtml}" ajax="false"/>
+	            </div>
+	        </f:facet>  
+	        
+	        <p:column headerText="Nº" sortBy="numero" id="numero" filterBy="numero" filterMatchMode="contains">  
+	            #{textobase.codigo_textobase} 
+	        </p:column>
+	        
+	        <p:column headerText="Nome" sortBy="nome" id="nome" filterBy="nome" filterMatchMode="contains">  
+	            #{textobase.texto_textobase}  
+	        </p:column>
+</p:dataTable>
+
 <p:dataTable var="car" value="#{textobaseController.textosBases}" paginator="true" rows="10"  
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{textobaseController.currentTextoBase}" id="carTable" lazy="true">  
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" id="carTable" lazy="true">  
   
         <p:ajax event="rowSelect" listener="#{textobaseController.onRowSelect}" update=":form:display" oncomplete="PF('carDialog').show()" />  
   
-        <p:column headerText="Model" sortBy="model" filterBy="#{car.model}">  
+        <p:column headerText="Model" sortBy="model" filterBy="#{car.codigo_textobase}">  
             <h:outputText value="#{car.codigo_textobase}" />  
         </p:column>  
   
-        <p:column headerText="Year" sortBy="year" filterBy="#{car.year}">  
+        <p:column headerText="Year" sortBy="year" filterBy="#{car.texto_textobase}">  
             <h:outputText value="#{car.texto_textobase}" />  
         </p:column>   
     </p:dataTable>  
