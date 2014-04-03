@@ -2,6 +2,8 @@ package br.fatec.dao;
 
 //import java.util.List;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -183,7 +185,7 @@ public class TextobaseDAO {
         }
     }*/
 	
-	/*@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public List<Textobase> listar()
 	{		
 		List<Textobase> listTextobase = null;
@@ -191,17 +193,21 @@ public class TextobaseDAO {
 		
 		try
 		{
-			this.manager.getTransaction().begin();    
-			listTextobase = this.manager.createNativeQuery(query, new Textobase.getClass()).getResultList();
+			//close();
+			//open();
+			this.manager.getTransaction().begin();
+			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
+			//listTextobase = this.manager.createQuery("select c * Textobase").getResultList();
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)
 		{
 			listTextobase = null;
+			this.manager.getTransaction().rollback();
 		}
 		
 		return listTextobase;
-	}*/
+	}
 	
 	public void open()
 	{

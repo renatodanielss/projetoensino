@@ -3,9 +3,8 @@ package br.fatec.controller;
 //import java.io.FileNotFoundException;
 //import java.io.FileOutputStream;
 //import java.io.IOException;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -42,7 +41,6 @@ public class TextobaseController {
 		this.textoBaseDao = new TextobaseDAO();
 		this.newTextoBase = new Textobase();
 		this.currentTextoBase = new Textobase();
-		this.textosBases = new ArrayList<Textobase>();
 	}
 	
 	public TextobaseDAO getTextoBaseDao() {
@@ -71,7 +69,7 @@ public class TextobaseController {
 	
 	public List<Textobase> getTextosBases() 
 	{
-		//this.textosBases = textoBaseDao.listar();
+		this.textosBases = textoBaseDao.listar();
 		return textosBases;
 	}
     
