@@ -185,7 +185,7 @@ public class TextobaseDAO {
         }
     }*/
 	
-	//@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public List<Textobase> listar()
 	{		
 		List<Textobase> listTextobase = null;
