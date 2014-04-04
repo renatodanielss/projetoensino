@@ -13,16 +13,45 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <table align="center">
 <tr><td>
-	<a href="/ProjectEnsino/Professor.xhtml" title="Professor">Professor</a>&nbsp;&nbsp;&nbsp;
-	<a href="/ProjectEnsino/Aluno.xhtml" title="Aluno">Aluno</a>&nbsp;&nbsp;&nbsp;
-	<a href="/ProjectEnsino/Questao.xhtml" title="Questao">Questão</a>&nbsp;&nbsp;&nbsp;
-	<a href="/ProjectEnsino/Disciplina.xhtml" title="Disciplina">Disciplina</a>&nbsp;&nbsp;&nbsp;
-	<a href="/ProjectEnsino/Textobase.xhtml" title="Texto Base">Texto Base</a>&nbsp;&nbsp;&nbsp;
-	<a href="/ProjectEnsino/Autor.xhtml" title="Autor">Autor</a>&nbsp;&nbsp;&nbsp;
-	<a href="/ProjectEnsino/Prova.xhtml" title="Prova">Prova</a>&nbsp;&nbsp;&nbsp;
-	<a href="/ProjectEnsino/RealizarProva.xhtml" title="Realizar Prova">Realizar Prova</a>&nbsp;&nbsp;&nbsp;
+	<p:commandButton id="dynaButtonProfessor" value="Professor" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonProfessor" my="left top" at="left bottom">  
+            <p:menuitem value="Cadastrar" url="/Professor.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
+    </p:menu>
+	<p:commandButton id="dynaButtonAluno" value="Aluno" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonAluno" my="left top" at="left bottom">  
+            <p:menuitem value="Cadastrar" url="/Aluno.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>
+            <p:menuitem value="Realizar Prova" url="/RealizarProva.xhtml" icon="ui-icon-star"/>  
+    </p:menu>
+	<p:commandButton id="dynaButtonQuestao" value="Questão" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonQuestao" my="left top" at="left bottom">  
+            <p:menuitem value="Cadastrar" url="/Questao.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
+    </p:menu>
+	<p:commandButton id="dynaButtonDisciplina" value="Disciplina" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonDisciplina" my="left top" at="left bottom">  
+            <p:menuitem value="Cadastrar" url="/Disciplina.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
+    </p:menu>
+	<p:commandButton id="dynaButtonTextobase" value="Texto Base" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonTextobase" my="left top" at="left bottom">  
+            <p:menuitem value="Cadastrar" url="/Textobase.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Editar" url="/Textobaselist.xhtml" icon="ui-icon-arrowrefresh-1-w"/>  
+    </p:menu>
+	<p:commandButton id="dynaButtonAutor" value="Autor" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonAutor" my="left top" at="left bottom">  
+            <p:menuitem value="Cadastrar" url="/Autor.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
+    </p:menu>
+	<p:commandButton id="dynaButtonProva" value="Prova" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonProva" my="left top" at="left bottom">  
+            <p:menuitem value="Cadastrar" url="/Prova.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
+    </p:menu>
 </td></tr>
 </table>
+<br />
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Disciplina</h2></center></td></tr>
