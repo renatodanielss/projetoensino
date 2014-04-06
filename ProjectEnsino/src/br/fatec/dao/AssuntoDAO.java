@@ -6,23 +6,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.fatec.model.Professor;
+import br.fatec.model.Assunto;
 
-public class ProfessorDAO {
+public class AssuntoDAO {
 	private EntityManagerFactory factory;
 	private EntityManager manager;
 	
-	public ProfessorDAO()
+	public AssuntoDAO()
 	{
 		open();
 	}
 	
-	public boolean inserir(Professor professor)
+	public boolean inserir(Assunto assunto)
 	{	
 		try
 		{
 			this.manager.getTransaction().begin();    
-	 		this.manager.persist(professor);
+	 		this.manager.persist(assunto);
 			this.manager.getTransaction().commit();
 			return true;
 		}
@@ -34,24 +34,24 @@ public class ProfessorDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Professor> listar()
+	public List<Assunto> listar()
 	{		
-		List<Professor> listProfessor = null;
-		String query = "select * from tbl_professor";
+		List<Assunto> listAssunto = null;
+		String query = "select * from tbl_assunto";
 		
 		try
 		{
 			this.manager.getTransaction().begin();
-			listProfessor = this.manager.createNativeQuery(query, new Professor().getClass()).getResultList();
+			listAssunto = this.manager.createNativeQuery(query, new Assunto().getClass()).getResultList();
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)
 		{
-			listProfessor = null;
+			listAssunto = null;
 			this.manager.getTransaction().rollback();
 		}
 		
-		return listProfessor;
+		return listAssunto;
 	}
 	
 	public void open()
