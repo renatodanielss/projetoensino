@@ -63,6 +63,8 @@ public class Aluno {
 	@Column(name="disciplina_aluno")
 	private Integer disciplina_aluno;
 
+	private boolean sexo;
+
 	public String getRa_aluno() {
 		return ra_aluno;
 	}
@@ -109,6 +111,10 @@ public class Aluno {
 
 	public void setCelular_aluno(String celular_aluno) {
 		this.celular_aluno = celular_aluno;
+	}
+	
+	public String isSexo() {
+	return (this.sexo ? "Masculino":"Feminino");
 	}
 
 	public String getSexo_aluno() {
@@ -191,8 +197,4 @@ public class Aluno {
 		this.disciplina_aluno = disciplina_aluno;
 	}
 	
-	
-
-
-
 }
