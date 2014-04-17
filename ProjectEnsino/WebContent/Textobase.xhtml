@@ -68,19 +68,38 @@ xmlns:p="http://primefaces.org/ui">
 </table>
 <table align="center">
 <tr>
-	<td align="left"><h3>Detalhes do Texto Base</h3></td>
+	<td align="left" colspan="2"><h3>Detalhes do Texto Base</h3></td>
 </tr>
 <tr>
-	<td align="left"><h:outputText value="Título:"></h:outputText></td>
+	<td align="left" colspan="2"><h:outputText value="Título:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left"><p:inputText id="txtTitulo" size="77"/></td>
+	<td align="left" colspan="2"><p:inputText id="txtTitulo" size="77"/></td>
+</tr>
+
+
+<tr>
+	<td align="left"><h:outputText value="Disciplina:"></h:outputText></td><td align="left"><h:outputText value="Assunto:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left"><h:outputText value="Texto:"></h:outputText></td>
+	<td align="left">
+		<p:selectOneMenu maxlength="20" style="vertical-align:bottom" id="slmDisciplina">
+			<f:selectItem itemValue="0" itemLabel="-------------------------------------------------"/>
+		</p:selectOneMenu>
+	</td>
+	<td align="left">
+		<p:selectOneMenu maxlength="20" style="vertical-align:bottom" id="slmAssunto">
+			<f:selectItem itemValue="0" itemLabel="-------------------------------------------------"/>
+		</p:selectOneMenu>
+	</td>
+</tr>
+
+
+<tr>
+	<td align="left" colspan="2"><h:outputText value="Texto:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left"><p:inputTextarea id="txtTexto" rows="10" cols="80" autoResize="false" value="#{textobaseController.newTextoBase.texto_textobase}"/></td>
+	<td align="left" colspan="2"><p:inputTextarea id="txtTexto" rows="10" cols="80" autoResize="false" value="#{textobaseController.newTextoBase.texto_textobase}"/></td>
 </tr>
 </table>
 <br />
