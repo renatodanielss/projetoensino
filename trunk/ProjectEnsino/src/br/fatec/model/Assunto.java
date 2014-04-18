@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 public class Assunto {
 	@Id
-	@Column(name="idDisciplina_assunto")
+	@Column(name="iddisciplina_assunto")
 	private Integer idDisciplina_assunto;
 	
 	@Column(name="nome_assunto")

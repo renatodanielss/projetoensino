@@ -18,16 +18,45 @@ public class Textobase {
 	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
 	@Column(name="codigo_textobase", nullable=false)
 	private Integer codigo_textobase;
-	
-	@Column(name="texto_textobase")
+	@Column(name="titulo_textobase", nullable=false)
+	private String titulo_textobase;
+	@Column(name="disciplina_textobase", nullable=false)
+	private int disciplina_textobase;
+	@Column(name="assunto_textobase", nullable=false)
+	private int assunto_textobase;
+	@Column(name="texto_textobase", nullable=false)
 	private String texto_textobase;
-	
+
 	public Integer getCodigo_textobase() {
 		return codigo_textobase;
 	}
 
 	public void setCodigo_textobase(Integer codigo_textobase) {
 		this.codigo_textobase = codigo_textobase;
+	}
+	
+	public String getTitulo_textobase() {
+		return titulo_textobase;
+	}
+
+	public void setTitulo_textobase(String titulo_textobase) {
+		this.titulo_textobase = titulo_textobase;
+	}
+
+	public int getDisciplina_textobase() {
+		return disciplina_textobase;
+	}
+
+	public void setDisciplina_textobase(int disciplina_textobase) {
+		this.disciplina_textobase = disciplina_textobase;
+	}
+
+	public int getAssunto_textobase() {
+		return assunto_textobase;
+	}
+
+	public void setAssunto_textobase(int assunto_textobase) {
+		this.assunto_textobase = assunto_textobase;
 	}
 
 	public String getTexto_textobase() {

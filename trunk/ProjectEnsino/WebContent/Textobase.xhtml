@@ -74,7 +74,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" colspan="2"><h:outputText value="Título:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" colspan="2"><p:inputText id="txtTitulo" size="77"/></td>
+	<td align="left" colspan="2"><p:inputText id="txtTitulo" size="77" value="#{textobaseController.newTextoBase.titulo_textobase}" /></td>
 </tr>
 
 
@@ -83,13 +83,15 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 <tr>
 	<td align="left">
-		<p:selectOneMenu maxlength="20" style="vertical-align:bottom" id="slmDisciplina">
-			<f:selectItem itemValue="0" itemLabel="-------------------------------------------------"/>
+		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px" value="#{textobaseController.newTextoBase.disciplina_textobase}">
+			<f:selectItem itemLabel="--" ></f:selectItem>
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
 		</p:selectOneMenu>
 	</td>
 	<td align="left">
-		<p:selectOneMenu maxlength="20" style="vertical-align:bottom" id="slmAssunto">
-			<f:selectItem itemValue="0" itemLabel="-------------------------------------------------"/>
+		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:329px" value="#{textobaseController.newTextoBase.assunto_textobase}">
+			<f:selectItem itemLabel="--" ></f:selectItem>
+			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2.idDisciplina_assunto}" itemLabel="#{item2.nome_assunto}"/>
 		</p:selectOneMenu>
 	</td>
 </tr>
