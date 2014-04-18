@@ -11,6 +11,9 @@
 
    <!-- entidade mapeada -->
    <class>br.fatec.model.Textobase</class>
+   <class>br.fatec.model.Disciplina</class>
+   <class>br.fatec.model.Assunto</class>
+   <class>br.fatec.model.Professor</class>
 
    <properties>
   <!-- dados da conexao -->

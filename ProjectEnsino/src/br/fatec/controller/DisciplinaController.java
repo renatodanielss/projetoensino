@@ -32,6 +32,7 @@ public class DisciplinaController {
 	}
 
 	public List<Disciplina> getDisciplinas() {
+		this.disciplinas = disciplinaDao.listar();
 		return disciplinas;
 	}
 

@@ -32,6 +32,7 @@ public class AssuntoController {
 	}
 
 	public List<Assunto> getAssuntos() {
+		this.assuntos = assuntoDao.listar();
 		return assuntos;
 	}
 
