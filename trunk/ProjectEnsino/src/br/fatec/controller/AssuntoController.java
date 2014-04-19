@@ -35,6 +35,11 @@ public class AssuntoController {
 		this.assuntos = assuntoDao.listar();
 		return assuntos;
 	}
+	
+	public List<Assunto> getAssuntos(int iddisciplina_assunto) {
+		this.assuntos = assuntoDao.listar(iddisciplina_assunto);
+		return assuntos;
+	}
 
 	public void setAssuntos(List<Assunto> assuntos) {
 		this.assuntos = assuntos;

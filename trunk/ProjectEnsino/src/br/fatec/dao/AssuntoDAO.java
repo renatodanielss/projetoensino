@@ -54,6 +54,27 @@ public class AssuntoDAO {
 		return listAssunto;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Assunto> listar(int iddisciplina_assunto)
+	{		
+		List<Assunto> listAssunto = null;
+		String query = "select * from tbl_assunto where iddisciplina_assunto = " + iddisciplina_assunto;
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+			listAssunto = this.manager.createNativeQuery(query, new Assunto().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listAssunto = null;
+			this.manager.getTransaction().rollback();
+		}
+		
+		return listAssunto;
+	}
+	
 	public void open()
 	{
 		this.factory = Persistence.createEntityManagerFactory("projectensino");
