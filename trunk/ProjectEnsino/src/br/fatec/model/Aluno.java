@@ -12,9 +12,6 @@ import javax.persistence.Table;
 
 public class Aluno {
 	@Id
-   // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
-	//@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
-	
 	@Column(name="ra_aluno")
 	private String ra_aluno;
 	
@@ -59,9 +56,6 @@ public class Aluno {
 	
 	@Column(name="email_aluno")
 	private String email_aluno;
-	
-	@Column(name="disciplina_aluno")
-	private Integer disciplina_aluno;
 
 	private boolean sexo;
 
@@ -188,13 +182,4 @@ public class Aluno {
 	public void setEmail_aluno(String email_aluno) {
 		this.email_aluno = email_aluno;
 	}
-
-	public Integer getDisciplina_aluno() {
-		return disciplina_aluno;
-	}
-
-	public void setDisciplina_aluno(Integer disciplina_aluno) {
-		this.disciplina_aluno = disciplina_aluno;
-	}
-	
 }
