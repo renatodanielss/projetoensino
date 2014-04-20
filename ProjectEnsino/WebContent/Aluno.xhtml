@@ -69,32 +69,32 @@ xmlns:p="http://primefaces.org/ui">
 <table>
 <tr><td><h3>Informações Pessoais</h3></td></tr>
 <tr><td>
-	<h:outputText value="RA:"></h:outputText><h:inputText id="txtRa" size="70"></h:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="RA:"></h:outputText><p:inputText id="txtRa" size="70" value="#{alunoController.newAluno.ra_aluno}"></p:inputText>&nbsp;&nbsp;&nbsp;
 </td></tr>
 <tr><td>
-	<h:outputText value="Nome:"></h:outputText><h:inputText id="txtNome" size="70"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="CPF:"></h:outputText><h:inputText id="txtCpf" size="32"></h:inputText>
+	<h:outputText value="Nome:"></h:outputText><p:inputText id="txtNome" size="70"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="CPF:"></h:outputText><p:inputText id="txtCpf" size="32"></p:inputText>
 </td></tr>
 <tr><td>
-	<h:outputText value="Data de Nascimento:"></h:outputText><h:inputText id="txtNascimento" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Telefone:"></h:outputText><h:inputText id="txtTelefone" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Celular:"></h:outputText><h:inputText id="txtCelular" size="17"></h:inputText>
+	<h:outputText value="Data de Nascimento:"></h:outputText><p:inputText id="txtNascimento" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Telefone:"></h:outputText><p:inputText id="txtTelefone" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Celular:"></h:outputText><p:inputText id="txtCelular" size="17"></p:inputText>
 </td></tr>
 <tr><td>
 	<h:outputText value="Sexo"></h:outputText>
-	<h:selectOneRadio><f:selectItem itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemLabel="Feminino"></f:selectItem>
-	</h:selectOneRadio>
+	<p:selectOneRadio><f:selectItem itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemLabel="Feminino"></f:selectItem>
+	</p:selectOneRadio>
 </td></tr>
 <tr><td><h3>Endereço</h3></td></tr>
 <tr><td>
-	<h:outputText value="Logradouro:"></h:outputText><h:inputText id="txtLogradouro" size="50"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Nº:"></h:outputText><h:inputText id="txtNumero" size="10"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Complemento:"></h:outputText><h:inputText id="txtComplemento" size="15"></h:inputText>
+	<h:outputText value="Logradouro:"></h:outputText><p:inputText id="txtLogradouro" size="50"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Nº:"></h:outputText><p:inputText id="txtNumero" size="10"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Complemento:"></h:outputText><p:inputText id="txtComplemento" size="15"></p:inputText>
 </td></tr>
 <tr><td>
-	<h:outputText value="Bairro:"></h:outputText><h:inputText id="txtBairro" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Cidade:"></h:outputText><h:inputText id="txtCidade" size="25"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="UF:"></h:outputText><h:selectOneMenu id="slmUf">  
+	<h:outputText value="Bairro:"></h:outputText><p:inputText id="txtBairro" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="Cidade:"></h:outputText><p:inputText id="txtCidade" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="UF:"></h:outputText><p:selectOneMenu style="vertical-align:bottom" id="slmUf">  
        <f:selectItem itemValue="1" itemLabel="AC"/>
        <f:selectItem itemValue="2" itemLabel="AL"/>
        <f:selectItem itemValue="3" itemLabel="AM"/>
@@ -122,19 +122,19 @@ xmlns:p="http://primefaces.org/ui">
        <f:selectItem itemValue="25" itemLabel="SE"/>
        <f:selectItem itemValue="26" itemLabel="SP"/>
        <f:selectItem itemValue="27" itemLabel="TO"/>
-	</h:selectOneMenu>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="CEP:"></h:outputText><h:inputText id="txtCep" size="20"></h:inputText>&nbsp;&nbsp;&nbsp;
+	</p:selectOneMenu>&nbsp;&nbsp;&nbsp;
+	<h:outputText value="CEP:"></h:outputText><p:inputText id="txtCep" size="20"></p:inputText>&nbsp;&nbsp;&nbsp;
 </td></tr>
 <tr><td>
-	<h:outputText value="E-mail:"></h:outputText><h:inputText id="txtEmail" size="116"></h:inputText>
+	<h:outputText value="E-mail:"></h:outputText><p:inputText id="txtEmail" size="116"></p:inputText>
 </td></tr>
 </table>
 <br />
 <table align="center">
 	<tr><td>
-		<h:button id="btnSalvar" value="Salvar" onclick=""></h:button>&nbsp;
-		<h:button id="btnExcluir" value="Excluir" onclick=""></h:button>&nbsp;
-		<h:button id="btnProcurar" value="Procurar" onclick=""></h:button>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" onclick=""></p:commandButton>&nbsp;
+		<p:commandButton id="btnExcluir" value="Excluir" onclick=""></p:commandButton>&nbsp;
+		<p:commandButton id="btnProcurar" value="Procurar" onclick=""></p:commandButton>&nbsp;
 	</td></tr>
 </table>
 </div>

@@ -30,8 +30,9 @@ public class AlunoController {
 		this.newAluno = new Aluno();
 		this.currentAluno = new Aluno();
 	}
-
+	
 	public List<Aluno> getAlunos() {
+		this.alunos = alunoDao.listar();
 		return alunos;
 	}
 
@@ -62,7 +63,7 @@ public class AlunoController {
 	public void setNewAluno(Aluno newAluno) {
 		this.newAluno = newAluno;
 	}
-	
+
 	public void cadastrar()
 	{	
 		if (alunoDao.inserir(this.newAluno))
