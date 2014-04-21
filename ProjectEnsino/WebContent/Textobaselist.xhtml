@@ -19,71 +19,33 @@ xmlns:p="http://primefaces.org/ui">
 
 </script>
 </h:head>
-<h:body>
+<ui:decorate template="/Template/Template.xhtml">
+<ui:define name="page">
 <h:form id="form">
-<table align="center">
-<tr><td>
-	<p:commandButton id="dynaButtonProfessor" value="Professor" type="button"/>
-    <p:menu overlay="true" trigger="dynaButtonProfessor" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Professor.xhtml" icon="ui-icon-disk"/>  
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
-    </p:menu>
-	<p:commandButton id="dynaButtonAluno" value="Aluno" type="button"/>
-    <p:menu overlay="true" trigger="dynaButtonAluno" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Aluno.xhtml" icon="ui-icon-disk"/>  
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>
-            <p:menuitem value="Realizar Prova" url="/RealizarProva.xhtml" icon="ui-icon-star"/>  
-    </p:menu>
-	<p:commandButton id="dynaButtonQuestao" value="Questão" type="button"/>
-    <p:menu overlay="true" trigger="dynaButtonQuestao" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Questao.xhtml" icon="ui-icon-disk"/>  
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
-    </p:menu>
-	<p:commandButton id="dynaButtonDisciplina" value="Disciplina" type="button"/>
-    <p:menu overlay="true" trigger="dynaButtonDisciplina" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Disciplina.xhtml" icon="ui-icon-disk"/>  
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
-    </p:menu>
-	<p:commandButton id="dynaButtonTextobase" value="Texto Base" type="button"/>
-    <p:menu overlay="true" trigger="dynaButtonTextobase" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Textobase.xhtml" icon="ui-icon-disk"/>  
-            <p:menuitem value="Editar" url="/Textobaselist.xhtml" icon="ui-icon-arrowrefresh-1-w"/>  
-    </p:menu>
-	<p:commandButton id="dynaButtonAutor" value="Autor" type="button"/>
-    <p:menu overlay="true" trigger="dynaButtonAutor" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Autor.xhtml" icon="ui-icon-disk"/>  
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
-    </p:menu>
-	<p:commandButton id="dynaButtonProva" value="Prova" type="button"/>
-    <p:menu overlay="true" trigger="dynaButtonProva" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Prova.xhtml" icon="ui-icon-disk"/>  
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>  
-    </p:menu>
-</td></tr>
-</table>
-<br />
 <table align="center" width="900">
 <tr><td>
 <p:dataTable  var="textobase" value="#{textobaseController.textosBases}" id="textobaseTable" rowKey="#{textobase.codigo_textobase}"
 		 selectionMode="single" selection="#{textobaseController.currentTextoBase}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
-		 rowsPerPageTemplate="5,10,15" lazy="true">  
+		 rowsPerPageTemplate="5,10,15" lazy="true">
   
-	        <f:facet name="header">  
+	        <f:facet name="header">
 	            Texto Base
 	            <br/>
 	        </f:facet>  
 	        
 	        <p:column width="50" headerText="Código" sortBy="codigo_textobase" id="codigo_textobase" filterBy="codigo_textobase" filterMatchMode="contains">
-	            #{textobase.codigo_textobase} 
+	            #{textobase.codigo_textobase}
 	        </p:column>
 	        
-	        <p:column width="850" headerText="Texto" sortBy="texto_textobase" id="texto_textobase" filterBy="texto_textobase" filterMatchMode="contains">  
-	            #{textobase.texto_textobase}  
+	        <p:column width="650" headerText="Texto" sortBy="texto_textobase" id="texto_textobase" filterBy="texto_textobase" filterMatchMode="contains">
+	            #{textobase.titulo_textobase}
 	        </p:column>
+
 </p:dataTable>
 </td></tr>
 </table>
 </h:form>
-</h:body>
+</ui:define>
+</ui:decorate>
 </html>

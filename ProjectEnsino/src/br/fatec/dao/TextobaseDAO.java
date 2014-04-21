@@ -3,12 +3,9 @@ package br.fatec.dao;
 //import java.util.List;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-//import javax.persistence.Query;
-
 import br.fatec.model.Textobase;
 
 public class TextobaseDAO {
@@ -189,15 +186,33 @@ public class TextobaseDAO {
 	public List<Textobase> listar()
 	{		
 		List<Textobase> listTextobase = null;
-		String query = "select * from tbl_textobase";
+		String query = "SELECT * FROM tbl_textobase inner join tbl_disciplina on tbl_textobase.disciplina_textobase = tbl_disciplina.id_disciplina";
 		
 		try
 		{
-			//close();
-			//open();
 			this.manager.getTransaction().begin();
 			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
-			//listTextobase = this.manager.createQuery("select c * Textobase").getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listTextobase = null;
+			this.manager.getTransaction().rollback();
+		}
+		
+		return listTextobase;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object> listarInnerJoin()
+	{		
+		List<Object> listTextobase = null;
+		String query = "SELECT tbl_textobase.codigo_textobase, tbl_textobase.titulo_textobase, tbl_disciplina.nome_disciplina FROM tbl_textobase inner join tbl_disciplina on tbl_textobase.disciplina_textobase = tbl_disciplina.id_disciplina";
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+			listTextobase = this.manager.createNativeQuery(query, new Object().getClass()).getResultList();
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)

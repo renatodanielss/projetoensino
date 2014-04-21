@@ -72,6 +72,12 @@ public class TextobaseController {
 		this.textosBases = textoBaseDao.listar();
 		return textosBases;
 	}
+	
+	public List<Object> getTextosbasesObject() 
+	{
+		List<Object> textosBasesObject = textoBaseDao.listarInnerJoin();
+		return textosBasesObject;
+	}
     
 	public void setTextosBases(List<Textobase> TextobaseList) 
 	{
