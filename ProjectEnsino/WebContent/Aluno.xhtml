@@ -66,35 +66,73 @@ xmlns:p="http://primefaces.org/ui">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Alunos</h2></center></td></tr>
 </table>
-<table>
-<tr><td><h3>Informações Pessoais</h3></td></tr>
-<tr><td>
-	<h:outputText value="RA:"></h:outputText><p:inputText id="txtRa" size="70" value="#{alunoController.newAluno.ra_aluno}"></p:inputText>&nbsp;&nbsp;&nbsp;
-</td></tr>
-<tr><td>
-	<h:outputText value="Nome:"></h:outputText><p:inputText id="txtNome" size="70"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="CPF:"></h:outputText><p:inputText id="txtCpf" size="32"></p:inputText>
-</td></tr>
-<tr><td>
-	<h:outputText value="Data de Nascimento:"></h:outputText><p:inputText id="txtNascimento" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Telefone:"></h:outputText><p:inputText id="txtTelefone" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Celular:"></h:outputText><p:inputText id="txtCelular" size="17"></p:inputText>
-</td></tr>
-<tr><td>
-	<h:outputText value="Sexo"></h:outputText>
-	<p:selectOneRadio><f:selectItem itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemLabel="Feminino"></f:selectItem>
+<table width="900">
+<tr>
+	<td align="left" colspan="2"><h3>Informações Pessoais</h3></td>
+</tr>
+<tr>
+	<td align="left" width="50%"><h:outputText value="RA:"/></td><td align="left" width="50%"><h:outputText value="CPF:"></h:outputText></td>
+</tr>
+
+<tr>
+	<td align="left" ><p:inputText id="txtRa" size="49" value="#{alunoController.newAluno.ra_aluno}"/></td>
+	<td align="left" width="40%"><p:inputText id="txtCpf" size="49" value="#{alunoController.newAluno.cpf_aluno}"/></td>
+</tr>
+
+<tr>
+	<td align="left" colspan="2"><h:outputText value="Nome:"></h:outputText></td>
+	
+</tr>
+<tr>
+	<td align="left" colspan="2" width="60%"><p:inputText id="txtNome" size="105" value="#{alunoController.newAluno.nome_aluno}"/></td>
+	
+</tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" width="35%"><h:outputText value="Data de Nascimento:"/></td><td align="left" width="35%"><h:outputText value="Telefone:"/></td><td align="left" width="30%"><h:outputText value="Celular:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left" width="30%"><p:calendar id="popupButtonCal" showOn="button" size="24" value="#{alunoController.newAluno.datanasc_aluno}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtTelefone" size="29" value="#{alunoController.newAluno.telefone_aluno}"/></td>
+	<td align="left"  width="35%"><p:inputText id="txtCelular" size="29" value="#{alunoController.newAluno.celular_aluno}"/></td>
+</tr>
+</table>
+
+<table width="900">
+<tr><td align="left">
+	<h:outputText value="Sexo:"></h:outputText>
+	<p:selectOneRadio id="sorSexo" value="#{alunoController.newAluno.sexo_aluno}"><f:selectItem itemValue="false" itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemValue="true" itemLabel="Feminino"></f:selectItem>
 	</p:selectOneRadio>
 </td></tr>
-<tr><td><h3>Endereço</h3></td></tr>
-<tr><td>
-	<h:outputText value="Logradouro:"></h:outputText><p:inputText id="txtLogradouro" size="50"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Nº:"></h:outputText><p:inputText id="txtNumero" size="10"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Complemento:"></h:outputText><p:inputText id="txtComplemento" size="15"></p:inputText>
-</td></tr>
-<tr><td>
-	<h:outputText value="Bairro:"></h:outputText><p:inputText id="txtBairro" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Cidade:"></h:outputText><p:inputText id="txtCidade" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="UF:"></h:outputText><p:selectOneMenu style="vertical-align:bottom" id="slmUf">  
+</table>
+
+<table width="900">
+<tr><td align="left" colspan="4"><h3>Endereço</h3></td></tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" width="35%"><h:outputText value="Logradouro:"/></td><td align="left" width="35%"><h:outputText value="Nº:"/></td><td align="left" width="30%"><h:outputText value="Complemento:"></h:outputText></td>
+</tr>
+
+<tr>
+	<td align="left" width="35%"><p:inputText id="txtLogradouro" size="50" value="#{alunoController.newAluno.logradouro_aluno}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtNumero" size="9" value="#{alunoController.newAluno.numero_aluno}"/></td>
+	<td align="left"  width="30%"><p:inputText id="txtComplemento" size="32" value="#{alunoController.newAluno.complemento_aluno}"/></td>
+</tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" width="35%"><h:outputText value="Bairro"/></td><td align="left" width="35%"><h:outputText value="Cidade:"/></td><td align="left" width="30%"><h:outputText value="UF:"/></td><td align="left" width="30%"><h:outputText value="CEP:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left" width="35%"><p:inputText id="txtBairro" size="36" value="#{alunoController.newAluno.bairro_aluno}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtCidade" size="30" value="#{alunoController.newAluno.cidade_aluno}"/></td>
+	<td align="left"  width="30%">
+	<p:selectOneMenu style="vertical-align:bottom" id="slmUf" value="#{alunoController.newAluno.uf_aluno}">  
        <f:selectItem itemValue="1" itemLabel="AC"/>
        <f:selectItem itemValue="2" itemLabel="AL"/>
        <f:selectItem itemValue="3" itemLabel="AM"/>
@@ -122,17 +160,24 @@ xmlns:p="http://primefaces.org/ui">
        <f:selectItem itemValue="25" itemLabel="SE"/>
        <f:selectItem itemValue="26" itemLabel="SP"/>
        <f:selectItem itemValue="27" itemLabel="TO"/>
-	</p:selectOneMenu>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="CEP:"></h:outputText><p:inputText id="txtCep" size="20"></p:inputText>&nbsp;&nbsp;&nbsp;
-</td></tr>
-<tr><td>
-	<h:outputText value="E-mail:"></h:outputText><p:inputText id="txtEmail" size="116"></p:inputText>
-</td></tr>
+	</p:selectOneMenu>
+	</td>
+	<td align="left" width="15%"><p:inputText id="txtCep" size="15" value="#{alunoController.newAluno.cep_aluno}"/></td>
+</tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" colspan="2"><h:outputText value="E-mail:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left" colspan="2"><p:inputText id="txtEmail" size="105" value="#{alunoController.newAluno.email_aluno}"/></td>
+</tr>
 </table>
 <br />
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnSalvar" value="Salvar" onclick=""></p:commandButton>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{alunoController.cadastrar}" ajax="false"/>&nbsp;
 		<p:commandButton id="btnExcluir" value="Excluir" onclick=""></p:commandButton>&nbsp;
 		<p:commandButton id="btnProcurar" value="Procurar" onclick=""></p:commandButton>&nbsp;
 	</td></tr>
