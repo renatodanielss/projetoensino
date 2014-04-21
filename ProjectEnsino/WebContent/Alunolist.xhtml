@@ -32,15 +32,20 @@ xmlns:p="http://primefaces.org/ui">
 	        <f:facet name="header">  
 	            Alunos
 	            <br/>
-	        </f:facet>  
+	        </f:facet> 
 	        
-	        <p:column width="50" headerText="RA" sortBy="ra_aluno" id="ra_aluno" filterBy="ra_aluno" filterMatchMode="contains">
+	        <p:column width="500" headerText="Nome" sortBy="nome_aluno" id="nome_aluno" filterBy="nome_aluno" filterMatchMode="contains">  
+	            #{aluno.nome_aluno}  
+	        </p:column> 
+	        
+	        <p:column width="200" headerText="RA" sortBy="ra_aluno" id="ra_aluno" filterBy="ra_aluno" filterMatchMode="contains">
 	            #{aluno.ra_aluno} 
 	        </p:column>
 	        
-	        <p:column width="850" headerText="Nome" sortBy="nome_aluno" id="nome_aluno" filterBy="nome_aluno" filterMatchMode="contains">  
-	            #{aluno.nome_aluno}  
-	        </p:column>
+	        <p:column width="200" headerText="CPF" sortBy="cpf_aluno" id="cpf_aluno" filterBy="cpf_aluno" filterMatchMode="contains">
+	            #{aluno.cpf_aluno} 
+	        </p:column>	        
+	       
 </p:dataTable>
 </td></tr>
 </table>
