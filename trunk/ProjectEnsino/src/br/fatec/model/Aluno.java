@@ -31,7 +31,7 @@ public class Aluno {
 	private String celular_aluno;
 	
 	@Column(name="sexo_aluno")
-	private String sexo_aluno;
+	private boolean sexo_aluno;
 	
 	@Column(name="logradouro_aluno")
 	private String logradouro_aluno;
@@ -56,8 +56,6 @@ public class Aluno {
 	
 	@Column(name="email_aluno")
 	private String email_aluno;
-
-	private boolean sexo;
 
 	public String getRa_aluno() {
 		return ra_aluno;
@@ -102,23 +100,19 @@ public class Aluno {
 	public String getCelular_aluno() {
 		return celular_aluno;
 	}
+	
+	public boolean isSexo_aluno() {
+		return sexo_aluno;
+	}
+
+	public void setSexo_aluno(boolean sexo_aluno) {
+		this.sexo_aluno = sexo_aluno;
+	}
 
 	public void setCelular_aluno(String celular_aluno) {
 		this.celular_aluno = celular_aluno;
 	}
 	
-	public String isSexo() {
-	return (this.sexo ? "Masculino":"Feminino");
-	}
-
-	public String getSexo_aluno() {
-		return sexo_aluno;
-	}
-
-	public void setSexo_aluno(String sexo_aluno) {
-		this.sexo_aluno = sexo_aluno;
-	}
-
 	public String getLogradouro_aluno() {
 		return logradouro_aluno;
 	}
