@@ -43,7 +43,7 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 <tr>
 	<td align="left">
-		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px" value="#{textobaseController.newTextoBase.disciplina_textobase}" immediate="true" onchange="submit();"  valueChangeListener="#{assuntoController.assuntosListener}">
+		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px" value="#{textobaseController.newTextoBase.disciplina_textobase}">
 			<f:selectItem itemLabel="--" itemValue="0" ></f:selectItem>
 			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
 		</p:selectOneMenu>
@@ -51,7 +51,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left">
 		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:329px" value="#{textobaseController.newTextoBase.assunto_textobase}">
 			<f:selectItem itemLabel="--" itemValue="0" ></f:selectItem>
-			<f:selectItems value="#{assuntoController.assuntosListener}" var="item2" itemValue="#{item2.idDisciplina_assunto}" itemLabel="#{item2.nome_assunto}"/>
+			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2.idDisciplina_assunto}" itemLabel="#{item2.nome_assunto}"/>
 		</p:selectOneMenu>
 	</td>
 </tr>
