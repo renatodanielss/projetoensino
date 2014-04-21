@@ -1,7 +1,5 @@
 package br.fatec.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,11 +11,11 @@ import javax.persistence.Table;
 public class Autor{
 	
 	@Id
-		@Column(name="id_autor")
-		private String id_autor;
+	@Column(name="id_autor")
+	private String id_autor;
 		
-		@Column(name="nome_autor")
-		private String nome_autor;
+	@Column(name="nome_autor")
+	private String nome_autor;
 	
 	private int id;
 	private String nome;

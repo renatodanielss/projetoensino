@@ -13,7 +13,7 @@ import br.fatec.model.Autor;
 @SessionScoped
 
 public class AutorController {
-	private List<Autor> autor;
+	private List<Autor> autores;
 	private AutorDAO autorDao;
 	private Autor currentAutor;
 	private Autor newAutor;
@@ -35,7 +35,7 @@ public class AutorController {
 		return autores;
 	}
 
-	public void setAutores(List<Auto> autores) {
+	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
 
@@ -51,7 +51,7 @@ public class AutorController {
 		return currentAutor;
 	}
 
-	public void setCurrentAutor(Auntor currentAutor) {
+	public void setCurrentAutor(Autor currentAutor) {
 		this.currentAutor = currentAutor;
 	}
 
@@ -65,11 +65,11 @@ public class AutorController {
 	
 	public void cadastrar()
 	{	
-		if (autorDao.inserir(this.newAutor))
+		/*if (autorDao.inserir(this.newAutor))
 			System.out.println("Autor inserido com sucesso!");
 		else
 			System.out.println("Erro na inserção!");
 		
-		this.newAutor = new Autor();
+		this.newAutor = new Autor();*/
 	}
 }
