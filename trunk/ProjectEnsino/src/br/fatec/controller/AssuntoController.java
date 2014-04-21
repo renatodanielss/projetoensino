@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ValueChangeEvent;
 
 import br.fatec.dao.AssuntoDAO;
 import br.fatec.model.Assunto;
@@ -15,7 +14,6 @@ import br.fatec.model.Assunto;
 
 public class AssuntoController {
 	private List<Assunto> assuntos;
-	private List<Assunto> assuntosListener;
 	private AssuntoDAO assuntoDao;
 	private Assunto currentAssunto;
 	private Assunto newAssunto;
@@ -38,19 +36,9 @@ public class AssuntoController {
 		return assuntos;
 	}
 	
-	/*public List<Assunto> getAssuntos(int iddisciplina_assunto) {
+	public List<Assunto> getAssuntos(int iddisciplina_assunto) {
 		this.assuntos = assuntoDao.listar(iddisciplina_assunto);
 		return assuntos;
-	}*/
-	
-	public List<Assunto> getAssuntosListener(ValueChangeEvent event){
-		String valor = (String) event.getNewValue();
-		assuntosListener = assuntoDao.listarListener(Integer.parseInt(valor));
-		return assuntosListener;
-	}
-	
-	public void setAssuntosListener(List<Assunto> assuntosListener) {
-		this.assuntosListener = assuntosListener;
 	}
 
 	public void setAssuntos(List<Assunto> assuntos) {

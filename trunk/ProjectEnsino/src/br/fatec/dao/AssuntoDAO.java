@@ -1,6 +1,7 @@
 package br.fatec.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -54,10 +55,10 @@ public class AssuntoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Assunto> listarListener(int valor)
-	{
+	public List<Assunto> listar(int iddisciplina_assunto)
+	{		
 		List<Assunto> listAssunto = null;
-		String query = "select * from tbl_assunto where iddisciplina_assunto = " + valor;
+		String query = "select * from tbl_assunto where iddisciplina_assunto = " + iddisciplina_assunto;
 		
 		try
 		{
