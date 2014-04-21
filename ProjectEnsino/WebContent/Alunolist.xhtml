@@ -64,7 +64,7 @@ xmlns:p="http://primefaces.org/ui">
 <br />
 <table align="center" width="900">
 <tr><td>
-<p:dataTable  var="aluno" value="#{alunoeController.alunos}" id="alunoTable" rowKey="#{aluno.ra_aluno}"
+<p:dataTable  var="aluno" value="#{alunoController.alunos}" id="alunoTable" rowKey="#{aluno.ra_aluno}"
 		 selectionMode="single" selection="#{alunoController.currentAluno}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
 		 rowsPerPageTemplate="5,10,15" lazy="true">  
