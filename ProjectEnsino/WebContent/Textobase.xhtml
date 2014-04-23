@@ -21,7 +21,7 @@ xmlns:p="http://primefaces.org/ui">
 </h:head>
 <ui:decorate template="/Template/Template.xhtml">
 <ui:define name="page">
-<h:form enctype="multipart/form-data">
+<h:form id="textobaseForm" enctype="multipart/form-data">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Texto Base</h2></center></td></tr>
@@ -42,18 +42,21 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left"><h:outputText value="Disciplina:"></h:outputText></td><td align="left"><h:outputText value="Assunto:"></h:outputText></td>
 </tr>
 <tr>
+	<h:panelGroup id="pgAssunto">
 	<td align="left">
 		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px" value="#{textobaseController.newTextoBase.disciplina_textobase}">
-			<f:selectItem itemLabel="--" itemValue="0" ></f:selectItem>
+			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
 			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
+			<p:ajax event="valueChange" update="slmAssunto" listener="#{assuntoController.mudarAssuntos}"></p:ajax>
 		</p:selectOneMenu>
 	</td>
 	<td align="left">
-		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:329px" value="#{textobaseController.newTextoBase.assunto_textobase}">
-			<f:selectItem itemLabel="--" itemValue="0" ></f:selectItem>
+		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:329px" value="#{textobaseController.newTextoBase.assunto_textobase}" >
+			<f:selectItem itemLabel="Selecione um assunto" itemValue="" ></f:selectItem>
 			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2.idDisciplina_assunto}" itemLabel="#{item2.nome_assunto}"/>
 		</p:selectOneMenu>
 	</td>
+	</h:panelGroup>
 </tr>
 
 
