@@ -53,7 +53,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left">
 		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:329px" value="#{textobaseController.newTextoBase.assunto_textobase}" >
 			<f:selectItem itemLabel="Selecione um assunto" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2.idDisciplina_assunto}" itemLabel="#{item2.nome_assunto}"/>
+			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2.id_assunto}" itemLabel="#{item2.nome_assunto}"/>
 		</p:selectOneMenu>
 	</td>
 	</h:panelGroup>
