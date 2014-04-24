@@ -37,6 +37,8 @@ public class AssuntoController {
 	public List<Assunto> getAssuntos() {
 		if (textobaseController.getNewTextoBase() == null)
 			this.assuntos = assuntoDao.listar();
+		if (textobaseController.getNewTextoBase().getDisciplina_textobase() < 1)
+			this.assuntos = null;
 		return assuntos;
 	}
 	
