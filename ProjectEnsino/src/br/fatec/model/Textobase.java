@@ -26,7 +26,7 @@ public class Textobase {
 	private int assunto_textobase;
 	@Column(name="texto_textobase", nullable=false)
 	private String texto_textobase;
-
+	
 	public Integer getCodigo_textobase() {
 		return codigo_textobase;
 	}

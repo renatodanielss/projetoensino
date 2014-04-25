@@ -92,31 +92,6 @@ public class TextobaseDAO {
 		return listTextoBase;
 	}
 	
-	public boolean alterar(Textobase textobase)
-	{
-		if(!existeTextobase(textobase.getNumero()))
-			return false;
-		
-		boolean retorno = false;
-		Textobase textobaseAlterado = null;
-		
-		try
-		{
-			this.manager.getTransaction().begin();    
-			textobaseAlterado = this.manager.merge(textobase);
-			this.manager.getTransaction().commit();
-		}
-		catch(Exception ex)
-		{
-			retorno = false;
-		}
-		
-		if(textobaseAlterado.equals(textobase))
-			retorno = true;
-		
-		return retorno;
-	}
-	
 	public boolean excluir(Textobase textobase)
 	{
 		if(!existeTextobase(textobase.getNumero()))
@@ -181,6 +156,22 @@ public class TextobaseDAO {
         	this.manager.close();
         }
     }*/
+	
+	public boolean alterar(Textobase textobase)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();    
+			this.manager.merge(textobase);
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Textobase> listar()

@@ -4,7 +4,9 @@ package br.fatec.controller;
 //import java.io.FileOutputStream;
 //import java.io.IOException;
 //import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,6 +15,14 @@ import javax.faces.bean.SessionScoped;
 
 
 //import org.primefaces.model.LazyDataModel;
+
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+
+
+
+
 
 //import javax.faces.context.FacesContext;
 //import javax.faces.model.DataModel;
@@ -92,5 +102,39 @@ public class TextobaseController {
 			System.out.println("Erro na inserção!");
 		
 		this.newTextoBase = new Textobase();
+	}
+	
+	public void iniciaAlterar() throws IOException
+	{
+		if (newTextoBase != null)
+		{
+			this.getNewTextoBase().setCodigo_textobase(this.getCurrentTextoBase().getCodigo_textobase());
+			this.getNewTextoBase().setTitulo_textobase(this.getCurrentTextoBase().getTitulo_textobase());
+			this.getNewTextoBase().setDisciplina_textobase(this.getCurrentTextoBase().getDisciplina_textobase());
+			//AssuntoController assuntoController = new AssuntoController();
+			//assuntoController.getAssuntoDao().listar(this.getCurrentTextoBase().getDisciplina_textobase());
+			this.getNewTextoBase().setAssunto_textobase(this.getCurrentTextoBase().getAssunto_textobase());
+			this.getNewTextoBase().setTexto_textobase(this.getCurrentTextoBase().getTexto_textobase());
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Textobase.xhtml?faces-redirect=true&redirect=1");
+		}
+	}
+	
+	public void alterar()
+	{	
+		if (textoBaseDao.alterar(this.newTextoBase))
+			System.out.println("Textobase alterado com sucesso!");
+		else
+			System.out.println("Erro na alteração!");
+	}
+	
+	public void cadastrarAlterar(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String redirectValue = (String) facesContext.getExternalContext().getRequestParameterMap().get("redirect");
+		if (redirectValue != null && Integer.parseInt(redirectValue) == 1)
+			alterar();
+		else
+			cadastrar();
 	}
 }
