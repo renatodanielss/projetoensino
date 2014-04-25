@@ -173,6 +173,24 @@ public class TextobaseDAO {
 		}
 	}
 	
+	public Textobase buscar(Integer codigo)
+	{
+		Textobase textobase = null;
+		
+		try
+		{
+			this.manager.getTransaction().begin();    
+	 		textobase = this.manager.find(Textobase.class, codigo);
+	 		this.manager.getTransaction().commit();
+		}
+		catch(Exception ex){
+			textobase = null;
+			this.manager.getTransaction().rollback();
+		}
+
+		return textobase;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Textobase> listar()
 	{		
@@ -215,6 +233,15 @@ public class TextobaseDAO {
 		return listTextobase;
 	}
 	
+	public boolean existeTextobase(Integer numero)
+	{
+		Textobase textobase = buscar(numero);
+		
+		if(textobase == null)
+			return false;
+		return true;
+	}
+	
 	public void open()
 	{
 		this.factory = Persistence.createEntityManagerFactory("projectensino");
@@ -226,13 +253,4 @@ public class TextobaseDAO {
 		this.manager.close();
 		this.factory.close();
 	}
-	
-	/*private boolean existeTextobase(Integer numero)
-	{
-		Textobase textobase = buscar(numero);
-		
-		if(textobase == null)
-			return false;
-		return true;
-	}*/
 }
