@@ -123,16 +123,20 @@ public class TextobaseController {
 	
 	public void alterar()
 	{	
-		if (textoBaseDao.alterar(this.newTextoBase))
+		if (textoBaseDao.alterar(this.newTextoBase)){
 			System.out.println("Textobase alterado com sucesso!");
+			this.newTextoBase.setCodigo_textobase(null);
+			this.newTextoBase.setTitulo_textobase(null);
+			this.newTextoBase.setDisciplina_textobase(0);
+			this.newTextoBase.setAssunto_textobase(0);
+			this.newTextoBase.setTexto_textobase(null);
+		}
 		else
 			System.out.println("Erro na alteração!");
 	}
 	
 	public void cadastrarAlterar(){
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		String redirectValue = (String) facesContext.getExternalContext().getRequestParameterMap().get("redirect");
-		if (redirectValue != null && Integer.parseInt(redirectValue) == 1)
+		if (textoBaseDao.existeTextobase(newTextoBase.getCodigo_textobase()))
 			alterar();
 		else
 			cadastrar();
