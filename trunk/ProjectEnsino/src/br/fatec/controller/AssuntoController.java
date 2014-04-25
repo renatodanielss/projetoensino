@@ -37,8 +37,16 @@ public class AssuntoController {
 	public List<Assunto> getAssuntos() {
 		if (textobaseController.getNewTextoBase() == null)
 			this.assuntos = assuntoDao.listar();
-		if (textobaseController.getNewTextoBase().getDisciplina_textobase() < 1)
-			this.assuntos = null;
+		else{
+			if (textobaseController.getNewTextoBase().getDisciplina_textobase() < 1)
+				this.assuntos = null;
+			else{
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				String redirectValue = (String) facesContext.getExternalContext().getRequestParameterMap().get("redirect");
+				if (redirectValue != null && Integer.parseInt(redirectValue) == 1)
+					mudarAssuntos();
+			}
+		}
 		return assuntos;
 	}
 	
