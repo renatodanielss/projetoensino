@@ -27,20 +27,21 @@ xmlns:p="http://primefaces.org/ui">
 <p:dataTable  var="textobase" value="#{textobaseController.textosBases}" id="textobaseTable" rowKey="#{textobase.codigo_textobase}"
 		 selectionMode="single" selection="#{textobaseController.currentTextoBase}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
-		 rowsPerPageTemplate="5,10,15" lazy="true">
+		 rowsPerPageTemplate="5,10,15" lazy="true" filterEvent="enter">
   
 	        <f:facet name="header">
 	            Texto Base
 	            <br/>
 	        </f:facet>
 	        
-	        <p:column width="50" headerText="Código" sortBy="codigo_textobase" id="codigo_textobase" filterBy="codigo_textobase" filterMatchMode="contains">
+	        <p:column width="50" headerText="Código" sortBy="#{textobase.codigo_textobase}" id="codigo_textobase" filterBy="#{textobase.codigo_textobase}" filterMatchMode="contains">
 	            #{textobase.codigo_textobase}
 	        </p:column>
 	        
-	        <p:column width="650" headerText="Título" sortBy="titulo_textobase" id="titulo_textobase" filterBy="titulo_textobase" filterMatchMode="contains">
+	        <p:column width="650" headerText="Título" sortBy="#{textobase.titulo_textobase}" id="titulo_textobase" filterBy="#{textobase.titulo_textobase}" filterMatchMode="contains">
 	            #{textobase.titulo_textobase}
 	        </p:column>
+	        <p:ajax event="filter" update="textobaseTable"></p:ajax>
 
 </p:dataTable>
 </td></tr>

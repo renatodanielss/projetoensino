@@ -111,8 +111,6 @@ public class TextobaseController {
 			this.getNewTextoBase().setCodigo_textobase(this.getCurrentTextoBase().getCodigo_textobase());
 			this.getNewTextoBase().setTitulo_textobase(this.getCurrentTextoBase().getTitulo_textobase());
 			this.getNewTextoBase().setDisciplina_textobase(this.getCurrentTextoBase().getDisciplina_textobase());
-			//AssuntoController assuntoController = new AssuntoController();
-			//assuntoController.getAssuntoDao().listar(this.getCurrentTextoBase().getDisciplina_textobase());
 			this.getNewTextoBase().setAssunto_textobase(this.getCurrentTextoBase().getAssunto_textobase());
 			this.getNewTextoBase().setTexto_textobase(this.getCurrentTextoBase().getTexto_textobase());
 			
