@@ -33,7 +33,7 @@ xmlns:p="http://primefaces.org/ui">
     </p:menu>
 	<p:commandButton id="dynaButtonTextobase" value="Texto Base" type="button"/>
     <p:menu overlay="true" trigger="dynaButtonTextobase" my="left top" at="left bottom">  
-            <p:menuitem value="Cadastrar" url="/Textobase.xhtml" icon="ui-icon-disk"/>  
+            <p:menuitem value="Cadastrar" url="/Textobase.xhtml" action="#{textobaseController.limparCampos}" icon="ui-icon-disk"/>  
             <p:menuitem value="Editar" url="/Textobaselist.xhtml" icon="ui-icon-arrowrefresh-1-w"/>  
     </p:menu>
 	<p:commandButton id="dynaButtonAutor" value="Autor" type="button"/>
