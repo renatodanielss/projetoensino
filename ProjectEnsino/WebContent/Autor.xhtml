@@ -33,6 +33,24 @@ xmlns:p="http://primefaces.org/ui">
 	<h:outputText value="Nome:"></h:outputText><h:inputText id="txtNome" size="40"></h:inputText>
 </td></tr>
 </table>
+
+<table width="900">
+<tr>
+	<td align="left"><h:outputText value="ID:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left"><p:inputText id="txtId" size="15" value="#{autorController.newAutor.id_autor"/></td>
+</tr>
+
+<tr>
+	<td align="left"><h:outputText value="Nome:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left"><p:inputText id="txtNomel" size="40" value="#{autorController.newAutor.nome_autor"/></td>
+</tr>
+</table>
+
+
 <br />
 <table align="center">
 	<tr><td>
