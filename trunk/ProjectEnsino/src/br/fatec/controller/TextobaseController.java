@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 
 
 
+
 //import javax.faces.context.FacesContext;
 //import javax.faces.model.DataModel;
 //import javax.faces.model.ListDataModel;
@@ -35,10 +36,10 @@ import br.fatec.model.Textobase;
 @ManagedBean(name="textobaseController")
 @SessionScoped
 public class TextobaseController {
+	private Textobase newTextoBase;
+	private Textobase currentTextoBase;
 	private List<Textobase> textosBases;
 	private TextobaseDAO textoBaseDao;
-	private Textobase currentTextoBase;
-	private Textobase newTextoBase;
 	
 	public TextobaseController()
 	{
@@ -82,12 +83,6 @@ public class TextobaseController {
 		this.textosBases = textoBaseDao.listar();
 		return textosBases;
 	}
-	
-	public List<Object> getTextosbasesObject() 
-	{
-		List<Object> textosBasesObject = textoBaseDao.listarInnerJoin();
-		return textosBasesObject;
-	}
     
 	public void setTextosBases(List<Textobase> TextobaseList) 
 	{
@@ -108,14 +103,19 @@ public class TextobaseController {
 	{
 		if (newTextoBase != null)
 		{
-			this.getNewTextoBase().setCodigo_textobase(this.getCurrentTextoBase().getCodigo_textobase());
-			this.getNewTextoBase().setTitulo_textobase(this.getCurrentTextoBase().getTitulo_textobase());
-			this.getNewTextoBase().setDisciplina_textobase(this.getCurrentTextoBase().getDisciplina_textobase());
-			this.getNewTextoBase().setAssunto_textobase(this.getCurrentTextoBase().getAssunto_textobase());
-			this.getNewTextoBase().setTexto_textobase(this.getCurrentTextoBase().getTexto_textobase());
-			
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("Textobase.xhtml?faces-redirect=true&redirect=1");
+			try{
+				this.getNewTextoBase().setCodigo_textobase(this.getCurrentTextoBase().getCodigo_textobase());
+				this.getNewTextoBase().setTitulo_textobase(this.getCurrentTextoBase().getTitulo_textobase());
+				this.getNewTextoBase().setDisciplina_textobase(this.getCurrentTextoBase().getDisciplina_textobase());
+				this.getNewTextoBase().setAssunto_textobase(this.getCurrentTextoBase().getAssunto_textobase());
+				this.getNewTextoBase().setTexto_textobase(this.getCurrentTextoBase().getTexto_textobase());
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("Textobase.xhtml?faces-redirect=true&redirect=1");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -123,11 +123,7 @@ public class TextobaseController {
 	{	
 		if (textoBaseDao.alterar(this.newTextoBase)){
 			System.out.println("Textobase alterado com sucesso!");
-			this.newTextoBase.setCodigo_textobase(null);
-			this.newTextoBase.setTitulo_textobase(null);
-			this.newTextoBase.setDisciplina_textobase(0);
-			this.newTextoBase.setAssunto_textobase(0);
-			this.newTextoBase.setTexto_textobase(null);
+			limparCampos();
 		}
 		else
 			System.out.println("Erro na alteração!");
@@ -138,5 +134,24 @@ public class TextobaseController {
 			alterar();
 		else
 			cadastrar();
+	}
+	
+	public void excluir() throws IOException
+	{
+		if (textoBaseDao.excluir(this.currentTextoBase)){
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Textobaselist.xhtml");
+			System.out.println("Textobase excluido com sucesso!");
+		}
+		else
+			System.out.println("Erro na exclusão!");
+	}
+	
+	public void limparCampos(){
+		this.newTextoBase.setCodigo_textobase(null);
+		this.newTextoBase.setTitulo_textobase(null);
+		this.newTextoBase.setDisciplina_textobase(0);
+		this.newTextoBase.setAssunto_textobase(0);
+		this.newTextoBase.setTexto_textobase(null);
 	}
 }

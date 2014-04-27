@@ -33,24 +33,7 @@ public class TextobaseDAO {
 		}
 	}
 	
-	/*public TextoBase buscar(Integer numero)
-	{
-		TextoBase textobase = null;
-		
-		try
-		{
-			this.manager.getTransaction().begin();    
-			textobase = this.manager.find(TextoBase.class, numero);
-			this.manager.getTransaction().commit();
-		}
-		catch(Exception ex)
-		{
-			textobase = null;
-		}
-
-		return textobase;
-	}
-	
+	/*	
 	public TextoBase buscar(String texto)
 	{
 		TextoBase textobase = null;
@@ -70,7 +53,7 @@ public class TextobaseDAO {
 		return textobase;
 	}
 	
-	public List<TextoBase> buscarTestoBase(String texto)
+	public List<TextoBase> buscarTextoBase(String texto)
 	{
 		List<TextoBase> listTextoBase = null;
 		
@@ -91,52 +74,6 @@ public class TextobaseDAO {
 
 		return listTextoBase;
 	}
-	
-	public boolean excluir(Textobase textobase)
-	{
-		if(!existeTextobase(textobase.getNumero()))
-			return false;
-		
-		boolean retorno = false;
-		
-		try
-		{
-			this.manager.getTransaction().begin();    
-			this.manager.remove(manager.getReference(textobase.getClass(), textobase.getNumero()));
-			this.manager.getTransaction().commit();
-		}
-		catch(Exception ex)
-		{
-			retorno = false;
-		}
-		
-		if(!existeTextobase(textobase.getNumero()))
-		{
-			textobase = new Textobase();
-			retorno = true;
-		}
-		
-		return retorno;
-	}
-	
-	public List<Textobase> listar()
-	{		
-		List<Textobase> listTextobase = null;
-		String query = "select * from tbl_textobase";
-		
-		try
-		{
-			this.manager.getTransaction().begin();    
-			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
-			this.manager.getTransaction().commit();
-		}
-		catch(Exception ex)
-		{
-			listTextobase = null;
-		}
-		
-		return listTextobase;
-	}*/
 	
 	/*private boolean contemNumero(Textobase textobase)
 	{
@@ -195,7 +132,7 @@ public class TextobaseDAO {
 	public List<Textobase> listar()
 	{		
 		List<Textobase> listTextobase = null;
-		String query = "SELECT * FROM tbl_textobase inner join tbl_disciplina on tbl_textobase.disciplina_textobase = tbl_disciplina.id_disciplina";
+		String query = "SELECT * FROM tbl_textobase";
 		
 		try
 		{
@@ -240,6 +177,22 @@ public class TextobaseDAO {
 		if(textobase == null)
 			return false;
 		return true;
+	}
+	
+	public boolean excluir(Textobase textobase)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();
+			this.manager.remove(manager.getReference(textobase.getClass(), textobase.getCodigo_textobase()));
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			this.manager.getTransaction().rollback();
+			return false;
+		}
 	}
 	
 	public void open()
