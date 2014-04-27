@@ -16,9 +16,9 @@ public class Autor{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
 	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
-	@Column(name="id_autor")
+	@Column(name="id_autor", nullable=false)
 	private Integer id_autor;	
-	@Column(name="nome_autor")
+	@Column(name="nome_autor", nullable=false)
 	private String nome_autor;
 	
 	public Integer getId_autor() {
