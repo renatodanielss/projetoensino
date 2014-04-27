@@ -17,14 +17,14 @@ public class Autor{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
 	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
 	@Column(name="id_autor")
-	private String id_autor;	
+	private Integer id_autor;	
 	@Column(name="nome_autor")
 	private String nome_autor;
 	
-	public String getId_autor() {
+	public Integer getId_autor() {
 		return id_autor;
 	}
-	public void setId_autor(String id_autor) {
+	public void setId_autor(Integer id_autor) {
 		this.id_autor = id_autor;
 	}
 	public String getNome_autor() {
