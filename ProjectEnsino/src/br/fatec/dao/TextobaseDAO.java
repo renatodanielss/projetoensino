@@ -170,9 +170,9 @@ public class TextobaseDAO {
 		return listTextobase;
 	}
 	
-	public boolean existeTextobase(Integer numero)
+	public boolean existeTextobase(Integer codigo)
 	{
-		Textobase textobase = buscar(numero);
+		Textobase textobase = buscar(codigo);
 		
 		if(textobase == null)
 			return false;
