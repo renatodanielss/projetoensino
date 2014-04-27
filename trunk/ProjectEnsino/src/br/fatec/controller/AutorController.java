@@ -70,6 +70,6 @@ public class AutorController {
 		else
 			System.out.println("Erro na inserção!");
 		
-		this.newAutor = new Autor();
+		this.newAutor= new Autor();
 	}
 }
