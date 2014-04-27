@@ -16,6 +16,7 @@
    <class>br.fatec.model.Professor</class>
    <class>br.fatec.model.Aluno</class>
    <class>br.fatec.model.Prova</class>
+   <class>br.fatec.model.Autor</class>
 
    <properties>
   <!-- dados da conexao -->
