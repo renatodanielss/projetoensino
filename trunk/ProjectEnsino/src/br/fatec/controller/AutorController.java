@@ -30,7 +30,7 @@ public class AutorController {
 		this.newAutor = new Autor();
 		this.currentAutor = new Autor();
 	}
-
+	
 	public List<Autor> getAutores() {
 		return autores;
 	}
@@ -62,14 +62,14 @@ public class AutorController {
 	public void setNewAutor(Autor newAutor) {
 		this.newAutor = newAutor;
 	}
-	
+
 	public void cadastrar()
 	{	
-		/*if (autorDao.inserir(this.newAutor))
+		if (autorDao.inserir(this.newAutor))
 			System.out.println("Autor inserido com sucesso!");
 		else
 			System.out.println("Erro na inserção!");
 		
-		this.newAutor = new Autor();*/
+		this.newAutor = new Autor();
 	}
 }
