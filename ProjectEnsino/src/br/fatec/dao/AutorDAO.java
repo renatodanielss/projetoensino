@@ -1,7 +1,10 @@
 package br.fatec.dao;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -32,6 +35,66 @@ public class AutorDAO {
 			return false;
 		}
 	}
+	
+	public boolean alterar(Autor autor)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();    
+			this.manager.merge(autor);
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public Autor buscar(Integer id)
+	{
+		Autor autor = null;
+		
+		try
+		{
+			this.manager.getTransaction().begin();    
+			autor = this.manager.find(Autor.class, id);
+	 		this.manager.getTransaction().commit();
+		}
+		catch(Exception ex){
+			autor = null;
+			this.manager.getTransaction().rollback();
+		}
+
+		return autor;
+	}
+	
+	public boolean existeAutor(Integer id)
+	{
+		Autor autor = buscar(id);
+		
+		if(autor == null)
+			return false;
+		return true;
+	}
+	
+	public boolean excluir(Autor autor)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();
+			this.manager.remove(manager.getReference(autor.getClass(), autor.getId_autor()));
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
+
 	
 	@SuppressWarnings("unchecked")
 	public List<Autor> listar()

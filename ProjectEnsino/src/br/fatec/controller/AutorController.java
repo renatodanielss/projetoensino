@@ -1,10 +1,13 @@
 package br.fatec.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import br.fatec.dao.AutorDAO;
 import br.fatec.model.Autor;
@@ -32,6 +35,7 @@ public class AutorController {
 	}
 	
 	public List<Autor> getAutores() {
+		this.autores = autorDao.listar();
 		return autores;
 	}
 
@@ -69,7 +73,55 @@ public class AutorController {
 			System.out.println("Autor inserido com sucesso!");
 		else
 			System.out.println("Erro na inserção!");
-		
-		this.newAutor= new Autor();
+	}
+	
+	public void iniciaAlterar() throws IOException
+	{
+		if (newAutor != null)
+		{
+			try{
+				this.getNewAutor().setId_autor(this.getCurrentAutor().getId_autor());
+				this.getNewAutor().setNome_autor(this.getCurrentAutor().getNome_autor());
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("Autor.xhtml?faces-redirect=true&redirect=1");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void alterar()
+	{	
+		if (autorDao.alterar(this.newAutor)){
+			System.out.println("Autor alterado com sucesso!");
+			limparCampos();
+		}
+		else
+			System.out.println("Erro na alteração!");
+	}
+	
+	public void cadastrarAlterar(){
+		if (autorDao.existeAutor(newAutor.getId_autor()))
+			alterar();
+		else
+			cadastrar();
+	}
+	
+	public void excluir() throws IOException
+	{
+		if (autorDao.excluir(this.currentAutor)){
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Autorlist.xhtml");
+			System.out.println("Autor excluido com sucesso!");
+		}
+		else
+			System.out.println("Erro na exclusão!");
+	}
+	
+	public void limparCampos(){
+		this.newAutor.setId_autor(null);
+		this.newAutor.setNome_autor(null);
 	}
 }
