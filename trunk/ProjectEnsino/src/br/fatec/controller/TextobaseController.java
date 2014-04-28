@@ -95,8 +95,6 @@ public class TextobaseController {
 			System.out.println("Texto base inserido com sucesso!");
 		else
 			System.out.println("Erro na inserção!");
-		
-		this.newTextoBase = new Textobase();
 	}
 	
 	public void iniciaAlterar() throws IOException
@@ -123,7 +121,6 @@ public class TextobaseController {
 	{	
 		if (textoBaseDao.alterar(this.newTextoBase)){
 			System.out.println("Textobase alterado com sucesso!");
-			limparCampos();
 		}
 		else
 			System.out.println("Erro na alteração!");
@@ -147,11 +144,18 @@ public class TextobaseController {
 			System.out.println("Erro na exclusão!");
 	}
 	
-	public void limparCampos(){
+	private void limparCampos(){
 		this.newTextoBase.setCodigo_textobase(null);
 		this.newTextoBase.setTitulo_textobase(null);
 		this.newTextoBase.setDisciplina_textobase(0);
 		this.newTextoBase.setAssunto_textobase(0);
 		this.newTextoBase.setTexto_textobase(null);
+	}
+	
+	public void goToTextobase() throws Exception{
+		limparCampos();
+		System.out.println("goToTextobase");
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect("Textobase.xhtml");
 	}
 }
