@@ -101,7 +101,7 @@ public class Aluno {
 		return celular_aluno;
 	}
 	
-	public boolean isSexo_aluno() {
+	public boolean getSexo_aluno() {
 		return sexo_aluno;
 	}
 

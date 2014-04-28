@@ -32,22 +32,28 @@ xmlns:p="http://primefaces.org/ui">
 	        <f:facet name="header">  
 	            Aluno
 	            <br/>
-	        </f:facet> 
+	        </f:facet>
 	        
-	        <p:column width="500" headerText="Nome" sortBy="nome_aluno" id="nome_aluno" filterBy="nome_aluno" filterMatchMode="contains">  
+	        <p:column width="500" headerText="Nome" id="nome_aluno" filterMatchMode="contains">  
 	            #{aluno.nome_aluno}  
 	        </p:column> 
 	        
-	        <p:column width="200" headerText="RA" sortBy="ra_aluno" id="ra_aluno" filterBy="ra_aluno" filterMatchMode="contains">
+	        <p:column width="200" headerText="RA" id="ra_aluno" filterMatchMode="contains">
 	            #{aluno.ra_aluno} 
 	        </p:column>
 	        
-	        <p:column width="200" headerText="CPF" sortBy="cpf_aluno" id="cpf_aluno" filterBy="cpf_aluno" filterMatchMode="contains">
+	        <p:column width="200" headerText="CPF" id="cpf_aluno" filterMatchMode="contains">
 	            #{aluno.cpf_aluno} 
-	        </p:column>	        
-	       
+	        </p:column>
 </p:dataTable>
 </td></tr>
+</table>
+<table align="center">
+	<tr><td>
+		<p:commandButton id="btnAlterar" value="Alterar" action="#{alunoController.iniciaAlterar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnExcluir" value="Excluir" action="#{alunoController.excluir}" ajax="false" />&nbsp;
+		<p:button id="btnProcurar" value="Procurar"></p:button>&nbsp;
+	</td></tr>
 </table>
 </h:form>
 </ui:define>
