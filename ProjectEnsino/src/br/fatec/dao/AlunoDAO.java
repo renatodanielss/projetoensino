@@ -33,6 +33,41 @@ public class AlunoDAO {
 		}
 	}
 	
+	public boolean alterar(Aluno aluno)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();    
+			this.manager.merge(aluno);
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public Aluno buscar(String ra)
+	{
+		Aluno aluno = null;
+		String query = "select * from tbl_aluno where ra_aluno = '" + ra + "'";
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+	 		aluno = (Aluno)this.manager.createNativeQuery(query, new Aluno().getClass()).getSingleResult();
+	 		this.manager.getTransaction().commit();
+		}
+		catch(Exception ex){
+			aluno = null;
+			this.manager.getTransaction().rollback();
+		}
+
+		return aluno;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Aluno> listar()
 	{	
@@ -52,6 +87,31 @@ public class AlunoDAO {
 		}
 		
 		return listAluno;
+	}
+	
+	public boolean existeAluno(String ra)
+	{
+		Aluno aluno = buscar(ra);
+		
+		if(aluno == null)
+			return false;
+		return true;
+	}
+	
+	public boolean excluir(Aluno aluno)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();
+			this.manager.remove(manager.getReference(aluno.getClass(), aluno.getRa_aluno()));
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			this.manager.getTransaction().rollback();
+			return false;
+		}
 	}
 	
 	public void open()
