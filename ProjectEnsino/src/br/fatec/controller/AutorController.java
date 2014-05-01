@@ -96,7 +96,6 @@ public class AutorController {
 	{	
 		if (autorDao.alterar(this.newAutor)){
 			System.out.println("Autor alterado com sucesso!");
-			limparCampos();
 		}
 		else
 			System.out.println("Erro na alteração!");
@@ -120,8 +119,14 @@ public class AutorController {
 			System.out.println("Erro na exclusão!");
 	}
 	
-	public void limparCampos(){
+	private void limparCampos(){
 		this.newAutor.setId_autor(null);
 		this.newAutor.setNome_autor(null);
+	}
+	
+	public void goToAutor() throws Exception{
+		limparCampos();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect("Autor.xhtml");
 	}
 }
