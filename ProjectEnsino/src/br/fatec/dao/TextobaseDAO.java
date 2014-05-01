@@ -28,7 +28,8 @@ public class TextobaseDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
@@ -105,7 +106,8 @@ public class TextobaseDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
@@ -122,7 +124,8 @@ public class TextobaseDAO {
 		}
 		catch(Exception ex){
 			textobase = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 
 		return textobase;
@@ -143,7 +146,8 @@ public class TextobaseDAO {
 		catch(Exception ex)
 		{
 			listTextobase = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 		
 		return listTextobase;
@@ -164,7 +168,8 @@ public class TextobaseDAO {
 		catch(Exception ex)
 		{
 			listTextobase = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 		
 		return listTextobase;
@@ -190,7 +195,8 @@ public class TextobaseDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
