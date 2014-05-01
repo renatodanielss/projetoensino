@@ -14,8 +14,8 @@ import javax.persistence.Table;
 public class Autor{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
-	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTOR_ID")
+	@SequenceGenerator(name="AUTOR_ID", sequenceName="AUTOR_SEQ", allocationSize=1)
 	@Column(name="id_autor", nullable=false)
 	private Integer id_autor;	
 	@Column(name="nome_autor", nullable=false)
@@ -33,8 +33,4 @@ public class Autor{
 	public void setNome_autor(String nome_autor) {
 		this.nome_autor = nome_autor;
 	}
-	
-	
-
-
 }
