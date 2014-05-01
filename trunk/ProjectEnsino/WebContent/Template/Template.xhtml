@@ -38,7 +38,7 @@ xmlns:p="http://primefaces.org/ui">
     </p:menu>
 	<p:commandButton id="dynaButtonAutor" value="Autor" type="button"/>
     <p:menu overlay="true" trigger="dynaButtonAutor" my="left top" at="left bottom">
-            <p:menuitem value="Cadastrar" url="/Autor.xhtml" icon="ui-icon-disk"/>
+            <p:menuitem value="Cadastrar" action="#{autorController.goToAutor}" icon="ui-icon-disk"/>
             <p:menuitem value="Editar" url="/Autorlist.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
     </p:menu>
 	<p:commandButton id="dynaButtonProva" value="Prova" type="button"/>
