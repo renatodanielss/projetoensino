@@ -24,7 +24,7 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
-<tr><td><center><h2>Cadastro de Alunos</h2></center></td></tr>
+<tr><td><center><h2>Cadastro de Aluno</h2></center></td></tr>
 </table>
 <table width="900">
 <tr>
@@ -36,7 +36,9 @@ xmlns:p="http://primefaces.org/ui">
 
 <tr>
 	<td align="left" ><p:inputText id="txtRa" size="49" value="#{alunoController.newAluno.ra_aluno}"/></td>
-	<td align="left" width="40%"><p:inputText id="txtCpf" size="49" value="#{alunoController.newAluno.cpf_aluno}"/></td>
+	<td align="left" width="40%"><p:inputMask mask="999.999.999-99" id="txtCpf" size="49" value="#{alunoController.newAluno.cpf_aluno}"/></td>
+<!-- <p:inputMask mask="999.999.999-99" id="idCpf" value="#{usuario.facade.tecnico.numeroCPF}"   
+    	required="true" requiredMessage="Campo Obrigatório" maxlength="11" converter="convertInput" /> -->
 </tr>
 
 <tr>
@@ -44,7 +46,7 @@ xmlns:p="http://primefaces.org/ui">
 	
 </tr>
 <tr>
-	<td align="left" colspan="2" width="60%"><p:inputText id="txtNome" size="105" value="#{alunoController.newAluno.nome_aluno}"/></td>
+	<td align="left" colspan="2" width="60%"><p:inputText id="txtNome" size="106" value="#{alunoController.newAluno.nome_aluno}"/></td>
 	
 </tr>
 </table>
@@ -54,9 +56,9 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" width="35%"><h:outputText value="Data de Nascimento:"/></td><td align="left" width="35%"><h:outputText value="Telefone:"/></td><td align="left" width="30%"><h:outputText value="Celular:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" width="30%"><p:calendar id="popupButtonCal" showOn="button" size="24" value="#{alunoController.newAluno.datanasc_aluno}"/></td>
-	<td align="left" width="35%"><p:inputText id="txtTelefone" size="29" value="#{alunoController.newAluno.telefone_aluno}"/></td>
-	<td align="left"  width="35%"><p:inputText id="txtCelular" size="29" value="#{alunoController.newAluno.celular_aluno}"/></td>
+	<td align="left" width="30%"><p:calendar id="popupButtonCal" locale="pt_BR" showOn="button" size="20" value="#{alunoController.newAluno.datanasc_aluno}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtTelefone" size="33" value="#{alunoController.newAluno.telefone_aluno}"/></td>
+	<td align="left"  width="35%"><p:inputText id="txtCelular" size="33" value="#{alunoController.newAluno.celular_aluno}"/></td>
 </tr>
 </table>
 
@@ -80,13 +82,13 @@ xmlns:p="http://primefaces.org/ui">
 <tr>
 	<td align="left" width="35%"><p:inputText id="txtLogradouro" size="50" value="#{alunoController.newAluno.logradouro_aluno}"/></td>
 	<td align="left" width="35%"><p:inputText id="txtNumero" size="9" value="#{alunoController.newAluno.numero_aluno}"/></td>
-	<td align="left"  width="30%"><p:inputText id="txtComplemento" size="32" value="#{alunoController.newAluno.complemento_aluno}"/></td>
+	<td align="left"  width="30%"><p:inputText id="txtComplemento" size="33" value="#{alunoController.newAluno.complemento_aluno}"/></td>
 </tr>
 </table>
 
 <table width="900">
 <tr>
-	<td align="left" width="35%"><h:outputText value="Bairro"/></td><td align="left" width="35%"><h:outputText value="Cidade:"/></td><td align="left" width="30%"><h:outputText value="UF:"/></td><td align="left" width="30%"><h:outputText value="CEP:"></h:outputText></td>
+	<td align="left" width="35%"><h:outputText value="Bairro:"/></td><td align="left" width="35%"><h:outputText value="Cidade:"/></td><td align="left" width="30%"><h:outputText value="UF:"/></td><td align="left" width="30%"><h:outputText value="CEP:"></h:outputText></td>
 </tr>
 <tr>
 	<td align="left" width="35%"><p:inputText id="txtBairro" size="36" value="#{alunoController.newAluno.bairro_aluno}"/></td>
@@ -122,7 +124,7 @@ xmlns:p="http://primefaces.org/ui">
        <f:selectItem itemValue="27" itemLabel="TO"/>
 	</p:selectOneMenu>
 	</td>
-	<td align="left" width="15%"><p:inputText id="txtCep" size="16" value="#{alunoController.newAluno.cep_aluno}"/></td>
+	<td align="left" width="15%"><p:inputMask mask="99999-999" id="txtCep" size="17" value="#{alunoController.newAluno.cep_aluno}"/></td>
 </tr>
 </table>
 
@@ -131,7 +133,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" colspan="2"><h:outputText value="E-mail:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" colspan="2"><p:inputText id="txtEmail" size="105" value="#{alunoController.newAluno.email_aluno}"/></td>
+	<td align="left" colspan="2"><p:inputText id="txtEmail" size="106" value="#{alunoController.newAluno.email_aluno}"/></td>
 </tr>
 </table>
 <br />
