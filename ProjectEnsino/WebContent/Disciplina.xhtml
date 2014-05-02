@@ -7,7 +7,7 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Disciplina</title>
+<link rel="icon" href="" type="image/ico" /><title>Disciplina</title>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -26,19 +26,24 @@ xmlns:p="http://primefaces.org/ui">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Disciplina</h2></center></td></tr>
 </table>
-<table>
-<tr><td><h3>Detalhes da Disciplina</h3></td></tr>
-<tr><td colspan="2">
-	<h:outputText value="ID:"></h:outputText><h:inputText id="txtId" size="15"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Disciplina:"></h:outputText><h:inputText id="txtDisciplina" size="40"></h:inputText>
-</td></tr>
+<table align="center">
+<tr>
+	<td align="left" colspan="2"><h3>Detalhes da Disciplina</h3></td>
+</tr>
+<tr>
+	<td align="left"><h:outputText value="Disciplina:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left"><p:inputText id="txtNome" size="77" style="width:658px" value="#{disciplinaController.newDisciplina.nome_disciplina}" /></td>
+</tr>
 </table>
 <br />
 <table align="center">
 	<tr><td>
-		<h:button id="btnSalvar" value="Salvar" onclick=""></h:button>&nbsp;
-		<h:button id="btnExcluir" value="Excluir" onclick=""></h:button>&nbsp;
-		<h:button id="btnProcurar" value="Procurar" onclick=""></h:button>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{disciplinaController.cadastrar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="#{disciplinaController.alterar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnExcluir" value="Excluir" action="#{disciplinaController.excluir}" ajax="false" />&nbsp;
+		<p:button id="btnProcurar" value="Procurar"></p:button>&nbsp;
 	</td></tr>
 </table>
 </div>

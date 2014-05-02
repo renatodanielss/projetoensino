@@ -1,10 +1,13 @@
 package br.fatec.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import br.fatec.dao.DisciplinaDAO;
 import br.fatec.model.Disciplina;
@@ -17,6 +20,7 @@ public class DisciplinaController {
 	private DisciplinaDAO disciplinaDao;
 	private Disciplina currentDisciplina;
 	private Disciplina newDisciplina;
+	private boolean showNewButton;
 	
 	public DisciplinaController()
 	{
@@ -29,6 +33,7 @@ public class DisciplinaController {
 		this.disciplinaDao = new DisciplinaDAO();
 		this.newDisciplina = new Disciplina();
 		this.currentDisciplina = new Disciplina();
+		this.mostrarSalvar();
 	}
 
 	public List<Disciplina> getDisciplinas() {
@@ -66,11 +71,78 @@ public class DisciplinaController {
 	
 	public void cadastrar()
 	{	
-		if (disciplinaDao.inserir(this.newDisciplina))
+		if (disciplinaDao.inserir(this.newDisciplina)){
 			System.out.println("Disciplina inserida com sucesso!");
+			newDisciplina = new Disciplina();
+		}
 		else
 			System.out.println("Erro na inserção!");
+	}
+	
+	public void iniciaAlterar() throws IOException
+	{
+		if (newDisciplina != null)
+		{
+			try{
+				this.getNewDisciplina().setId_disciplina(this.getCurrentDisciplina().getId_disciplina());
+				this.getNewDisciplina().setNome_disciplina(this.getCurrentDisciplina().getNome_disciplina());
+				
+				mostrarAlterar();
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("Disciplina.xhtml?faces-redirect=true&redirect=1");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void alterar()
+	{	
+		if (disciplinaDao.alterar(this.newDisciplina)){
+			System.out.println("Disciplina alterada com sucesso!");
+			newDisciplina = new Disciplina();
+		}
+		else
+			System.out.println("Erro na alteração!");
 		
-		this.newDisciplina = new Disciplina();
+		//ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		//externalContext.redirect("CadastroConcluido.xhtml");
+	}
+	
+	public void excluir() throws IOException
+	{
+		if (disciplinaDao.excluir(this.currentDisciplina)){
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Disciplinalist.xhtml");
+			System.out.println("Disciplina excluida com sucesso!");
+		}
+		else
+			System.out.println("Erro na exclusão!");
+	}
+	
+	private void limparCampos(){
+		this.newDisciplina.setId_disciplina(null);
+		this.newDisciplina.setNome_disciplina(null);
+		this.mostrarSalvar();
+	}
+	
+	public void goToDisciplina() throws Exception{
+		limparCampos();
+		System.out.println("goToDisciplina");
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect("Disciplina.xhtml");
+	}
+	
+	public boolean getShowNewButton(){
+		return showNewButton;
+	}
+		  
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
 	}
 }

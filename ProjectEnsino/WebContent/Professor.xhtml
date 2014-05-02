@@ -6,9 +6,8 @@ xmlns:h="http://java.sun.com/jsf/html"
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta name="google-site-verification" content="n-nJLwjXLvl_MM02VPM4kD1FMSifZu4QWUsYI-8ZAXM" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Professor</title>
+<link rel="icon" href="" type="image/ico" /><title>Professor</title>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -24,40 +23,85 @@ xmlns:p="http://primefaces.org/ui">
 <ui:define name="page">
 <h:form enctype="multipart/form-data">
 <div align="center">
-<h:form>
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Professor</h2></center></td></tr>
 </table>
-<table border="0">
-<tr align="left"><td colspan="2"><h3>Informações Pessoais</h3></td></tr>
-<tr align="left"><td colspan="2">
-	<p:outputLabel value="ID:"></p:outputLabel><p:inputText id="txtId" size="8"></p:inputText>&nbsp;&nbsp;&nbsp;
-</td></tr>
-<tr align="left"><td colspan="2">
-	<p:outputLabel value="Nome:"></p:outputLabel><p:inputText id="txtNome" size="70"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="CPF:"></p:outputLabel><p:inputText id="txtCpf" size="32"></p:inputText>
-</td></tr>
-<tr align="left"><td colspan="2">
-	<p:outputLabel value="Data de Nascimento:"></p:outputLabel><p:inputText id="txtNascimento" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="Telefone:"></p:outputLabel><p:inputText id="txtTelefone" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="Celular:"></p:outputLabel><p:inputText id="txtCelular" size="17"></p:inputText>
-</td></tr>
-<tr align="left"><td align="left" width="50">
-	<p:outputLabel value="Sexo"></p:outputLabel></td>
-	<td align="left"><p:selectOneRadio><f:selectItem itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemLabel="Feminino"></f:selectItem>
+<table width="900">
+<tr>
+	<td align="left" colspan="3"><h3>Informações Pessoais</h3></td>
+</tr>
+
+<tr>
+	<td align="left" width="15%"><h:outputText value="Matrícula:"/></td><td align="left" width="25%"><h:outputText value="CPF:"/></td><td align="left" width="60%"><h:outputText value="Disciplina:"></h:outputText></td>
+</tr>
+
+<tr>
+	<td align="left" width="25%"><p:inputText id="txtMatricula" size="20" value="#{professorController.newProfessor.matricula_professor}"/></td>
+	<td align="left" width="25%"><p:inputText id="txtCpf" size="30" value="#{professorController.newProfessor.cpf_professor}"/></td>
+	<td align="left"  width="50%">
+	<p:selectOneMenu maxlength="85" id="slmDisciplina" style="width:375px;vertical-align:bottom" value="#{professorController.newProfessor.disciplina_professor}">
+		<f:selectItem itemLabel="Selecione uma disciplina" itemValue="0" ></f:selectItem>
+		<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
+	</p:selectOneMenu>
+		</td>
+</tr>
+
+</table>
+
+<table width="900">
+<tr>
+	<td align="left"><h:outputText value="Nome:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left" width="60%"><p:inputText id="txtNome" size="105" value="#{professorController.newProfessor.nome_professor}"/></td>
+	
+</tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" width="35%"><h:outputText value="Data de Nascimento:"/></td><td align="left" width="35%"><h:outputText value="Telefone:"/></td><td align="left" width="30%"><h:outputText value="Celular:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left" width="30%"><p:inputMask mask="99/99/9999" size="26" value="#{professorController.newProfessor.datanasc_professor}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtTelefone" size="33" value="#{professorController.newProfessor.telefone_professor}"/></td>
+	<td align="left"  width="35%"><p:inputText id="txtCelular" size="33" value="#{professorController.newProfessor.celular_professor}"/></td>
+</tr>
+</table>
+
+<table width="900">
+<tr><td align="left">
+	<h:outputText value="Sexo:"></h:outputText>
+	<p:selectOneRadio id="sorSexo" value="#{professorController.newProfessor.sexo_professor}"><f:selectItem itemValue="false" itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemValue="true" itemLabel="Feminino"></f:selectItem>
 	</p:selectOneRadio>
 </td></tr>
-<tr align="left"><td colspan="2"><h3>Endereço</h3></td></tr>
-<tr align="left"><td colspan="2">
-	<p:outputLabel value="Logradouro:"></p:outputLabel><p:inputText id="txtLogradouro" size="50"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="Nº:"></p:outputLabel><p:inputText id="txtNumero" size="10"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="Complemento:"></p:outputLabel><p:inputText id="txtComplemento" size="16"></p:inputText>
-</td></tr>
-<tr align="left"><td colspan="2">
-	<p:outputLabel value="Bairro:"></p:outputLabel><p:inputText id="txtBairro" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="Cidade:"></p:outputLabel><p:inputText id="txtCidade" size="25"></p:inputText>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="UF:"></p:outputLabel><p:selectOneMenu style="vertical-align:bottom" id="slmUf">
-       <f:selectItem itemValue="0" itemLabel="--"/>
+</table>
+
+<table width="900">
+<tr><td align="left" colspan="4"><h3>Endereço</h3></td></tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" width="35%"><h:outputText value="Logradouro:"/></td><td align="left" width="35%"><h:outputText value="Nº:"/></td><td align="left" width="30%"><h:outputText value="Complemento:"></h:outputText></td>
+</tr>
+
+<tr>
+	<td align="left" width="35%"><p:inputText id="txtLogradouro" size="50" value="#{professorController.newProfessor.logradouro_professor}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtNumero" size="9" value="#{professorController.newProfessor.numero_professor}"/></td>
+	<td align="left"  width="30%"><p:inputText id="txtComplemento" size="32" value="#{professorController.newProfessor.complemento_professor}"/></td>
+</tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" width="35%"><h:outputText value="Bairro"/></td><td align="left" width="35%"><h:outputText value="Cidade:"/></td><td align="left" width="30%"><h:outputText value="UF:"/></td><td align="left" width="30%"><h:outputText value="CEP:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left" width="35%"><p:inputText id="txtBairro" size="36" value="#{professorController.newProfessor.bairro_professor}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtCidade" size="30" value="#{professorController.newProfessor.cidade_professor}"/></td>
+	<td align="left"  width="30%">
+	<p:selectOneMenu style="vertical-align:bottom" id="slmUf" value="#{professorController.newProfessor.uf_professor}">  
        <f:selectItem itemValue="1" itemLabel="AC"/>
        <f:selectItem itemValue="2" itemLabel="AL"/>
        <f:selectItem itemValue="3" itemLabel="AM"/>
@@ -85,22 +129,28 @@ xmlns:p="http://primefaces.org/ui">
        <f:selectItem itemValue="25" itemLabel="SE"/>
        <f:selectItem itemValue="26" itemLabel="SP"/>
        <f:selectItem itemValue="27" itemLabel="TO"/>
-	</p:selectOneMenu>&nbsp;&nbsp;&nbsp;
-	<p:outputLabel value="CEP:"></p:outputLabel><p:inputText id="txtCep" size="23"></p:inputText>&nbsp;&nbsp;&nbsp;
-</td></tr>
-<tr align="left"><td colspan="2">
-	<p:outputLabel value="E-mail:"></p:outputLabel><p:inputText id="txtEmail" size="116"></p:inputText>
-</td></tr>
+	</p:selectOneMenu>
+	</td>
+	<td align="left" width="15%"><p:inputText id="txtCep" size="16" value="#{professorController.newProfessor.cep_professor}"/></td>
+</tr>
+</table>
+
+<table width="900">
+<tr>
+	<td align="left" colspan="2"><h:outputText value="E-mail:"></h:outputText></td>
+</tr>
+<tr>
+	<td align="left" colspan="2"><p:inputText id="txtEmail" size="105" value="#{professorController.newProfessor.email_professor}"/></td>
+</tr>
 </table>
 <br />
 <table align="center">
 	<tr><td>
-		<p:button id="btnSalvar" value="Salvar" onclick=""></p:button>&nbsp;
-		<p:button id="btnExcluir" value="Excluir" onclick=""></p:button>&nbsp;
-		<p:button id="btnProcurar" value="Procurar" onclick=""></p:button>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{professorController.cadastrar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnExcluir" value="Excluir" onclick=""></p:commandButton>&nbsp;
+		<p:commandButton id="btnProcurar" value="Procurar" onclick=""></p:commandButton>&nbsp;
 	</td></tr>
 </table>
-</h:form>
 </div>
 </h:form>
 </ui:define>
