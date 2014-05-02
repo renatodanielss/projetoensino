@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.fatec.model.Assunto;
+import br.fatec.model.Autor;
 
 public class AssuntoDAO {
 	private EntityManagerFactory factory;
@@ -74,6 +75,22 @@ public class AssuntoDAO {
 		}
 		
 		return listAssunto;
+	}
+	
+	public boolean excluir(Assunto assunto)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();
+			this.manager.remove(manager.getReference(assunto.getClass(), assunto.getId_assunto()));
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			this.manager.getTransaction().rollback();
+			return false;
+		}
 	}
 	
 	public void open()

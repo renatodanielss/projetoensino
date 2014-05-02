@@ -1,12 +1,15 @@
 package br.fatec.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import br.fatec.dao.AssuntoDAO;
 import br.fatec.model.Assunto;
 
@@ -102,4 +105,35 @@ public class AssuntoController {
 		else
 			System.out.println("Erro na inserção!");
 	}
+	
+	public void iniciaAlterar() throws IOException
+	{
+		if (newAssunto != null)
+		{
+			try{
+				this.getNewAssunto().setId_assunto(this.getCurrentAssunto().getId_assunto());
+				this.getNewAssunto().setNome_assunto(this.getCurrentAssunto().getNome_assunto());
+				this.getNewAssunto().setIdDisciplina_assunto(this.getCurrentAssunto().getIdDisciplina_assunto());
+				
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("Assunto.xhtml?faces-redirect=true&redirect=1");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void excluir() throws IOException
+	{
+		if (assuntoDao.excluir(this.currentAssunto)){
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Alunolist.xhtml");
+			System.out.println("Aluno excluido com sucesso!");
+		}
+		else
+			System.out.println("Erro na exclusão!");
+	}
+	
 }
