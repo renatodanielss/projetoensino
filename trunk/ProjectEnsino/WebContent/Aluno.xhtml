@@ -37,8 +37,6 @@ xmlns:p="http://primefaces.org/ui">
 <tr>
 	<td align="left" ><p:inputText id="txtRa" size="49" value="#{alunoController.newAluno.ra_aluno}"/></td>
 	<td align="left" width="40%"><p:inputMask mask="999.999.999-99" id="txtCpf" size="49" value="#{alunoController.newAluno.cpf_aluno}"/></td>
-<!-- <p:inputMask mask="999.999.999-99" id="idCpf" value="#{usuario.facade.tecnico.numeroCPF}"   
-    	required="true" requiredMessage="Campo Obrigatório" maxlength="11" converter="convertInput" /> -->
 </tr>
 
 <tr>
@@ -56,7 +54,6 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" width="35%"><h:outputText value="Data de Nascimento:"/></td><td align="left" width="35%"><h:outputText value="Telefone:"/></td><td align="left" width="30%"><h:outputText value="Celular:"></h:outputText></td>
 </tr>
 <tr>
-	<!--<td align="left" width="30%"><p:calendar id="popupButtonCal" locale="pt_BR" showOn="button" size="20" value="#{alunoController.newAluno.datanasc_aluno}"/></td> -->
 	<td align="left" width="30%"><p:inputMask mask="99/99/9999" size="26" value="#{alunoController.newAluno.datanasc_aluno}"/></td>
 	<td align="left" width="35%"><p:inputText id="txtTelefone" size="33" value="#{alunoController.newAluno.telefone_aluno}"/></td>
 	<td align="left"  width="35%"><p:inputText id="txtCelular" size="33" value="#{alunoController.newAluno.celular_aluno}"/></td>
