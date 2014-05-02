@@ -22,7 +22,7 @@ public class Aluno {
 	private String cpf_aluno;
 	
 	@Column(name="datanasc_aluno")
-	private Date datanasc_aluno;
+	private String datanasc_aluno;
 		
 	@Column(name="telefone_aluno")
 	private String telefone_aluno;
@@ -81,11 +81,11 @@ public class Aluno {
 		this.cpf_aluno = cpf_aluno;
 	}
 
-	public Date getDatanasc_aluno() {
+	public String getDatanasc_aluno() {
 		return datanasc_aluno;
 	}
 
-	public void setDatanasc_aluno(Date datanasc_aluno) {
+	public void setDatanasc_aluno(String datanasc_aluno) {
 		this.datanasc_aluno = datanasc_aluno;
 	}
 
