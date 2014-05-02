@@ -31,7 +31,12 @@ xmlns:p="http://primefaces.org/ui">
             <p:menuitem value="Cadastrar" url="/Disciplina.xhtml" icon="ui-icon-disk"/>
             <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>
     </p:menu>
-	<p:commandButton id="dynaButtonTextobase" value="Texto Base" style="width:132px" type="button"/>
+    <p:commandButton id="dynaButtonAssunto" value="Assunto" type="button"/>
+    <p:menu overlay="true" trigger="dynaButtonAssunto" my="left top" at="left bottom">
+            <p:menuitem value="Cadastrar" url="/Assunto.xhtml" icon="ui-icon-disk"/>
+            <p:menuitem value="Editar" url="/Assuntolist.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
+    </p:menu>
+	<p:commandButton id="dynaButtonTextobase" value="Texto Base" type="button"/>
     <p:menu overlay="true" trigger="dynaButtonTextobase" my="left top" at="left bottom">
             <p:menuitem value="Cadastrar" action="#{textobaseController.goToTextobase}" icon="ui-icon-disk"/>
             <p:menuitem value="Editar" url="/Textobaselist.xhtml" icon="ui-icon-arrowrefresh-1-w"/>
