@@ -28,7 +28,8 @@ public class AlunoDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
@@ -44,7 +45,8 @@ public class AlunoDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
@@ -62,7 +64,8 @@ public class AlunoDAO {
 		}
 		catch(Exception ex){
 			aluno = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 
 		return aluno;
@@ -83,7 +86,8 @@ public class AlunoDAO {
 		catch(Exception ex)
 		{
 			listAluno = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 		
 		return listAluno;
@@ -109,7 +113,8 @@ public class AlunoDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
