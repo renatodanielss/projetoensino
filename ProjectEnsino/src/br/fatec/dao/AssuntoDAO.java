@@ -28,7 +28,8 @@ public class AssuntoDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
