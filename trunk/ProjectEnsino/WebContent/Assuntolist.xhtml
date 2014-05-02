@@ -27,28 +27,29 @@ xmlns:p="http://primefaces.org/ui">
 <table align="center" width="900">
 <tr><td>
 
-<p:dataTable  var="assunto" value="#{assuntoController.autores}" id="assuntoTable" rowKey="#{assunto.id_assunto}"
+<p:dataTable  var="assunto" value="#{assuntoController.assuntos}" id="assuntoTable" rowKey="#{assunto.id_assunto}"
 		 selectionMode="single" selection="#{assuntoController.currentAssunto}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
 		 rowsPerPageTemplate="5,10,15" lazy="true" filterEvent="enter">
   
 	        <f:facet name="header">  
-	            Autor
+	            Assunto
 	            <br/>
 	        </f:facet> 
 	        
 	        <p:inputText></p:inputText>
-	        <p:column width="50" headerText="ID" id="id_autor">
-	             #{autor.id_autor}
+	        <p:column width="50" headerText="ID" id="id_assunto">
+	             #{assunto.id_assunto}
 	        </p:column>
 	        
-	        <p:column width="650" headerText="Autor" id="nome_autor">
-	           #{autor.nome_autor}
+	        <p:column width="650" headerText="Autor" id="nome_assunto">
+	           #{assunto.nome_assunto}
 	        </p:column>        
 	       
 </p:dataTable>
 </td></tr>
 </table>
+<!--  
 <table align="center" >
 	<tr><td>
 		<p:commandButton id="btnAlterar" value="Alterar" action="#{assuntoController.iniciaAlterar}" ajax="false"/>&nbsp;
@@ -56,6 +57,7 @@ xmlns:p="http://primefaces.org/ui">
 		<p:button id="btnProcurar" value="Procurar"></p:button>&nbsp;
 	</td></tr>
 </table>
+-->
 </h:form>
 	
 	
