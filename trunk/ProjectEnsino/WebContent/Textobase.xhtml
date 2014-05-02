@@ -68,15 +68,13 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 </table>
 <br />
-<h:panelGroup id="pnlGrd">
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.cadastrar}" rendered="#{textobaseController.showNewButton}" ajax="false"/>&nbsp;
-		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.alterar}" rendered="#{!textobaseController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
-		<p:commandButton id="btnProcurar" value="Procurar" action="#{textobaseController.saveForm}" ajax="false"></p:commandButton>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.cadastrar}" ajax="false" rendered="#{textobaseController.showNewButton}" />&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.alterar}" ajax="false" rendered="#{!textobaseController.showNewButton}" />&nbsp;
+		<p:commandButton id="btnProcurar" value="Procurar" ajax="false" />&nbsp;
 	</td></tr>
 </table>
-</h:panelGroup>
 </div>
 
 </h:form>

@@ -6,25 +6,14 @@ package br.fatec.controller;
 //import java.util.ArrayList;
 import java.io.IOException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 //import javax.faces.model.DataModel;
 //import javax.faces.model.ListDataModel;
-
-
 //import org.primefaces.model.LazyDataModel;
-
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
-
-
-
-
-
-
 //import javax.faces.context.FacesContext;
 //import javax.faces.model.DataModel;
 //import javax.faces.model.ListDataModel;
@@ -40,6 +29,7 @@ public class TextobaseController {
 	private Textobase currentTextoBase;
 	private List<Textobase> textosBases;
 	private TextobaseDAO textoBaseDao;
+	private boolean showNewButton;
 	
 	public TextobaseController()
 	{
@@ -52,6 +42,7 @@ public class TextobaseController {
 		this.textoBaseDao = new TextobaseDAO();
 		this.newTextoBase = new Textobase();
 		this.currentTextoBase = new Textobase();
+		this.mostrarSalvar();
 	}
 	
 	public TextobaseDAO getTextoBaseDao() {
@@ -91,8 +82,10 @@ public class TextobaseController {
 	
 	public void cadastrar()
 	{	
-		if (textoBaseDao.inserir(this.newTextoBase))
+		if (textoBaseDao.inserir(this.newTextoBase)){
 			System.out.println("Texto base inserido com sucesso!");
+			newTextoBase = new Textobase();
+		}
 		else
 			System.out.println("Erro na inserção!");
 	}
@@ -108,6 +101,7 @@ public class TextobaseController {
 				this.getNewTextoBase().setAssunto_textobase(this.getCurrentTextoBase().getAssunto_textobase());
 				this.getNewTextoBase().setTexto_textobase(this.getCurrentTextoBase().getTexto_textobase());
 				
+				mostrarAlterar();
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Textobase.xhtml?faces-redirect=true&redirect=1");
 			}
@@ -121,16 +115,13 @@ public class TextobaseController {
 	{	
 		if (textoBaseDao.alterar(this.newTextoBase)){
 			System.out.println("Textobase alterado com sucesso!");
+			newTextoBase = new Textobase();
 		}
 		else
 			System.out.println("Erro na alteração!");
-	}
-	
-	public void cadastrarAlterar(){
-		if (textoBaseDao.existeTextobase(newTextoBase.getCodigo_textobase()))
-			alterar();
-		else
-			cadastrar();
+		
+		//ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		//externalContext.redirect("CadastroConcluido.xhtml");
 	}
 	
 	public void excluir() throws IOException
@@ -150,6 +141,7 @@ public class TextobaseController {
 		this.newTextoBase.setDisciplina_textobase(0);
 		this.newTextoBase.setAssunto_textobase(0);
 		this.newTextoBase.setTexto_textobase(null);
+		this.mostrarSalvar();
 	}
 	
 	public void goToTextobase() throws Exception{
@@ -157,5 +149,17 @@ public class TextobaseController {
 		System.out.println("goToTextobase");
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Textobase.xhtml");
+	}
+	
+	public boolean getShowNewButton(){
+		return showNewButton;
+	}
+		  
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
 	}
 }
