@@ -28,16 +28,53 @@ public class DisciplinaDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
+	}
+	
+	public boolean alterar(Disciplina disciplina)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();    
+			this.manager.merge(disciplina);
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public Disciplina buscar(Integer id)
+	{
+		Disciplina disciplina = null;
+		
+		try
+		{
+			this.manager.getTransaction().begin();    
+	 		disciplina = this.manager.find(Disciplina.class, id);
+	 		this.manager.getTransaction().commit();
+		}
+		catch(Exception ex){
+			disciplina = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}
+
+		return disciplina;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Disciplina> listar()
 	{		
 		List<Disciplina> listDisciplina = null;
-		String query = "select * from tbl_disciplina";
+		String query = "SELECT * FROM tbl_disciplina";
 		
 		try
 		{
@@ -48,10 +85,37 @@ public class DisciplinaDAO {
 		catch(Exception ex)
 		{
 			listDisciplina = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 		
 		return listDisciplina;
+	}
+	
+	public boolean existeDisciplina(Integer id)
+	{
+		Disciplina disciplina = buscar(id);
+		
+		if(disciplina == null)
+			return false;
+		return true;
+	}
+	
+	public boolean excluir(Disciplina disciplina)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();
+			this.manager.remove(manager.getReference(disciplina.getClass(), disciplina.getId_disciplina()));
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+			return false;
+		}
 	}
 	
 	public void open()

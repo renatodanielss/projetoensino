@@ -1,7 +1,5 @@
 package br.fatec.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,8 +10,8 @@ import javax.persistence.Table;
 
 public class Professor {
 	@Id
-	@Column(name="ra_professor")
-	private String ra_professor;
+	@Column(name="matricula_professor")
+	private String matricula_professor;
 	
 	@Column(name="nome_professor")
 	private String nome_professor;
@@ -22,7 +20,7 @@ public class Professor {
 	private String cpf_professor;
 	
 	@Column(name="datanasc_professor")
-	private Date datanasc_professor;
+	private String datanasc_professor;
 	
 	@Column(name="telefone_professor")
 	private String telefone_professor;
@@ -31,7 +29,7 @@ public class Professor {
 	private String celular_professor;
 	
 	@Column(name="sexo_professor")
-	private String sexo_professor;
+	private Boolean sexo_professor;
 	
 	@Column(name="logradouro_professor")
 	private String logradouro_professor;
@@ -60,12 +58,12 @@ public class Professor {
 	@Column(name="disciplina_professor")
 	private Integer disciplina_professor;
 
-	public String getRa_professor() {
-		return ra_professor;
+	public String getMatricula_professor() {
+		return matricula_professor;
 	}
 
-	public void setRa_professor(String ra_professor) {
-		this.ra_professor = ra_professor;
+	public void setMatricula_professor(String matricula_professor) {
+		this.matricula_professor = matricula_professor;
 	}
 
 	public String getNome_professor() {
@@ -84,11 +82,11 @@ public class Professor {
 		this.cpf_professor = cpf_professor;
 	}
 
-	public Date getDatanasc_professor() {
+	public String getDatanasc_professor() {
 		return datanasc_professor;
 	}
 
-	public void setDatanasc_professor(Date datanasc_professor) {
+	public void setDatanasc_professor(String datanasc_professor) {
 		this.datanasc_professor = datanasc_professor;
 	}
 
@@ -108,11 +106,11 @@ public class Professor {
 		this.celular_professor = celular_professor;
 	}
 
-	public String getSexo_professor() {
+	public Boolean getSexo_professor() {
 		return sexo_professor;
 	}
 
-	public void setSexo_professor(String sexo_professor) {
+	public void setSexo_professor(Boolean sexo_professor) {
 		this.sexo_professor = sexo_professor;
 	}
 
