@@ -38,7 +38,7 @@ public class AssuntoController {
 	}
 
 	public List<Assunto> getAssuntos() {
-		if (textobaseController.getNewTextoBase() == null)
+		if (textobaseController == null)
 			this.assuntos = assuntoDao.listar();
 		else{
 			if (textobaseController.getNewTextoBase().getDisciplina_textobase() < 1)
@@ -87,10 +87,15 @@ public class AssuntoController {
 	}
 	
 	public TextobaseController getTextobaseController() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		@SuppressWarnings("rawtypes")
-		Map sessionMap = context.getExternalContext().getSessionMap();
-		textobaseController = (TextobaseController)sessionMap.get("textobaseController");
+		try{
+			FacesContext context = FacesContext.getCurrentInstance();
+			@SuppressWarnings("rawtypes")
+			Map sessionMap = context.getExternalContext().getSessionMap();
+			textobaseController = (TextobaseController)sessionMap.get("textobaseController");
+		}catch(Exception e){
+			textobaseController = null;
+			e.printStackTrace();
+		}
 		return textobaseController;
 	}
 
@@ -129,8 +134,8 @@ public class AssuntoController {
 	{
 		if (assuntoDao.excluir(this.currentAssunto)){
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("Alunolist.xhtml");
-			System.out.println("Aluno excluido com sucesso!");
+			externalContext.redirect("Assuntolist.xhtml");
+			System.out.println("Assunto excluido com sucesso!");
 		}
 		else
 			System.out.println("Erro na exclusão!");

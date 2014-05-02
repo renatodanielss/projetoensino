@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.fatec.model.Assunto;
-import br.fatec.model.Autor;
 
 public class AssuntoDAO {
 	private EntityManagerFactory factory;
@@ -50,7 +49,8 @@ public class AssuntoDAO {
 		catch(Exception ex)
 		{
 			listAssunto = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 		
 		return listAssunto;
@@ -71,7 +71,8 @@ public class AssuntoDAO {
 		catch(Exception ex)
 		{
 			listAssunto = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 		
 		return listAssunto;
@@ -88,7 +89,9 @@ public class AssuntoDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+			
 			return false;
 		}
 	}

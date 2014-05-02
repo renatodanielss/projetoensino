@@ -5,10 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-import br.fatec.dao.ProfessorDAO;
 import br.fatec.dao.ProvaDAO;
-import br.fatec.model.Professor;
 import br.fatec.model.Prova;
 
 
