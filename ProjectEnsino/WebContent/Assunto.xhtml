@@ -33,7 +33,7 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 <tr>
 <td align="left">
-	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px" value="#{assuntoController.newAssunto.idDisciplina_assunto}">
+	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px;vertical-align:bottom" value="#{assuntoController.newAssunto.idDisciplina_assunto}">
 			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
 			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
 	</p:selectOneMenu>
