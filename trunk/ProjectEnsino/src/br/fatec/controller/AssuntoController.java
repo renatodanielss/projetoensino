@@ -101,7 +101,5 @@ public class AssuntoController {
 			System.out.println("Assunto inserido com sucesso!");
 		else
 			System.out.println("Erro na inserção!");
-		
-		this.newAssunto = new Assunto();
 	}
 }
