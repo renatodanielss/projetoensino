@@ -86,7 +86,6 @@ public class AlunoController {
 				this.getNewAluno().setDatanasc_aluno(this.getCurrentAluno().getDatanasc_aluno());
 				this.getNewAluno().setTelefone_aluno(this.getCurrentAluno().getTelefone_aluno());
 				this.getNewAluno().setCelular_aluno(this.getCurrentAluno().getCelular_aluno());
-				this.getNewAluno().setTelefone_aluno(this.getCurrentAluno().getTelefone_aluno());
 				this.getNewAluno().setSexo_aluno(this.getCurrentAluno().getSexo_aluno());
 				this.getNewAluno().setLogradouro_aluno(this.getCurrentAluno().getLogradouro_aluno());
 				this.getNewAluno().setNumero_aluno(this.getCurrentAluno().getNumero_aluno());
@@ -142,7 +141,7 @@ public class AlunoController {
 		this.getNewAluno().setDatanasc_aluno(null);
 		this.getNewAluno().setTelefone_aluno(null);
 		this.getNewAluno().setCelular_aluno(null);
-		this.getNewAluno().setTelefone_aluno(null);
+		this.getNewAluno().setSexo_aluno(null);
 		this.getNewAluno().setLogradouro_aluno(null);
 		this.getNewAluno().setNumero_aluno(null);
 		this.getNewAluno().setComplemento_aluno(null);

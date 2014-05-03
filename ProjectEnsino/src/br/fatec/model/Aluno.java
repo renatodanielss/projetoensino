@@ -29,7 +29,7 @@ public class Aluno {
 	private String celular_aluno;
 	
 	@Column(name="sexo_aluno")
-	private boolean sexo_aluno;
+	private Boolean sexo_aluno;
 	
 	@Column(name="logradouro_aluno")
 	private String logradouro_aluno;
@@ -99,11 +99,11 @@ public class Aluno {
 		return celular_aluno;
 	}
 	
-	public boolean getSexo_aluno() {
+	public Boolean getSexo_aluno() {
 		return sexo_aluno;
 	}
 
-	public void setSexo_aluno(boolean sexo_aluno) {
+	public void setSexo_aluno(Boolean sexo_aluno) {
 		this.sexo_aluno = sexo_aluno;
 	}
 
