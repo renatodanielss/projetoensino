@@ -18,36 +18,52 @@ xmlns:p="http://primefaces.org/ui">
   ga('send', 'pageview');
 
 </script>
+
 </h:head>
+
 <ui:decorate template="/Template/Template.xhtml">
 <ui:define name="page">
-<h:form enctype="multipart/form-data">
-<div align="center">
-<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
-<tr><td><center><h2>Cadastro de Disciplina</h2></center></td></tr>
+
+	
+<h:form id="form">
+<table align="center" width="900">
+<tr><td>
+
+<p:dataTable  var="disciplina" value="#{disciplinaController.disciplinas}" id="disciplinaTable" rowKey="#{disciplina.id_disciplina}"
+		 selectionMode="single" selection="#{disciplinaController.currentDisciplina}" style="text-align:center" paginator="true" rows="10"
+		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+		 rowsPerPageTemplate="5,10,15" lazy="true" filterEvent="enter">
+  
+	        <f:facet name="header">  
+	            Disciplina
+	            <br/>
+	        </f:facet> 
+	        
+	        <p:inputText></p:inputText>
+	        <p:column width="50" headerText="ID" id="id_assunto">
+	             #{disciplina.id_disciplina}
+	        </p:column>
+	        
+	        <p:column width="650" headerText="Autor" id="nome_assunto">
+	           #{disciplina.nome_disciplina}
+	        </p:column>        
+	       
+</p:dataTable>
+</td></tr>
 </table>
-<table align="center">
-<tr>
-	<td align="left" colspan="2"><h3>Detalhes da Disciplina</h3></td>
-</tr>
-<tr>
-	<td align="left"><h:outputText value="Disciplina:"></h:outputText></td>
-</tr>
-<tr>
-	<td align="left"><p:inputText id="txtNome" size="77" style="width:658px" value="#{disciplinaController.newDisciplina.nome_disciplina}" /></td>
-</tr>
-</table>
-<br />
+
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{disciplinaController.cadastrar}" ajax="false"/>&nbsp;
-		<p:commandButton id="btnAlterar" value="Alterar" action="#{disciplinaController.alterar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnIncluir" value="Incluir" action="#{disciplinaController.goToDisciplina}" ajax="false" />&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="#{disciplinaController.iniciaAlterar}" ajax="false"/>&nbsp;
 		<p:commandButton id="btnExcluir" value="Excluir" action="#{disciplinaController.excluir}" ajax="false" />&nbsp;
-		<p:button id="btnProcurar" value="Procurar"></p:button>&nbsp;
 	</td></tr>
 </table>
-</div>
+
 </h:form>
+	
+	
+
 </ui:define>
 </ui:decorate>
 </html>
