@@ -37,7 +37,7 @@ xmlns:p="http://primefaces.org/ui">
 
 <tr>
 	<td align="left" width="25%"><p:inputText id="txtMatricula" size="20" value="#{professorController.newProfessor.matricula_professor}"/></td>
-	<td align="left" width="25%"><p:inputText id="txtCpf" size="30" value="#{professorController.newProfessor.cpf_professor}"/></td>
+	<td align="left" width="25%"><p:inputMask mask="999.999.999-99" id="txtCpf" size="30" value="#{professorController.newProfessor.cpf_professor}"/></td>
 	<td align="left"  width="50%">
 	<p:selectOneMenu maxlength="85" id="slmDisciplina" style="width:375px;vertical-align:bottom" value="#{professorController.newProfessor.disciplina_professor}">
 		<f:selectItem itemLabel="Selecione uma disciplina" itemValue="0" ></f:selectItem>
@@ -131,7 +131,7 @@ xmlns:p="http://primefaces.org/ui">
        <f:selectItem itemValue="27" itemLabel="TO"/>
 	</p:selectOneMenu>
 	</td>
-	<td align="left" width="15%"><p:inputText id="txtCep" size="16" value="#{professorController.newProfessor.cep_professor}"/></td>
+	<td align="left" width="15%"><p:inputMask mask="99999-999" id="txtCep" size="16" value="#{professorController.newProfessor.cep_professor}"/></td>
 </tr>
 </table>
 
