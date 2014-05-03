@@ -1,0 +1,20 @@
+.menuButtons{
+	width: 119px;
+	background: transparent;
+	color: #FFFFFF;
+	font-family: Microsoft-Yi-Baiti;
+	font-size: 14pt;
+}
+
+.menuButtons2{
+	background: #700707;
+	color: #FFFFFF;
+	font-family: Microsoft-Yi-Baiti;
+	font-size: 14pt;
+}
+
+.menu{
+	background-image: url("../resources/images/topo.png");
+	height: 500px;
+	width: 900.
+}
