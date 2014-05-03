@@ -141,4 +141,17 @@ public class AssuntoController {
 			System.out.println("Erro na exclusão!");
 	}
 	
+	private void limparCampos(){
+		this.newAssunto.setId_assunto(null);;
+		this.newAssunto.setIdDisciplina_assunto(null);
+		this.newAssunto.setNome_assunto(null);
+		//this.mostrarSalvar();
+	}
+	
+	public void goToAssunto() throws Exception{
+		limparCampos();
+		System.out.println("goToAssunto");
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect("Assunto.xhtml");
+	}
 }
