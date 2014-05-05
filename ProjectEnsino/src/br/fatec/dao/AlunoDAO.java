@@ -54,12 +54,11 @@ public class AlunoDAO {
 	public Aluno buscar(String ra)
 	{
 		Aluno aluno = null;
-		String query = "select * from tbl_aluno where ra_aluno = '" + ra + "'";
-		
+
 		try
 		{
 			this.manager.getTransaction().begin();
-	 		aluno = (Aluno)this.manager.createNativeQuery(query, new Aluno().getClass()).getSingleResult();
+			aluno = this.manager.find(Aluno.class, ra); 
 	 		this.manager.getTransaction().commit();
 		}
 		catch(Exception ex){
@@ -132,3 +131,5 @@ public class AlunoDAO {
 	}
 
 }
+
+

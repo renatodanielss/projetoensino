@@ -135,12 +135,16 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 </table>
 <br />
-<table align="center">
-	<tr><td>
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{alunoController.cadastrarAlterar}" ajax="false"/>&nbsp;
+<h:panelGroup id="pnlGrd">
+<table border="0" width="900" align="center">
+	<tr><td align="right" width="900" >
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{alunoController.cadastrar}" rendered="#{alunoController.showNewButton}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{alunoController.alterar}" rendered="#{!alunoController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
 	</td></tr>
 </table>
+</h:panelGroup>
 </div>
+
 </h:form>
 </ui:define>
 </ui:decorate>
