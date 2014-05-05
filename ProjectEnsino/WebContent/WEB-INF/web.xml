@@ -11,6 +11,6 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-  	<welcome-file>Professor.xhtml</welcome-file>
+  	<welcome-file>Pages/Professor.xhtml</welcome-file>
   </welcome-file-list>
 </web-app>
