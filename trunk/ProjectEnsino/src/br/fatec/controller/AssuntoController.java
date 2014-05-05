@@ -21,6 +21,7 @@ public class AssuntoController {
 	private Assunto currentAssunto;
 	private AssuntoDAO assuntoDao;
 	private List<Assunto> assuntos;
+	private List<Assunto> textobaseAssuntos;
 	private TextobaseController textobaseController;
 	
 	public AssuntoController()
@@ -38,28 +39,29 @@ public class AssuntoController {
 	}
 
 	public List<Assunto> getAssuntos() {
-		if (textobaseController == null)
-			this.assuntos = assuntoDao.listar();
-		else{
-			if (textobaseController.getNewTextoBase().getDisciplina_textobase() < 1)
-				this.assuntos = null;
-			else{
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				String redirectValue = (String) facesContext.getExternalContext().getRequestParameterMap().get("redirect");
-				if (redirectValue != null && Integer.parseInt(redirectValue) == 1)
-					mudarAssuntos();
-			}
-		}
+		this.assuntos = assuntoDao.listar();
 		return assuntos;
-	}
-	
-	public void mudarAssuntos() {
-		TextobaseController textobaseController = this.getTextobaseController();
-		this.assuntos = assuntoDao.listar(textobaseController.getNewTextoBase().getDisciplina_textobase());
 	}
 
 	public void setAssuntos(List<Assunto> assuntos) {
 		this.assuntos = assuntos;
+	}
+
+	public List<Assunto> getTextobaseAssuntos() {
+		textobaseController = this.getTextobaseController();
+		if (textobaseController.getNewTextoBase().getDisciplina_textobase() < 1)
+			this.textobaseAssuntos = null;
+		else{
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String redirectValue = (String) facesContext.getExternalContext().getRequestParameterMap().get("redirect");
+			if (redirectValue != null && Integer.parseInt(redirectValue) == 1)
+				mudarAssuntos();
+		}
+		return textobaseAssuntos;
+	}
+
+	public void setTextobaseAssuntos(List<Assunto> textobaseAssuntos) {
+		this.textobaseAssuntos = textobaseAssuntos;
 	}
 
 	public AssuntoDAO getAssuntoDao() {
@@ -101,6 +103,11 @@ public class AssuntoController {
 
 	public void setTextobaseController(TextobaseController textobaseController) {
 		this.textobaseController = textobaseController;
+	}
+	
+	public void mudarAssuntos() {
+		TextobaseController textobaseController = this.getTextobaseController();
+		this.textobaseAssuntos = assuntoDao.listar(textobaseController.getNewTextoBase().getDisciplina_textobase());
 	}
 	
 	public void cadastrar()
