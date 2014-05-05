@@ -20,6 +20,7 @@ public class AlunoController {
 	private AlunoDAO alunoDao;
 	private Aluno currentAluno;
 	private Aluno newAluno;
+	private boolean showNewButton;
 		
 	public AlunoController()
 	{
@@ -150,11 +151,23 @@ public class AlunoController {
 		this.getNewAluno().setUf_aluno(null);
 		this.getNewAluno().setCep_aluno(null);
 		this.getNewAluno().setEmail_aluno(null);
+		this.mostrarSalvar();
 	}
 	
 	public void goToAluno() throws Exception{
 		limparCampos();
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Aluno.xhtml");
+	}
+	public boolean getShowNewButton(){
+		return showNewButton;
+	}
+		  
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
 	}
 }
