@@ -21,6 +21,8 @@ public class AlunoController {
 	private Aluno currentAluno;
 	private Aluno newAluno;
 	private boolean showNewButton;
+	private String pesquisa;
+	private String pesquisarPor;
 		
 	public AlunoController()
 	{
@@ -66,6 +68,23 @@ public class AlunoController {
 
 	public void setNewAluno(Aluno newAluno) {
 		this.newAluno = newAluno;
+	}
+	
+	
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
+	public String getPesquisarPor() {
+		return pesquisarPor;
+	}
+
+	public void setPesquisarPor(String pesquisarPor) {
+		this.pesquisarPor = pesquisarPor;
 	}
 
 	public void cadastrar()
