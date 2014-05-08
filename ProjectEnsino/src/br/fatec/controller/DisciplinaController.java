@@ -37,7 +37,9 @@ public class DisciplinaController {
 	}
 
 	public List<Disciplina> getDisciplinas() {
-		this.disciplinas = disciplinaDao.listar();
+		if (this.disciplinas == null){
+			this.disciplinas = disciplinaDao.listar();
+		}
 		return disciplinas;
 	}
 
@@ -72,8 +74,9 @@ public class DisciplinaController {
 	public void cadastrar()
 	{	
 		if (disciplinaDao.inserir(this.newDisciplina)){
+			setDisciplinas(null);
 			System.out.println("Disciplina inserida com sucesso!");
-			newDisciplina = new Disciplina();
+			this.newDisciplina = new Disciplina();
 		}
 		else
 			System.out.println("Erro na inserção!");
@@ -100,19 +103,18 @@ public class DisciplinaController {
 	public void alterar()
 	{	
 		if (disciplinaDao.alterar(this.newDisciplina)){
+			setDisciplinas(null);
 			System.out.println("Disciplina alterada com sucesso!");
 			newDisciplina = new Disciplina();
 		}
 		else
 			System.out.println("Erro na alteração!");
-		
-		//ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		//externalContext.redirect("CadastroConcluido.xhtml");
 	}
 	
 	public void excluir() throws IOException
 	{
 		if (disciplinaDao.excluir(this.currentDisciplina)){
+			setDisciplinas(null);
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.redirect("Disciplinalist.xhtml");
 			System.out.println("Disciplina excluida com sucesso!");

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import br.fatec.model.Assunto;
 
 public class AssuntoDAO {
@@ -23,6 +22,23 @@ public class AssuntoDAO {
 		{
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(assunto);
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean alterar(Assunto assunto)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();    
+			this.manager.merge(assunto);
 			this.manager.getTransaction().commit();
 			return true;
 		}

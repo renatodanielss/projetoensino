@@ -3,13 +3,11 @@ package br.fatec.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 import br.fatec.dao.AssuntoDAO;
 import br.fatec.model.Assunto;
 
@@ -39,7 +37,9 @@ public class AssuntoController {
 	}
 
 	public List<Assunto> getAssuntos() {
-		this.assuntos = assuntoDao.listar();
+		if (this.assuntos == null){
+			this.assuntos = assuntoDao.listar();
+		}
 		return assuntos;
 	}
 
@@ -112,8 +112,10 @@ public class AssuntoController {
 	
 	public void cadastrar()
 	{	
-		if (assuntoDao.inserir(this.newAssunto))
+		if (assuntoDao.inserir(this.newAssunto)){
+			setAssuntos(null);
 			System.out.println("Assunto inserido com sucesso!");
+		}
 		else
 			System.out.println("Erro na inserção!");
 	}
@@ -127,7 +129,6 @@ public class AssuntoController {
 				this.getNewAssunto().setNome_assunto(this.getCurrentAssunto().getNome_assunto());
 				this.getNewAssunto().setIdDisciplina_assunto(this.getCurrentAssunto().getIdDisciplina_assunto());
 				
-				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Assunto.xhtml?faces-redirect=true&redirect=1");
 			}
@@ -137,9 +138,21 @@ public class AssuntoController {
 		}
 	}
 	
+	public void alterar()
+	{	
+		if (assuntoDao.alterar(this.newAssunto)){
+			setAssuntoDao(null);
+			System.out.println("Assunto alterado com sucesso!");
+			this.newAssunto = new Assunto();
+		}
+		else
+			System.out.println("Erro na alteração!");
+	}
+	
 	public void excluir() throws IOException
 	{
 		if (assuntoDao.excluir(this.currentAssunto)){
+			setAssuntos(null);
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.redirect("Assuntolist.xhtml");
 			System.out.println("Assunto excluido com sucesso!");

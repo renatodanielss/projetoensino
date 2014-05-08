@@ -22,7 +22,7 @@ xmlns:p="http://primefaces.org/ui">
 <ui:decorate template="/Template/Template.xhtml">
 <ui:define name="page">
 <h:form id="form">
-<table align="center" width="900">
+<table align="center" style="width: 900px">
 <tr><td>
 <p:dataTable var="textobase" value="#{textobaseController.textosBases}" id="textobaseTable" rowKey="#{textobase.codigo_textobase}"
 		 selectionMode="single" selection="#{textobaseController.currentTextoBase}" style="text-align:center" paginator="true" rows="10"

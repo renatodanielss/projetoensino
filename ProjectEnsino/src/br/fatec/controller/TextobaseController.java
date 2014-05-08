@@ -71,7 +71,9 @@ public class TextobaseController {
 	
 	public List<Textobase> getTextosBases() 
 	{
-		this.textosBases = textoBaseDao.listar();
+		if (this.textosBases == null){
+			this.textosBases = textoBaseDao.listar();
+		}
 		return textosBases;
 	}
     
@@ -81,10 +83,11 @@ public class TextobaseController {
 	}
 	
 	public void cadastrar()
-	{	
+	{
 		if (textoBaseDao.inserir(this.newTextoBase)){
+			setTextosBases(null);
 			System.out.println("Texto base inserido com sucesso!");
-			newTextoBase = new Textobase();
+			this.newTextoBase = new Textobase();
 		}
 		else
 			System.out.println("Erro na inserção!");
@@ -114,19 +117,18 @@ public class TextobaseController {
 	public void alterar()
 	{	
 		if (textoBaseDao.alterar(this.newTextoBase)){
+			setTextosBases(null);
 			System.out.println("Textobase alterado com sucesso!");
-			newTextoBase = new Textobase();
+			this.newTextoBase = new Textobase();
 		}
 		else
 			System.out.println("Erro na alteração!");
-		
-		//ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		//externalContext.redirect("CadastroConcluido.xhtml");
 	}
 	
 	public void excluir() throws IOException
 	{
 		if (textoBaseDao.excluir(this.currentTextoBase)){
+			setTextosBases(null);
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.redirect("Textobaselist.xhtml");
 			System.out.println("Textobase excluido com sucesso!");
