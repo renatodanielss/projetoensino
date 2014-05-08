@@ -2,13 +2,11 @@ package br.fatec.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 import br.fatec.dao.ProfessorDAO;
 import br.fatec.model.Professor;
 
@@ -34,11 +32,11 @@ public class ProfessorController {
 		this.currentProfessor = new Professor();
 	}
 
-	
-	
 	public List<Professor> getProfessores() {
-		professores = professorDao.listar();
-		return professores;
+		if (this.professores == null){
+			this.professores = this.professorDao.listar();
+		}
+		return this.professores;
 	}
 
 	public void setProfessores(List<Professor> professores) {
@@ -71,8 +69,11 @@ public class ProfessorController {
 
 	public void cadastrar()
 	{	
-		if (professorDao.inserir(this.newProfessor))
+		if (professorDao.inserir(this.newProfessor)){
+			setProfessores(null);
 			System.out.println("Professor inserido com sucesso!");
+			this.newProfessor = new Professor();
+		}
 		else
 			System.out.println("Erro na inserção!");
 		
@@ -113,23 +114,18 @@ public class ProfessorController {
 	public void alterar()
 	{	
 		if (professorDao.alterar(this.newProfessor)){
+			setProfessores(null);
 			System.out.println("Professor alterado com sucesso!");
-			limparCampos();
+			this.newProfessor = new Professor();
 		}
 		else
 			System.out.println("Erro na alteração!");
 	}
 	
-	public void cadastrarAlterar(){
-		if (professorDao.existeProfessor(newProfessor.getMatricula_professor()))
-			alterar();
-		else
-			cadastrar();
-	}
-	
 	public void excluir() throws IOException
 	{
 		if (professorDao.excluir(this.currentProfessor)){
+			setProfessores(null);
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.redirect("Professorlist.xhtml");
 			System.out.println("Professor excluido com sucesso!");

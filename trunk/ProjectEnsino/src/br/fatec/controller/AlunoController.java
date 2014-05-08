@@ -38,7 +38,9 @@ public class AlunoController {
 	}
 	
 	public List<Aluno> getAlunos() {
-		this.alunos = alunoDao.listar();
+		if (this.alunos == null){
+			this.alunos = alunoDao.listar();
+		}
 		return alunos;
 	}
 
@@ -70,7 +72,6 @@ public class AlunoController {
 		this.newAluno = newAluno;
 	}
 	
-	
 	public String getPesquisa() {
 		return pesquisa;
 	}
@@ -89,8 +90,10 @@ public class AlunoController {
 
 	public void cadastrar()
 	{	
-		if (alunoDao.inserir(this.newAluno))
+		if (alunoDao.inserir(this.newAluno)){
+			setAlunos(null);
 			System.out.println("Aluno inserido com sucesso!");
+		}
 		else
 			System.out.println("Erro na inserção!");
 	}
@@ -128,23 +131,17 @@ public class AlunoController {
 	public void alterar()
 	{	
 		if (alunoDao.alterar(this.newAluno)){
+			setAlunos(null);
 			System.out.println("Aluno alterado com sucesso!");
-			limparCampos();
 		}
 		else
 			System.out.println("Erro na alteração!");
 	}
 	
-	public void cadastrarAlterar(){
-		if (alunoDao.existeAluno(newAluno.getRa_aluno()))
-			alterar();
-		else
-			cadastrar();
-	}
-	
 	public void excluir() throws IOException
 	{
 		if (alunoDao.excluir(this.currentAluno)){
+			setAlunos(null);
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.redirect("Alunolist.xhtml");
 			System.out.println("Aluno excluido com sucesso!");

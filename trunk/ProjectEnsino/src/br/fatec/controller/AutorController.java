@@ -35,7 +35,9 @@ public class AutorController {
 	}
 	
 	public List<Autor> getAutores() {
-		this.autores = autorDao.listar();
+		if (this.autores == null){
+			this.autores = autorDao.listar();
+		}
 		return autores;
 	}
 
@@ -69,8 +71,10 @@ public class AutorController {
 
 	public void cadastrar()
 	{	
-		if (autorDao.inserir(this.newAutor))
+		if (autorDao.inserir(this.newAutor)){
+			setAutores(null);
 			System.out.println("Autor inserido com sucesso!");
+		}
 		else
 			System.out.println("Erro na inserção!");
 	}
@@ -95,22 +99,17 @@ public class AutorController {
 	public void alterar()
 	{	
 		if (autorDao.alterar(this.newAutor)){
+			setAutores(null);
 			System.out.println("Autor alterado com sucesso!");
 		}
 		else
 			System.out.println("Erro na alteração!");
 	}
 	
-	public void cadastrarAlterar(){
-		if (autorDao.existeAutor(newAutor.getId_autor()))
-			alterar();
-		else
-			cadastrar();
-	}
-	
 	public void excluir() throws IOException
 	{
 		if (autorDao.excluir(this.currentAutor)){
+			setAutores(null);
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 			externalContext.redirect("Autorlist.xhtml");
 			System.out.println("Autor excluido com sucesso!");
