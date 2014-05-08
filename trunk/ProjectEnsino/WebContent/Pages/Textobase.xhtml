@@ -26,7 +26,7 @@ xmlns:p="http://primefaces.org/ui">
 <table border="0" align="center" cellpadding="0" cellspacing="0" style="width: 900px">
 <tr><td><center><h2>Cadastro de Texto Base</h2></center></td></tr>
 </table>
-<table border="0" align="center" style="width: 650px">
+<table border="0" align="center" style="width: 660px">
 <tr>
 	<td align="left" colspan="2"><h3>Detalhes do Texto Base</h3></td>
 </tr>
@@ -70,7 +70,7 @@ xmlns:p="http://primefaces.org/ui">
 <br />
 <h:panelGroup id="pnlGrd">
 <table border="0" width="682" align="center">
-	<tr><td align="right" width="682">
+	<tr><td align="right" style="width: 660px">
 		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.cadastrar}" rendered="#{textobaseController.showNewButton}" ajax="false"/>&nbsp;
 		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.alterar}" rendered="#{!textobaseController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
 	</td></tr>
