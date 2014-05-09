@@ -23,10 +23,12 @@ xmlns:p="http://primefaces.org/ui">
 <ui:define name="page">
 <h:form id="textobaseForm" enctype="multipart/form-data">
 <div align="center">
-<table border="0" align="center" cellpadding="0" cellspacing="0" style="width: 900px">
-<tr><td><center><h2>Cadastro de Texto Base</h2></center></td></tr>
-</table>
-<table border="0" align="center" style="width: 660px">
+<table border="0" align="center" cellpadding="0" cellspacing="0" style="width: 1004px">
+<tr><td colspan="2"><center><h2>Cadastro de Texto Base</h2></center></td></tr>
+<tr>
+<!-- <td></td> -->
+<td style="width: 700px">
+<table border="0" align="center" style="width: 700px">
 <tr>
 	<td align="left" colspan="2"><h3>Detalhes do Texto Base</h3></td>
 </tr>
@@ -34,50 +36,49 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" colspan="2"><h:outputText value="Título:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" colspan="2"><p:inputText id="txtTitulo" value="#{textobaseController.newTextoBase.titulo_textobase}" style="width: 660px" /></td>
+	<td align="left" colspan="2"><p:inputText id="txtTitulo" value="#{textobaseController.newTextoBase.titulo_textobase}" style="width: 680px" /></td>
 </tr>
-
-
 <tr>
 	<td align="left"><h:outputText value="Disciplina:"></h:outputText></td><td align="left"><h:outputText value="Assunto:"></h:outputText></td>
 </tr>
 <tr>
 	<h:panelGroup id="pgAssunto">
 	<td align="left">
-		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px" value="#{textobaseController.newTextoBase.disciplina_textobase}">
+		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:339px" value="#{textobaseController.newTextoBase.disciplina_textobase}">
 			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
 			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
 			<p:ajax event="valueChange" update="slmAssunto" listener="#{assuntoController.mudarAssuntos}"></p:ajax>
 		</p:selectOneMenu>
 	</td>
 	<td align="left">
-		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:329px" value="#{textobaseController.newTextoBase.assunto_textobase}" >
+		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:339px" value="#{textobaseController.newTextoBase.assunto_textobase}" >
 			<f:selectItem itemLabel="Selecione um assunto" itemValue="" ></f:selectItem>
 			<f:selectItems value="#{assuntoController.textobaseAssuntos}" var="item2" itemValue="#{item2.id_assunto}" itemLabel="#{item2.nome_assunto}"/>
 		</p:selectOneMenu>
 	</td>
 	</h:panelGroup>
 </tr>
-
-
 <tr>
 	<td align="left" colspan="2"><h:outputText value="Texto:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" colspan="2"><p:inputTextarea id="txtTexto" rows="10" cols="80" autoResize="false" value="#{textobaseController.newTextoBase.texto_textobase}" style="width: 660px" /></td>
+	<td align="left" colspan="2"><p:inputTextarea id="txtTexto" rows="10" cols="80" autoResize="false" value="#{textobaseController.newTextoBase.texto_textobase}" style="width: 680px;" /></td>
 </tr>
 </table>
+</td></tr>
+<tr><td style="width: 700px">
 <br />
 <h:panelGroup id="pnlGrd">
-<table border="0" width="682" align="center">
-	<tr><td align="right" style="width: 660px">
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.cadastrar}" rendered="#{textobaseController.showNewButton}" ajax="false"/>&nbsp;
-		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.alterar}" rendered="#{!textobaseController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
+<table border="0" align="center" style="width: 700px">
+	<tr><td align="right" style="width: 700px">
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.cadastrar}" rendered="#{textobaseController.showNewButton}" ajax="false" />&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{textobaseController.alterar}" rendered="#{!textobaseController.showNewButton}" ajax="false" />&nbsp;
 	</td></tr>
 </table>
 </h:panelGroup>
+</td></tr>
+</table>
 </div>
-
 </h:form>
 </ui:define>
 </ui:decorate>
