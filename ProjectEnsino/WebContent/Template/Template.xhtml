@@ -14,23 +14,23 @@ xmlns:p="http://primefaces.org/ui">
 <tr style="background-image: url('../resources/images/menu.png');"><td align="center">
 	<p:button id="dynaButtonProfessor" value="Professor" href="/Pages/Professorlist.xhtml" styleClass="menuButtons" />
 	<p:commandButton id="dynaButtonAluno" value="Aluno" type="button" styleClass="menuButtons" />
-    <p:menu overlay="true" trigger="dynaButtonAluno" my="left top" at="left bottom">
-            <p:menuitem value="Alunos" url="/Pages/Alunolist.xhtml" icon="ui-icon-disk"/>
-            <p:menuitem value="Realizar Prova" url="/Pages/RealizarProva.xhtml" icon="ui-icon-star"/>
+    <p:menu overlay="true" trigger="dynaButtonAluno" my="left top" at="left bottom" styleClass="menuButtonsItens">
+            <p:menuitem value="Alunos" url="/Pages/Alunolist.xhtml" icon="ui-icon-disk" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
+            <p:menuitem value="Realizar Prova" url="/Pages/RealizarProva.xhtml" icon="ui-icon-star" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
     </p:menu>
 	<p:commandButton id="dynaButtonQuestao" value="Questão" type="button" styleClass="menuButtons" />
-    <p:menu overlay="true" trigger="dynaButtonQuestao" my="left top" at="left bottom">
-            <p:menuitem value="Cadastrar" url="/Pages/Questao.xhtml" icon="ui-icon-disk"/>
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>
+    <p:menu overlay="true" trigger="dynaButtonQuestao" my="left top" at="left bottom" styleClass="menuButtonsItens">
+            <p:menuitem value="Cadastrar" url="/Pages/Questao.xhtml" icon="ui-icon-disk" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
     </p:menu>
 	<p:button id="dynaButtonDisciplina" value="Disciplina" href="/Pages/Disciplinalist.xhtml" styleClass="menuButtons" />
     <p:button id="dynaButtonAssunto" value="Assunto" href="/Pages/Assuntolist.xhtml" styleClass="menuButtons" />
 	<p:button id="dynaButtonTextobase" value="Texto Base" href="/Pages/Textobaselist.xhtml" style="width:150px" styleClass="menuButtons" />
 	<p:button id="dynaButtonAutor" value="Autor" href="/Pages/Autorlist.xhtml" styleClass="menuButtons" />
 	<p:commandButton id="dynaButtonProva" value="Prova" type="button" styleClass="menuButtons" />
-    <p:menu overlay="true" trigger="dynaButtonProva" my="left top" at="left bottom">
-            <p:menuitem value="Cadastrar" url="/Pages/Prova.xhtml" icon="ui-icon-disk"/>
-            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w"/>
+    <p:menu overlay="true" trigger="dynaButtonProva" my="left top" at="left bottom" styleClass="menuButtonsItens">
+            <p:menuitem value="Cadastrar" url="/Pages/Prova.xhtml" icon="ui-icon-disk" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
+            <p:menuitem value="Editar" icon="ui-icon-arrowrefresh-1-w" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
     </p:menu>
 </td></tr>
 </table>
