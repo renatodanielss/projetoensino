@@ -20,6 +20,7 @@ public class AutorController {
 	private AutorDAO autorDao;
 	private Autor currentAutor;
 	private Autor newAutor;
+	private boolean showNewButton;
 	
 	public AutorController()
 	{
@@ -32,6 +33,8 @@ public class AutorController {
 		this.autorDao = new AutorDAO();
 		this.newAutor = new Autor();
 		this.currentAutor = new Autor();
+		
+		this.mostrarSalvar();
 	}
 	
 	public List<Autor> getAutores() {
@@ -68,6 +71,22 @@ public class AutorController {
 	public void setNewAutor(Autor newAutor) {
 		this.newAutor = newAutor;
 	}
+	
+	public boolean getShowNewButton(){
+		return showNewButton;
+	}
+	
+	public void setShowNewButton(boolean showNewButton){
+		this.showNewButton = showNewButton;
+	}
+	
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
+	}
 
 	public void cadastrar()
 	{	
@@ -86,6 +105,8 @@ public class AutorController {
 			try{
 				this.getNewAutor().setId_autor(this.getCurrentAutor().getId_autor());
 				this.getNewAutor().setNome_autor(this.getCurrentAutor().getNome_autor());
+				
+				this.mostrarAlterar();
 				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Autor.xhtml?faces-redirect=true&redirect=1");
@@ -121,6 +142,8 @@ public class AutorController {
 	private void limparCampos(){
 		this.newAutor.setId_autor(null);
 		this.newAutor.setNome_autor(null);
+		
+		this.mostrarSalvar();
 	}
 	
 	public void goToAutor() throws Exception{

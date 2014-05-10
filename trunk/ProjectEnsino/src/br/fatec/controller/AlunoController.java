@@ -119,6 +119,8 @@ public class AlunoController {
 				this.getNewAluno().setCep_aluno(this.getCurrentAluno().getCep_aluno());
 				this.getNewAluno().setEmail_aluno(this.getCurrentAluno().getEmail_aluno());
 				
+				this.mostrarAlterar();
+				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Aluno.xhtml?faces-redirect=true&redirect=1");
 			}

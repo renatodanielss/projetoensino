@@ -146,7 +146,8 @@ xmlns:p="http://primefaces.org/ui">
 <br />
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{professorController.cadastrar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{professorController.cadastrar}" rendered="#{professorController.showNewButton}" ajax="false" />&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{professorController.alterar}" rendered="#{!professorController.showNewButton}" ajax="false" />&nbsp;
 	</td></tr>
 </table>
 </div>
