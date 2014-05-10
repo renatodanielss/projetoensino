@@ -46,7 +46,9 @@ xmlns:p="http://primefaces.org/ui">
 
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{assuntoController.cadastrar}" ajax="false"/>&nbsp;
+		
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{assuntoController.cadastrar}" rendered="#{assuntoController.showNewButton}" ajax="false" />&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{assuntoController.alterar}" rendered="#{!assuntoController.showNewButton}" ajax="false" />&nbsp;
 	</td></tr>
 </table>
 </div>

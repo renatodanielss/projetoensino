@@ -18,6 +18,7 @@ public class ProfessorController {
 	private ProfessorDAO professorDao;
 	private Professor currentProfessor;
 	private Professor newProfessor;
+	private boolean showNewButton;
 	
 	public ProfessorController()
 	{
@@ -30,6 +31,8 @@ public class ProfessorController {
 		this.professorDao = new ProfessorDAO();
 		this.newProfessor = new Professor();
 		this.currentProfessor = new Professor();
+		
+		mostrarSalvar();
 	}
 
 	public List<Professor> getProfessores() {
@@ -66,6 +69,22 @@ public class ProfessorController {
 	public void setNewProfessor(Professor newProfessor) {
 		this.newProfessor = newProfessor;
 	}
+	
+	public boolean getShowNewButton() {
+		return showNewButton;
+	}
+	
+	public void setShowNewButton(boolean showNewButton) {
+		this.showNewButton = showNewButton;
+	}
+	
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
+	}
 
 	public void cadastrar()
 	{	
@@ -101,6 +120,8 @@ public class ProfessorController {
 				this.getNewProfessor().setUf_professor(this.getCurrentProfessor().getUf_professor());
 				this.getNewProfessor().setCep_professor(this.getCurrentProfessor().getCep_professor());
 				this.getNewProfessor().setEmail_professor(this.getCurrentProfessor().getEmail_professor());
+				
+				mostrarAlterar();
 				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Professor.xhtml?faces-redirect=true&redirect=1");
@@ -152,6 +173,8 @@ public class ProfessorController {
 		this.getNewProfessor().setUf_professor(null);
 		this.getNewProfessor().setCep_professor(null);
 		this.getNewProfessor().setEmail_professor(null);
+		
+		mostrarSalvar();
 	}
 	
 	public void goToProfessor() throws Exception{

@@ -21,6 +21,7 @@ public class AssuntoController {
 	private List<Assunto> assuntos;
 	private List<Assunto> textobaseAssuntos;
 	private TextobaseController textobaseController;
+	private boolean showNewButton;
 	
 	public AssuntoController()
 	{
@@ -34,6 +35,7 @@ public class AssuntoController {
 		this.newAssunto = new Assunto();
 		this.currentAssunto = new Assunto();
 		this.textobaseController = this.getTextobaseController();
+		this.mostrarSalvar();
 	}
 
 	public List<Assunto> getAssuntos() {
@@ -88,6 +90,22 @@ public class AssuntoController {
 		this.newAssunto = newAssunto;
 	}
 	
+	public boolean getShowNewButton(){
+		return showNewButton;
+	}
+	
+	public void setShowNewButton(boolean showNewButton){
+		this.showNewButton = showNewButton;
+	}
+	
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
+	}
+	
 	public TextobaseController getTextobaseController() {
 		try{
 			FacesContext context = FacesContext.getCurrentInstance();
@@ -129,6 +147,8 @@ public class AssuntoController {
 				this.getNewAssunto().setNome_assunto(this.getCurrentAssunto().getNome_assunto());
 				this.getNewAssunto().setIdDisciplina_assunto(this.getCurrentAssunto().getIdDisciplina_assunto());
 				
+				mostrarAlterar();
+				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Assunto.xhtml?faces-redirect=true&redirect=1");
 			}
@@ -141,7 +161,7 @@ public class AssuntoController {
 	public void alterar()
 	{	
 		if (assuntoDao.alterar(this.newAssunto)){
-			setAssuntoDao(null);
+			setAssuntos(null);
 			System.out.println("Assunto alterado com sucesso!");
 			this.newAssunto = new Assunto();
 		}
@@ -162,10 +182,10 @@ public class AssuntoController {
 	}
 	
 	private void limparCampos(){
-		this.newAssunto.setId_assunto(null);;
+		this.newAssunto.setId_assunto(null);
 		this.newAssunto.setIdDisciplina_assunto(null);
 		this.newAssunto.setNome_assunto(null);
-		//this.mostrarSalvar();
+		this.mostrarSalvar();
 	}
 	
 	public void goToAssunto() throws Exception{
