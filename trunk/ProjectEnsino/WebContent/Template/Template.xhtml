@@ -25,7 +25,7 @@ xmlns:p="http://primefaces.org/ui">
     </p:menu>
 	<p:button id="dynaButtonDisciplina" value="Disciplina" href="/Pages/Disciplinalist.xhtml" styleClass="menuButtons" />
     <p:button id="dynaButtonAssunto" value="Assunto" href="/Pages/Assuntolist.xhtml" styleClass="menuButtons" />
-	<p:button id="dynaButtonTextobase" value="Texto Base" href="/Pages/Textobaselist.xhtml" style="width:150px" styleClass="menuButtons" />
+	<p:button id="dynaButtonTextobase" value="Texto Base" href="/Pages/Textobaselist.xhtml" style="width:154px" styleClass="menuButtons" />
 	<p:button id="dynaButtonAutor" value="Autor" href="/Pages/Autorlist.xhtml" styleClass="menuButtons" />
 	<p:commandButton id="dynaButtonProva" value="Prova" type="button" styleClass="menuButtons" />
     <p:menu overlay="true" trigger="dynaButtonProva" my="left top" at="left bottom" styleClass="menuButtonsItens">
@@ -38,6 +38,16 @@ xmlns:p="http://primefaces.org/ui">
 </ui:insert>
 <ui:insert name="page">
 
+</ui:insert>
+<br /><br /><br />
+<ui:insert name="rodape">
+<table align="center" style="width: 1004px;background-color: #700707">
+	<tr><td align="center">
+		<hr style="width: 1004px" />
+		<p:outputLabel value="Copyright © 2014 Consilium Technologies Solutions. Todos os direitos reservados." style="color: white;font-family: georgia;font-size: 13px" /><br />
+		<hr style="width: 1004px" />
+	</td></tr>
+</table>
 </ui:insert>
 </h:form>
 </h:body>
