@@ -23,26 +23,28 @@ xmlns:p="http://primefaces.org/ui">
 <ui:define name="page">
 <h:form enctype="multipart/form-data">
 <div align="center">
-<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<table style="width:900px" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Autor</h2></center></td></tr>
 <tr><td align="left"><h3>Detalhes do Autor</h3></td></tr>
 <tr>
 	<td align="left"><h:outputText value="Nome:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left"><p:inputText id="txtNomel" size="105" value="#{autorController.newAutor.nome_autor}"/></td>
+	<td align="left"><p:inputText id="txtNomel" style="width:900px" value="#{autorController.newAutor.nome_autor}"/></td>
 </tr>
 </table>
-
-
 <br />
-<table align="center">
-	<tr><td align="right" width="890">
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{autorController.cadastrar}" rendered="#{autorController.showNewButton}" ajax="false" />&nbsp;
-		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{autorController.alterar}" rendered="#{!autorController.showNewButton}" ajax="false" />&nbsp;
+
+<h:panelGroup id="pnlGrd">
+<table border="0" style="width:900px" align="center">
+	<tr><td align="right" style="width:900px" >
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{autorController.cadastrar}" rendered="#{alunoController.showNewButton}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{autorController.alterar}" rendered="#{!alunoController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
 	</td></tr>
 </table>
+</h:panelGroup>
 </div>
+
 </h:form>
 </ui:define>
 </ui:decorate>

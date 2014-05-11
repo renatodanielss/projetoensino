@@ -27,7 +27,8 @@ public class AutorDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
@@ -43,7 +44,8 @@ public class AutorDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
@@ -60,10 +62,33 @@ public class AutorDAO {
 		}
 		catch(Exception ex){
 			autor = null;
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 		}
 
 		return autor;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Autor> listar()
+	{		
+		List<Autor> listAutor = null;
+		String query = "select * from tbl_autor";
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+			listAutor = this.manager.createNativeQuery(query, new Autor().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listAutor = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}
+		
+		return listAutor;
 	}
 	
 	public boolean existeAutor(Integer id)
@@ -86,33 +111,13 @@ public class AutorDAO {
 		}
 		catch(Exception ex)
 		{
-			this.manager.getTransaction().rollback();
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
 			return false;
 		}
 	}
 
-	
-	@SuppressWarnings("unchecked")
-	public List<Autor> listar()
-	{		
-		List<Autor> listAutor = null;
-		String query = "select * from tbl_autor";
-		
-		try
-		{
-			this.manager.getTransaction().begin();
-			listAutor = this.manager.createNativeQuery(query, new Autor().getClass()).getResultList();
-			this.manager.getTransaction().commit();
-		}
-		catch(Exception ex)
-		{
-			listAutor = null;
-			this.manager.getTransaction().rollback();
-		}
-		
-		return listAutor;
-	}
-	
+
 	public void open()
 	{
 		this.factory = Persistence.createEntityManagerFactory("projectensino");

@@ -21,20 +21,20 @@ public class AutorController {
 	private Autor currentAutor;
 	private Autor newAutor;
 	private boolean showNewButton;
+	private String pesquisa;
+	private String pesquisarPor;
 	
 	public AutorController()
 	{
 		
 	}
-	
+	 
 	@PostConstruct
 	public void preparaDados()
 	{
 		this.autorDao = new AutorDAO();
 		this.newAutor = new Autor();
 		this.currentAutor = new Autor();
-		
-		this.mostrarSalvar();
 	}
 	
 	public List<Autor> getAutores() {
@@ -72,21 +72,10 @@ public class AutorController {
 		this.newAutor = newAutor;
 	}
 	
-	public boolean getShowNewButton(){
-		return showNewButton;
-	}
+	//public void setShowNewButton(boolean showNewButton) {
+		//this.showNewButton = showNewButton;
+	//}
 	
-	public void setShowNewButton(boolean showNewButton){
-		this.showNewButton = showNewButton;
-	}
-	
-	public void mostrarAlterar(){
-		this.showNewButton = false;
-	}
-		  
-	public void mostrarSalvar(){
-	     this.showNewButton = true;
-	}
 
 	public void cadastrar()
 	{	
@@ -98,6 +87,22 @@ public class AutorController {
 			System.out.println("Erro na inserção!");
 	}
 	
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
+	public String getPesquisarPor() {
+		return pesquisarPor;
+	}
+
+	public void setPesquisarPor(String pesquisarPor) {
+		this.pesquisarPor = pesquisarPor;
+	}
+
 	public void iniciaAlterar() throws IOException
 	{
 		if (newAutor != null)
@@ -105,8 +110,6 @@ public class AutorController {
 			try{
 				this.getNewAutor().setId_autor(this.getCurrentAutor().getId_autor());
 				this.getNewAutor().setNome_autor(this.getCurrentAutor().getNome_autor());
-				
-				this.mostrarAlterar();
 				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Autor.xhtml?faces-redirect=true&redirect=1");
@@ -142,7 +145,6 @@ public class AutorController {
 	private void limparCampos(){
 		this.newAutor.setId_autor(null);
 		this.newAutor.setNome_autor(null);
-		
 		this.mostrarSalvar();
 	}
 	
@@ -151,4 +153,17 @@ public class AutorController {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Autor.xhtml");
 	}
+	
+	public boolean getShowNewButton(){
+		return showNewButton;
+	}
+		  
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
+	}
+
 }
