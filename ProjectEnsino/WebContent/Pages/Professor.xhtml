@@ -36,7 +36,7 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 
 <tr>
-	<td align="left" width="25%"><p:inputText id="txtMatricula" size="20" value="#{professorController.newProfessor.matricula_professor}"/></td>
+	<td align="left" width="25%"><p:inputText id="txtMatricula" size="20" value="#{professorController.newProfessor.matricula_professor}" disabled="#{professorController.bloquearMatricula}"/></td>
 	<td align="left" width="25%"><p:inputMask mask="999.999.999-99" id="txtCpf" size="30" value="#{professorController.newProfessor.cpf_professor}"/></td>
 	<td align="left"  width="50%">
 	<p:selectOneMenu maxlength="85" id="slmDisciplina" style="width:375px;vertical-align:bottom" value="#{professorController.newProfessor.disciplina_professor}">

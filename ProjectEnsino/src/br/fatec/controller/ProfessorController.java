@@ -19,6 +19,7 @@ public class ProfessorController {
 	private Professor currentProfessor;
 	private Professor newProfessor;
 	private boolean showNewButton;
+	private boolean bloquearMatricula;
 	
 	public ProfessorController()
 	{
@@ -33,6 +34,7 @@ public class ProfessorController {
 		this.currentProfessor = new Professor();
 		
 		mostrarSalvar();
+		liberarCampo();
 	}
 
 	public List<Professor> getProfessores() {
@@ -78,6 +80,14 @@ public class ProfessorController {
 		this.showNewButton = showNewButton;
 	}
 	
+	public boolean getBloquearMatricula() {
+		return bloquearMatricula;
+	}
+
+	public void setBloquearMatricula(boolean bloquearMatricula) {
+		this.bloquearMatricula = bloquearMatricula;
+	}
+
 	public void mostrarAlterar(){
 		this.showNewButton = false;
 	}
@@ -122,6 +132,7 @@ public class ProfessorController {
 				this.getNewProfessor().setEmail_professor(this.getCurrentProfessor().getEmail_professor());
 				
 				mostrarAlterar();
+				bloquearCampo();
 				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Professor.xhtml?faces-redirect=true&redirect=1");
@@ -175,11 +186,22 @@ public class ProfessorController {
 		this.getNewProfessor().setEmail_professor(null);
 		
 		mostrarSalvar();
+		liberarCampo();
 	}
 	
 	public void goToProfessor() throws Exception{
 		limparCampos();
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Professor.xhtml");
+	}
+	
+	public void bloquearCampo()
+	{
+		this.bloquearMatricula = true;
+	}
+	
+	public void liberarCampo()
+	{
+		this.bloquearMatricula = false;
 	}
 }
