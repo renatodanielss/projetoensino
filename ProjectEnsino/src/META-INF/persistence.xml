@@ -17,6 +17,8 @@
    <class>br.fatec.model.Aluno</class>
    <class>br.fatec.model.Prova</class>
    <class>br.fatec.model.Autor</class>
+   <class>br.fatec.model.Questao</class>
+   <class>br.fatec.model.Alternativa</class>
 
    <properties>
   <!-- dados da conexao -->

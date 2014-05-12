@@ -24,70 +24,59 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
-<tr><td><center><h2>Cadastro de Questões</h2></center></td></tr>
-</table>
-<table>
-<tr><td><h3>Detalhes da Questão</h3></td></tr>
-<tr><td colspan="2">
-	<h:outputText value="ID:"></h:outputText><h:inputText id="txtId" size="15"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Autor:"></h:outputText><h:inputText id="txtAutor" size="40"></h:inputText>
-	<h:button id="btnAutor" value="..."></h:button>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Disciplina:"></h:outputText><h:inputText id="txtDisciplina" size="20"></h:inputText>
-	<h:button id="btnDisciplina" value="..."></h:button>&nbsp;&nbsp;&nbsp;
+<tr><td colspan="2"><center><h2>Cadastro de Questões</h2></center></td></tr>
+<tr><td colspan="2" align="left"><h3>Detalhes da Questão</h3></td></tr>
+<tr>
+	<td colspan="2" align="left"><h:outputText value="Autor:" /></td>
+</tr>
+<tr>
+	<td style="width: 900px" colspan="2" align="left">
+	<p:selectOneMenu maxlength="20" id="slmAutor" style="width:884px" value="#{questaoController.newQuestao.autor_questao}">
+			<f:selectItem itemLabel="Selecione um autor" itemValue="" ></f:selectItem>
+			<f:selectItems value="#{autorController.autores}" var="autor" itemValue="#{autor.id_autor}" itemLabel="#{autor.nome_autor}"/>
+		</p:selectOneMenu>
+	</td>
+</tr>
+<tr>
+	<td align="left"><h:outputText value="Disciplina:" /></td>
+	<td align="left"><h:outputText value="Assunto:" /></td>
+</tr>
+<tr>
+	<h:panelGroup id="pgAssunto">
+	<td align="left" style="width: 446px">
+		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:438px" value="#{questaoController.newQuestao.disciplina_questao}">
+			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
+			<p:ajax event="valueChange" update="slmAssunto" listener="#{assuntoController.mudarAssuntos}"></p:ajax>
+		</p:selectOneMenu>
+	</td>
+	<td align="left">
+		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:438px" value="#{questaoController.newQuestao.assunto_questao}" >
+			<f:selectItem itemLabel="Selecione um assunto" itemValue="" ></f:selectItem>
+			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2.id_assunto}" itemLabel="#{item2.nome_assunto}"/>
+		</p:selectOneMenu>
+	</td>
+	</h:panelGroup>
+</tr>
+<tr><td colspan="2" align="left"><h:outputText value="Texto Base: " /></td></tr>
+<tr><td colspan="2" align="left">
+	<p:selectOneMenu id="somTextobase" value="#{questaoController.newQuestao.textobase_questao}" style="width:884px">
+		<f:selectItem itemLabel="Selecione um texto base" itemValue="" />
+		<f:selectItems value="#{textobaseController.textosBases}" var="textobase" itemValue="#{textobase.codigo_textobase}" itemLabel="#{textobase.titulo_textobase}" />
+	</p:selectOneMenu>
 </td></tr>
-</table>
-<table>
-<tr><td valign="top">
-	<h:outputText value="Texto Base: "></h:outputText><p:inputTextarea id="txtTextoBase" rows="4" cols="78" /></td>
-<td valign="top">
-	<h:button id="btnTextoBase" value="..."></h:button>
+<tr><td colspan="2" align="left">
+	<p:inputTextarea id="txtTextoBase" rows="6" cols="78" style="width:876px" autoResize="false"/>
 </td></tr>
-</table>
-<table>
-<tr><td valign="top">
-	<h:outputText value="Enunciado: "></h:outputText><p:inputTextarea id="txtEnunciado" rows="4" cols="84" />
+<tr><td colspan="2" align="left">
+	<h:outputText value="Enunciado: " />
 </td></tr>
-<tr><td>
-	<h:outputText value="Quantidade de Acertos:"></h:outputText><h:inputText id="txtQtdAcertos" size="8"></h:inputText>&nbsp;&nbsp;&nbsp;
-	<h:outputText value="Quantidade de Erros:"></h:outputText><h:inputText id="txtQtdErros" size="8"></h:inputText>
+<tr><td colspan="2" align="left">
+	<p:inputTextarea id="txtEnunciado" value="#{questaoController.newQuestao.enunciado_questao}" rows="4" cols="84" style="width:876px" autoResize="false" />
 </td></tr>
-<tr><td>
-	<p:panelGrid id="pgAlternativas" columns="3"> 
-    <f:facet name="header">  
-        Alternativas  
-    </f:facet>  
-  
-    <h:outputLabel for="txtA" value="A" />  
-    <p:inputText id="txtA" value="" label="A" size="90"/>  
-  	<h:selectOneRadio value="">  
-    	<f:selectItem itemValue="1" itemLabel="" />  
-    </h:selectOneRadio>
-  
-    <h:outputLabel for="txtB" value="B" />  
-    <p:inputText id="txtB" value="" required="true" label="B" size="90"/>
-    <h:selectOneRadio value="">  
-    	<f:selectItem itemValue="1" itemLabel="" />  
-    </h:selectOneRadio>
-  	<center>
-    <f:facet name="footer">  
-        <p:button id="btnAdicionarAlternativa" value="Adicionar Alternativa" icon="ui-icon-check" style="margin:0"/>
-    </f:facet>  
-    <f:facet name="footer">  
-        <p:button id="btnEditarAlternativa" value="Editar Alternativa" icon="ui-icon-check" style="margin:0"/>  
-    </f:facet>  
-    <f:facet name="footer">  
-        <p:button id="btnExcluirAlternativa" value="Excluir Alternativa" icon="ui-icon-check" style="margin:0" />  
-    </f:facet>
-    </center>  
-	</p:panelGrid> 
-</td></tr>
-</table>
-<br />
-<table align="center">
-	<tr><td>
-		<h:button id="btnSalvar" value="Salvar" onclick=""></h:button>&nbsp;
-		<h:button id="btnExcluir" value="Excluir" onclick=""></h:button>&nbsp;
-		<h:button id="btnProcurar" value="Procurar" onclick=""></h:button>&nbsp;
+	<tr><td align="right" colspan="2">
+		<br />
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml"  actionListener="#{questaoController.cadastrar}" ajax="false" />&nbsp;
 	</td></tr>
 </table>
 </div>
