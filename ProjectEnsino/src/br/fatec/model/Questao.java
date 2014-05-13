@@ -1,18 +1,14 @@
 package br.fatec.model;
 
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,27 +21,26 @@ public class Questao {
 	@Column(name="id_questao")
 	private int id_questao;
 	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-    @PrimaryKeyJoinColumn
+	@ManyToOne
+    @JoinColumn(name="textobase_questao")
 	private Textobase textobase_questao;
 	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-    @PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="autor_questao")
 	private Autor autor_questao;
 	
 	@Column(name="enunciado_questao")
 	private String enunciado_questao;
 	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-    @PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="disciplina_questao")
 	private Disciplina disciplina_questao;
 	
-	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-    @PrimaryKeyJoinColumn
+	@ManyToOne
+	@JoinColumn(name="assunto_questao")
 	private Assunto assunto_questao;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="id_alternativa")
+	@OneToMany(mappedBy="questao_alternativa")
 	private List<Alternativa> alternativas_questao;
 
 	public int getId_questao() {

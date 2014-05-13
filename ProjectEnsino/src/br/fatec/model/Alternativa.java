@@ -1,6 +1,5 @@
 package br.fatec.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_alternativa")
-public class Alternativa {
+public class Alternativa{
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALTERNATIVA_ID")
 	@SequenceGenerator(name="ALTERNATIVA_ID", sequenceName="ALTERNATIVA_SEQ", allocationSize=1)
@@ -22,7 +21,7 @@ public class Alternativa {
 	@Column(name="texto_alternativa")
 	private String texto_alternativa;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Questao questao_alternativa;
 
 	public int getId_alternativa() {

@@ -1,9 +1,12 @@
 package br.fatec.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 import br.fatec.dao.AlternativaDAO;
 import br.fatec.dao.QuestaoDAO;
 import br.fatec.model.Alternativa;
@@ -16,7 +19,7 @@ public class QuestaoController {
 	private Questao currentQuestao;
 	private List<Questao> questoes;
 	private QuestaoDAO questaoDao;
-	private Alternativa alternativa;
+	private List<Alternativa> alternativas;
 	private AlternativaDAO alternativaDAO;
 	private boolean showNewButton;
 	
@@ -31,7 +34,6 @@ public class QuestaoController {
 		this.questaoDao = new QuestaoDAO();
 		this.newQuestao = new Questao();
 		this.currentQuestao = new Questao();
-		this.alternativa = new Alternativa();
 		this.alternativaDAO = new AlternativaDAO();
 		this.mostrarSalvar();
 	}
@@ -60,6 +62,14 @@ public class QuestaoController {
 		this.questaoDao = questaoDao;
 	}
 
+	public List<Alternativa> getAlternativas() {
+		return alternativas;
+	}
+
+	public void setAlternativas(List<Alternativa> alternativas) {
+		this.alternativas = alternativas;
+	}
+
 	public List<Questao> getQuestoes() 
 	{
 		if (this.questoes == null){
@@ -72,14 +82,6 @@ public class QuestaoController {
 	{
 		this.questoes = QuestaoList;
 	}
-	
-	public Alternativa getAlternativa() {
-		return alternativa;
-	}
-
-	public void setAlternativa(Alternativa alternativa) {
-		this.alternativa = alternativa;
-	}
 
 	public AlternativaDAO getAlternativaDAO() {
 		return alternativaDAO;
@@ -91,15 +93,30 @@ public class QuestaoController {
 
 	public void cadastrar()
 	{
-		try{
-			questaoDao.inserir(this.newQuestao);
-			for (Alternativa alternativaAux : this.newQuestao.getAlternativas_questao()){
-				alternativaDAO.inserir(alternativaAux);
-			}
+		/*for (Alternativa alternativaAux : this.newQuestao.getAlternativas_questao()){
+			alternativaDAO.inserir(alternativaAux);
+		}*/
+		Alternativa alternativa1 = new Alternativa();
+		alternativa1.setTexto_alternativa("Franz Ferdinand");
+		alternativa1.setQuestao_alternativa(newQuestao);
+		
+		Alternativa alternativa2 = new Alternativa();
+		alternativa2.setTexto_alternativa("Rio Ferdinand");
+		alternativa2.setQuestao_alternativa(newQuestao);
+		
+		alternativas = new ArrayList<Alternativa>();
+		alternativas.add(alternativa1);
+		alternativas.add(alternativa2);
+		newQuestao.setAlternativas_questao(alternativas);
+		
+		if (questaoDao.inserir(this.newQuestao)){
+			for (Alternativa altAux : newQuestao.getAlternativas_questao())
+				alternativaDAO.inserir(altAux);
 			setQuestoes(null);
 			System.out.println("Questão inserida com sucesso!");
 			this.newQuestao = new Questao();
-		}catch(Exception e){
+		}
+		else{
 			System.out.println("Erro na inserção!");
 		}
 	}

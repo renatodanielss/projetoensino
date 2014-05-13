@@ -25,6 +25,7 @@ public class QuestaoDAO {
 		}
 		catch(Exception ex)
 		{
+			ex.printStackTrace();
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;

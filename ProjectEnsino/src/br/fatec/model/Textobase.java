@@ -4,15 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_textobase")
-public class Textobase {
+public class Textobase{
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
 	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
@@ -83,4 +81,19 @@ public class Textobase {
 			return false;
 		return true;
 	}*/
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Textobase))
+            return false;
+ 
+        final Textobase textobase = (Textobase)object;
+ 
+        if (this.codigo_textobase != null && textobase.getCodigo_textobase() != null) {
+            return this.codigo_textobase.equals(textobase.getCodigo_textobase());
+        }
+        return false;
+    }
 }

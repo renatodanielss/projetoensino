@@ -31,9 +31,9 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 <tr>
 	<td style="width: 900px" colspan="2" align="left">
-	<p:selectOneMenu maxlength="20" id="slmAutor" style="width:884px" value="#{questaoController.newQuestao.autor_questao}">
+	<p:selectOneMenu maxlength="20" id="slmAutor" style="width:884px" value="#{questaoController.newQuestao.autor_questao}" converter="entityConverter">
 			<f:selectItem itemLabel="Selecione um autor" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{autorController.autores}" var="autor" itemValue="#{autor.id_autor}" itemLabel="#{autor.nome_autor}"/>
+			<f:selectItems value="#{autorController.autores}" var="autor" itemValue="#{autor}" itemLabel="#{autor.nome_autor}"/>
 		</p:selectOneMenu>
 	</td>
 </tr>
@@ -44,25 +44,25 @@ xmlns:p="http://primefaces.org/ui">
 <tr>
 	<h:panelGroup id="pgAssunto">
 	<td align="left" style="width: 446px">
-		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:438px" value="#{questaoController.newQuestao.disciplina_questao}">
+		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:438px" value="#{questaoController.newQuestao.disciplina_questao}" converter="entityConverter">
 			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item}" itemLabel="#{item.nome_disciplina}"/>
 			<p:ajax event="valueChange" update="slmAssunto" listener="#{assuntoController.mudarAssuntos}"></p:ajax>
 		</p:selectOneMenu>
 	</td>
 	<td align="left">
-		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:438px" value="#{questaoController.newQuestao.assunto_questao}" >
+		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:438px" value="#{questaoController.newQuestao.assunto_questao}" converter="entityConverter">
 			<f:selectItem itemLabel="Selecione um assunto" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2.id_assunto}" itemLabel="#{item2.nome_assunto}"/>
+			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2}" itemLabel="#{item2.nome_assunto}"/>
 		</p:selectOneMenu>
 	</td>
 	</h:panelGroup>
 </tr>
 <tr><td colspan="2" align="left"><h:outputText value="Texto Base: " /></td></tr>
 <tr><td colspan="2" align="left">
-	<p:selectOneMenu id="somTextobase" value="#{questaoController.newQuestao.textobase_questao}" style="width:884px">
+	<p:selectOneMenu id="somTextobase" value="#{questaoController.newQuestao.textobase_questao}" converter="entityConverter" style="width:884px">
 		<f:selectItem itemLabel="Selecione um texto base" itemValue="" />
-		<f:selectItems value="#{textobaseController.textosBases}" var="textobase" itemValue="#{textobase.codigo_textobase}" itemLabel="#{textobase.titulo_textobase}" />
+		<f:selectItems value="#{textobaseController.textosBases}" var="textobase" itemValue="#{textobase}" itemLabel="#{textobase.titulo_textobase}" />
 	</p:selectOneMenu>
 </td></tr>
 <tr><td colspan="2" align="left">

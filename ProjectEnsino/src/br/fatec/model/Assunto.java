@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tbl_assunto")
 
-public class Assunto {
+public class Assunto{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ASSUNTO_ID")
 	@SequenceGenerator(name="ASSUNTO_ID", sequenceName="ASSUNTO_SEQ", allocationSize=1)
