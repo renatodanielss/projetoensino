@@ -24,6 +24,18 @@ public class Alternativa{
 	@ManyToOne
 	private Questao questao_alternativa;
 
+	public Alternativa(){
+	}
+	
+	public Alternativa(Questao questao_alternativa){
+		this.questao_alternativa = questao_alternativa;
+	}
+	
+	public Alternativa(String texto_alternativa, Questao questao_alternativa){
+		this.texto_alternativa = texto_alternativa;
+		this.questao_alternativa = questao_alternativa;
+	}
+	
 	public int getId_alternativa() {
 		return id_alternativa;
 	}
