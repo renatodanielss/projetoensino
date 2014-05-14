@@ -2,18 +2,16 @@ package br.fatec.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
+import javax.faces.bean.ViewScoped;
 import br.fatec.dao.AlternativaDAO;
 import br.fatec.dao.QuestaoDAO;
 import br.fatec.model.Alternativa;
 import br.fatec.model.Questao;
 
 @ManagedBean(name="questaoController")
-@SessionScoped
+@ViewScoped
 public class QuestaoController {
 	private Questao newQuestao;
 	private Questao currentQuestao;
@@ -35,6 +33,8 @@ public class QuestaoController {
 		this.newQuestao = new Questao();
 		this.currentQuestao = new Questao();
 		this.alternativaDAO = new AlternativaDAO();
+		this.alternativas = new ArrayList<Alternativa>();
+		this.alternativas.add(new Alternativa("", this.newQuestao));
 		this.mostrarSalvar();
 	}
 	
@@ -96,21 +96,16 @@ public class QuestaoController {
 		/*for (Alternativa alternativaAux : this.newQuestao.getAlternativas_questao()){
 			alternativaDAO.inserir(alternativaAux);
 		}*/
-		Alternativa alternativa1 = new Alternativa();
-		alternativa1.setTexto_alternativa("Franz Ferdinand");
-		alternativa1.setQuestao_alternativa(newQuestao);
-		
-		Alternativa alternativa2 = new Alternativa();
-		alternativa2.setTexto_alternativa("Rio Ferdinand");
-		alternativa2.setQuestao_alternativa(newQuestao);
+		/*Alternativa alternativa1 = new Alternativa("Franz Ferdinand", newQuestao);
+		Alternativa alternativa2 = new Alternativa("Rio Ferdinand", newQuestao);
 		
 		alternativas = new ArrayList<Alternativa>();
 		alternativas.add(alternativa1);
 		alternativas.add(alternativa2);
-		newQuestao.setAlternativas_questao(alternativas);
+		newQuestao.setAlternativas_questao(alternativas);*/
 		
 		if (questaoDao.inserir(this.newQuestao)){
-			for (Alternativa altAux : newQuestao.getAlternativas_questao())
+			for (Alternativa altAux : this.alternativas)
 				alternativaDAO.inserir(altAux);
 			setQuestoes(null);
 			System.out.println("Questão inserida com sucesso!");
@@ -131,5 +126,9 @@ public class QuestaoController {
 		  
 	public void mostrarSalvar(){
 	     this.showNewButton = true;
+	}
+	
+	public void adicionarAlternativa(){
+		this.alternativas.add(new Alternativa(this.newQuestao));
 	}
 }

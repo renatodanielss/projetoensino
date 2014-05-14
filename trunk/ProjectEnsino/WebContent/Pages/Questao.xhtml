@@ -74,11 +74,23 @@ xmlns:p="http://primefaces.org/ui">
 <tr><td colspan="2" align="left">
 	<p:inputTextarea id="txtEnunciado" value="#{questaoController.newQuestao.enunciado_questao}" rows="4" cols="84" style="width:876px" autoResize="false" />
 </td></tr>
-	<tr><td align="right" colspan="2">
-		<br />
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml"  actionListener="#{questaoController.cadastrar}" ajax="false" />&nbsp;
-	</td></tr>
-</table>
+<tr><td colspan="2" align="left">
+	<h:outputText value="Alternativas: " />
+</td></tr>
+<tr><td colspan="2" align="left">
+	<h:panelGroup id="pgAlternativas">
+		<ui:repeat id="rptAlternativas" value="#{questaoController.alternativas}" varStatus="status">
+			<p:outputLabel value="#{status.index + 1}" />&nbsp;&nbsp;<p:inputText value="#{questaoController.alternativas[status.index].texto_alternativa}" style="width:859px"/><br />
+		</ui:repeat>
+	</h:panelGroup>
+	<p:commandButton id="cmdAdicionarAlternativa" value="Adicionar Alternativa" action="#{questaoController.adicionarAlternativa}" update="pgAlternativas" ajax="true" />
+	<p:commandButton id="cmdExcluirAlternativa" value="Excluir Alternativa" update="rptAlternativas" ajax="false" />
+</td></tr>
+<tr><td align="right" colspan="2">
+	<br />
+	<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml"  actionListener="#{questaoController.cadastrar}" ajax="false" />&nbsp;
+</td></tr>
+</table> 
 </div>
 </h:form>
 </ui:define>
