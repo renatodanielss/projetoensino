@@ -23,6 +23,7 @@ public class AlunoController {
 	private boolean showNewButton;
 	private String pesquisa;
 	private String pesquisarPor;
+	private boolean bloquearRa;
 		
 	public AlunoController()
 	{
@@ -35,6 +36,7 @@ public class AlunoController {
 		this.alunoDao = new AlunoDAO();
 		this.newAluno = new Aluno();
 		this.currentAluno = new Aluno();
+		this.liberarCampoRa();
 	}
 	
 	public List<Aluno> getAlunos() {
@@ -88,6 +90,14 @@ public class AlunoController {
 		this.pesquisarPor = pesquisarPor;
 	}
 
+	public boolean getBloquearRa(){
+		return bloquearRa;
+	}
+
+	public void setBloquearRa(boolean bloquearRa) {
+		this.bloquearRa = bloquearRa;
+	}
+
 	public void cadastrar()
 	{	
 		if (alunoDao.inserir(this.newAluno)){
@@ -120,6 +130,7 @@ public class AlunoController {
 				this.getNewAluno().setEmail_aluno(this.getCurrentAluno().getEmail_aluno());
 				
 				this.mostrarAlterar();
+				this.bloquerCampoRa();
 				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Aluno.xhtml?faces-redirect=true&redirect=1");
@@ -170,6 +181,7 @@ public class AlunoController {
 		this.getNewAluno().setCep_aluno(null);
 		this.getNewAluno().setEmail_aluno(null);
 		this.mostrarSalvar();
+		this.liberarCampoRa();
 	}
 	
 	public void goToAluno() throws Exception{
@@ -177,6 +189,15 @@ public class AlunoController {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Aluno.xhtml");
 	}
+	
+	public void bloquerCampoRa(){
+		this.bloquearRa = true;
+	}
+	
+	public void liberarCampoRa(){
+		this.bloquearRa = false;
+	}
+	
 	public boolean getShowNewButton(){
 		return showNewButton;
 	}

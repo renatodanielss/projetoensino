@@ -39,7 +39,7 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 
 <tr>
-	<td align="left" ><p:inputText id="txtRa" style="width:425px" value="#{alunoController.newAluno.ra_aluno}"/></td>
+	<td align="left" ><p:inputText id="txtRa" style="width:425px" value="#{alunoController.newAluno.ra_aluno}" disabled="#{alunoController.bloquearRa}"/></td>
 	<td align="left" ><p:inputMask mask="999.999.999-99" id="txtCpf" style="width:448px" value="#{alunoController.newAluno.cpf_aluno}"/></td>
 </tr>
 </table>
