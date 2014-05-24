@@ -80,7 +80,9 @@ xmlns:p="http://primefaces.org/ui">
 <tr><td colspan="2" align="left">
 	<h:panelGroup id="pgAlternativas">
 		<ui:repeat id="rptAlternativas" value="#{questaoController.alternativas}" varStatus="status">
-			<p:outputLabel value="#{status.index + 1}" />&nbsp;&nbsp;<p:inputText value="#{questaoController.alternativas[status.index].texto_alternativa}" style="width:859px"/><br />
+			<p:outputLabel value="#{status.index + 1}" />&nbsp;&nbsp;<p:inputText value="#{questaoController.alternativas[status.index].texto_alternativa}" style="width:809px"/>
+			<p:selectBooleanCheckbox id="sorAlternativaCorreta" value="#{questaoController.alternativas[status.index].correta_alternativa}" converter="entityConverter" style="margin-left: 6px; margin-top: 0px"/>
+			<br />
 		</ui:repeat>
 	</h:panelGroup>
 	<p:commandButton id="cmdAdicionarAlternativa" value="Adicionar Alternativa" action="#{questaoController.adicionarAlternativa}" update="pgAlternativas" ajax="true" />
