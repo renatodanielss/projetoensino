@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,10 +21,14 @@ public class Alternativa{
 	
 	@Column(name="texto_alternativa")
 	private String texto_alternativa;
+
+	@Column(name="correta_alternativa")
+	private Boolean correta_alternativa;
 	
 	@ManyToOne
+	@JoinColumn(name="questao_alternativa")
 	private Questao questao_alternativa;
-
+	
 	public Alternativa(){
 	}
 	
@@ -50,6 +55,14 @@ public class Alternativa{
 
 	public void setTexto_alternativa(String texto_alternativa) {
 		this.texto_alternativa = texto_alternativa;
+	}
+
+	public Boolean getCorreta_alternativa() {
+		return correta_alternativa;
+	}
+
+	public void setCorreta_alternativa(Boolean correta_alternativa) {
+		this.correta_alternativa = correta_alternativa;
 	}
 
 	public Questao getQuestao_alternativa() {
