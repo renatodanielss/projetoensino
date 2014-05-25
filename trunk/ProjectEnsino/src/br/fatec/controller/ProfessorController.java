@@ -37,7 +37,6 @@ public class ProfessorController {
 		this.newProfessor = new Professor();
 		this.currentProfessor = new Professor();
 		
-		mostrarSalvar();
 		liberarCampo();
 	}
 

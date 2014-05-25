@@ -33,7 +33,6 @@ public class AutorController {
 		this.autorDao = new AutorDAO();
 		this.newAutor = new Autor();
 		this.currentAutor = new Autor();
-		this.mostrarSalvar();
 	}
 	
 	public List<Autor> getAutores() {

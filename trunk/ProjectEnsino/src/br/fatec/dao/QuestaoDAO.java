@@ -91,6 +91,28 @@ public class QuestaoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Questao> listar(int id_disciplina)
+	{
+		List<Questao> listQuestao = null;
+		String query = "SELECT * FROM tbl_questao where  disciplina_questao = " + id_disciplina;
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+			listQuestao = this.manager.createNativeQuery(query, new Questao().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listQuestao = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}
+		
+		return listQuestao;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Object> listarInnerJoin()
 	{		
 		List<Object> listQuestao = null;

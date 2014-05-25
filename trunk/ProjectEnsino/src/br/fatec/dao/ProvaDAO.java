@@ -16,10 +16,10 @@ public class ProvaDAO {
 	}
 	
 	public boolean inserir(Prova prova)
-	{	
+	{
 		try
 		{
-			this.manager.getTransaction().begin();    
+			this.manager.getTransaction().begin();
 	 		this.manager.persist(prova);
 			this.manager.getTransaction().commit();
 			return true;

@@ -33,7 +33,6 @@ public class DisciplinaController {
 		this.disciplinaDao = new DisciplinaDAO();
 		this.newDisciplina = new Disciplina();
 		this.currentDisciplina = new Disciplina();
-		this.mostrarSalvar();
 	}
 
 	public List<Disciplina> getDisciplinas() {
@@ -105,7 +104,7 @@ public class DisciplinaController {
 		if (disciplinaDao.alterar(this.newDisciplina)){
 			setDisciplinas(null);
 			System.out.println("Disciplina alterada com sucesso!");
-			newDisciplina = new Disciplina();
+			this.newDisciplina = new Disciplina();
 		}
 		else
 			System.out.println("Erro na alteração!");

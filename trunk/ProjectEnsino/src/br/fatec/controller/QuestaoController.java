@@ -35,7 +35,6 @@ public class QuestaoController {
 		this.alternativaDAO = new AlternativaDAO();
 		this.alternativas = new ArrayList<Alternativa>();
 		this.alternativas.add(new Alternativa("", this.newQuestao));
-		this.mostrarSalvar();
 	}
 	
 	public Questao getNewQuestao() {
