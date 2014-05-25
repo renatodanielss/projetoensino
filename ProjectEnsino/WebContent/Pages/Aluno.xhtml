@@ -93,8 +93,8 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" ><h:outputText value="Bairro:"/></td><td align="left" ><h:outputText value="Cidade:"/></td><td align="left" ><h:outputText value="UF:"/></td><td align="left" ><h:outputText value="CEP:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" ><p:inputText id="txtBairro" style="width:343px" value="#{alunoController.newAluno.bairro_aluno}"/></td>
-	<td align="left" ><p:inputText id="txtCidade" style="width:330px" value="#{alunoController.newAluno.cidade_aluno}"/></td>
+	<td align="left" ><p:inputText id="txtBairro" style="width:330px" value="#{alunoController.newAluno.bairro_aluno}"/></td>
+	<td align="left" ><p:inputText id="txtCidade" style="width:348px" value="#{alunoController.newAluno.cidade_aluno}"/></td>
 	<td align="left" style="width:60px">
 	<p:selectOneMenu style="vertical-align:bottom" id="slmUf" value="#{alunoController.newAluno.uf_aluno}">  
        <f:selectItem itemValue="1" itemLabel="AC"/>
@@ -126,7 +126,7 @@ xmlns:p="http://primefaces.org/ui">
        <f:selectItem itemValue="27" itemLabel="TO"/>
 	</p:selectOneMenu>
 	</td>
-	<td align="left" ><p:inputMask mask="99999-999" id="txtCep" style="width:112px" value="#{alunoController.newAluno.cep_aluno}"/></td>
+	<td align="left" ><p:inputMask mask="99999-999" id="txtCep" style="width:100px" value="#{alunoController.newAluno.cep_aluno}"/></td>
 </tr>
 </table>
 
@@ -135,7 +135,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" colspan="2"><h:outputText value="E-mail:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" colspan="2"><p:inputText id="txtEmail" style="width:888px" value="#{alunoController.newAluno.email_aluno}" /></td>
+	<td align="left" colspan="2"><p:inputText id="txtEmail" style="width:889px" value="#{alunoController.newAluno.email_aluno}" /></td>
 </tr>
 </table>
 </td></tr></table>
