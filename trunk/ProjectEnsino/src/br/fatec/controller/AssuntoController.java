@@ -133,6 +133,7 @@ public class AssuntoController {
 		if (assuntoDao.inserir(this.newAssunto)){
 			setAssuntos(null);
 			System.out.println("Assunto inserido com sucesso!");
+			this.newAssunto = new Assunto();
 		}
 		else
 			System.out.println("Erro na inserção!");
