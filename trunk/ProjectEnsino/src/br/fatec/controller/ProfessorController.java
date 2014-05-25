@@ -2,11 +2,13 @@ package br.fatec.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import br.fatec.dao.ProfessorDAO;
 import br.fatec.model.Professor;
 
@@ -19,6 +21,8 @@ public class ProfessorController {
 	private Professor currentProfessor;
 	private Professor newProfessor;
 	private boolean showNewButton;
+	private String pesquisa;
+	private String pesquisarPor;
 	private boolean bloquearMatricula;
 	
 	public ProfessorController()
@@ -86,6 +90,22 @@ public class ProfessorController {
 
 	public void setBloquearMatricula(boolean bloquearMatricula) {
 		this.bloquearMatricula = bloquearMatricula;
+	}
+
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
+	public String getPesquisarPor() {
+		return pesquisarPor;
+	}
+
+	public void setPesquisarPor(String pesquisarPor) {
+		this.pesquisarPor = pesquisarPor;
 	}
 
 	public void mostrarAlterar(){
