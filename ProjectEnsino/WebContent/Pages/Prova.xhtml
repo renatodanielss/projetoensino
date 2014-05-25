@@ -25,16 +25,14 @@ xmlns:p="http://primefaces.org/ui">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Prova</h2></center></td></tr>
-</table>
-<table>
-<tr><td><h3>Detalhes da Prova</h3></td></tr>
+<tr><td align="left"><h3>Detalhes da Prova</h3></td></tr>
 </table>
 <table width="900" border="0">
 <tr>
 	<td align="left" width="70%"><h:outputText value="Título:"/></td>
 </tr>
 <tr>
-	<td align="left" width="70%"><p:inputText id="txtTitulo" value="#{provaController.newProva.titulo_prova}" style="width: 860px"/></td>
+	<td align="left" width="70%"><p:inputText id="txtTitulo" value="#{provaController.newProva.titulo_prova}" style="width: 875px"/></td>
 </tr>
 </table>
 
@@ -42,33 +40,39 @@ xmlns:p="http://primefaces.org/ui">
 <tr><td align="left" width="30%"><h:outputText value="Disciplina:" /></td><td align="left"><h:outputText value="Número de Questões:"/></td></tr>
 <tr>
 <td align="left" width="30%">
-	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:500px;vertical-align:bottom" value="#{provaController.newProva.disciplina_prova}">
+	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:514px;vertical-align:bottom" value="#{provaController.newProva.disciplina_prova}" converter="entityConverter">
 			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item}" itemLabel="#{item.nome_disciplina}"/>
 	</p:selectOneMenu>
 </td>
 <td align="left">
 	<p:inputMask 
    mask="9?999"
    maxlength="4"
+   value="#{provaController.newProva.numeroQuestoes_prova}"
    placeHolder=" "
-   style="width:354px"/>
+   style="width:353px"/>
 </td>	
 </tr>
 </table>
 <br />
-<table style="width: 900px" align="center">
+<table border="0" style="width: 900px" align="center">
 	<tr><td align="right">
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnGerar" value="Gerar Prova" action="#{provaController.gerarProva}" update="pgQuestoes" ajax="true"/>&nbsp;
 	</td></tr>
 	<tr><td>
-		<ui:repeat id="rptQuestoes" value="#{questaoController.questoes}" varStatus="statusQuestoes">
-			<p:outputLabel value="#{statusQuestoes.index + 1}" />&nbsp;&nbsp;<h:outputText value="#{questaoController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px"/><br />
-			<ui:repeat id="rptAlternativas" value="#{questaoController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
-				<h:outputText value="#{questaoController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}"/><br />
+	<h:panelGroup id="pgQuestoes">
+		<ui:repeat id="rptQuestoes" value="#{provaController.questoes}" varStatus="statusQuestoes">
+			<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px"/><br />
+			<ui:repeat id="rptAlternativas" value="#{provaController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
+				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}"/><br />
 			</ui:repeat>
 			<br />
 		</ui:repeat>
+	</h:panelGroup>
+	</td></tr>
+	<tr><td align="right">
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" ajax="false"/>&nbsp;
 	</td></tr>
 </table>
 </div>

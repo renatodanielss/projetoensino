@@ -35,7 +35,6 @@ public class AssuntoController {
 		this.newAssunto = new Assunto();
 		this.currentAssunto = new Assunto();
 		this.textobaseController = this.getTextobaseController();
-		this.mostrarSalvar();
 	}
 
 	public List<Assunto> getAssuntos() {
