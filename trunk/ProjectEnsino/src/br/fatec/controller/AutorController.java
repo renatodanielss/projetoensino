@@ -2,13 +2,11 @@ package br.fatec.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 import br.fatec.dao.AutorDAO;
 import br.fatec.model.Autor;
 
@@ -35,6 +33,7 @@ public class AutorController {
 		this.autorDao = new AutorDAO();
 		this.newAutor = new Autor();
 		this.currentAutor = new Autor();
+		this.mostrarSalvar();
 	}
 	
 	public List<Autor> getAutores() {
@@ -76,17 +75,6 @@ public class AutorController {
 		//this.showNewButton = showNewButton;
 	//}
 	
-
-	public void cadastrar()
-	{	
-		if (autorDao.inserir(this.newAutor)){
-			setAutores(null);
-			System.out.println("Autor inserido com sucesso!");
-		}
-		else
-			System.out.println("Erro na inserção!");
-	}
-	
 	public String getPesquisa() {
 		return pesquisa;
 	}
@@ -101,6 +89,17 @@ public class AutorController {
 
 	public void setPesquisarPor(String pesquisarPor) {
 		this.pesquisarPor = pesquisarPor;
+	}
+	
+	public void cadastrar()
+	{	
+		if (autorDao.inserir(this.newAutor)){
+			setAutores(null);
+			System.out.println("Autor inserido com sucesso!");
+			this.newAutor = new Autor();
+		}
+		else
+			System.out.println("Erro na inserção!");
 	}
 
 	public void iniciaAlterar() throws IOException
@@ -125,6 +124,7 @@ public class AutorController {
 		if (autorDao.alterar(this.newAutor)){
 			setAutores(null);
 			System.out.println("Autor alterado com sucesso!");
+			this.newAutor = new Autor();
 		}
 		else
 			System.out.println("Erro na alteração!");
@@ -165,5 +165,4 @@ public class AutorController {
 	public void mostrarSalvar(){
 	     this.showNewButton = true;
 	}
-
 }
