@@ -2,13 +2,11 @@ package br.fatec.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 import br.fatec.dao.AlunoDAO;
 import br.fatec.model.Aluno;
 
@@ -103,6 +101,7 @@ public class AlunoController {
 		if (alunoDao.inserir(this.newAluno)){
 			setAlunos(null);
 			System.out.println("Aluno inserido com sucesso!");
+			this.newAluno = new Aluno();
 		}
 		else
 			System.out.println("Erro na inserção!");
