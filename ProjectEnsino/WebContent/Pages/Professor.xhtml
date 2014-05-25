@@ -23,23 +23,23 @@ xmlns:p="http://primefaces.org/ui">
 <ui:define name="page">
 <h:form enctype="multipart/form-data">
 <div align="center">
-<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<table style="width:906px" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Cadastro de Professor</h2></center></td></tr>
 </table>
-<table width="900">
+<table  style="width:906px" border = "0">
 <tr>
 	<td align="left" colspan="3"><h3>Informações Pessoais</h3></td>
 </tr>
 
 <tr>
-	<td align="left" width="15%"><h:outputText value="Matrícula:"/></td><td align="left" width="25%"><h:outputText value="CPF:"/></td><td align="left" width="60%"><h:outputText value="Disciplina:"></h:outputText></td>
+	<td align="left" ><h:outputText value="Matrícula:"/></td><td align="left"><h:outputText value="CPF:"/></td><td align="left"><h:outputText value="Disciplina:"></h:outputText></td>
 </tr>
 
 <tr>
-	<td align="left" width="25%"><p:inputText id="txtMatricula" size="20" value="#{professorController.newProfessor.matricula_professor}" disabled="#{professorController.bloquearMatricula}"/></td>
-	<td align="left" width="25%"><p:inputMask mask="999.999.999-99" id="txtCpf" size="30" value="#{professorController.newProfessor.cpf_professor}"/></td>
-	<td align="left"  width="50%">
-	<p:selectOneMenu maxlength="85" id="slmDisciplina" style="width:375px;vertical-align:bottom" value="#{professorController.newProfessor.disciplina_professor}">
+	<td align="left" ><p:inputText id="txtMatricula" style="width:237px" value="#{professorController.newProfessor.matricula_professor}" disabled="#{professorController.bloquearMatricula}"/></td>
+	<td align="left" ><p:inputMask mask="999.999.999-99" id="txtCpf" style="width:258px" value="#{professorController.newProfessor.cpf_professor}"/></td>
+	<td align="left" style="width:50px">
+	<p:selectOneMenu maxlength="85" id="slmDisciplina" style="width:372px;vertical-align:bottom" value="#{professorController.newProfessor.disciplina_professor}">
 		<f:selectItem itemLabel="Selecione uma disciplina" itemValue="0" ></f:selectItem>
 		<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
 	</p:selectOneMenu>
@@ -48,28 +48,28 @@ xmlns:p="http://primefaces.org/ui">
 
 </table>
 
-<table width="900">
+<table style="width:906px" border="0">
 <tr>
 	<td align="left"><h:outputText value="Nome:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" width="60%"><p:inputText id="txtNome" size="105" value="#{professorController.newProfessor.nome_professor}"/></td>
+	<td align="left"><p:inputText id="txtNome" style="width:890px" value="#{professorController.newProfessor.nome_professor}"/></td>
 	
 </tr>
 </table>
 
-<table width="900">
+<table style="width:906px" border="0">
 <tr>
-	<td align="left" width="35%"><h:outputText value="Data de Nascimento:"/></td><td align="left" width="35%"><h:outputText value="Telefone:"/></td><td align="left" width="30%"><h:outputText value="Celular:"></h:outputText></td>
+	<td align="left" ><h:outputText value="Data de Nascimento:"/></td><td align="left" ><h:outputText value="Telefone:"/></td><td align="left" ><h:outputText value="Celular:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" width="30%"><p:inputMask mask="99/99/9999" size="26" value="#{professorController.newProfessor.datanasc_professor}"/></td>
-	<td align="left" width="35%"><p:inputText id="txtTelefone" size="33" value="#{professorController.newProfessor.telefone_professor}"/></td>
-	<td align="left"  width="35%"><p:inputText id="txtCelular" size="33" value="#{professorController.newProfessor.celular_professor}"/></td>
+	<td align="left" ><p:inputMask mask="99/99/9999" style="width:250px" value="#{professorController.newProfessor.datanasc_professor}"/></td>
+	<td align="left" ><p:inputText id="txtTelefone" style="width:306px" value="#{professorController.newProfessor.telefone_professor}"/></td>
+	<td align="left" ><p:inputText id="txtCelular" style="width:306px" value="#{professorController.newProfessor.celular_professor}"/></td>
 </tr>
 </table>
 
-<table width="900">
+<table style="width:906px" border="0">
 <tr><td align="left">
 	<h:outputText value="Sexo:"></h:outputText>
 	<p:selectOneRadio id="sorSexo" value="#{professorController.newProfessor.sexo_professor}"><f:selectItem itemValue="false" itemLabel="Masculino"></f:selectItem>&nbsp;&nbsp;<f:selectItem itemValue="true" itemLabel="Feminino"></f:selectItem>
@@ -77,30 +77,30 @@ xmlns:p="http://primefaces.org/ui">
 </td></tr>
 </table>
 
-<table width="900">
+<table style="width:906px" border="0">
 <tr><td align="left" colspan="4"><h3>Endereço</h3></td></tr>
 </table>
 
-<table width="900">
+<table style="width:906px" border="0">
 <tr>
-	<td align="left" width="35%"><h:outputText value="Logradouro:"/></td><td align="left" width="35%"><h:outputText value="Nº:"/></td><td align="left" width="30%"><h:outputText value="Complemento:"></h:outputText></td>
+	<td align="left" ><h:outputText value="Logradouro:"/></td><td align="left" ><h:outputText value="Nº:"/></td><td align="left" ><h:outputText value="Complemento:"></h:outputText></td>
 </tr>
 
 <tr>
-	<td align="left" width="35%"><p:inputText id="txtLogradouro" size="50" value="#{professorController.newProfessor.logradouro_professor}"/></td>
-	<td align="left" width="35%"><p:inputText id="txtNumero" size="9" value="#{professorController.newProfessor.numero_professor}"/></td>
-	<td align="left"  width="30%"><p:inputText id="txtComplemento" size="32" value="#{professorController.newProfessor.complemento_professor}"/></td>
+	<td align="left" ><p:inputText id="txtLogradouro" style="width:409px" value="#{professorController.newProfessor.logradouro_professor}"/></td>
+	<td align="left" ><p:inputText id="txtNumero" style="width:80px" border="0" value="#{professorController.newProfessor.numero_professor}"/></td>
+	<td align="left" ><p:inputText id="txtComplemento" style="width:373px" value="#{professorController.newProfessor.complemento_professor}"/></td>
 </tr>
 </table>
 
-<table width="900">
+<table style="width:906px" border = "0">
 <tr>
 	<td align="left" width="35%"><h:outputText value="Bairro"/></td><td align="left" width="35%"><h:outputText value="Cidade:"/></td><td align="left" width="30%"><h:outputText value="UF:"/></td><td align="left" width="30%"><h:outputText value="CEP:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" width="35%"><p:inputText id="txtBairro" size="36" value="#{professorController.newProfessor.bairro_professor}"/></td>
-	<td align="left" width="35%"><p:inputText id="txtCidade" size="30" value="#{professorController.newProfessor.cidade_professor}"/></td>
-	<td align="left"  width="30%">
+	<td align="left" width="35%"><p:inputText id="txtBairro" style="width:330px" value="#{professorController.newProfessor.bairro_professor}"/></td>
+	<td align="left" width="35%"><p:inputText id="txtCidade" style="width:349px" value="#{professorController.newProfessor.cidade_professor}"/></td>
+	<td align="left" style="width:60px">
 	<p:selectOneMenu style="vertical-align:bottom" id="slmUf" value="#{professorController.newProfessor.uf_professor}">  
        <f:selectItem itemValue="1" itemLabel="AC"/>
        <f:selectItem itemValue="2" itemLabel="AL"/>
@@ -131,26 +131,29 @@ xmlns:p="http://primefaces.org/ui">
        <f:selectItem itemValue="27" itemLabel="TO"/>
 	</p:selectOneMenu>
 	</td>
-	<td align="left" width="15%"><p:inputMask mask="99999-999" id="txtCep" size="16" value="#{professorController.newProfessor.cep_professor}"/></td>
+	<td align="left" ><p:inputMask mask="99999-999" id="txtCep" style="width:111px" value="#{professorController.newProfessor.cep_professor}"/></td>
 </tr>
 </table>
 
-<table width="900">
+<table style="width:906px"  border="0">
 <tr>
 	<td align="left" colspan="2"><h:outputText value="E-mail:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" colspan="2"><p:inputText id="txtEmail" size="105" value="#{professorController.newProfessor.email_professor}"/></td>
+	<td align="left" colspan="2"><p:inputText id="txtEmail" style="width:890px" value="#{professorController.newProfessor.email_professor}"/></td>
 </tr>
 </table>
 <br />
-<table align="center">
-	<tr><td>
+<h:panelGroup id="pnlGrd">
+<table border="0" style="width:900px" align="center">
+	<tr><td align="right" style="width:900px" >
 		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{professorController.cadastrar}" rendered="#{professorController.showNewButton}" ajax="false" />&nbsp;
 		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{professorController.alterar}" rendered="#{!professorController.showNewButton}" ajax="false" />&nbsp;
 	</td></tr>
 </table>
+</h:panelGroup>
 </div>
+
 </h:form>
 </ui:define>
 </ui:decorate>
