@@ -29,60 +29,46 @@ xmlns:p="http://primefaces.org/ui">
 <table>
 <tr><td><h3>Detalhes da Prova</h3></td></tr>
 </table>
-<table width="950" border = "1">
+<table width="900" border="0">
 <tr>
-	<td align="left" width="10%"><h:outputText value="ID:"/></td><td align="left" width="60%"><h:outputText value="Título:"/></td><td align="left" width="30%"><h:outputText value="Disciplina:"></h:outputText></td>
+	<td align="left" width="70%"><h:outputText value="Título:"/></td>
 </tr>
 <tr>
-	<td align="left" width="10%"><p:inputText id="txtId" size="10" value="#{provaController.newProva.id_prova}"/></td>
-	<td align="left" width="60%"><p:inputText id="txtTitulo" size="54" value="#{provaController.newProva.titulo_prova}"/></td>
-	<td align="left">
-	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:329px" value="#{provaController.newProva.disciplina_prova}">
-			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
-	</p:selectOneMenu>
-	</td>
+	<td align="left" width="70%"><p:inputText id="txtTitulo" value="#{provaController.newProva.titulo_prova}" style="width: 860px"/></td>
 </tr>
 </table>
 
-<table width="950" border="1">
-<tr><td>
-	<p:panelGrid id="pgQuestoes" columns="5">  
-    <f:facet name="header">  
-        Questões  
-    </f:facet>  
-  
-    <h:outputLabel for="txtId" value="ID" />
-    <h:outputLabel for="txtAutor" value="Autor" />
-    <h:outputLabel for="txtDisciplina" value="Disciplina" />
-    <h:outputLabel for="txtBase" value="Texto Base" />
-    <h:outputLabel for="txtEnunciado" value="Enunciado" />
-      
-    <p:inputText id="txtId2"  label="ID" size="15"/>
-    <p:inputText id="txtAutor" label="Autor" size="15"/>
-    <p:inputText id="txtDisciplina" label="A" size="15"/>
-    <p:inputText id="txtBase" label="Texto Base" size="15"/>
-    <p:inputText id="txtEnunciado" label="Enunciado" size="15"/>
-  	<center>
-    <f:facet name="footer">  
-        <p:button id="btnAdicionarQuestao" value="Adicionar Questão" icon="ui-icon-check" style="margin:0"/>  
-    </f:facet>  
-    <f:facet name="footer">  
-        <p:button id="btnEditarQuestao" value="Editar Questão" icon="ui-icon-check" style="margin:0"/>  
-    </f:facet>  
-    <f:facet name="footer">  
-        <p:button id="btnExcluirQuestão" value="Excluir Questão" icon="ui-icon-check" style="margin:0" />  
-    </f:facet>
-    </center>  
-	</p:panelGrid>
-</td></tr>
+<table width="900" border="0">
+<tr><td align="left" width="30%"><h:outputText value="Disciplina:" /></td><td align="left"><h:outputText value="Número de Questões:"/></td></tr>
+<tr>
+<td align="left" width="30%">
+	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:500px;vertical-align:bottom" value="#{provaController.newProva.disciplina_prova}">
+			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item.id_disciplina}" itemLabel="#{item.nome_disciplina}"/>
+	</p:selectOneMenu>
+</td>
+<td align="left">
+	<p:inputMask 
+   mask="9?999"
+   maxlength="4"
+   placeHolder=" "
+   style="width:354px"/>
+</td>	
+</tr>
 </table>
 <br />
-<table align="center">
-	<tr><td>
+<table style="width: 900px" align="center">
+	<tr><td align="right">
 		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" ajax="false"/>&nbsp;
-		<p:commandButton id="btnExcluir" value="Excluir" onclick=""></p:commandButton>&nbsp;
-		<p:commandButton id="btnProcurar" value="Procurar" onclick=""></p:commandButton>&nbsp;
+	</td></tr>
+	<tr><td>
+		<ui:repeat id="rptQuestoes" value="#{questaoController.questoes}" varStatus="statusQuestoes">
+			<p:outputLabel value="#{statusQuestoes.index + 1}" />&nbsp;&nbsp;<h:outputText value="#{questaoController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px"/><br />
+			<ui:repeat id="rptAlternativas" value="#{questaoController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
+				<h:outputText value="#{questaoController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}"/><br />
+			</ui:repeat>
+			<br />
+		</ui:repeat>
 	</td></tr>
 </table>
 </div>
