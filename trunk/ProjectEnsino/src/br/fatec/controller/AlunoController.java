@@ -145,6 +145,7 @@ public class AlunoController {
 		if (alunoDao.alterar(this.newAluno)){
 			setAlunos(null);
 			System.out.println("Aluno alterado com sucesso!");
+			this.newAluno = new Aluno();
 		}
 		else
 			System.out.println("Erro na alteração!");
