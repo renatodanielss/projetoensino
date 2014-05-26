@@ -24,22 +24,22 @@ xmlns:p="http://primefaces.org/ui">
 <h:form id="form">
 <table align="center" style="width: 900px">
 <tr><td>
-<p:dataTable var="questao" value="#{textobaseController.textosBases}" id="questaoTable" rowKey="#{textobase.codigo_textobase}"
-		 selectionMode="single" selection="#{textobaseController.currentTextoBase}" style="text-align:center" paginator="true" rows="10"
+<p:dataTable var="questao" value="#{textobaseController.textosBases}" id="questaoTable" rowKey="#{questao.id_questao}"
+		 selectionMode="single" selection="#{questaoController.currentQuestao}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 		 rowsPerPageTemplate="5,10,15" lazy="true" filterEvent="enter">
   
 	        <f:facet name="header">
-	            Texto Base
+	            Questão
 	            <br/>
 	        </f:facet>
 	        <p:inputText></p:inputText>
-	        <p:column width="50" headerText="Código" id="codigo_textobase">
-	            #{textobase.codigo_textobase}
+	        <p:column width="50" headerText="Código" id="id_questao">
+	            #{questao.id_questao}
 	        </p:column>
 	        
-	        <p:column width="650" headerText="Título" id="titulo_textobase">
-	            #{textobase.titulo_textobase}
+	        <p:column width="650" headerText="Enunciado" id="enunciado_questao">
+	            #{questao.enunciado_questao}
 	        </p:column>
 
 </p:dataTable>

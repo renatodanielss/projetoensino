@@ -109,6 +109,7 @@ public class AutorController {
 				this.getNewAutor().setId_autor(this.getCurrentAutor().getId_autor());
 				this.getNewAutor().setNome_autor(this.getCurrentAutor().getNome_autor());
 				
+				mostrarAlterar();
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("Autor.xhtml?faces-redirect=true&redirect=1");
 			}
