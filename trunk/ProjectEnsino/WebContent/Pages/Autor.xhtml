@@ -30,7 +30,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left"><h:outputText value="Nome:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left"><p:inputText id="txtNomel" style="width:900px" value="#{autorController.newAutor.nome_autor}"/></td>
+	<td align="left"><p:inputText id="txtNome" style="width:900px" value="#{autorController.newAutor.nome_autor}"/></td>
 </tr>
 </table>
 <br />
@@ -38,8 +38,8 @@ xmlns:p="http://primefaces.org/ui">
 <h:panelGroup id="pnlGrd">
 <table border="0" style="width:900px" align="center">
 	<tr><td align="right" style="width:900px" >
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{autorController.cadastrar}" rendered="#{alunoController.showNewButton}" ajax="false"/>&nbsp;
-		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{autorController.alterar}" rendered="#{!alunoController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{autorController.cadastrar}" rendered="#{autorController.showNewButton}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{autorController.alterar}" rendered="#{!autorController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
 	</td></tr>
 </table>
 </h:panelGroup>
