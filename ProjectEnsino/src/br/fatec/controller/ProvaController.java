@@ -120,7 +120,7 @@ public class ProvaController {
 		else
 			questaoAux = this.questaoDao.listar();
 		
-		if (this.newProva.getNumeroQuestoes_prova() > 0){
+		if (this.newProva.getNumeroQuestoes_prova() > 0 && questaoAux.size() >= this.newProva.getNumeroQuestoes_prova()){
 			for (int i=0; i < this.newProva.getNumeroQuestoes_prova(); i++){
 				indice = random.nextInt(questaoAux.size());
 				this.questoes.add(questaoAux.get(indice));
