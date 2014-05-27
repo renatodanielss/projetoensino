@@ -112,28 +112,6 @@ public class QuestaoDAO {
 		return listQuestao;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Object> listarInnerJoin()
-	{		
-		List<Object> listQuestao = null;
-		String query = "SELECT tbl_textobase.codigo_textobase, tbl_textobase.titulo_textobase, tbl_disciplina.nome_disciplina FROM tbl_textobase inner join tbl_disciplina on tbl_textobase.disciplina_textobase = tbl_disciplina.id_disciplina";
-		
-		try
-		{
-			this.manager.getTransaction().begin();
-			listQuestao = this.manager.createNativeQuery(query, new Object().getClass()).getResultList();
-			this.manager.getTransaction().commit();
-		}
-		catch(Exception ex)
-		{
-			listQuestao = null;
-			if (this.manager.getTransaction().isActive())
-				this.manager.getTransaction().rollback();
-		}
-		
-		return listQuestao;
-	}
-	
 	public boolean existeTextobase(Integer codigo)
 	{
 		Questao questao = buscar(codigo);
