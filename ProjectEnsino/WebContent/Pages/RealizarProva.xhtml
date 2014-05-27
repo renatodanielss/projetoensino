@@ -26,34 +26,35 @@ xmlns:p="http://primefaces.org/ui">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Realizar Prova</h2></center></td></tr>
 </table>
-<table>
+<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td colspan="2" align="left">
+	<p:outputLabel value="Nome: " /><p:outputLabel value="#{realizarProvaController.newRealizarProva.aluno_realizarprova.nome_aluno}"></p:outputLabel><br />
+	<p:outputLabel value="RA: " /><p:outputLabel value="#{realizarProvaController.newRealizarProva.aluno_realizarprova.ra_aluno}"></p:outputLabel><br /><br />
+</td></tr>
 <tr><td colspan="2">
-	<p:outputLabel value="Disciplina: Português"></p:outputLabel><br /><br />
+	<p:outputLabel value="#{realizarProvaController.currentProva.titulo_prova}"></p:outputLabel><br /><br />
 </td></tr>
 </table>
 <table width="900" align="center">
 <tr><td>
-	<p:outputLabel value="1) Qual das alternativas não corresponde a um componente interno da CPU?"></p:outputLabel><br /><br />
-</td></tr>
-<tr><td>
-<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-	<p:selectOneRadio id="rdlAlternativas">
-		<f:selectItem itemLabel="Registrador" itemValue="1" />
-		<f:selectItem itemLabel="UC" itemValue="2" />
-		<f:selectItem itemLabel="ULA" itemValue="3" />
-		<f:selectItem itemLabel="Memória RAM" itemValue="4" />
-		<f:selectItem itemLabel="Memória Cache" itemValue="5" />  
-	</p:selectOneRadio>
-</h:panelGrid>
+<h:panelGroup id="pgQuestoes">
+		<ui:repeat id="rptQuestoes" value="#{realizarProvaController.currentProva.questoes_prova}" varStatus="statusQuestoes">
+			<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].enunciado_questao}" style="width:859px"/><br />
+			<ui:repeat id="rptAlternativas" value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
+				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}"/><br />
+			</ui:repeat>
+			<p:outputLabel value="Digite a letra da alternativa correta: " /><p:inputText id="selecionarAlternativa" value="#{realizarProvaController.alternativasSelecionadas[statusQuestoes.index]}" style="width: 40px" />
+			<br />
+			<br />
+		</ui:repeat>
+	</h:panelGroup>
 </td></tr>
 <tr><td></td></tr>
 </table>
 <br />
 <table align="center">
 	<tr><td>
-		<h:button id="btnAnterior" value="Anterior" onclick=""></h:button>&nbsp;
-		<h:button id="btnProxima" value="Próxima" onclick=""></h:button>&nbsp;
-		<h:button id="btnEncerrar" value="Encerrar Prova" onclick=""></h:button>&nbsp;
+		<p:commandButton id="btnEncerrarProva" value="Encerrar Prova" actionListener="#{realizarProvaController.encerrarProva}" ajax="false"/>
 	</td></tr>
 </table>
 </div>

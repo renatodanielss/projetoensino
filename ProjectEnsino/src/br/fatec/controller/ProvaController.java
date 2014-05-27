@@ -1,13 +1,14 @@
 package br.fatec.controller;
 
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import br.fatec.dao.ProvaDAO;
@@ -17,7 +18,7 @@ import br.fatec.model.Questao;
 
 
 @ManagedBean(name="provaController")
-@ViewScoped
+@SessionScoped
 
 public class ProvaController {
 
@@ -170,7 +171,12 @@ public class ProvaController {
 	}
 	
 	private void limparCampos(){
-		this.newProva = this.currentProva;
+		this.newProva.setId_prova(null);
+		this.newProva.setTitulo_prova(null);
+		this.newProva.setDisciplina_prova(null);
+		this.newProva.setNumeroQuestoes_prova(0);
+		this.newProva.setQuestoes_prova(null);
+		this.questoes = null;
 		this.mostrarSalvar();
 	}
 	
