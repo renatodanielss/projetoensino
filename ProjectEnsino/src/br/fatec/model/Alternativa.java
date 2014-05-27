@@ -1,5 +1,6 @@
 package br.fatec.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,9 +24,9 @@ public class Alternativa{
 	private String texto_alternativa;
 
 	@Column(name="correta_alternativa")
-	private Boolean correta_alternativa;
+	private boolean correta_alternativa;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="questao_alternativa")
 	private Questao questao_alternativa;
 	
@@ -57,11 +58,11 @@ public class Alternativa{
 		this.texto_alternativa = texto_alternativa;
 	}
 
-	public Boolean getCorreta_alternativa() {
+	public boolean getCorreta_alternativa() {
 		return correta_alternativa;
 	}
 
-	public void setCorreta_alternativa(Boolean correta_alternativa) {
+	public void setCorreta_alternativa(boolean correta_alternativa) {
 		this.correta_alternativa = correta_alternativa;
 	}
 

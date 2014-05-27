@@ -1,8 +1,11 @@
 package br.fatec.model;
 
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +22,7 @@ public class Questao {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "QUESTAO_ID")
 	@SequenceGenerator(name="QUESTAO_ID", sequenceName="QUESTAO_SEQ", allocationSize=1)
 	@Column(name="id_questao")
-	private int id_questao;
+	private Integer id_questao;
 	
 	@ManyToOne
     @JoinColumn(name="textobase_questao")
@@ -40,14 +43,14 @@ public class Questao {
 	@JoinColumn(name="assunto_questao")
 	private Assunto assunto_questao;
 	
-	@OneToMany(mappedBy="questao_alternativa")
+	@OneToMany(mappedBy="questao_alternativa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Alternativa> alternativas_questao;
 
-	public int getId_questao() {
+	public Integer getId_questao() {
 		return id_questao;
 	}
 
-	public void setId_questao(int id_questao) {
+	public void setId_questao(Integer id_questao) {
 		this.id_questao = id_questao;
 	}
 

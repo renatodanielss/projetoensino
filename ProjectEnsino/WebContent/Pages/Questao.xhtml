@@ -31,9 +31,9 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 <tr>
 	<td style="width: 900px" colspan="2" align="left">
-	<p:selectOneMenu maxlength="20" id="slmAutor" style="width:884px" value="#{questaoController.newQuestao.autor_questao}" converter="entityConverter">
-			<f:selectItem itemLabel="Selecione um autor" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{autorController.autores}" var="autor" itemValue="#{autor}" itemLabel="#{autor.nome_autor}"/>
+	<p:selectOneMenu id="somAutor" value="#{questaoController.newQuestao.autor_questao}" converter="entityConverter" style="width:884px">
+			<f:selectItem itemLabel="Selecione um autor" itemValue="" />
+			<f:selectItems value="#{autorController.autores}" var="autor" itemValue="#{autor}" itemLabel="#{autor.nome_autor}" />
 		</p:selectOneMenu>
 	</td>
 </tr>
@@ -42,21 +42,18 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left"><h:outputText value="Assunto:" /></td>
 </tr>
 <tr>
-	<h:panelGroup id="pgAssunto">
 	<td align="left" style="width: 446px">
-		<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:438px" value="#{questaoController.newQuestao.disciplina_questao}" converter="entityConverter">
-			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item}" itemLabel="#{item.nome_disciplina}"/>
-			<p:ajax event="valueChange" update="slmAssunto" listener="#{assuntoController.mudarAssuntos}"></p:ajax>
+		<p:selectOneMenu id="somDisciplina" value="#{questaoController.newQuestao.disciplina_questao}" converter="entityConverter" maxlength="20" style="width:438px">
+			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" />
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="disciplina" itemValue="#{disciplina}" itemLabel="#{disciplina.nome_disciplina}" />
 		</p:selectOneMenu>
 	</td>
 	<td align="left">
-		<p:selectOneMenu maxlength="20" id="slmAssunto" style="width:438px" value="#{questaoController.newQuestao.assunto_questao}" converter="entityConverter">
-			<f:selectItem itemLabel="Selecione um assunto" itemValue="" ></f:selectItem>
-			<f:selectItems value="#{assuntoController.assuntos}" var="item2" itemValue="#{item2}" itemLabel="#{item2.nome_assunto}"/>
+		<p:selectOneMenu id="somAssunto" value="#{questaoController.newQuestao.assunto_questao}" converter="entityConverter" style="width:438px" >
+			<f:selectItem itemLabel="Selecione um assunto" itemValue="" />
+			<f:selectItems value="#{assuntoController.assuntos}" var="assunto" itemValue="#{assunto}" itemLabel="#{assunto.nome_assunto}"/>
 		</p:selectOneMenu>
 	</td>
-	</h:panelGroup>
 </tr>
 <tr><td colspan="2" align="left"><h:outputText value="Texto Base: " /></td></tr>
 <tr><td colspan="2" align="left">
@@ -76,9 +73,9 @@ xmlns:p="http://primefaces.org/ui">
 </td></tr>
 <tr><td colspan="2" align="left">
 	<h:panelGroup id="pgAlternativas">
-		<ui:repeat id="rptAlternativas" value="#{questaoController.alternativas}" varStatus="status">
-			<p:outputLabel value="#{status.index + 1}" />&nbsp;&nbsp;<p:inputText value="#{questaoController.alternativas[status.index].texto_alternativa}" style="width:809px"/>
-			<p:selectBooleanCheckbox id="sorAlternativaCorreta" value="#{questaoController.alternativas[status.index].correta_alternativa}" converter="entityConverter" style="margin-left: 6px; margin-top: 0px"/>
+		<ui:repeat id="rptAlternativas" value="#{questaoController.alternativas}" varStatus="statusAlt">
+			<p:outputLabel value="#{statusAlt.index + 1}" />&nbsp;&nbsp;<p:inputText value="#{questaoController.alternativas[statusAlt.index].texto_alternativa}" style="width:809px"/>
+			<p:selectBooleanCheckbox id="sorAlternativaCorreta" value="#{questaoController.alternativas[statusAlt.index].correta_alternativa}" style="margin-left: 6px; margin-top: 0px"/>
 			<br />
 		</ui:repeat>
 	</h:panelGroup>
@@ -87,7 +84,8 @@ xmlns:p="http://primefaces.org/ui">
 </td></tr>
 <tr><td align="right" colspan="2">
 	<br />
-	<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml"  actionListener="#{questaoController.cadastrar}" ajax="false" />&nbsp;
+	<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml"  actionListener="#{questaoController.cadastrar}" rendered="#{questaoController.showNewButton}" ajax="false" />
+	<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" rendered="#{!questaoController.showNewButton}" ajax="false" />	
 </td></tr>
 </table> 
 </div>

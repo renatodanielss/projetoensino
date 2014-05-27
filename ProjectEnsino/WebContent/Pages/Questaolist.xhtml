@@ -24,7 +24,7 @@ xmlns:p="http://primefaces.org/ui">
 <h:form id="form">
 <table align="center" style="width: 900px">
 <tr><td>
-<p:dataTable var="questao" value="#{textobaseController.textosBases}" id="questaoTable" rowKey="#{questao.id_questao}"
+<p:dataTable var="questao" value="#{questaoController.questoes}" id="questaoTable" rowKey="#{questao.id_questao}"
 		 selectionMode="single" selection="#{questaoController.currentQuestao}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 		 rowsPerPageTemplate="5,10,15" lazy="true" filterEvent="enter">
@@ -34,12 +34,16 @@ xmlns:p="http://primefaces.org/ui">
 	            <br/>
 	        </f:facet>
 	        <p:inputText></p:inputText>
-	        <p:column width="50" headerText="Código" id="id_questao">
+	        <p:column width="30" headerText="Código" id="id_questao">
 	            #{questao.id_questao}
 	        </p:column>
 	        
-	        <p:column width="650" headerText="Enunciado" id="enunciado_questao">
+	        <p:column width="600" headerText="Enunciado" id="enunciado_questao">
 	            #{questao.enunciado_questao}
+	        </p:column>
+	        
+	        <p:column width="70" headerText="Disciplina" id="disciplina_questao">
+	            #{questao.disciplina_questao.nome_disciplina}
 	        </p:column>
 
 </p:dataTable>
@@ -47,8 +51,8 @@ xmlns:p="http://primefaces.org/ui">
 </table>
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnIncluir" value="Incluir" action="#{textobaseController.goToTextobase}" ajax="false"/>&nbsp;
-		<p:commandButton id="btnAlterar" value="Alterar" action="#{textobaseController.iniciaAlterar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnIncluir" value="Incluir" action="#{questaoController.goToQuestao}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="#{questaoController.iniciaAlterar}" ajax="false"/>&nbsp;
 		<p:commandButton id="btnExcluir" value="Excluir" action="#{textobaseController.excluir}" ajax="false" />&nbsp;
 	</td></tr>
 </table>
