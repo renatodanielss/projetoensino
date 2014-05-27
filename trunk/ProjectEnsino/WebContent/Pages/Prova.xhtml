@@ -72,7 +72,8 @@ xmlns:p="http://primefaces.org/ui">
 	</h:panelGroup>
 	</td></tr>
 	<tr><td align="right">
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" rendered="#{provaController.showNewButton}" ajax="false"/>
+		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" rendered="#{!provaController.showNewButton}" ajax="false" />
 	</td></tr>
 </table>
 </div>
