@@ -28,22 +28,7 @@ xmlns:p="http://primefaces.org/ui">
 <table align="center" width="900">
 <tr><td>
 
-<table align="center" width="900">
 
-<tr>
-	<td align="left"><h:outputText value="Pesquisa:"/></td><td align="left" width="40%"><h:outputText value="Pesquisar por:"></h:outputText></td>
-</tr>
-<tr>
-	<td align="left" width="60%"><p:inputText id="txtPesquisa" size="60" value="#{autorController.pesquisa}"/></td>
-	<td>
-	<p:selectOneMenu maxlength="85" id="slmPesquisa" style="width:375px;vertical-align:bottom" value="#{autorController.pesquisarPor}">
-		<f:selectItem itemLabel="ID" itemValue="id_autor" ></f:selectItem>
-		<f:selectItem itemLabel="Nome" itemValue="nome_autor" ></f:selectItem>
-	</p:selectOneMenu>
-	</td>			
-</tr>
-</table>
-<br />
 <p:dataTable  var="autor" value="#{autorController.autores}" id="autorTable" rowKey="#{autor.id_autor}"
 		 selectionMode="single" selection="#{autorController.currentAutor}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
