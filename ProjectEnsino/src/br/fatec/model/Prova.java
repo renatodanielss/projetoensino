@@ -1,5 +1,6 @@
 package br.fatec.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,7 +17,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_prova")
-public class Prova {
+public class Prova implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROVA_ID")
 	@SequenceGenerator(name="PROVA_ID", sequenceName="PROVA_SEQ", allocationSize=1)

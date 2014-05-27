@@ -1,13 +1,15 @@
 package br.fatec.controller;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import br.fatec.dao.ProvaDAO;
 import br.fatec.dao.QuestaoDAO;
 import br.fatec.model.Prova;
@@ -26,6 +28,7 @@ public class ProvaController {
 	private Prova newProva;
 	private List<Questao> questoes;
 	private QuestaoDAO questaoDao;
+	private boolean showNewButton;
 	
 	public ProvaController()
 	{
@@ -43,7 +46,10 @@ public class ProvaController {
 	}
 	
 	public List<Prova> getProvas() {
-		return provas;
+		if (this.provas == null){
+			this.provas = this.provaDao.listar();
+		}
+		return this.provas;
 	}
 
 	public void setProvas(List<Prova> provas) {
@@ -103,6 +109,28 @@ public class ProvaController {
 			System.out.println("Erro na inserção!");
 	}
 	
+	public void iniciaAlterar() throws IOException
+	{
+		if (this.newProva != null)
+		{
+			try{
+				this.newProva.setId_prova(this.currentProva.getId_prova());
+				this.newProva.setTitulo_prova(this.currentProva.getTitulo_prova());
+				this.newProva.setDisciplina_prova(this.currentProva.getDisciplina_prova());
+				this.newProva.setNumeroQuestoes_prova(this.currentProva.getNumeroQuestoes_prova());
+				this.newProva.setQuestoes_prova(this.currentProva.getQuestoes_prova());
+				this.setQuestoes(this.newProva.getQuestoes_prova());
+				
+				mostrarAlterar();
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("Prova.xhtml?faces-redirect=true&redirect=1");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public char obterLetra(int status){
 		status += 96;
 		return (char)status;
@@ -127,5 +155,29 @@ public class ProvaController {
 				questaoAux.remove(indice);
 			}
 		}
+	}
+	
+	public boolean getShowNewButton(){
+		return showNewButton;
+	}
+	
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
+	}
+	
+	private void limparCampos(){
+		this.newProva = this.currentProva;
+		this.mostrarSalvar();
+	}
+	
+	public void goToProva() throws Exception{
+		limparCampos();
+		System.out.println("goToProva");
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect("Prova.xhtml");
 	}
 }

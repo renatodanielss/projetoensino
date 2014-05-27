@@ -1,9 +1,9 @@
 package br.fatec.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import br.fatec.model.Prova;
 
 public class ProvaDAO {
@@ -30,6 +30,28 @@ public class ProvaDAO {
 				this.manager.getTransaction().rollback();
 			return false;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prova> listar()
+	{		
+		List<Prova> listProva = null;
+		String query = "SELECT * FROM tbl_prova";
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+			listProva = this.manager.createNativeQuery(query, new Prova().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listProva = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}
+		
+		return listProva;
 	}
 	
 	public void open()
