@@ -7,6 +7,7 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/favicon.png"/>
 <title>Prova</title>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -55,12 +56,12 @@ xmlns:p="http://primefaces.org/ui">
 	<tr><td align="right">
 		<p:commandButton id="btnGerar" value="Gerar Prova" action="#{provaController.gerarProva}" update="pgQuestoes" ajax="true"/>&nbsp;
 	</td></tr>
-	<tr><td>
+	<tr><td align="left">
 	<h:panelGroup id="pgQuestoes">
 		<ui:repeat id="rptQuestoes" value="#{provaController.questoes}" varStatus="statusQuestoes">
-			<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px"/><br />
+			<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px" styleClass="realizarProva" /><br />
 			<ui:repeat id="rptAlternativas" value="#{provaController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
-				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}"/><br />
+				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
 			</ui:repeat>
 			<br />
 		</ui:repeat>

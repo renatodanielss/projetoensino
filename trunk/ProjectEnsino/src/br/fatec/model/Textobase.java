@@ -14,15 +14,15 @@ public class Textobase{
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
 	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
-	@Column(name="codigo_textobase", nullable=false)
+	@Column(name="codigo_textobase")
 	private Integer codigo_textobase;
-	@Column(name="titulo_textobase", nullable=false)
+	@Column(name="titulo_textobase")
 	private String titulo_textobase;
-	@Column(name="disciplina_textobase", nullable=false)
+	@Column(name="disciplina_textobase")
 	private int disciplina_textobase;
-	@Column(name="assunto_textobase", nullable=false)
+	@Column(name="assunto_textobase")
 	private int assunto_textobase;
-	@Column(name="texto_textobase", nullable=false)
+	@Column(name="texto_textobase")
 	private String texto_textobase;
 	
 	public Integer getCodigo_textobase() {
