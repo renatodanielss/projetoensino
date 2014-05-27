@@ -31,7 +31,7 @@ xmlns:p="http://primefaces.org/ui">
 	<p:outputLabel value="Nome: " /><p:outputLabel value="#{realizarProvaController.newRealizarProva.aluno_realizarprova.nome_aluno}"></p:outputLabel><br />
 	<p:outputLabel value="RA: " /><p:outputLabel value="#{realizarProvaController.newRealizarProva.aluno_realizarprova.ra_aluno}"></p:outputLabel><br /><br />
 </td></tr>
-<tr><td colspan="2">
+<tr><td colspan="2" align="center">
 	<p:outputLabel value="#{realizarProvaController.currentProva.titulo_prova}"></p:outputLabel><br /><br />
 </td></tr>
 </table>
@@ -54,7 +54,7 @@ xmlns:p="http://primefaces.org/ui">
 <br />
 <table align="center">
 	<tr><td>
-		<p:commandButton id="btnEncerrarProva" value="Encerrar Prova" actionListener="#{realizarProvaController.encerrarProva}" ajax="false"/>
+		<p:commandButton id="btnEncerrarProva" value="Encerrar Prova" action="/Pages/CadastroConcluido.xhtml" actionListener="#{realizarProvaController.encerrarProva}" ajax="false"/>
 	</td></tr>
 </table>
 </div>
