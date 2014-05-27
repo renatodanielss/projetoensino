@@ -19,6 +19,7 @@
    <class>br.fatec.model.Autor</class>
    <class>br.fatec.model.Questao</class>
    <class>br.fatec.model.Alternativa</class>
+   <class>br.fatec.model.RealizarProva</class>
 
    <properties>
   <!-- dados da conexao -->
