@@ -1,5 +1,6 @@
 package br.fatec.controller;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,16 +129,14 @@ public class QuestaoController {
 		if (this.newQuestao != null)
 		{
 			try{
-				this.newQuestao = this.currentQuestao;
-				this.setAlternativas(this.newQuestao.getAlternativas_questao());
-				/*this.newQuestao.setId_questao(this.getCurrentQuestao().getId_questao());
+				this.newQuestao.setId_questao(this.getCurrentQuestao().getId_questao());
 				this.newQuestao.setAutor_questao(this.getCurrentQuestao().getAutor_questao());
 				this.newQuestao.setDisciplina_questao(this.getCurrentQuestao().getDisciplina_questao());
 				this.newQuestao.setAssunto_questao(this.getCurrentQuestao().getAssunto_questao());
 				this.newQuestao.setTextobase_questao(this.getCurrentQuestao().getTextobase_questao());
 				this.newQuestao.setEnunciado_questao(this.getCurrentQuestao().getEnunciado_questao());
 				this.newQuestao.setAlternativas_questao(this.getCurrentQuestao().getAlternativas_questao());
-				this.setAlternativas(this.newQuestao.getAlternativas_questao());*/
+				this.setAlternativas(this.newQuestao.getAlternativas_questao());
 				
 				mostrarAlterar();
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -147,6 +146,17 @@ public class QuestaoController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void alterar()
+	{	
+		if (questaoDao.alterar(this.newQuestao)){
+			setQuestoes(null);
+			System.out.println("Questão alterado com sucesso!");
+			this.newQuestao = new Questao();
+		}
+		else
+			System.out.println("Erro na alteração!");
 	}
 	
 	private void limparCampos(){
@@ -160,6 +170,18 @@ public class QuestaoController {
 		this.alternativas = new ArrayList<Alternativa>();
 		this.alternativas.add(new Alternativa("", this.newQuestao));
 		this.mostrarSalvar();
+	}
+	
+	public void excluir() throws IOException
+	{
+		if (questaoDao.excluir(this.currentQuestao)){
+			setQuestoes(null);
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Questaolist.xhtml");
+			System.out.println("Questão excluida com sucesso!");
+		}
+		else
+			System.out.println("Erro na exclusão!");
 	}
 	
 	public void goToQuestao() throws Exception{
