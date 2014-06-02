@@ -32,6 +32,40 @@ public class ProvaDAO {
 		}
 	}
 	
+	public boolean alterar(Prova prova)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();    
+			this.manager.merge(prova);
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public boolean excluir(Prova prova)
+	{
+		try
+		{
+			this.manager.getTransaction().begin();
+			this.manager.remove(manager.getReference(prova.getClass(), prova.getId_prova()));
+			this.manager.getTransaction().commit();
+			return true;
+		}
+		catch(Exception ex)
+		{
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+			return false;
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Prova> listar()
 	{		

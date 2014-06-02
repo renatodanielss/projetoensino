@@ -1,7 +1,5 @@
 package br.fatec.controller;
 
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +128,29 @@ public class ProvaController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void alterar()
+	{	
+		if (provaDao.alterar(this.newProva)){
+			setProvas(null);
+			System.out.println("Prova alterada com sucesso!");
+			this.newProva = new Prova();
+		}
+		else
+			System.out.println("Erro na alteração!");
+	}
+	
+	public void excluir() throws IOException
+	{
+		if (provaDao.excluir(this.currentProva)){
+			setProvas(null);
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Provalist.xhtml");
+			System.out.println("Prova excluida com sucesso!");
+		}
+		else
+			System.out.println("Erro na exclusão!");
 	}
 	
 	public char obterLetra(int status){
