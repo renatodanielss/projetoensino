@@ -185,4 +185,19 @@ public class Professor {
 	public void setDisciplina_professor(Integer disciplina_professor) {
 		this.disciplina_professor = disciplina_professor;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Professor))
+            return false;
+ 
+        final Professor professor = (Professor)object;
+ 
+        if (this.matricula_professor != null && professor.getMatricula_professor() != null) {
+            return this.matricula_professor.equals(professor.getMatricula_professor());
+        }
+        return false;
+    }
 }

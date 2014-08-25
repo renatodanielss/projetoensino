@@ -79,4 +79,19 @@ public class Prova implements Serializable{
 	public void setQuestoes_prova(List<Questao> questoes_prova) {
 		this.questoes_prova = questoes_prova;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Prova))
+            return false;
+ 
+        final Prova prova = (Prova)object;
+ 
+        if (this.id_prova != null && prova.getId_prova() != null) {
+            return this.id_prova.equals(prova.getId_prova());
+        }
+        return false;
+    }
 }

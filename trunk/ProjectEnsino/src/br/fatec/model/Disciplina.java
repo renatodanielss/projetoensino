@@ -36,4 +36,19 @@ public class Disciplina{
 	public void setNome_disciplina(String nome_disciplina) {
 		this.nome_disciplina = nome_disciplina;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Disciplina))
+            return false;
+ 
+        final Disciplina disciplina = (Disciplina)object;
+ 
+        if (this.id_disciplina != null && disciplina.getId_disciplina() != null) {
+            return this.id_disciplina.equals(disciplina.getId_disciplina());
+        }
+        return false;
+    }
 }

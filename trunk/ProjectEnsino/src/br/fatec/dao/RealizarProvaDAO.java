@@ -12,14 +12,15 @@ public class RealizarProvaDAO {
 	
 	public RealizarProvaDAO()
 	{
-		open();
+		
 	}
 	
 	public boolean inserir(RealizarProva realizarprova)
 	{	
 		try
 		{
-			this.manager.getTransaction().begin();    
+			open();
+			this.manager.getTransaction().begin();
 	 		this.manager.persist(realizarprova);
 			this.manager.getTransaction().commit();
 			return true;
@@ -29,6 +30,8 @@ public class RealizarProvaDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -36,6 +39,7 @@ public class RealizarProvaDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			this.manager.merge(realizarprova);
 			this.manager.getTransaction().commit();
@@ -46,6 +50,8 @@ public class RealizarProvaDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -55,6 +61,7 @@ public class RealizarProvaDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		realizarprova = this.manager.find(RealizarProva.class, codigo);
 	 		this.manager.getTransaction().commit();
@@ -63,6 +70,8 @@ public class RealizarProvaDAO {
 			realizarprova = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 
 		return realizarprova;
@@ -76,6 +85,7 @@ public class RealizarProvaDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listRealizarProva = this.manager.createNativeQuery(query, new RealizarProva().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -85,6 +95,8 @@ public class RealizarProvaDAO {
 			listRealizarProva = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listRealizarProva;
@@ -103,6 +115,7 @@ public class RealizarProvaDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(realizarprova.getClass(), realizarprova.getId_realizarprova()));
 			this.manager.getTransaction().commit();
@@ -113,6 +126,8 @@ public class RealizarProvaDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	

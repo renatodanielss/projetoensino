@@ -60,5 +60,20 @@ public class RealizarProva {
 
 	public void setNota_realizarprova(Integer nota_realizarprova) {
 		this.nota_realizarprova = nota_realizarprova;
-	}	
+	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof RealizarProva))
+            return false;
+ 
+        final RealizarProva realizarprova = (RealizarProva)object;
+ 
+        if (this.id_realizarprova != null && realizarprova.getId_realizarprova() != null) {
+            return this.id_realizarprova.equals(realizarprova.getId_realizarprova());
+        }
+        return false;
+    }
 }

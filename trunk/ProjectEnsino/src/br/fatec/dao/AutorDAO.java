@@ -13,13 +13,14 @@ public class AutorDAO {
 	
 	public AutorDAO()
 	{
-		open();
+		
 	}
 	
 	public boolean inserir(Autor autor)
 	{	
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(autor);
 			this.manager.getTransaction().commit();
@@ -30,6 +31,8 @@ public class AutorDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -37,6 +40,7 @@ public class AutorDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			this.manager.merge(autor);
 			this.manager.getTransaction().commit();
@@ -47,6 +51,8 @@ public class AutorDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -56,6 +62,7 @@ public class AutorDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			autor = this.manager.find(Autor.class, id);
 	 		this.manager.getTransaction().commit();
@@ -64,6 +71,8 @@ public class AutorDAO {
 			autor = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 
 		return autor;
@@ -77,6 +86,7 @@ public class AutorDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listAutor = this.manager.createNativeQuery(query, new Autor().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -86,6 +96,8 @@ public class AutorDAO {
 			listAutor = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listAutor;
@@ -104,6 +116,7 @@ public class AutorDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(autor.getClass(), autor.getId_autor()));
 			this.manager.getTransaction().commit();
@@ -114,17 +127,19 @@ public class AutorDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 
 
-	public void open()
+	private void open()
 	{
 		this.factory = Persistence.createEntityManagerFactory("projectensino");
 		this.manager = factory.createEntityManager();
 	}
 	
-	public void close()
+	private void close()
 	{
 		this.manager.close();
 		this.factory.close();
