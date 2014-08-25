@@ -101,4 +101,19 @@ public class Questao {
 	public void setAlternativas_questao(List<Alternativa> alternativas_questao) {
 		this.alternativas_questao = alternativas_questao;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Questao))
+            return false;
+ 
+        final Questao questao = (Questao)object;
+ 
+        if (this.id_questao != null && questao.getId_questao() != null) {
+            return this.id_questao.equals(questao.getId_questao());
+        }
+        return false;
+    }
 }

@@ -174,4 +174,19 @@ public class Aluno {
 	public void setEmail_aluno(String email_aluno) {
 		this.email_aluno = email_aluno;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Aluno))
+            return false;
+ 
+        final Aluno aluno = (Aluno)object;
+ 
+        if (this.ra_aluno != null && aluno.getRa_aluno() != null) {
+            return this.ra_aluno.equals(aluno.getRa_aluno());
+        }
+        return false;
+    }
 }

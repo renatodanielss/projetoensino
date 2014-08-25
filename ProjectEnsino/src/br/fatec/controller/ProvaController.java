@@ -17,7 +17,6 @@ import br.fatec.model.Questao;
 
 @ManagedBean(name="provaController")
 @SessionScoped
-
 public class ProvaController {
 
 	
@@ -131,7 +130,8 @@ public class ProvaController {
 	}
 	
 	public void alterar()
-	{	
+	{
+		this.newProva.setQuestoes_prova(this.questoes);
 		if (provaDao.alterar(this.newProva)){
 			setProvas(null);
 			System.out.println("Prova alterada com sucesso!");

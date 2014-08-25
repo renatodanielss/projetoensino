@@ -47,4 +47,19 @@ public class Assunto{
 	public void setNome_assunto(String nome_assunto) {
 		this.nome_assunto = nome_assunto;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Assunto))
+            return false;
+ 
+        final Assunto assunto = (Assunto)object;
+ 
+        if (this.id_assunto != null && assunto.getId_assunto() != null) {
+            return this.id_assunto.equals(assunto.getId_assunto());
+        }
+        return false;
+    }
 }

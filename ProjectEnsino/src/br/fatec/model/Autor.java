@@ -32,4 +32,19 @@ public class Autor{
 	public void setNome_autor(String nome_autor) {
 		this.nome_autor = nome_autor;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Autor))
+            return false;
+ 
+        final Autor autor = (Autor)object;
+ 
+        if (this.id_autor != null && autor.getId_autor() != null) {
+            return this.id_autor.equals(autor.getId_autor());
+        }
+        return false;
+    }
 }

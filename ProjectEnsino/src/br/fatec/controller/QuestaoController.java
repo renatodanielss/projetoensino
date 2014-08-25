@@ -117,7 +117,7 @@ public class QuestaoController {
 			setQuestoes(null);
 			setAlternativas(null);
 			System.out.println("Questão inserida com sucesso!");
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
+			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
 		}
 		else{
 			System.out.println("Erro na inserção!");
@@ -149,10 +149,12 @@ public class QuestaoController {
 	}
 	
 	public void alterar()
-	{	
+	{
+		this.newQuestao.setAlternativas_questao(this.alternativas);
 		if (questaoDao.alterar(this.newQuestao)){
 			setQuestoes(null);
-			System.out.println("Questão alterado com sucesso!");
+			setAlternativas(null);
+			System.out.println("Questão alterada com sucesso!");
 			this.newQuestao = new Questao();
 		}
 		else

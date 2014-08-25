@@ -14,13 +14,14 @@ public class AlunoDAO {
 	
 	public AlunoDAO()
 	{
-		open();
+		
 	}
 	
 	public boolean inserir(Aluno aluno)
 	{	
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(aluno);
 			this.manager.getTransaction().commit();
@@ -31,6 +32,8 @@ public class AlunoDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -38,6 +41,7 @@ public class AlunoDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			this.manager.merge(aluno);
 			this.manager.getTransaction().commit();
@@ -48,6 +52,8 @@ public class AlunoDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -57,6 +63,7 @@ public class AlunoDAO {
 
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			aluno = this.manager.find(Aluno.class, ra); 
 	 		this.manager.getTransaction().commit();
@@ -65,6 +72,8 @@ public class AlunoDAO {
 			aluno = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 
 		return aluno;
@@ -78,6 +87,7 @@ public class AlunoDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listAluno = this.manager.createNativeQuery(query, new Aluno().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -87,6 +97,8 @@ public class AlunoDAO {
 			listAluno = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listAluno;
@@ -105,6 +117,7 @@ public class AlunoDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(aluno.getClass(), aluno.getRa_aluno()));
 			this.manager.getTransaction().commit();
@@ -115,6 +128,8 @@ public class AlunoDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -129,7 +144,4 @@ public class AlunoDAO {
 		this.manager.close();
 		this.factory.close();
 	}
-
 }
-
-

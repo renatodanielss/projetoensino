@@ -13,13 +13,14 @@ public class AssuntoDAO {
 	
 	public AssuntoDAO()
 	{
-		open();
+		
 	}
 	
 	public boolean inserir(Assunto assunto)
 	{	
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(assunto);
 			this.manager.getTransaction().commit();
@@ -30,6 +31,8 @@ public class AssuntoDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -37,6 +40,7 @@ public class AssuntoDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			this.manager.merge(assunto);
 			this.manager.getTransaction().commit();
@@ -47,6 +51,8 @@ public class AssuntoDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -58,6 +64,7 @@ public class AssuntoDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listAssunto = this.manager.createNativeQuery(query, new Assunto().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -67,6 +74,8 @@ public class AssuntoDAO {
 			listAssunto = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listAssunto;
@@ -80,6 +89,7 @@ public class AssuntoDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listAssunto = this.manager.createNativeQuery(query, new Assunto().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -89,6 +99,8 @@ public class AssuntoDAO {
 			listAssunto = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listAssunto;
@@ -98,6 +110,7 @@ public class AssuntoDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(assunto.getClass(), assunto.getId_assunto()));
 			this.manager.getTransaction().commit();
@@ -109,16 +122,18 @@ public class AssuntoDAO {
 				this.manager.getTransaction().rollback();
 			
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
-	public void open()
+	private void open()
 	{
 		this.factory = Persistence.createEntityManagerFactory("projectensino");
 		this.manager = factory.createEntityManager();
 	}
 	
-	public void close()
+	private void close()
 	{
 		this.manager.close();
 		this.factory.close();

@@ -14,13 +14,14 @@ public class DisciplinaDAO {
 	
 	public DisciplinaDAO()
 	{
-		open();
+		
 	}
 	
 	public boolean inserir(Disciplina disciplina)
 	{	
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(disciplina);
 			this.manager.getTransaction().commit();
@@ -31,6 +32,8 @@ public class DisciplinaDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -38,6 +41,7 @@ public class DisciplinaDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			this.manager.merge(disciplina);
 			this.manager.getTransaction().commit();
@@ -48,6 +52,8 @@ public class DisciplinaDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -57,6 +63,7 @@ public class DisciplinaDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		disciplina = this.manager.find(Disciplina.class, id);
 	 		this.manager.getTransaction().commit();
@@ -65,6 +72,8 @@ public class DisciplinaDAO {
 			disciplina = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 
 		return disciplina;
@@ -78,6 +87,7 @@ public class DisciplinaDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listDisciplina = this.manager.createNativeQuery(query, new Disciplina().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -87,6 +97,8 @@ public class DisciplinaDAO {
 			listDisciplina = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listDisciplina;
@@ -105,6 +117,7 @@ public class DisciplinaDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(disciplina.getClass(), disciplina.getId_disciplina()));
 			this.manager.getTransaction().commit();
@@ -115,16 +128,18 @@ public class DisciplinaDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
-	public void open()
+	private void open()
 	{
 		this.factory = Persistence.createEntityManagerFactory("projectensino");
 		this.manager = factory.createEntityManager();
 	}
 	
-	public void close()
+	private void close()
 	{
 		this.manager.close();
 		this.factory.close();

@@ -1,6 +1,5 @@
 package br.fatec.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,15 +17,15 @@ public class Alternativa{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALTERNATIVA_ID")
 	@SequenceGenerator(name="ALTERNATIVA_ID", sequenceName="ALTERNATIVA_SEQ", allocationSize=1)
 	@Column(name="id_alternativa")
-	private int id_alternativa;
+	private Integer id_alternativa;
 	
 	@Column(name="texto_alternativa")
 	private String texto_alternativa;
 
 	@Column(name="correta_alternativa")
-	private boolean correta_alternativa;
+	private Boolean correta_alternativa;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="questao_alternativa")
 	private Questao questao_alternativa;
 	
@@ -42,11 +41,11 @@ public class Alternativa{
 		this.questao_alternativa = questao_alternativa;
 	}
 	
-	public int getId_alternativa() {
+	public Integer getId_alternativa() {
 		return id_alternativa;
 	}
 
-	public void setId_alternativa(int id_alternativa) {
+	public void setId_alternativa(Integer id_alternativa) {
 		this.id_alternativa = id_alternativa;
 	}
 
@@ -58,11 +57,11 @@ public class Alternativa{
 		this.texto_alternativa = texto_alternativa;
 	}
 
-	public boolean getCorreta_alternativa() {
+	public Boolean getCorreta_alternativa() {
 		return correta_alternativa;
 	}
 
-	public void setCorreta_alternativa(boolean correta_alternativa) {
+	public void setCorreta_alternativa(Boolean correta_alternativa) {
 		this.correta_alternativa = correta_alternativa;
 	}
 
@@ -73,4 +72,19 @@ public class Alternativa{
 	public void setQuestao_alternativa(Questao questao_alternativa) {
 		this.questao_alternativa = questao_alternativa;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Alternativa))
+            return false;
+ 
+        final Alternativa alternativa = (Alternativa)object;
+ 
+        if (this.id_alternativa != null && alternativa.getId_alternativa() != null) {
+            return this.id_alternativa.equals(alternativa.getId_alternativa());
+        }
+        return false;
+    }
 }

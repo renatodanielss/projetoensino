@@ -14,13 +14,14 @@ public class ProfessorDAO {
 	
 	public ProfessorDAO()
 	{
-		open();
+		
 	}
 	
 	public boolean inserir(Professor professor)
 	{	
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(professor);
 			this.manager.getTransaction().commit();
@@ -31,6 +32,8 @@ public class ProfessorDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -38,6 +41,7 @@ public class ProfessorDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			this.manager.merge(professor);
 			this.manager.getTransaction().commit();
@@ -48,6 +52,8 @@ public class ProfessorDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -58,6 +64,7 @@ public class ProfessorDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 	 		professor = (Professor)this.manager.createNativeQuery(query, new Professor().getClass()).getSingleResult();
 	 		this.manager.getTransaction().commit();
@@ -66,6 +73,8 @@ public class ProfessorDAO {
 			professor = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 
 		return professor;
@@ -79,6 +88,7 @@ public class ProfessorDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listProfessor = this.manager.createNativeQuery(query, new Professor().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -88,6 +98,8 @@ public class ProfessorDAO {
 			listProfessor = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listProfessor;
@@ -102,6 +114,7 @@ public class ProfessorDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listTextobase = this.manager.createNativeQuery(query, new Object().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -111,6 +124,8 @@ public class ProfessorDAO {
 			listTextobase = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listTextobase;
@@ -129,6 +144,7 @@ public class ProfessorDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(professor.getClass(), professor.getMatricula_professor()));
 			this.manager.getTransaction().commit();
@@ -139,6 +155,8 @@ public class ProfessorDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	

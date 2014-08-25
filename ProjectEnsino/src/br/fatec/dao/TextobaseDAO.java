@@ -12,13 +12,14 @@ public class TextobaseDAO {
 	
 	public TextobaseDAO()
 	{
-		open();
+		
 	}
 	
 	public boolean inserir(Textobase textobase)
 	{	
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		this.manager.persist(textobase);
 			this.manager.getTransaction().commit();
@@ -29,6 +30,8 @@ public class TextobaseDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -88,8 +91,8 @@ public class TextobaseDAO {
             Query q = this.manager.createQuery("select object(c) from tbl_textobase as c");
  
         return q.getResultList();}
-        finally{
-        	this.manager.close();
+        
+        	this.manager.
         }
     }*/
 	
@@ -97,6 +100,7 @@ public class TextobaseDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 			this.manager.merge(textobase);
 			this.manager.getTransaction().commit();
@@ -107,6 +111,8 @@ public class TextobaseDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
@@ -116,6 +122,7 @@ public class TextobaseDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();    
 	 		textobase = this.manager.find(Textobase.class, codigo);
 	 		this.manager.getTransaction().commit();
@@ -124,6 +131,8 @@ public class TextobaseDAO {
 			textobase = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 
 		return textobase;
@@ -137,6 +146,7 @@ public class TextobaseDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -146,6 +156,8 @@ public class TextobaseDAO {
 			listTextobase = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listTextobase;
@@ -159,6 +171,7 @@ public class TextobaseDAO {
 		
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			listTextobase = this.manager.createNativeQuery(query, new Object().getClass()).getResultList();
 			this.manager.getTransaction().commit();
@@ -168,6 +181,8 @@ public class TextobaseDAO {
 			listTextobase = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+		}finally{
+			close();
 		}
 		
 		return listTextobase;
@@ -186,6 +201,7 @@ public class TextobaseDAO {
 	{
 		try
 		{
+			open();
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(textobase.getClass(), textobase.getCodigo_textobase()));
 			this.manager.getTransaction().commit();
@@ -196,16 +212,18 @@ public class TextobaseDAO {
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;
+		}finally{
+			close();
 		}
 	}
 	
-	public void open()
+	private void open()
 	{
 		this.factory = Persistence.createEntityManagerFactory("projectensino");
 		this.manager = factory.createEntityManager();
 	}
 	
-	public void close()
+	private void close()
 	{
 		this.manager.close();
 		this.factory.close();

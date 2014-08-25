@@ -45,6 +45,7 @@ public class QuestaoDAO {
 		{
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
+			ex.printStackTrace();
 			return false;
 		}
 	}
