@@ -240,7 +240,7 @@ public class ProfessorController {
 		String mensagemErro = "";
 		if (professor.getNome_professor().length() == 0)
 			mensagemErro += "<br/>-Preencher campo nome";
-		if (!professor.getEmail_professor().matches("[^@]*[@][a-zA-Z0-9]*[.][^@]*"))
+		if (!professor.getEmail_professor().matches("[^@]*[@][a-zA-Z0-9]*[.][a-zA-Z]*"))
 			mensagemErro += "<br/>-Email inválido";
 		return mensagemErro;
 	}
