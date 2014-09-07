@@ -116,6 +116,8 @@ public class ProfessorController {
 	     this.showNewButton = true;
 	}
 
+	//validar - método cadastrar atualizado. Nesta versão é verificado se oo método cadastrarCampos verificou algum erro, caso sim, este método exibirá os erros na página.
+	//As mesmas alterações deverão ser feitas no método alterar.
 	public void cadastrar() throws IOException
 	{
 		String mensagem = validarCampos(this.newProfessor);
@@ -233,6 +235,7 @@ public class ProfessorController {
 		this.bloquearMatricula = false;
 	}
 	
+	//validar - método para validação de atributos do objeto associado à view
 	public String validarCampos(Professor professor){
 		String mensagemErro = "";
 		if (professor.getNome_professor().length() == 0)

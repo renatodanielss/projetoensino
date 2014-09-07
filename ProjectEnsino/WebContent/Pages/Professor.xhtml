@@ -25,6 +25,7 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <div align="center">
 <table style="width:906px" border="0" align="center" cellpadding="0" cellspacing="0">
+<!-- //validar - componente message é necessário para que a mensagem de erro seja exibida -->
 <tr><td align="left"><p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" escape="false" /></td></tr>
 <tr><td><center><h2>Cadastro de Professor</h2></center></td></tr>
 </table>
@@ -149,6 +150,7 @@ xmlns:p="http://primefaces.org/ui">
 <h:panelGroup id="pnlGrd">
 <table border="0" style="width:900px" align="center">
 	<tr><td align="right" style="width:900px" >
+		<!-- //validar - componente commandButton atualizado para atender às necessidades de validação, a mesma alteração deverá ser feita no botão btnAlterar -->
 		<p:commandButton id="btnSalvar" value="Salvar" action="#{professorController.cadastrar}" rendered="#{professorController.showNewButton}" ajax="false" />&nbsp;
 		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{professorController.alterar}" rendered="#{!professorController.showNewButton}" ajax="false" />&nbsp;
 	</td></tr>
