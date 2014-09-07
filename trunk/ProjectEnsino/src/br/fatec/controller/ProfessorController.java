@@ -1,6 +1,7 @@
 package br.fatec.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import br.edu.fatec.calendar.Date;
 import br.fatec.dao.ProfessorDAO;
 import br.fatec.model.Professor;
 
@@ -118,7 +120,7 @@ public class ProfessorController {
 
 	//validar - método cadastrar atualizado. Nesta versão é verificado se oo método cadastrarCampos verificou algum erro, caso sim, este método exibirá os erros na página.
 	//As mesmas alterações deverão ser feitas no método alterar.
-	public void cadastrar() throws IOException
+	public void cadastrar() throws IOException, ParseException
 	{
 		String mensagem = validarCampos(this.newProfessor);
 		if (mensagem.length() == 0){
@@ -236,10 +238,12 @@ public class ProfessorController {
 	}
 	
 	//validar - método para validação de atributos do objeto associado à view
-	public String validarCampos(Professor professor){
+	public String validarCampos(Professor professor) throws ParseException{
 		String mensagemErro = "";
 		if (professor.getNome_professor().trim().length() == 0)
 			mensagemErro += "<br/>-Preencher campo nome";
+		if (!Date.isDate(professor.getDatanasc_professor()))
+			mensagemErro += "<br/>-Data de nascimento inválida";
 		if (!professor.getEmail_professor().trim().matches("[^@ ]*[@][a-zA-Z0-9]*[.][a-zA-Z.]*"))
 			mensagemErro += "<br/>-Email inválido";
 		return mensagemErro;
