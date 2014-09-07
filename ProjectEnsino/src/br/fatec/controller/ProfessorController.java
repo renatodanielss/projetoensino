@@ -238,9 +238,9 @@ public class ProfessorController {
 	//validar - método para validação de atributos do objeto associado à view
 	public String validarCampos(Professor professor){
 		String mensagemErro = "";
-		if (professor.getNome_professor().length() == 0)
+		if (professor.getNome_professor().trim().length() == 0)
 			mensagemErro += "<br/>-Preencher campo nome";
-		if (!professor.getEmail_professor().matches("[^@]*[@][a-zA-Z0-9]*[.][a-zA-Z]*"))
+		if (!professor.getEmail_professor().trim().matches("[^@ ]*[@][a-zA-Z0-9]*[.][a-zA-Z.]*"))
 			mensagemErro += "<br/>-Email inválido";
 		return mensagemErro;
 	}
