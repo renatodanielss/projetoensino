@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -115,17 +116,25 @@ public class ProfessorController {
 	     this.showNewButton = true;
 	}
 
-	public void cadastrar()
-	{	
-		if (professorDao.inserir(this.newProfessor)){
-			setProfessores(null);
-			System.out.println("Professor inserido com sucesso!");
+	public void cadastrar() throws IOException
+	{
+		String mensagem = validarCampos(this.newProfessor);
+		if (mensagem.length() == 0){
+			if (professorDao.inserir(this.newProfessor)){
+				setProfessores(null);
+				System.out.println("Professor inserido com sucesso!");
+				this.newProfessor = new Professor();
+			}
+			else
+				System.out.println("Erro na inserção!");
+			
 			this.newProfessor = new Professor();
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml");
 		}
-		else
-			System.out.println("Erro na inserção!");
-		
-		this.newProfessor = new Professor();
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
 	}
 	
 	public void iniciaAlterar() throws IOException
@@ -222,5 +231,14 @@ public class ProfessorController {
 	public void liberarCampo()
 	{
 		this.bloquearMatricula = false;
+	}
+	
+	public String validarCampos(Professor professor){
+		String mensagemErro = "";
+		if (professor.getNome_professor().length() == 0)
+			mensagemErro += "<br/>-Preencher campo nome";
+		if (!professor.getEmail_professor().matches("[^@]*[@][a-zA-Z0-9]*[.][^@]*"))
+			mensagemErro += "<br/>-Email inválido";
+		return mensagemErro;
 	}
 }
