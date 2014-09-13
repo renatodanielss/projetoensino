@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 
 import br.edu.fatec.calendar.Date;
 import br.fatec.dao.ProfessorDAO;
+import br.fatec.model.Autor;
 import br.fatec.model.Professor;
 
 @ManagedBean(name="professorController")
@@ -23,6 +24,7 @@ public class ProfessorController {
 	private ProfessorDAO professorDao;
 	private Professor currentProfessor;
 	private Professor newProfessor;
+	private AutorController autorController;
 	private boolean showNewButton;
 	private String pesquisa;
 	private String pesquisarPor;
@@ -125,6 +127,14 @@ public class ProfessorController {
 		String mensagem = validarCampos(this.newProfessor);
 		if (mensagem.length() == 0){
 			if (professorDao.inserir(this.newProfessor)){
+				autorController = new AutorController();
+				autorController.preparaDados();
+				Autor autor = new Autor();
+				autor.setNome_autor(newProfessor.getNome_professor());
+				autorController.setNewAutor(autor);
+				autorController.cadastrar();
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("autorController");
+				
 				setProfessores(null);
 				System.out.println("Professor inserido com sucesso!");
 				this.newProfessor = new Professor();
