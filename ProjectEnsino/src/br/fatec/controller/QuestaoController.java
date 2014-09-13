@@ -117,7 +117,7 @@ public class QuestaoController {
 			setQuestoes(null);
 			setAlternativas(null);
 			System.out.println("Questão inserida com sucesso!");
-			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
 		}
 		else{
 			System.out.println("Erro na inserção!");
