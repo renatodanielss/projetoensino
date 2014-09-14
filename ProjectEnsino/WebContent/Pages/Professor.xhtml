@@ -150,7 +150,8 @@ xmlns:p="http://primefaces.org/ui">
 <h:panelGroup id="pnlGrd">
 <table border="0" style="width:900px" align="center">
 	<tr><td align="right" style="width:900px" >
-		<!-- //validar - componente commandButton atualizado para atender às necessidades de validação, a mesma alteração deverá ser feita no botão btnAlterar -->
+		<!-- //validar - componente commandButton foi atualizado para atender às necessidades de validação, no botão salvar, o atributo action ao invés de chamar uma página, 
+			   chamará o método que antes era chamado pelo ActionListener, e este, por sua vez, foi excluído, a mesma alteração deverá ser feita no botão btnAlterar -->
 		<p:commandButton id="btnSalvar" value="Salvar" action="#{professorController.cadastrar}" rendered="#{professorController.showNewButton}" ajax="false" />&nbsp;
 		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{professorController.alterar}" rendered="#{!professorController.showNewButton}" ajax="false" />&nbsp;
 	</td></tr>
