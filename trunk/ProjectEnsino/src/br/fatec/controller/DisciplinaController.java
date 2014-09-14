@@ -33,6 +33,7 @@ public class DisciplinaController {
 		this.disciplinaDao = new DisciplinaDAO();
 		this.newDisciplina = new Disciplina();
 		this.currentDisciplina = new Disciplina();
+		mostrarSalvar();
 	}
 
 	public List<Disciplina> getDisciplinas() {

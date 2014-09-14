@@ -41,6 +41,7 @@ public class ProfessorController {
 		this.professorDao = new ProfessorDAO();
 		this.newProfessor = new Professor();
 		this.currentProfessor = new Professor();
+		mostrarSalvar();
 		
 		liberarCampo();
 	}

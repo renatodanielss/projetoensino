@@ -30,6 +30,7 @@ public class TextobaseController{
 		this.textoBaseDao = new TextobaseDAO();
 		this.newTextoBase = new Textobase();
 		this.currentTextoBase = new Textobase();
+		mostrarSalvar();
 	}
 	
 	public TextobaseDAO getTextoBaseDao() {
