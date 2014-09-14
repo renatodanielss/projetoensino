@@ -41,6 +41,7 @@ public class ProvaController {
 		this.currentProva = new Prova();
 		this.questoes = null;
 		this.questaoDao = new QuestaoDAO();
+		mostrarSalvar();
 	}
 	
 	public List<Prova> getProvas() {

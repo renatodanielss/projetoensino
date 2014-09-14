@@ -34,6 +34,8 @@ public class AlunoController {
 		this.alunoDao = new AlunoDAO();
 		this.newAluno = new Aluno();
 		this.currentAluno = new Aluno();
+		mostrarSalvar();
+		
 		this.liberarCampoRa();
 	}
 	

@@ -47,6 +47,7 @@ public class RealizarProvaController{
 		this.alunoDao = new AlunoDAO();
 		this.currentProva = new Prova();
 		this.alternativasSelecionadas = new ArrayList<String>();
+		mostrarSalvar();
 	}
 	
 	public RealizarProvaDAO getRealizarProvaDao() {
