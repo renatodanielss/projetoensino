@@ -3,11 +3,14 @@ package br.fatec.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import br.fatec.dao.AssuntoDAO;
 import br.fatec.model.Assunto;
 
@@ -129,14 +132,18 @@ public class AssuntoController {
 	}
 	
 	public void cadastrar()
-	{	
-		if (assuntoDao.inserir(this.newAssunto)){
-			setAssuntos(null);
-			System.out.println("Assunto inserido com sucesso!");
-			this.newAssunto = new Assunto();
+	{	String mensagem = validarCampos(this.newAssunto);
+		if (mensagem.length() == 0)
+		{
+			if (assuntoDao.inserir(this.newAssunto)){
+				setAssuntos(null);
+				System.out.println("Assunto inserido com sucesso!");
+				this.newAssunto = new Assunto();
+			}
+			else
+				System.out.println("Erro na inserção!");
 		}
-		else
-			System.out.println("Erro na inserção!");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
 	}
 	
 	public void iniciaAlterar() throws IOException
@@ -196,15 +203,13 @@ public class AssuntoController {
 		externalContext.redirect("Assunto.xhtml");
 	}
 	
-	/*//validar - método para validação de atributos do objeto associado à view
-	private String validarCampos(Professor professor) throws ParseException{
+	//validar - método para validação de atributos do objeto associado à view
+	private String validarCampos(Assunto assunto){
 		String mensagemErro = "";
-		if (professor.getNome_professor().trim().length() == 0)
+		
+		if (assunto.getNome_assunto().trim().length() == 0)
 			mensagemErro += "<br/>-Preencher campo nome";
-		if (!Date.isDate(professor.getDatanasc_professor()))
-			mensagemErro += "<br/>-Data de nascimento inválida";
-		if (!professor.getEmail_professor().trim().matches("[^@ ]*[@][a-zA-Z0-9]*[.][a-zA-Z.]*"))
-			mensagemErro += "<br/>-Email inválido";
+
 		return mensagemErro;
-	}*/
+	}
 }
