@@ -195,4 +195,16 @@ public class AssuntoController {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Assunto.xhtml");
 	}
+	
+	/*//validar - método para validação de atributos do objeto associado à view
+	private String validarCampos(Professor professor) throws ParseException{
+		String mensagemErro = "";
+		if (professor.getNome_professor().trim().length() == 0)
+			mensagemErro += "<br/>-Preencher campo nome";
+		if (!Date.isDate(professor.getDatanasc_professor()))
+			mensagemErro += "<br/>-Data de nascimento inválida";
+		if (!professor.getEmail_professor().trim().matches("[^@ ]*[@][a-zA-Z0-9]*[.][a-zA-Z.]*"))
+			mensagemErro += "<br/>-Email inválido";
+		return mensagemErro;
+	}*/
 }
