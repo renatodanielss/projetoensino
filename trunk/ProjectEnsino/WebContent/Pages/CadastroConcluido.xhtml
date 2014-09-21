@@ -20,10 +20,10 @@ xmlns:p="http://primefaces.org/ui">
 
 </script>
 </h:head>
-<ui:decorate template="/Template/Template.xhtml">
+<ui:decorate template="#{cadastroConcluidoController.template}">
 <ui:define name="page">
 <h:form enctype="multipart/form-data">
-<div align="center"><font face="Times New Roman" size="6"><p:outputLabel value="#{realizarProvaController.concluirPage}" styleClass="cadastroConcluido" /></font></div>
+<div align="center"><font face="Times New Roman" size="6"><p:outputLabel value="#{cadastroConcluidoController.pageMessage}" styleClass="cadastroConcluido" /></font></div>
 <br />
 <br />
 <br />
