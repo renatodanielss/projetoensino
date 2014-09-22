@@ -18,7 +18,6 @@ import br.fatec.model.Professor;
 
 @ManagedBean(name="professorController")
 @SessionScoped
-
 public class ProfessorController {
 	private List<Professor> professores;
 	private ProfessorDAO professorDao;
@@ -144,8 +143,6 @@ public class ProfessorController {
 				System.out.println("Erro na inserção!");
 			
 			this.newProfessor = new Professor();
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("CadastroConcluido.xhtml");
 		}
 		else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
