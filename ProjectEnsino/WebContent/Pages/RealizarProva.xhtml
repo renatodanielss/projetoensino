@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/favicon.png"/>
+<title>Realizar Prova</title>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49927407-1', 'ctssystem.com.br');
+  ga('send', 'pageview');
+
+</script>
+</h:head>
+<ui:decorate template="/Template/TemplateAluno.xhtml">
+<ui:define name="page">
+<h:form enctype="multipart/form-data">
+<div align="center">
+<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td><center><h2>Realizar Prova</h2></center></td></tr>
+</table>
+<table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td colspan="2" align="left">
+	<p:outputLabel value="Nome: " /><p:outputLabel value="#{realizarProvaController.newRealizarProva.aluno_realizarprova.nome_aluno}" styleClass="realizarProva" /><br />
+	<p:outputLabel value="RA: " /><p:outputLabel value="#{realizarProvaController.newRealizarProva.aluno_realizarprova.ra_aluno}" styleClass="realizarProva" /><br /><br />
+</td></tr>
+<tr><td colspan="2" align="center">
+	<p:outputLabel value="#{realizarProvaController.currentProva.titulo_prova}" /><br /><br />
+</td></tr>
+</table>
+<table width="900" align="center">
+<tr><td align="left">
+<h:panelGroup id="pgQuestoes">
+		<ui:repeat id="rptQuestoes" value="#{realizarProvaController.currentProva.questoes_prova}" varStatus="statusQuestoes">
+			<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].enunciado_questao}" style="width:859px" styleClass="realizarProva" /><br />
+			<ui:repeat id="rptAlternativas" value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
+				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
+			</ui:repeat>
+			<p:outputLabel value="Digite a letra da alternativa correta: " styleClass="realizarProva" /><p:inputText id="selecionarAlternativa" value="#{realizarProvaController.alternativasSelecionadas[statusQuestoes.index]}" style="width: 40px" maxlength="1" />
+			<br />
+			<br />
+		</ui:repeat>
+	</h:panelGroup>
+</td></tr>
+<tr><td></td></tr>
+</table>
+<br />
+<table align="center">
+	<tr><td>
+		<p:commandButton id="btnEncerrarProva" value="Encerrar Prova" action="/Pages/CadastroConcluido.xhtml" actionListener="#{realizarProvaController.encerrarProva}" ajax="false"/>
+	</td></tr>
+</table>
+</div>
+</h:form>
+</ui:define>
+</ui:decorate>
+</html>

@@ -1,0 +1,33 @@
+.menuButtons{
+	width: 119px;
+	background: transparent;
+	color: #FFFFFF;
+	font-family: Microsoft-Yi-Baiti;
+	font-size: 14pt;
+}
+
+.menuButtonsItens{
+	background: #700707;
+	font-family: Microsoft-Yi-Baiti;
+	font-size: 14pt;
+}
+
+.menu{
+	background-image: url("../resources/images/topo.png");
+	height: 500px;
+	width: 900.
+}
+
+.botoesQuestoes{
+	width: 50px;
+	height: 30px;
+	vertical-align: sub;
+}
+
+.cadastroConcluido{
+	font-family: Times-New-Roman;
+}
+
+.realizarProva{
+	font-family: Times-New-Roman;
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/favicon.png"/>
+<title>Aluno</title>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49927407-1', 'ctssystem.com.br');
+  ga('send', 'pageview');
+
+</script>
+</h:head>
+<ui:decorate template="/Template/TemplateAdministracao.xhtml">
+<ui:define name="page">
+<h:form id="form">
+<table align="center" width="900">
+<tr><td>
+
+
+
+<p:dataTable  var="aluno" value="#{alunoController.alunos}" id="alunoTable" rowKey="#{aluno.ra_aluno}"
+		 selectionMode="single" selection="#{alunoController.currentAluno}" style="text-align:center" paginator="true" rows="10"
+		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+		 rowsPerPageTemplate="5,10,15" lazy="true">  
+ 
+	        <f:facet name="header">  
+	            Aluno
+	            <br/>
+	        </f:facet>
+	        
+	        <p:column width="500" headerText="Nome" id="nome_aluno" filterMatchMode="contains">  
+	            #{aluno.nome_aluno}  
+	        </p:column> 
+	        
+	        <p:column width="200" headerText="RA" id="ra_aluno" filterMatchMode="contains">
+	            #{aluno.ra_aluno} 
+	        </p:column>
+	        
+	        <p:column width="200" headerText="CPF" id="cpf_aluno" filterMatchMode="contains">
+	            #{aluno.cpf_aluno} 
+	        </p:column>
+</p:dataTable>
+</td></tr>
+</table>
+<table align="center">
+	<tr><td>
+		<p:commandButton id="btnIncluir" value="Incluir" action="#{alunoController.goToAluno}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="#{alunoController.iniciaAlterar}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnExcluir" value="Excluir" action="#{alunoController.excluir}" ajax="false" />&nbsp;
+	</td></tr>
+</table>
+</h:form>
+</ui:define>
+</ui:decorate>
+</html>
