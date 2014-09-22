@@ -5,6 +5,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+
 @ManagedBean(name="cadastroConcluidoController")
 @RequestScoped
 public class CadastroConcluido {
