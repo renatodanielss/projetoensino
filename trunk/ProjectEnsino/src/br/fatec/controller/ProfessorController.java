@@ -138,6 +138,11 @@ public class ProfessorController {
 				setProfessores(null);
 				System.out.println("Professor inserido com sucesso!");
 				this.newProfessor = new Professor();
+				
+				//validar - importante adicionar o redirect com o parâmetro origin=nome da entidade (letras minúsculas, sem espaços oou caracteres especiais, por exemplo:
+				//"CadastroConcluido.xhtml?faces-redirect=true&origin=textobase".
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=professor");
 			}
 			else
 				System.out.println("Erro na inserção!");
