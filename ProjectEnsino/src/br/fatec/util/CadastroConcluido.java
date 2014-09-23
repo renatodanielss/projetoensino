@@ -3,7 +3,7 @@ package br.fatec.util;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name="cadastroConcluidoController")
 @RequestScoped
@@ -32,49 +32,52 @@ public class CadastroConcluido {
 	}
 	
 	private void configurarPagina(){
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpServletRequest req = (HttpServletRequest)facesContext.getExternalContext().getRequest();
+		/*FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpServletRequest req = (HttpServletRequest)facesContext.getExternalContext().getRequest();*/
 		
-		String requestUrl = "http://localhost:8084/ProjectEnsino/Pages/";
 		String templateUrl = "/Template/";
 		
-		if (req.getRequestURL().toString().equals(requestUrl + "Aluno.xhtml")){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		String redirectValue = (String) facesContext.getExternalContext().getRequestParameterMap().get("origin");
+		switch (redirectValue){
+			
+		case "aluno":
 			setPageMessage("Aluno cadastrado com sucesso");
 			setTemplate(templateUrl + "TemplateAdministracao.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "Assunto.xhtml")){
+			break;
+		case "assunto":
 			setPageMessage("Assunto cadastrado com sucesso");
 			setTemplate(templateUrl + "TemplateProfessor.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "Autor.xhtml")){
+			break;
+		case "autor":
 			setPageMessage("Autor cadastrado com sucesso");
 			setTemplate(templateUrl + "TemplateProfessor.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "Disciplina.xhtml")){
+			break;
+		case "disciplina":
 			setPageMessage("Disciplina cadastrada com sucesso");
 			setTemplate(templateUrl + "TemplateProfessor.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "Professor.xhtml")){
+			break;
+		case "professor":
 			setPageMessage("Professor cadastrado com sucesso");
 			setTemplate(templateUrl + "TemplateAdministracao.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "Prova.xhtml")){
+			break;
+		case "prova":
 			setPageMessage("Prova cadastrada com sucesso");
 			setTemplate(templateUrl + "TemplateProfessor.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "Questao.xhtml")){
+			break;
+		case "questao":
 			setPageMessage("Questão cadastrada com sucesso");
 			setTemplate(templateUrl + "TemplateProfessor.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "RealizarProva.xhtml")){
+			break;
+		case "realizarprova":
 			setPageMessage("Prova realizada com sucesso");
 			setTemplate(templateUrl + "TemplateAluno.xhtml");
-		}
-		else if (req.getRequestURL().toString().equals(requestUrl + "Textobase.xhtml")){
+			break;
+		case "textobase":
 			setPageMessage("Texto base cadastrado com sucesso");
 			setTemplate(templateUrl + "TemplateProfessor.xhtml");
-		}
-		else{
+			break;
+		default:
 			setPageMessage("");
 			setTemplate("");
 		}

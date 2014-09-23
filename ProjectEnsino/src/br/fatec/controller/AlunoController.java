@@ -98,12 +98,15 @@ public class AlunoController {
 		this.bloquearRa = bloquearRa;
 	}
 
-	public void cadastrar()
+	public void cadastrar() throws IOException
 	{	
 		if (alunoDao.inserir(this.newAluno)){
 			setAlunos(null);
 			System.out.println("Aluno inserido com sucesso!");
 			this.newAluno = new Aluno();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=aluno");
 		}
 		else
 			System.out.println("Erro na inserção!");
