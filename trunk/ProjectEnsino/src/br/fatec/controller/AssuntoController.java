@@ -132,7 +132,8 @@ public class AssuntoController {
 	}
 	
 	public void cadastrar()
-	{	String mensagem = validarCampos(this.newAssunto);
+	{	
+		String mensagem = validarCampos(this.newAssunto);
 		if (mensagem.length() == 0)
 		{
 			if (assuntoDao.inserir(this.newAssunto)){
