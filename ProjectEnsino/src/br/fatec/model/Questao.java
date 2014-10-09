@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -43,6 +44,7 @@ public class Questao {
 	@JoinColumn(name="assunto_questao")
 	private Assunto assunto_questao;
 	
+	@OrderBy("id_alternativa")
 	@OneToMany(mappedBy="questao_alternativa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Alternativa> alternativas_questao;
 

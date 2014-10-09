@@ -42,7 +42,7 @@ xmlns:p="http://primefaces.org/ui">
 		<ui:repeat id="rptQuestoes" value="#{realizarProvaController.currentProva.questoes_prova}" varStatus="statusQuestoes">
 			<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].enunciado_questao}" style="width:859px" styleClass="realizarProva" /><br />
 			<ui:repeat id="rptAlternativas" value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
-				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
+				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{realizarProvaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{realizarProvaController.currentProva.questoes_prova[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
 			</ui:repeat>
 			<p:outputLabel value="Digite a letra da alternativa correta: " styleClass="realizarProva" /><p:inputText id="selecionarAlternativa" value="#{realizarProvaController.alternativasSelecionadas[statusQuestoes.index]}" style="width: 40px" maxlength="1" />
 			<br />

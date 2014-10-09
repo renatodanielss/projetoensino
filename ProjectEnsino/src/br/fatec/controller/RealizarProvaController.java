@@ -3,12 +3,13 @@ package br.fatec.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+
 import br.fatec.dao.AlunoDAO;
 import br.fatec.dao.ProvaDAO;
 import br.fatec.dao.RealizarProvaDAO;
@@ -29,7 +30,6 @@ public class RealizarProvaController{
 	private AlunoDAO alunoDao;
 	private ProvaDAO provaDao;
 	private List<String> alternativasSelecionadas;
-	private String concluirPage;
 	private boolean showNewButton;
 	
 	public RealizarProvaController()
@@ -127,23 +127,6 @@ public class RealizarProvaController{
 
 	public void setAlternativasSelecionadas(List<String> alternativasSelecionadas) {
 		this.alternativasSelecionadas = alternativasSelecionadas;
-	}
-	
-	public String getConcluirPage(){
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpServletRequest req = (HttpServletRequest)facesContext.getExternalContext().getRequest();
-		if (req.getRequestURL().toString().equals("http://localhost:8084/ProjectEnsino/Pages/RealizarProva.xhtml")){
-			setConcluirPage("Prova realizada com sucesso");
-			return this.concluirPage;
-		}
-		else{
-			setConcluirPage("Cadastro concluído com Sucesso");
-			return this.concluirPage;
-		}
-	}
-	
-	public void setConcluirPage(String concluirPage) {
-		this.concluirPage = concluirPage;
 	}
 
 	public void cadastrar()
@@ -259,5 +242,10 @@ public class RealizarProvaController{
 		  
 	public void mostrarSalvar(){
 	     this.showNewButton = true;
+	}
+	
+	public char obterLetra(int status){
+		status += 96;
+		return (char)status;
 	}
 }
