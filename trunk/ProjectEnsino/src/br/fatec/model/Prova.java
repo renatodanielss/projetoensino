@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -38,6 +39,7 @@ public class Prova implements Serializable{
 	
 	@ManyToMany
     @JoinTable(name="tbl_questaoprova", joinColumns={@JoinColumn(name="id_prova")}, inverseJoinColumns={@JoinColumn(name="id_questao")})
+	@OrderColumn(name="ordem_questaoprova")
 	private List<Questao> questoes_prova;
 	
 	public Integer getId_prova() {

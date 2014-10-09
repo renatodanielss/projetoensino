@@ -157,6 +157,7 @@ public class QuestaoController {
 			setAlternativas(null);
 			System.out.println("Questão alterada com sucesso!");
 			this.newQuestao = new Questao();
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
 		}
 		else
 			System.out.println("Erro na alteração!");

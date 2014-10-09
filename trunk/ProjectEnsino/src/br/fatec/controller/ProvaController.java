@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import br.fatec.dao.ProvaDAO;
 import br.fatec.dao.QuestaoDAO;
 import br.fatec.model.Prova;
@@ -103,6 +105,7 @@ public class ProvaController {
 			setProvas(null);
 			System.out.println("Prova inserido com sucesso!");
 			this.newProva = new Prova();
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("provaController");
 		}
 		else
 			System.out.println("Erro na inserção!");
@@ -140,6 +143,7 @@ public class ProvaController {
 		}
 		else
 			System.out.println("Erro na alteração!");
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("provaController");
 	}
 	
 	public void excluir() throws IOException
