@@ -188,8 +188,10 @@ public class ProfessorController {
 		}
 	}
 	
-	public void alterar()
+	public void alterar() 
 	{	
+	//	String mensagem = validarCampos(this.newProfessor);
+	//	if (mensagem.length() == 0){
 		if (professorDao.alterar(this.newProfessor)){
 			setProfessores(null);
 			System.out.println("Professor alterado com sucesso!");
@@ -197,6 +199,10 @@ public class ProfessorController {
 		}
 		else
 			System.out.println("Erro na alteração!");
+	//	}
+	//	else{
+			
+	//	}
 	}
 	
 	public void excluir() throws IOException

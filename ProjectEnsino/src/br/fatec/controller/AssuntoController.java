@@ -1,6 +1,7 @@
 package br.fatec.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -131,20 +132,28 @@ public class AssuntoController {
 		this.textobaseAssuntos = assuntoDao.listar(textobaseController.getNewTextoBase().getDisciplina_textobase());
 	}
 	
-	public void cadastrar()
+	public void cadastrar() throws IOException, ParseException
 	{	
+
 		String mensagem = validarCampos(this.newAssunto);
+	
 		if (mensagem.length() == 0)
 		{
 			if (assuntoDao.inserir(this.newAssunto)){
 				setAssuntos(null);
 				System.out.println("Assunto inserido com sucesso!");
 				this.newAssunto = new Assunto();
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=assunto");
 			}
 			else
 				System.out.println("Erro na inserção!");
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		else
+		{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
 	}
 	
 	public void iniciaAlterar() throws IOException
@@ -167,15 +176,29 @@ public class AssuntoController {
 		}
 	}
 	
-	public void alterar()
+	public void alterar() throws IOException, ParseException
 	{	
-		if (assuntoDao.alterar(this.newAssunto)){
-			setAssuntos(null);
-			System.out.println("Assunto alterado com sucesso!");
-			this.newAssunto = new Assunto();
+		String mensagem = validarCampos(this.newAssunto);
+		
+		if (mensagem.length() == 0)
+		{
+			if (assuntoDao.alterar(this.newAssunto))
+			{
+				setAssuntos(null);
+				System.out.println("Assunto alterado com sucesso!");
+				this.newAssunto = new Assunto();
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();	
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=assunto");
+				
+			}
+			else
+				System.out.println("Erro na alteração!");
 		}
 		else
-			System.out.println("Erro na alteração!");
+		{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
 	}
 	
 	public void excluir() throws IOException
@@ -210,7 +233,9 @@ public class AssuntoController {
 		
 		if (assunto.getNome_assunto().trim().length() == 0)
 			mensagemErro += "<br/>-Preencher campo nome";
-
+		if (assunto.getIdDisciplina_assunto() == 0)	
+			mensagemErro += "<br/>-Preencher campo Disciplina";
+		
 		return mensagemErro;
 	}
 }
