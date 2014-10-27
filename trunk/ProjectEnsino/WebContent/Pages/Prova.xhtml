@@ -25,10 +25,14 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<!-- //validar - componente message é necessário para que a mensagem de erro seja exibida -->
+<tr><td align="left"><p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" escape="false" /></td></tr>
 <tr><td><center><h2>Cadastro de Prova</h2></center></td></tr>
 <tr><td align="left"><h3>Detalhes da Prova</h3></td></tr>
 </table>
+
 <table width="900" border="0">
+
 <tr>
 	<td align="left" width="70%"><h:outputText value="Título:"/></td>
 </tr>
@@ -68,7 +72,8 @@ xmlns:p="http://primefaces.org/ui">
 	</h:panelGroup>
 	</td></tr>
 	<tr><td align="right">
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" rendered="#{provaController.showNewButton}" ajax="false"/>
+		<p:commandButton id="btnSalvar" value="Salvar" action="#{provaController.cadastrar}" rendered="#{provaController.showNewButton}" ajax="false"/>
+		<!--<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" rendered="#{provaController.showNewButton}" ajax="false"/> -->
 		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{provaController.alterar}" rendered="#{!provaController.showNewButton}" ajax="false" />
 	</td></tr>
 </table>
