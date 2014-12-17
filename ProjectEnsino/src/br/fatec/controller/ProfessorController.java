@@ -120,8 +120,8 @@ public class ProfessorController {
 	     this.showNewButton = true;
 	}
 
-	//validar - método cadastrar atualizado. Nesta versão é verificado se o método cadastrarCampos verificou algum erro, caso sim, este método exibirá os erros na página.
-	//As mesmas alterações deverão ser feitas no método alterar.
+	//validar - mï¿½todo cadastrar atualizado. Nesta versï¿½o ï¿½ verificado se o mï¿½todo cadastrarCampos verificou algum erro, caso sim, este mï¿½todo exibirï¿½ os erros na pï¿½gina.
+	//As mesmas alteraï¿½ï¿½es deverï¿½o ser feitas no mï¿½todo alterar.
 	public void cadastrar() throws IOException, ParseException
 	{
 		String mensagem = validarCampos(this.newProfessor);
@@ -139,13 +139,13 @@ public class ProfessorController {
 				System.out.println("Professor inserido com sucesso!");
 				this.newProfessor = new Professor();
 				
-				//validar - importante adicionar o redirect com o parâmetro origin=nome da entidade (letras minúsculas, sem espaços oou caracteres especiais, por exemplo:
+				//validar - importante adicionar o redirect com o parï¿½metro origin=nome da entidade (letras minï¿½sculas, sem espaï¿½os oou caracteres especiais, por exemplo:
 				//"CadastroConcluido.xhtml?faces-redirect=true&origin=textobase".
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=professor");
 			}
 			else
-				System.out.println("Erro na inserção!");
+				System.out.println("Erro na inserÃ§Ã£o!");
 			
 			this.newProfessor = new Professor();
 		}
@@ -188,21 +188,21 @@ public class ProfessorController {
 		}
 	}
 	
-	public void alterar() 
-	{	
-	//	String mensagem = validarCampos(this.newProfessor);
-	//	if (mensagem.length() == 0){
-		if (professorDao.alterar(this.newProfessor)){
-			setProfessores(null);
-			System.out.println("Professor alterado com sucesso!");
-			this.newProfessor = new Professor();
+	public void alterar() throws IOException, ParseException
+	{
+		String mensagem = validarCampos(this.newProfessor);
+		if (mensagem.length() == 0){
+			if (professorDao.alterar(this.newProfessor)){
+				setProfessores(null);
+				System.out.println("Professor alterado com sucesso!");
+				this.newProfessor = new Professor();
+			}
+			else
+				System.out.println("Erro na alteraÃ§Ã£o!");
+			}
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
 		}
-		else
-			System.out.println("Erro na alteração!");
-	//	}
-	//	else{
-			
-	//	}
 	}
 	
 	public void excluir() throws IOException
@@ -214,7 +214,7 @@ public class ProfessorController {
 			System.out.println("Professor excluido com sucesso!");
 		}
 		else
-			System.out.println("Erro na exclusão!");
+			System.out.println("Erro na exclusï¿½o!");
 	}
 	
 	private void limparCampos(){
@@ -256,15 +256,15 @@ public class ProfessorController {
 		this.bloquearMatricula = false;
 	}
 	
-	//validar - método para validação de atributos do objeto associado à view, este método será chamado pelo método cadastrar e alterar
+	//validar - mï¿½todo para validaï¿½ï¿½o de atributos do objeto associado ï¿½ view, este mï¿½todo serï¿½ chamado pelo mï¿½todo cadastrar e alterar
 	public String validarCampos(Professor professor) throws ParseException{
 		String mensagemErro = "";
 		if (professor.getNome_professor().trim().length() == 0)
 			mensagemErro += "<br/>-Preencher campo nome";
 		if (!Date.isDate(professor.getDatanasc_professor()))
-			mensagemErro += "<br/>-Data de nascimento inválida";
+			mensagemErro += "<br/>-Data de nascimento invÃ¡lida";
 		if (!professor.getEmail_professor().trim().matches("[^@ ]*[@][a-zA-Z0-9]*[.][a-zA-Z.]*"))
-			mensagemErro += "<br/>-Email inválido";
+			mensagemErro += "<br/>-Email invÃ¡lido";
 		return mensagemErro;
 	}
 }
