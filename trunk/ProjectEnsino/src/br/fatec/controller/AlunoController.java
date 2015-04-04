@@ -145,12 +145,15 @@ public class AlunoController {
 		}
 	}
 	
-	public void alterar()
+	public void alterar() throws IOException
 	{	
 		if (alunoDao.alterar(this.newAluno)){
 			setAlunos(null);
 			System.out.println("Aluno alterado com sucesso!");
 			this.newAluno = new Aluno();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=aluno");
 		}
 		else
 			System.out.println("Erro na alteração!");

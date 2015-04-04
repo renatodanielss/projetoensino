@@ -103,12 +103,15 @@ public class DisciplinaController {
 		}
 	}
 	
-	public void alterar()
+	public void alterar() throws IOException
 	{	
 		if (disciplinaDao.alterar(this.newDisciplina)){
 			setDisciplinas(null);
 			System.out.println("Disciplina alterada com sucesso!");
 			this.newDisciplina = new Disciplina();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=disciplina");
 		}
 		else
 			System.out.println("Erro na alteração!");
