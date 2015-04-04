@@ -73,8 +73,7 @@ xmlns:p="http://primefaces.org/ui">
 	</td></tr>
 	<tr><td align="right">
 		<p:commandButton id="btnSalvar" value="Salvar" action="#{provaController.cadastrar}" rendered="#{provaController.showNewButton}" ajax="false"/>
-		<!--<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{provaController.cadastrar}" rendered="#{provaController.showNewButton}" ajax="false"/> -->
-		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{provaController.alterar}" rendered="#{!provaController.showNewButton}" ajax="false" />
+		<p:commandButton id="btnAlterar" value="Alterar" action="#{provaController.alterar}" rendered="#{!provaController.showNewButton}" ajax="false" />
 	</td></tr>
 </table>
 </div>

@@ -120,7 +120,7 @@ public class ProfessorController {
 	     this.showNewButton = true;
 	}
 
-	//validar - mï¿½todo cadastrar atualizado. Nesta versï¿½o ï¿½ verificado se o mï¿½todo cadastrarCampos verificou algum erro, caso sim, este mï¿½todo exibirï¿½ os erros na pï¿½gina.
+	//validar - método cadastrar atualizado. Nesta versï¿½o ï¿½ verificado se o mï¿½todo cadastrarCampos verificou algum erro, caso sim, este mï¿½todo exibirï¿½ os erros na pï¿½gina.
 	//As mesmas alteraï¿½ï¿½es deverï¿½o ser feitas no mï¿½todo alterar.
 	public void cadastrar() throws IOException, ParseException
 	{
@@ -132,7 +132,7 @@ public class ProfessorController {
 				Autor autor = new Autor();
 				autor.setNome_autor(newProfessor.getNome_professor());
 				autorController.setNewAutor(autor);
-				autorController.cadastrar();
+				autorController.cadastrarProfessor();
 				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("autorController");
 				
 				setProfessores(null);

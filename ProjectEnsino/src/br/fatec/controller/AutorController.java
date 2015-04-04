@@ -91,7 +91,21 @@ public class AutorController {
 		this.pesquisarPor = pesquisarPor;
 	}
 	
-	public void cadastrar()
+	public void cadastrar() throws IOException
+	{	
+		if (autorDao.inserir(this.newAutor)){
+			setAutores(null);
+			System.out.println("Autor inserido com sucesso!");
+			this.newAutor = new Autor();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=autor");
+		}
+		else
+			System.out.println("Erro na inserção!");
+	}
+	
+	public void cadastrarProfessor() throws IOException
 	{	
 		if (autorDao.inserir(this.newAutor)){
 			setAutores(null);

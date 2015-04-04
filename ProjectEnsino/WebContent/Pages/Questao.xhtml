@@ -85,8 +85,8 @@ xmlns:p="http://primefaces.org/ui">
 </td></tr>
 <tr><td align="right" colspan="2">
 	<br />
-	<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{questaoController.cadastrar}" rendered="#{questaoController.showNewButton}" ajax="false" />
-	<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{questaoController.alterar}" rendered="#{!questaoController.showNewButton}" ajax="false" />	
+	<p:commandButton id="btnSalvar" value="Salvar" action="#{questaoController.cadastrar}" rendered="#{questaoController.showNewButton}" ajax="false" />
+	<p:commandButton id="btnAlterar" value="Alterar" action="#{questaoController.alterar}" rendered="#{!questaoController.showNewButton}" ajax="false" />	
 </td></tr>
 </table> 
 </div>

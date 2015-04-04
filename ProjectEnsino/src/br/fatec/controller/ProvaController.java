@@ -97,7 +97,7 @@ public class ProvaController {
 		this.questaoDao = questaoDao;
 	}
 
-	public void cadastrar()
+	public void cadastrar() throws IOException
 	{
 		
 		this.newProva.setQuestoes_prova(this.questoes);
@@ -106,6 +106,9 @@ public class ProvaController {
 			System.out.println("Prova inserido com sucesso!");
 			this.newProva = new Prova();
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("provaController");
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=prova");
 		}
 		else
 			System.out.println("Erro na inserção!");
