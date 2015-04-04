@@ -136,13 +136,16 @@ public class ProvaController {
 		}
 	}
 	
-	public void alterar()
+	public void alterar() throws IOException
 	{
 		this.newProva.setQuestoes_prova(this.questoes);
 		if (provaDao.alterar(this.newProva)){
 			setProvas(null);
 			System.out.println("Prova alterada com sucesso!");
 			this.newProva = new Prova();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=prova");
 		}
 		else
 			System.out.println("Erro na alteração!");

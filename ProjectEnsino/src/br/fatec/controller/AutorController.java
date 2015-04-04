@@ -134,12 +134,15 @@ public class AutorController {
 		}
 	}
 	
-	public void alterar()
+	public void alterar() throws IOException
 	{	
 		if (autorDao.alterar(this.newAutor)){
 			setAutores(null);
 			System.out.println("Autor alterado com sucesso!");
 			this.newAutor = new Autor();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=autor");
 		}
 		else
 			System.out.println("Erro na alteração!");

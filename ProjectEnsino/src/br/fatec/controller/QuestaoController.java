@@ -153,7 +153,7 @@ public class QuestaoController {
 		}
 	}
 	
-	public void alterar()
+	public void alterar() throws IOException
 	{
 		this.newQuestao.setAlternativas_questao(this.alternativas);
 		if (questaoDao.alterar(this.newQuestao)){
@@ -163,6 +163,9 @@ public class QuestaoController {
 			this.newQuestao = new Questao();
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
 			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("realizarProvaController");
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=questao");
 		}
 		else
 			System.out.println("Erro na alteração!");

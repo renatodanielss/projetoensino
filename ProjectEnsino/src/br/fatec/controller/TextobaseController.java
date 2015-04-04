@@ -105,12 +105,15 @@ public class TextobaseController{
 		}
 	}
 	
-	public void alterar()
+	public void alterar() throws IOException
 	{	
 		if (textoBaseDao.alterar(this.newTextoBase)){
 			setTextosBases(null);
 			System.out.println("Textobase alterado com sucesso!");
 			this.newTextoBase = new Textobase();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=textobase");
 		}
 		else
 			System.out.println("Erro na alteração!");

@@ -196,6 +196,9 @@ public class ProfessorController {
 				setProfessores(null);
 				System.out.println("Professor alterado com sucesso!");
 				this.newProfessor = new Professor();
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=professor");
 			}
 			else
 				System.out.println("Erro na alteração!");
