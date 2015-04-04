@@ -150,7 +150,6 @@ xmlns:p="http://primefaces.org/ui">
 <h:panelGroup id="pnlGrd">
 <table border="0" style="width:900px" align="center">
 	<tr><td align="right" style="width:900px" >
-		<!-- //validar - Colocar o valor do actionListener no action, excluir actionListener, e fazer a mesma alteração no botão alterar -->
 		<p:commandButton id="btnSalvar" value="Salvar" action="#{professorController.cadastrar}" rendered="#{professorController.showNewButton}" ajax="false" />&nbsp;
 		<p:commandButton id="btnAlterar" value="Alterar" action="#{professorController.alterar}"  rendered="#{!professorController.showNewButton}" ajax="false" />&nbsp;
 	</td></tr>

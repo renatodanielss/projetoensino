@@ -203,7 +203,7 @@ public class RealizarProvaController{
 		}
 	}
 	
-	public void encerrarProva(){
+	public void encerrarProva() throws IOException{
 		ArrayList<String> altsQuests = new ArrayList<String>();
 		int i = 1;
 		for (Questao quest : this.currentProva.getQuestoes_prova()){
@@ -225,6 +225,9 @@ public class RealizarProvaController{
 		}
 		this.getNewRealizarProva().setNota_realizarprova(nota);
 		this.cadastrar();
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=realizarprova");
 	}
 	
 	public void apertarBotao(){

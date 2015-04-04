@@ -71,12 +71,15 @@ public class DisciplinaController {
 		this.newDisciplina = newDisciplina;
 	}
 	
-	public void cadastrar()
+	public void cadastrar() throws IOException
 	{	
 		if (disciplinaDao.inserir(this.newDisciplina)){
 			setDisciplinas(null);
 			System.out.println("Disciplina inserida com sucesso!");
 			this.newDisciplina = new Disciplina();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=disciplina");
 		}
 		else
 			System.out.println("Erro na inserção!");

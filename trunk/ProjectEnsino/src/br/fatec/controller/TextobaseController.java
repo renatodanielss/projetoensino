@@ -70,12 +70,15 @@ public class TextobaseController{
 		this.textosBases = TextobaseList;
 	}
 	
-	public void cadastrar()
+	public void cadastrar() throws IOException
 	{
 		if (textoBaseDao.inserir(this.newTextoBase)){
 			setTextosBases(null);
 			System.out.println("Texto base inserido com sucesso!");
 			this.newTextoBase = new Textobase();
+			
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=textobase");
 		}
 		else
 			System.out.println("Erro na inserção!");

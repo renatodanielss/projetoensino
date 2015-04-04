@@ -39,8 +39,8 @@ xmlns:p="http://primefaces.org/ui">
 <h:panelGroup id="pnlGrd">
 <table border="0" style="width:900px" align="center">
 	<tr><td align="right" style="width:900px" >
-		<p:commandButton id="btnSalvar" value="Salvar" action="CadastroConcluido.xhtml" actionListener="#{autorController.cadastrar}" rendered="#{autorController.showNewButton}" ajax="false"/>&nbsp;
-		<p:commandButton id="btnAlterar" value="Alterar" action="CadastroConcluido.xhtml" actionListener="#{autorController.alterar}" rendered="#{!autorController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
+		<p:commandButton id="btnSalvar" value="Salvar" action="#{autorController.cadastrar}" rendered="#{autorController.showNewButton}" ajax="false"/>&nbsp;
+		<p:commandButton id="btnAlterar" value="Alterar" action="#{autorController.alterar}" rendered="#{!autorController.showNewButton}" ajax="false"></p:commandButton>&nbsp;
 	</td></tr>
 </table>
 </h:panelGroup>
