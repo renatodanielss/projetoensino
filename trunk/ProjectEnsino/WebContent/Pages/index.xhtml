@@ -25,13 +25,19 @@ xmlns:p="http://primefaces.org/ui">
 <h:form id="form">
 <table align="center" width="900">
 <tr><td>
-<a href="/ProjectEnsino/Pages/Professorlist.xhtml">Área da Administração</a>
+<p:commandLink id="adm" action="/Pages/Professorlist.xhtml">
+	<h:outputText value="Área da Administração" />
+</p:commandLink>
 </td></tr>
 <tr><td>
-<a href="/ProjectEnsino/Pages/Disciplinalist.xhtml">Área do Professor</a>
+<p:commandLink id="prof" action="/Pages/Disciplinalist.xhtml">
+	<h:outputText value="Área do Professor" />
+</p:commandLink>
 </td></tr>
 <tr><td>
-<a href="/ProjectEnsino/Pages/SelecionarProva.xhtml">Área do Aluno</a>
+<p:commandLink id="alu" action="/Pages/SelecionarProva.xhtml">
+	<h:outputText value="Área do Aluno" />
+</p:commandLink>
 </td></tr>
 </table>
 </h:form>
