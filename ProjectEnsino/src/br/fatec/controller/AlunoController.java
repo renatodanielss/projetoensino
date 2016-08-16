@@ -98,7 +98,7 @@ public class AlunoController {
 		this.bloquearRa = bloquearRa;
 	}
 
-	public void cadastrar() throws IOException
+	public void  s() throws IOException
 	{	
 		if (alunoDao.inserir(this.newAluno)){
 			setAlunos(null);
