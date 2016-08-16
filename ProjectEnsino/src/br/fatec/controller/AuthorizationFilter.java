@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebFilter("/*")
+@WebFilter("/Pages/*")
 public class AuthorizationFilter implements Filter {
 
     private static final String AJAX_REDIRECT_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession(false);
-        String loginURL = request.getContextPath() + "/Login.jsp";
+        String loginURL = request.getContextPath() + "/Pages/Login.xhtml";
 
         boolean loggedIn = (session != null) && (session.getAttribute("user") != null);
         boolean loginRequest = request.getRequestURI().equals(loginURL);
