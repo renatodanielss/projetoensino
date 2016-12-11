@@ -1,4 +1,4 @@
-package br.fatec.controller;
+package br.fatec.util;
 import java.io.IOException;
 
 import javax.faces.application.ResourceHandler;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebFilter("/Pages/*")
-public class AuthorizationFilter implements Filter {
+@WebFilter("/Admin/*")
+public class AdminFilter implements Filter {
 
     private static final String AJAX_REDIRECT_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         + "<partial-response><redirect url=\"%s\"></redirect></partial-response>";
@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession(false);
-        String loginURL = request.getContextPath() + "/Pages/Login.xhtml";
+        String loginURL = request.getContextPath() + "/Pages/LoginAdministracao.xhtml";
 
         boolean loggedIn = (session != null) && (session.getAttribute("user") != null);
         boolean loginRequest = request.getRequestURI().equals(loginURL);
@@ -37,17 +37,30 @@ public class AuthorizationFilter implements Filter {
                 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
                 response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
                 response.setDateHeader("Expires", 0); // Proxies.
+                
+                System.out.println("Entrou Expirar");
             }
 
+            System.out.println("Entrou chain.doFilter(request, response)");
             chain.doFilter(request, response); // So, just continue request.
         }
         else if (ajaxRequest) {
             response.setContentType("text/xml");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().printf(AJAX_REDIRECT_XML, loginURL); // So, return special XML response instructing JSF ajax to send a redirect.
+            System.out.println("Entrou else ajaxRequest");
         }
         else {
+        	//String from = URLEncoder.encode(request.getRequestURI(), "UTF-8");
+        	String from = request.getRequestURI();
+        	
+        	if (request.getQueryString() != null) {
+        	    from += "?" + request.getQueryString();
+        	}
+        	
+        	request.getSession().setAttribute("from", from);
             response.sendRedirect(loginURL); // So, just perform standard synchronous redirect.
+            System.out.println("Entrou else");
         }
     }
 

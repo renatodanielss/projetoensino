@@ -2,43 +2,32 @@ package br.fatec.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="tbl_turma")
+//@Entity
+//@Table(name="tbl_turma")
 public class Turma {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TURMA_ID")
-	@SequenceGenerator(name="TURMA_ID", sequenceName="TURMA_SEQ", allocationSize=1)
-	@Column(name="id_turma")
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TURMA_ID")
+	//@SequenceGenerator(name="TURMA_ID", sequenceName="TURMA_SEQ", allocationSize=1)
+	//@Column(name="id_turma")
 	private Integer id_turma;
 	
-	@Column(name="nome_turma")
+	//@Column(name="nome_turma")
 	private String nome_turma;
 	
-	@Column(name="dataInicio_turma")
+	//@Column(name="dataInicio_turma")
 	private String dataInicio_turma;
 	
-	@Column(name="dataFim_turma")
+	//@Column(name="dataFim_turma")
 	private String dataFim_turma;
 	
-	@Column(name="ativa_turma")
+	//@Column(name="ativa_turma")
 	private Boolean ativa_turma;
 	
-	@Column(name="qtdAlunos_turma")
+	//@Column(name="qtdAlunos_turma")
 	private Integer qtdAlunos_turma;
 	
-	@ManyToMany
-    @JoinTable(name="tbl_alunoturma", joinColumns={@JoinColumn(name="id_turma")}, inverseJoinColumns={@JoinColumn(name="id_aluno")})
+	//@ManyToMany
+	//@JoinTable(name="tbl_alunoturma", joinColumns={@JoinColumn(name="id_turma")}, inverseJoinColumns={@JoinColumn(name="id_aluno")})
 	private List<Aluno> alunos;
 	
 	public Integer getId_turma() {

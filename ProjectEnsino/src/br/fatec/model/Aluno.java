@@ -1,58 +1,58 @@
 package br.fatec.model;
 
-import javax.persistence.Column;
+/*import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Table;*/
 
-@Entity
-@Table(name="tbl_aluno")
+//@Entity
+//@Table(name="tbl_aluno")
 
 public class Aluno {
-	@Id
-	@Column(name="ra_aluno")
+	//@Id
+	//@Column(name="ra_aluno")
 	private String ra_aluno;
 	
-	@Column(name="nome_aluno")
+	//@Column(name="nome_aluno")
 	private String nome_aluno;
 	
-	@Column(name="cpf_aluno")
+	//@Column(name="cpf_aluno")
 	private String cpf_aluno;
 	
-	@Column(name="datanasc_aluno")
+	//@Column(name="datanasc_aluno")
 	private String datanasc_aluno;
 		
-	@Column(name="telefone_aluno")
+	//@Column(name="telefone_aluno")
 	private String telefone_aluno;
 	
-	@Column(name="celular_aluno")
+	//@Column(name="celular_aluno")
 	private String celular_aluno;
 	
-	@Column(name="sexo_aluno")
+	//@Column(name="sexo_aluno")
 	private Boolean sexo_aluno;
 	
-	@Column(name="logradouro_aluno")
+	//@Column(name="logradouro_aluno")
 	private String logradouro_aluno;
 	
-	@Column(name="numero_aluno")
+	//@Column(name="numero_aluno")
 	private String numero_aluno;
 	
-	@Column(name="complemento_aluno")
+	//@Column(name="complemento_aluno")
 	private String complemento_aluno;
 	
-	@Column(name="bairro_aluno")
+	//@Column(name="bairro_aluno")
 	private String bairro_aluno;
 	
-	@Column(name="cidade_aluno")
+	//@Column(name="cidade_aluno")
 	private String cidade_aluno;
 	
-	@Column(name="uf_aluno")
+	//@Column(name="uf_aluno")
 	private String uf_aluno;
 	
-	@Column(name="cep_aluno")
+	//@Column(name="cep_aluno")
 	private String cep_aluno;
 	
-	@Column(name="email_aluno")
+	//@Column(name="email_aluno")
 	private String email_aluno;
 
 	public String getRa_aluno() {

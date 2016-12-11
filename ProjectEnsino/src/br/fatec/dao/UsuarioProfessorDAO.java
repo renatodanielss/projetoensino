@@ -1,29 +1,27 @@
 package br.fatec.dao;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import br.fatec.model.UsuarioProfessor;
 
-import br.fatec.model.Usuario;
-
-public class UsuarioDAO {
+public class UsuarioProfessorDAO {
 	private EntityManagerFactory factory;
 	private EntityManager manager;
 	
-	public UsuarioDAO()
+	public UsuarioProfessorDAO()
 	{
 		
 	}
 	
-	public boolean inserir(Usuario usuario)
+	public boolean inserir(UsuarioProfessor usuarioProfessor)
 	{	
 		try
 		{
 			open();
 			this.manager.getTransaction().begin();    
-	 		this.manager.persist(usuario);
+	 		this.manager.persist(usuarioProfessor);
 			this.manager.getTransaction().commit();
 			return true;
 		}
@@ -37,13 +35,13 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public boolean alterar(Usuario usuario)
+	public boolean alterar(UsuarioProfessor usuarioProfessor)
 	{
 		try
 		{
 			open();
 			this.manager.getTransaction().begin();    
-			this.manager.merge(usuario);
+			this.manager.merge(usuarioProfessor);
 			this.manager.getTransaction().commit();
 			return true;
 		}
@@ -57,35 +55,61 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public Usuario buscar(String usuario)
+	public UsuarioProfessor buscar(String username)
 	{
-		Usuario Usuario = null;
-
+		UsuarioProfessor usuarioProfessor = null;
+		String query = "select * from tbl_user_professor where username_user = '" + username + "'";
+		
 		try
 		{
 			open();
 			this.manager.getTransaction().begin();
-			Usuario = this.manager.find(Usuario.class, usuario); 
+	 		usuarioProfessor = (UsuarioProfessor)this.manager.createNativeQuery(query, new UsuarioProfessor().getClass()).getSingleResult();
 	 		this.manager.getTransaction().commit();
 		}
 		catch(Exception ex){
-			Usuario = null;
+			usuarioProfessor = null;
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 		}finally{
 			close();
 		}
 
-		return Usuario;
+		return usuarioProfessor;
 	}
 	
-	public boolean excluir(Usuario usuario)
+	@SuppressWarnings("unchecked")
+	public List<UsuarioProfessor> listar()
+	{		
+		List<UsuarioProfessor> listUsuarioProfessor = null;
+		String query = "select * from tbl_user_professor";
+		
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listUsuarioProfessor = this.manager.createNativeQuery(query, new UsuarioProfessor().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listUsuarioProfessor = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listUsuarioProfessor;
+	}
+	
+	public boolean excluir(UsuarioProfessor usuarioProfessor)
 	{
 		try
 		{
 			open();
 			this.manager.getTransaction().begin();
-			this.manager.remove(manager.getReference(usuario.getClass(), usuario.getUsuario()));
+			this.manager.remove(manager.getReference(usuarioProfessor.getClass(), usuarioProfessor.getUsuario()));
 			this.manager.getTransaction().commit();
 			return true;
 		}

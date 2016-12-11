@@ -10,16 +10,16 @@
    <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
    <!-- entidades mapeadas -->
+   <class>br.fatec.model.UsuarioProfessor</class>
+   <class>br.fatec.model.UsuarioAdmin</class>
    <class>br.fatec.model.Textobase</class>
    <class>br.fatec.model.Disciplina</class>
    <class>br.fatec.model.Assunto</class>
    <class>br.fatec.model.Professor</class>
-   <class>br.fatec.model.Aluno</class>
    <class>br.fatec.model.Prova</class>
    <class>br.fatec.model.Autor</class>
    <class>br.fatec.model.Questao</class>
    <class>br.fatec.model.Alternativa</class>
-   <class>br.fatec.model.RealizarProva</class>
 
    <properties>
   <!-- dados da conexao -->

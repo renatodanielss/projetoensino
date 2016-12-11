@@ -17,13 +17,19 @@ xmlns:p="http://primefaces.org/ui">
     <p:menu overlay="true" trigger="dynaButtonProfessor" my="left top" at="left bottom" styleClass="menuButtonsItens">
             <p:menuitem value="Consultar notas" url="/Pages/RealizarProvalist.xhtml" icon="ui-icon-star" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
     </p:menu>
-	<p:button id="dynaButtonQuestao" value="Questão" href="/Pages/Questaolist.xhtml" styleClass="menuButtons" />
-	<p:button id="dynaButtonDisciplina" value="Disciplina" href="/Pages/Disciplinalist.xhtml" styleClass="menuButtons" />
-    <p:button id="dynaButtonAssunto" value="Assunto" href="/Pages/Assuntolist.xhtml" styleClass="menuButtons" />
-	<p:button id="dynaButtonTextobase" value="Texto Base" href="/Pages/Textobaselist.xhtml" style="width:154px" styleClass="menuButtons" />
-	<p:button id="dynaButtonAutor" value="Autor" href="/Pages/Autorlist.xhtml" styleClass="menuButtons" />
-	<p:button id="dynaButtonProva" value="Prova" href="/Pages/Provalist.xhtml" styleClass="menuButtons" />
+	<p:button id="dynaButtonQuestao" value="Questão" href="/Professor/Questaolist.xhtml" styleClass="menuButtons" />
+	<p:button id="dynaButtonDisciplina" value="Disciplina" href="/Professor/Disciplinalist.xhtml" styleClass="menuButtons" />
+    <p:button id="dynaButtonAssunto" value="Assunto" href="/Professor/Assuntolist.xhtml" styleClass="menuButtons" />
+	<p:button id="dynaButtonTextobase" value="Texto Base" href="/Professor/Textobaselist.xhtml" style="width:154px" styleClass="menuButtons" />
+	<p:button id="dynaButtonAutor" value="Autor" href="/Professor/Autorlist.xhtml" styleClass="menuButtons" />
+	<p:button id="dynaButtonProva" value="Prova" href="/Professor/Provalist.xhtml" styleClass="menuButtons" />
 </td></tr>
+<tr>
+	<td align="right">
+		<p:outputLabel style="font-size: 16px; font-family: Arial; font-weight: bold;" value="Logado como: #{usuarioProfessorController.usuarioProfessor.usuario} | " rendered="#{usuarioProfessorController.isLogged}" />
+		<h:commandLink id="logoutButton" style="font-size: 16px; font-family: Arial;" value="Logout" action="#{usuarioProfessorController.logout}" rendered="#{usuarioProfessorController.isLogged}" />
+	</td>
+</tr>
 </table>
 <br />
 </ui:insert>

@@ -1,6 +1,6 @@
 package br.fatec.model;
 
-import javax.persistence.Column;
+/*import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,26 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.Table;*/
 
-@Entity
-@Table(name="tbl_realizarprova")
+//@Entity
+//@Table(name="tbl_realizarprova")
 public class RealizarProva {
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REALIZARPROVA_ID")
-	@SequenceGenerator(name="REALIZARPROVA_ID", sequenceName="REALIZARPROVA_SEQ", allocationSize=1)
-	@Column(name="id_realizarprova")
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REALIZARPROVA_ID")
+	//@SequenceGenerator(name="REALIZARPROVA_ID", sequenceName="REALIZARPROVA_SEQ", allocationSize=1)
+	//@Column(name="id_realizarprova")
 	private Integer id_realizarprova;
 	
-	@ManyToOne
-	@JoinColumn(name="aluno_realizarprova")
+	//@ManyToOne
+	//@JoinColumn(name="aluno_realizarprova")
     private Aluno aluno_realizarprova;
 	
-	@ManyToOne
-	@JoinColumn(name="prova_realizarprova")
+    //@ManyToOne
+	//@JoinColumn(name="prova_realizarprova")
 	private Prova prova_realizarprova;
 	
-	@Column(name="nota_realizarprova")
+	//@Column(name="nota_realizarprova")
 	private Integer nota_realizarprova;
 
 	public Integer getId_realizarprova() {
