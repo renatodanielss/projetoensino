@@ -26,18 +26,19 @@ xmlns:p="http://primefaces.org/ui">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr><td><center><h2>Área da Administração</h2></center></td></tr>
+<tr><td><p:messages id="messages" autoUpdate="true" closable="true" /></td></tr>
 </table>
 
-<h:form>
+<h:form id="formLogin" action="login" method="post" onkeypress="if (event.keyCode == 13) { document.getElementById('formLogin:btnLogin').click(); return false; }">
     <h:panelGrid columns="2">
         <h:outputText value="Username" />
-        <h:inputText value="#{usuarioSessaoController.username}" />
+        <h:inputText value="#{usuarioAdminController.username}" />
 
         <h:outputText value="Password" />
-        <h:inputSecret value="#{usuarioSessaoController.password}" />
+        <h:inputSecret value="#{usuarioAdminController.password}" />
 
         <h:panelGroup />
-        <h:commandButton value="login" action="#{usuarioSessaoController.login}" />
+        <h:commandButton id="btnLogin" value="Login" action="#{usuarioAdminController.login}" />
     </h:panelGrid>
 </h:form>
 

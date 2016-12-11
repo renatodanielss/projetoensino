@@ -161,7 +161,6 @@ public class ProfessorController {
 			try{
 				this.getNewProfessor().setMatricula_professor(this.getCurrentProfessor().getMatricula_professor());
 				this.getNewProfessor().setCpf_professor(this.getCurrentProfessor().getCpf_professor());
-				this.getNewProfessor().setDisciplina_professor(this.getCurrentProfessor().getDisciplina_professor());
 				this.getNewProfessor().setNome_professor(this.getCurrentProfessor().getNome_professor());
 				this.getNewProfessor().setDatanasc_professor(this.getCurrentProfessor().getDatanasc_professor());
 				this.getNewProfessor().setTelefone_professor(this.getCurrentProfessor().getTelefone_professor());
@@ -224,7 +223,6 @@ public class ProfessorController {
 			
 		this.getNewProfessor().setMatricula_professor(null);
 		this.getNewProfessor().setCpf_professor(null);
-		this.getNewProfessor().setDisciplina_professor(null);
 		this.getNewProfessor().setNome_professor(null);
 		this.getNewProfessor().setDatanasc_professor(null);
 		this.getNewProfessor().setTelefone_professor(null);

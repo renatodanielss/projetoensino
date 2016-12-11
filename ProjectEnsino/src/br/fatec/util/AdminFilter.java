@@ -27,7 +27,7 @@ public class AdminFilter implements Filter {
         HttpSession session = request.getSession(false);
         String loginURL = request.getContextPath() + "/Pages/LoginAdministracao.xhtml";
 
-        boolean loggedIn = (session != null) && (session.getAttribute("user") != null);
+        boolean loggedIn = (session != null) && (session.getAttribute("useradmin") != null);
         boolean loginRequest = request.getRequestURI().equals(loginURL);
         boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
         boolean ajaxRequest = "partial/ajax".equals(request.getHeader("Faces-Request"));

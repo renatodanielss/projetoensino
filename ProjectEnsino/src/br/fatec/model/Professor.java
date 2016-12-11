@@ -54,9 +54,6 @@ public class Professor {
 	
 	@Column(name="email_professor")
 	private String email_professor;
-	
-	@Column(name="disciplina_professor")
-	private Integer disciplina_professor;
 
 	public String getMatricula_professor() {
 		return matricula_professor;
@@ -176,14 +173,6 @@ public class Professor {
 
 	public void setEmail_professor(String email_professor) {
 		this.email_professor = email_professor;
-	}
-
-	public Integer getDisciplina_professor() {
-		return disciplina_professor;
-	}
-
-	public void setDisciplina_professor(Integer disciplina_professor) {
-		this.disciplina_professor = disciplina_professor;
 	}
 	
 	@Override

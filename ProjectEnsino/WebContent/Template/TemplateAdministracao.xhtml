@@ -22,6 +22,12 @@ xmlns:p="http://primefaces.org/ui">
             <p:menuitem value="Alunos" url="/Pages/Alunolist.xhtml" icon="ui-icon-disk" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
     </p:menu>
 </td></tr>
+<tr>
+	<td align="right">
+		<p:outputLabel style="font-size: 16px; font-family: Arial; font-weight: bold;" value="Logado como: #{usuarioAdminController.usuarioAdmin.usuario} | " rendered="#{usuarioAdminController.isLogged}" />
+		<h:commandLink id="logoutButton" style="font-size: 16px; font-family: Arial;" value="Logout" action="#{usuarioAdminController.logout}" rendered="#{usuarioAdminController.isLogged}" />
+	</td>
+</tr>
 </table>
 <br />
 </ui:insert>
