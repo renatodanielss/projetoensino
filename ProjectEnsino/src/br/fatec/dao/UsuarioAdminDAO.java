@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.fatec.model.UsuarioAdmin;
-import br.fatec.model.UsuarioProfessor;
 
 public class UsuarioAdminDAO {
 	private EntityManagerFactory factory;

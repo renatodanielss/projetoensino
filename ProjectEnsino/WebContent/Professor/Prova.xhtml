@@ -51,7 +51,7 @@ function PrintElem(elem, title)
     mywindow.document.write('<html><head><title>' + title  + '</title>');
 
     mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + title  + '</h1>');
+    mywindow.document.write('<center><h1>' + title  + '</h1></center>');
     mywindow.document.write(document.getElementById(elem).innerHTML);
     mywindow.document.write('</body></html>');
 
@@ -94,14 +94,14 @@ function PrintElem(elem, title)
 <table border="0" style="width: 900px" align="center">
 	<tr><td align="right">
 		<p:commandButton id="btnGerar" value="Gerar Prova Automaticamente" action="#{provaController.gerarProva}" update="pgQuestoes" ajax="true"/>&nbsp;<br /><br />
-		<p:button id="btnSelecionar" value="Selecionar Questões" onclick="return showGrpMemberSearchPageCalenderLeave()" />&nbsp;<br /><br />
+		<p:button id="btnSelecionar" value="Selecionar Questões" onclick="return showGrpMemberSearchPageCalenderLeave()" disabled="true" />&nbsp;<br /><br />
 		<p:button id="btnImprimir" value="Imprimir Prova" onclick="PrintElem('imprimirProva', '#{provaController.newProva.titulo_prova}')" />&nbsp;<br />
 	</td></tr>
 	<tr><td align="left">
 	<div id="imprimirProva">
 		<h:panelGroup id="pgQuestoes">
 			<ui:repeat id="rptQuestoes" value="#{provaController.questoes}" varStatus="statusQuestoes">
-				<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px" styleClass="realizarProva" /><br />
+				<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px" styleClass="realizarProva" /><br /><br />
 				<ui:repeat id="rptAlternativas" value="#{provaController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
 					&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
 				</ui:repeat>
