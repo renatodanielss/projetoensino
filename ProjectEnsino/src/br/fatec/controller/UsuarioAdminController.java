@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 
 import br.fatec.dao.UsuarioAdminDAO;
-import br.fatec.dao.UsuarioProfessorDAO;
 import br.fatec.model.UsuarioAdmin;
-import br.fatec.model.UsuarioProfessor;
 import br.fatec.util.FacesUtil;
 import br.fatec.util.SessionUtil;
 
@@ -80,7 +78,7 @@ public class UsuarioAdminController extends HttpServlet{
 		System.out.println("Logout");
 		SessionUtil.getSession();
 		SessionUtil.remove("useradmin");
-		SessionUtil.invalidate();
+		//SessionUtil.invalidate();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/Pages/LoginAdministracao.xhtml");
 	}
 	

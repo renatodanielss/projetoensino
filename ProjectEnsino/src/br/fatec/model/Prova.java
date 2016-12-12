@@ -16,6 +16,8 @@ import javax.persistence.OrderColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.fatec.util.SessionUtil;
+
 @Entity
 @Table(name="tbl_prova")
 public class Prova implements Serializable{
@@ -36,6 +38,10 @@ public class Prova implements Serializable{
 	
 	@Column(name="numeroquestoes_prova")
 	private int numeroQuestoes_prova;
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_professor_prova")
+	private UsuarioProfessor usuario_professor_prova;
 	
 	@ManyToMany
     @JoinTable(name="tbl_questaoprova", joinColumns={@JoinColumn(name="id_prova")}, inverseJoinColumns={@JoinColumn(name="id_questao")})
@@ -72,6 +78,15 @@ public class Prova implements Serializable{
 
 	public void setNumeroQuestoes_prova(int numeroQuestoes_prova) {
 		this.numeroQuestoes_prova = numeroQuestoes_prova;
+	}
+
+	public UsuarioProfessor getUsuario_professor_prova() {
+		this.usuario_professor_prova = (UsuarioProfessor)SessionUtil.getParam("user");
+		return usuario_professor_prova;
+	}
+
+	public void setUsuario_professor_prova(UsuarioProfessor usuario_professor_prova) {
+		this.usuario_professor_prova = usuario_professor_prova;
 	}
 
 	public List<Questao> getQuestoes_prova() {

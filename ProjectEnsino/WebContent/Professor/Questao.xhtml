@@ -36,6 +36,7 @@ xmlns:p="http://primefaces.org/ui">
 			<f:selectItem itemLabel="Selecione um autor" itemValue="" />
 			<f:selectItems value="#{autorController.autores}" var="autor" itemValue="#{autor}" itemLabel="#{autor.nome_autor}" />
 		</p:selectOneMenu>
+		<input type="hidden" value="#{questaoController.newQuestao.usuario_professor_questao}" />
 	</td>
 </tr>
 <tr>

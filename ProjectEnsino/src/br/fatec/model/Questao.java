@@ -16,6 +16,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.fatec.util.SessionUtil;
+
 @Entity
 @Table(name="tbl_questao")
 public class Questao {
@@ -44,10 +46,14 @@ public class Questao {
 	@JoinColumn(name="assunto_questao")
 	private Assunto assunto_questao;
 	
+	@ManyToOne
+	@JoinColumn(name="usuario_professor_questao")
+	private UsuarioProfessor usuario_professor_questao;
+	
 	@OrderBy("id_alternativa")
 	@OneToMany(mappedBy="questao_alternativa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Alternativa> alternativas_questao;
-
+	
 	public Integer getId_questao() {
 		return id_questao;
 	}
@@ -94,6 +100,16 @@ public class Questao {
 
 	public void setAssunto_questao(Assunto assunto_questao) {
 		this.assunto_questao = assunto_questao;
+	}
+
+	public UsuarioProfessor getUsuario_professor_questao() {
+		this.usuario_professor_questao = (UsuarioProfessor)SessionUtil.getParam("user");
+		return this.usuario_professor_questao;
+	}
+
+	public void setUsuario_professor_questao(
+			UsuarioProfessor usuario_professor_questao) {
+		this.usuario_professor_questao = usuario_professor_questao;
 	}
 
 	public List<Alternativa> getAlternativas_questao() {

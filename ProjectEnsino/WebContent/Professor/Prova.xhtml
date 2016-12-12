@@ -19,9 +19,17 @@ xmlns:p="http://primefaces.org/ui">
   ga('send', 'pageview');
 
 </script>
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+    var popup = document.getElementById('myPopup');
+    popup.classList.toggle('show');
+}
+</script>
 </h:head>
 <ui:decorate template="/Template/TemplateProfessor.xhtml">
 <ui:define name="page">
+<h:outputStylesheet library="css" name="PopupMessageStyle.css" />
 <h:form enctype="multipart/form-data">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -30,9 +38,33 @@ xmlns:p="http://primefaces.org/ui">
 <tr><td><center><h2>Cadastro de Prova</h2></center></td></tr>
 <tr><td align="left"><h3>Detalhes da Prova</h3></td></tr>
 </table>
+<script>
+function showGrpMemberSearchPageCalenderLeave() { 
+     window.open('./Questaolist.xhtml','mywindow', 'resizable=no,toolbar=no,scrollbars=yes,height=450,width=530,top=145,left=235');
+     return false;
+ }
+ 
+function PrintElem(elem, title)
+{
+	var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
+    mywindow.document.write('<html><head><title>' + title  + '</title>');
+
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + title  + '</h1>');
+    mywindow.document.write(document.getElementById(elem).innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+</script>
 <table width="900" border="0">
-
 <tr>
 	<td align="left" width="70%"><h:outputText value="Título:"/></td>
 </tr>
@@ -40,7 +72,9 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" width="70%"><p:inputText id="txtTitulo" value="#{provaController.newProva.titulo_prova}" style="width: 875px"/></td>
 </tr>
 </table>
-
+<!-- <div class="popup" onclick="myFunction()">Click me! -->
+<!--   <span class="popuptext" id="myPopup">Popup text...</span> -->
+<!-- </div> -->
 <table width="900" border="0">
 <tr><td align="left" width="30%"><h:outputText value="Disciplina:" /></td><td align="left"><h:outputText value="Número de Questões:"/></td></tr>
 <tr>
@@ -49,6 +83,7 @@ xmlns:p="http://primefaces.org/ui">
 			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
 			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item}" itemLabel="#{item.nome_disciplina}"/>
 	</p:selectOneMenu>
+	<input type="hidden" value="#{provaController.newProva.usuario_professor_prova}" />
 </td>
 <td align="left">
 	<p:inputMask mask="9?999" maxlength="4" value="#{provaController.newProva.numeroQuestoes_prova}" placeHolder=" " style="width:353px"/>
@@ -58,18 +93,22 @@ xmlns:p="http://primefaces.org/ui">
 <br />
 <table border="0" style="width: 900px" align="center">
 	<tr><td align="right">
-		<p:commandButton id="btnGerar" value="Gerar Prova" action="#{provaController.gerarProva}" update="pgQuestoes" ajax="true"/>&nbsp;
+		<p:commandButton id="btnGerar" value="Gerar Prova Automaticamente" action="#{provaController.gerarProva}" update="pgQuestoes" ajax="true"/>&nbsp;<br /><br />
+		<p:button id="btnSelecionar" value="Selecionar Questões" onclick="return showGrpMemberSearchPageCalenderLeave()" />&nbsp;<br /><br />
+		<p:button id="btnImprimir" value="Imprimir Prova" onclick="PrintElem('imprimirProva', '#{provaController.newProva.titulo_prova}')" />&nbsp;<br />
 	</td></tr>
 	<tr><td align="left">
-	<h:panelGroup id="pgQuestoes">
-		<ui:repeat id="rptQuestoes" value="#{provaController.questoes}" varStatus="statusQuestoes">
-			<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px" styleClass="realizarProva" /><br />
-			<ui:repeat id="rptAlternativas" value="#{provaController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
-				&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
+	<div id="imprimirProva">
+		<h:panelGroup id="pgQuestoes">
+			<ui:repeat id="rptQuestoes" value="#{provaController.questoes}" varStatus="statusQuestoes">
+				<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width:859px" styleClass="realizarProva" /><br />
+				<ui:repeat id="rptAlternativas" value="#{provaController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
+					&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
+				</ui:repeat>
+				<br />
 			</ui:repeat>
-			<br />
-		</ui:repeat>
-	</h:panelGroup>
+		</h:panelGroup>
+	</div>
 	</td></tr>
 	<tr><td align="right">
 		<p:commandButton id="btnSalvar" value="Salvar" action="#{provaController.cadastrar}" rendered="#{provaController.showNewButton}" ajax="false"/>

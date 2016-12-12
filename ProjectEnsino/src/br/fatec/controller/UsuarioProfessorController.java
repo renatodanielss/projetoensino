@@ -78,7 +78,7 @@ public class UsuarioProfessorController extends HttpServlet{
 		System.out.println("Logout");
 		SessionUtil.getSession();
 		SessionUtil.remove("user");
-		SessionUtil.invalidate();
+		//SessionUtil.invalidate();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/Pages/LoginProfessor.xhtml");
 	}
 	
