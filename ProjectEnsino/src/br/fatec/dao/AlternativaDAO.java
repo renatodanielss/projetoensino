@@ -128,10 +128,13 @@ public class AlternativaDAO {
 			this.manager.getTransaction().begin();
 			this.manager.remove(manager.getReference(alternativa.getClass(), alternativa.getId_alternativa()));
 			this.manager.getTransaction().commit();
+			System.out.println("Alternativa Commit");
 			return true;
 		}
 		catch(Exception ex)
 		{
+			ex.printStackTrace();
+			System.out.println("Alternativa Rollback");
 			if (this.manager.getTransaction().isActive())
 				this.manager.getTransaction().rollback();
 			return false;

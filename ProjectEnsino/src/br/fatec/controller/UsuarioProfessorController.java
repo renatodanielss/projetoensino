@@ -1,8 +1,11 @@
 package br.fatec.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -24,8 +27,12 @@ public class UsuarioProfessorController extends HttpServlet{
 	private String username;
 	private String password;
 	private Boolean isLogged;
+	private UsuarioProfessor currentUsuarioProfessor;
+	private UsuarioProfessor newUsuarioProfessor;
+	private List<UsuarioProfessor> usuarioProfessores;
 	private UsuarioProfessor usuarioProfessor;
 	private UsuarioProfessorDAO usuarioProfessorDAO;
+	private boolean showNewButton;
 	
 	public UsuarioProfessorController(){
 		
@@ -36,14 +43,14 @@ public class UsuarioProfessorController extends HttpServlet{
 	{
 		this.usuarioProfessor = new UsuarioProfessor();
 		this.usuarioProfessorDAO = new UsuarioProfessorDAO();
+		this.currentUsuarioProfessor = new UsuarioProfessor();
+		this.newUsuarioProfessor = new UsuarioProfessor();
 		this.username = "";
 		this.password = "";
 	}
 
 	public void login() throws ServletException, IOException {
 		this.usuarioProfessor = this.usuarioProfessorDAO.buscar(this.username);
-		//System.out.println("Usuário: " + this.usuarioProfessor.getUsuario());
-		//System.out.println("Senha: " + this.usuarioProfessor.getSenha());
 		
 		if (this.usuarioProfessor != null){
 			if (this.usuarioProfessor.getUsuario().equals(this.username) && this.usuarioProfessor.getSenha().equals(this.password)){
@@ -114,4 +121,162 @@ public class UsuarioProfessorController extends HttpServlet{
 	public void setUsuarioProfessor(UsuarioProfessor usuarioProfessor) {
 		this.usuarioProfessor = usuarioProfessor;
 	}
+
+	public UsuarioProfessor getCurrentUsuarioProfessor() {
+		return currentUsuarioProfessor;
+	}
+
+	public void setCurrentUsuarioProfessor(UsuarioProfessor currentUsuarioProfessor) {
+		this.currentUsuarioProfessor = currentUsuarioProfessor;
+	}
+
+	public UsuarioProfessor getNewUsuarioProfessor() {
+		return newUsuarioProfessor;
+	}
+
+	public void setNewUsuarioProfessor(UsuarioProfessor newUsuarioProfessor) {
+		this.newUsuarioProfessor = newUsuarioProfessor;
+	}
+
+	public List<UsuarioProfessor> getUsuarioProfessores() {
+		if (this.usuarioProfessores == null){
+			this.usuarioProfessores = this.usuarioProfessorDAO.listar();
+		}
+		return usuarioProfessores;
+	}
+
+	public void setUsuarioProfessores(List<UsuarioProfessor> usuarioProfessores) {
+		this.usuarioProfessores = usuarioProfessores;
+	}
+
+	public UsuarioProfessorDAO getUsuarioProfessorDAO() {
+		return usuarioProfessorDAO;
+	}
+
+	public void setUsuarioProfessorDAO(UsuarioProfessorDAO usuarioProfessorDAO) {
+		this.usuarioProfessorDAO = usuarioProfessorDAO;
+	}
+
+	public boolean isShowNewButton() {
+		return showNewButton;
+	}
+
+	public void setShowNewButton(boolean showNewButton) {
+		this.showNewButton = showNewButton;
+	}
+	
+	public void mostrarAlterar(){
+		this.showNewButton = false;
+	}
+		  
+	public void mostrarSalvar(){
+	     this.showNewButton = true;
+	}
+	
+	public void goToUsuarioProfessor() throws Exception{
+		limparCampos();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		externalContext.redirect("Usuarioprofessor.xhtml");
+	}
+	
+	//validar - método cadastrar atualizado. Nesta versï¿½o ï¿½ verificado se o mï¿½todo cadastrarCampos verificou algum erro, caso sim, este mï¿½todo exibirï¿½ os erros na pï¿½gina.
+	//As mesmas alteraï¿½ï¿½es deverï¿½o ser feitas no mï¿½todo alterar.
+	public void cadastrar() throws IOException, ParseException
+	{
+		String mensagem = validarCampos(this.newUsuarioProfessor);
+		if (mensagem.length() == 0){
+			if (usuarioProfessorDAO.inserir(this.newUsuarioProfessor)){
+				setUsuarioProfessores(null);
+				System.out.println("Professor inserido com sucesso!");
+				this.newUsuarioProfessor = new UsuarioProfessor();
+				
+				//validar - importante adicionar o redirect com o parï¿½metro origin=nome da entidade (letras minï¿½sculas, sem espaï¿½os oou caracteres especiais, por exemplo:
+				//"CadastroConcluido.xhtml?faces-redirect=true&origin=textobase".
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=usuarioprofessor");
+			}
+			else
+				System.out.println("Erro na inserção!");
+			
+			this.newUsuarioProfessor = new UsuarioProfessor();
+		}
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
+	}
+	
+	private void limparCampos(){
+		
+		this.getNewUsuarioProfessor().setId_user(null);
+		this.getNewUsuarioProfessor().setProfessor(null);
+		this.getNewUsuarioProfessor().setUsuario(null);
+		this.getNewUsuarioProfessor().setSenha(null);
+		
+		mostrarSalvar();
+	}
+	
+	public void iniciaAlterar() throws IOException
+	{
+		if (this.newUsuarioProfessor != null)
+		{
+			try{
+				this.getNewUsuarioProfessor().setId_user(this.getCurrentUsuarioProfessor().getId_user());
+				this.getNewUsuarioProfessor().setProfessor(this.getCurrentUsuarioProfessor().getProfessor());
+				this.getNewUsuarioProfessor().setUsuario(this.getCurrentUsuarioProfessor().getUsuario());
+				this.getNewUsuarioProfessor().setSenha(this.getCurrentUsuarioProfessor().getSenha());
+				
+				mostrarAlterar();
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("Usuarioprofessor.xhtml?faces-redirect=true&redirect=1");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void alterar() throws IOException, ParseException
+	{
+		String mensagem = validarCampos(this.newUsuarioProfessor);
+		if (mensagem.length() == 0){
+			if (usuarioProfessorDAO.alterar(this.newUsuarioProfessor)){
+				setUsuarioProfessores(null);
+				System.out.println("Professor alterado com sucesso!");
+				this.newUsuarioProfessor = new UsuarioProfessor();
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=usuarioprofessor");
+			}
+			else
+				System.out.println("Erro na alteração!");
+			}
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
+	}
+	
+	public void excluir() throws IOException
+	{
+		if (usuarioProfessorDAO.excluir(this.currentUsuarioProfessor)){
+			setUsuarioProfessores(null);
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Usuarioprofessorlist.xhtml");
+			System.out.println("Professor excluido com sucesso!");
+		}
+		else
+			System.out.println("Erro na exclusão!");
+	}
+	
+	//validar - método para validação de atributos do objeto associado à view, este método será chamado pelo método cadastrar e alterar
+		public String validarCampos(UsuarioProfessor usuarioProfessor) throws ParseException{
+			String mensagemErro = "";
+			if (usuarioProfessor.getUsuario().trim().length() == 0)
+				mensagemErro += "<br/>-Preencher campo usuário";
+			if (usuarioProfessor.getSenha().trim().length() == 0)
+				mensagemErro += "<br/>-Preencher campo senha";
+			if (usuarioProfessor.getProfessor() == null)
+				mensagemErro += "<br/>-Selecione um professor";
+			return mensagemErro;
+		}
 }

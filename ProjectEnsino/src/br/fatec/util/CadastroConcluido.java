@@ -61,6 +61,10 @@ public class CadastroConcluido {
 			setPageMessage("Professor cadastrado com sucesso");
 			setTemplate(templateUrl + "TemplateAdministracao.xhtml");
 			break;
+		case "usuarioprofessor":
+			setPageMessage("Usuário cadastrado com sucesso");
+			setTemplate(templateUrl + "TemplateAdministracao.xhtml");
+			break;
 		case "prova":
 			setPageMessage("Prova cadastrada com sucesso");
 			setTemplate(templateUrl + "TemplateProfessor.xhtml");

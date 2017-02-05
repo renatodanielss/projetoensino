@@ -31,21 +31,16 @@ xmlns:p="http://primefaces.org/ui">
 </table>
 <table  style="width:906px" border = "0">
 <tr>
-	<td align="left" colspan="3"><h3>Informações Pessoais</h3></td>
+	<td align="left" colspan="2"><h3>Informações Pessoais</h3></td>
 </tr>
 
 <tr>
-	<td align="left" ><h:outputText value="Matrícula:"/></td><td align="left"><h:outputText value="CPF:"/></td><td align="left"><h:outputText value="Disciplina:"></h:outputText></td>
+	<td align="left" ><h:outputText value="Matrícula:"/></td><td align="left"><h:outputText value="CPF:"/></td>
 </tr>
 
 <tr>
-	<td align="left" ><p:inputText id="txtMatricula" style="width:237px" value="#{professorController.newProfessor.matricula_professor}" disabled="#{professorController.bloquearMatricula}"/></td>
-	<td align="left" ><p:inputMask mask="999.999.999-99" id="txtCpf" style="width:258px" value="#{professorController.newProfessor.cpf_professor}"/></td>
-	<td align="left" style="width:50px">
-	<p:selectOneMenu maxlength="85" id="slmDisciplina" style="width:372px;vertical-align:bottom">
-		<f:selectItem itemLabel="Selecione uma disciplina" itemValue="0" ></f:selectItem>
-	</p:selectOneMenu>
-		</td>
+	<td align="left" ><p:inputText id="txtMatricula" style="width:438px" value="#{professorController.newProfessor.matricula_professor}" disabled="#{professorController.bloquearMatricula}"/></td>
+	<td align="left" ><p:inputMask mask="999.999.999-99" id="txtCpf" style="width:438px" value="#{professorController.newProfessor.cpf_professor}"/></td>
 </tr>
 
 </table>

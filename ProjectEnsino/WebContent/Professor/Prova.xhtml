@@ -51,6 +51,14 @@ function PrintElem(elem, title)
     mywindow.document.write('<html><head><title>' + title  + '</title>');
 
     mywindow.document.write('</head><body >');
+    
+    //Começo do cabeçalho
+    
+    mywindow.document.write('<p width="90%" style="line-height: 0.5; text-align: justify;">' + "Nome: __________________________________________________________   Turma:_____________<br />"  + '</p>');
+    mywindow.document.write('<p width="90%" style="line-height: 0.5; text-align: justify;">' + "Ciclo: _______   Disciplina: _______________________________________   Data: ____/____/_______<br />"  + '</p>');
+    mywindow.document.write('<p width="90%" style="line-height: 0.5; text-align: justify;">' + "Matrícula: _________________   Instituição: __________________________________   Nota: ________"  + '</p>');
+    //Fim do cabeçalho
+    
     mywindow.document.write('<center><h1>' + title  + '</h1></center>');
     mywindow.document.write(document.getElementById(elem).innerHTML);
     mywindow.document.write('</body></html>');

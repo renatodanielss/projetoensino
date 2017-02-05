@@ -42,8 +42,9 @@ public class UsuarioAdminController extends HttpServlet{
 
 	public void login() throws ServletException, IOException {
 		this.usuarioAdmin = this.usuarioAdminDAO.buscar(this.username);
-		//System.out.println("Usuário: " + this.usuarioProfessor.getUsuario());
-		//System.out.println("Senha: " + this.usuarioProfessor.getSenha());
+		
+		//System.out.println("Usuário: " + this.usuarioAdmin.getUsuario());
+		//System.out.println("Senha: " + this.usuarioAdmin.getSenha());
 		
 		if (this.usuarioAdmin != null){
 			if (this.usuarioAdmin.getUsuario().equals(this.username) && this.usuarioAdmin.getSenha().equals(this.password)){

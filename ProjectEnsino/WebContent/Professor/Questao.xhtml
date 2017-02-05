@@ -77,12 +77,12 @@ xmlns:p="http://primefaces.org/ui">
 	<h:panelGroup id="pgAlternativas">
 		<ui:repeat id="rptAlternativas" value="#{questaoController.alternativas}" varStatus="statusAlt">
 			<p:outputLabel value="#{statusAlt.index + 1}" />&nbsp;&nbsp;<p:inputText value="#{questaoController.alternativas[statusAlt.index].texto_alternativa}" style="width:809px"/>
-			<p:selectBooleanCheckbox id="sorAlternativaCorreta" value="#{questaoController.alternativas[statusAlt.index].correta_alternativa}" converter="entityConverter" style="margin-left: 6px; margin-top: 0px"/>
+			<!--  <p:selectBooleanCheckbox id="sorAlternativaCorreta" value="#{questaoController.alternativas[statusAlt.index].correta_alternativa}" converter="entityConverter" style="margin-left: 6px; margin-top: 0px"/> -->
 			<br />
 		</ui:repeat>
 	</h:panelGroup>
 	<p:commandButton id="cmdAdicionarAlternativa" value="Adicionar Alternativa" action="#{questaoController.adicionarAlternativa}" update="pgAlternativas" ajax="true" />
-	<p:commandButton id="cmdExcluirAlternativa" value="Excluir Alternativa" update="rptAlternativas" ajax="false" />
+	<p:commandButton id="cmdExcluirAlternativa" value="Excluir Alternativas em Branco" action="#{questaoController.removerAlternativas}" update="pgAlternativas" ajax="true" />
 </td></tr>
 <tr><td align="right" colspan="2">
 	<br />

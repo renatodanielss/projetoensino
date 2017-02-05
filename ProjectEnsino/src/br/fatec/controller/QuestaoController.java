@@ -1,14 +1,15 @@
 package br.fatec.controller;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
 import br.fatec.dao.AlternativaDAO;
 import br.fatec.dao.QuestaoDAO;
 import br.fatec.model.Alternativa;
@@ -38,7 +39,7 @@ public class QuestaoController {
 		this.currentQuestao = new Questao();
 		this.alternativaDAO = new AlternativaDAO();
 		this.alternativas = new ArrayList<Alternativa>();
-		this.alternativas.add(new Alternativa("", this.newQuestao));
+		//this.alternativas.add(new Alternativa("", this.newQuestao));
 		mostrarSalvar();
 	}
 	
@@ -109,6 +110,22 @@ public class QuestaoController {
 	
 	public void adicionarAlternativa(){
 		this.alternativas.add(new Alternativa(this.newQuestao));
+		System.out.println("Adicionou alternativa");
+	}
+	
+	public void removerAlternativas(){
+		for (int i = 0; i < this.alternativas.size(); i++){
+			//System.out.println("Alternativa Mantida " + i+1 + ": " + this.alternativas.get(i).getTexto_alternativa());
+			if (this.alternativas.get(i).getTexto_alternativa().equals("")){
+				//System.out.println("Tamanho antes: " + Integer.toString(this.alternativas.size()));
+				//alternativaDAO.excluir(this.alternativas.get(i));
+				System.out.println("ID Alternativa: " + this.alternativas.get(i).getId_alternativa());
+				System.out.println("Texto Alternativa: " + this.alternativas.get(i).getTexto_alternativa());
+				this.alternativas.remove(i);
+				//System.out.println("Tamanho depois: " + Integer.toString(this.alternativas.size()));
+			}
+		}
+		//this.newQuestao.setAlternativas_questao(this.alternativas);
 	}
 	
 	public void cadastrar() throws IOException
@@ -155,6 +172,7 @@ public class QuestaoController {
 	
 	public void alterar() throws IOException
 	{
+		System.out.println("Tamanho alternação: " + Integer.toString(this.alternativas.size()));
 		this.newQuestao.setAlternativas_questao(this.alternativas);
 		if (questaoDao.alterar(this.newQuestao)){
 			setQuestoes(null);
@@ -180,7 +198,7 @@ public class QuestaoController {
 		this.newQuestao.setEnunciado_questao(null);
 		this.newQuestao.setAlternativas_questao(null);
 		this.alternativas = new ArrayList<Alternativa>();
-		this.alternativas.add(new Alternativa("", this.newQuestao));
+		//this.alternativas.add(new Alternativa("", this.newQuestao));
 		this.mostrarSalvar();
 	}
 	

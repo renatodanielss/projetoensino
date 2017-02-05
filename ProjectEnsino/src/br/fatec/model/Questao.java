@@ -51,7 +51,7 @@ public class Questao {
 	private UsuarioProfessor usuario_professor_questao;
 	
 	@OrderBy("id_alternativa")
-	@OneToMany(mappedBy="questao_alternativa", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="questao_alternativa", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private List<Alternativa> alternativas_questao;
 	
 	public Integer getId_questao() {
