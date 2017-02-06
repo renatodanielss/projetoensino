@@ -23,17 +23,19 @@ xmlns:p="http://primefaces.org/ui">
 <ui:decorate template="/Template/TemplateSimples.xhtml">
 <ui:define name="page">
 <h:form id="form">
-<table align="center" width="900">
-<tr><td>
-<a id="adm" style="font-size: 20px;" href="/Admin/Professorlist.xhtml">
-	<h:outputText value="Área da Administração" />
-</a>
-</td></tr>
-<tr><td>
-<a id="prof" style="font-size: 20px;" href="/Professor/Disciplinalist.xhtml">
-	<h:outputText value="Área do Professor" />
-</a>
-</td></tr>
+<table align="center" width="900" border="0" cellspacing="0" cellpading="0">
+<tr>
+	<td style="width: 350px; height: 350px;" align="center">
+		<a id="adm" href="/Admin/Professorlist.xhtml">
+			<img src="#{request.contextPath}/resources/images/admin.png" border="0" style="display:block; width:80%; height:80%;" />
+		</a>
+	</td>
+	<td style="width: 350px; height: 350px;" align="center">
+		<a id="prof" href="/Professor/Disciplinalist.xhtml">
+			<img src="#{request.contextPath}/resources/images/professor.png" border="0" style="display:block; width:80%; height:80%;" />
+		</a>
+	</td>
+</tr>
 </table>
 </h:form>
 </ui:define>

@@ -1,9 +1,11 @@
 package br.fatec.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import br.fatec.model.Questao;
 
 public class QuestaoDAO {
@@ -95,8 +97,39 @@ public class QuestaoDAO {
 	public List<Questao> listar(int id_disciplina)
 	{
 		List<Questao> listQuestao = null;
-		String query = "SELECT * FROM tbl_questao where  disciplina_questao = " + id_disciplina;
+		String query = "SELECT * FROM tbl_questao WHERE disciplina_questao = " + id_disciplina;
 		
+		try
+		{
+			this.manager.getTransaction().begin();
+			listQuestao = this.manager.createNativeQuery(query, new Questao().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listQuestao = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}
+		
+		return listQuestao;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Questao> listar(int id_disciplina, int id_assunto)
+	{
+		List<Questao> listQuestao = null;
+		String query;
+		
+		if (id_disciplina != -1 && id_assunto != -1)
+			query = "SELECT * FROM tbl_questao WHERE disciplina_questao = " + id_disciplina + " AND assunto_questao = " + id_assunto;
+		else if (id_disciplina != -1)
+			query = "SELECT * FROM tbl_questao WHERE disciplina_questao = " + id_disciplina;
+		else if (id_assunto != -1)
+			query = "SELECT * FROM tbl_questao WHERE assunto_questao = " + id_assunto;
+		else
+			query = "SELECT * FROM tbl_questao";
+			
 		try
 		{
 			this.manager.getTransaction().begin();

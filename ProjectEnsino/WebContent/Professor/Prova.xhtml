@@ -74,29 +74,58 @@ function PrintElem(elem, title)
 </script>
 <table width="900" border="0">
 <tr>
-	<td align="left" width="70%"><h:outputText value="Título:"/></td>
+	<td colspan="3" align="left" width="70%"><h:outputText value="Título:"/></td>
 </tr>
 <tr>
-	<td align="left" width="70%"><p:inputText id="txtTitulo" value="#{provaController.newProva.titulo_prova}" style="width: 875px"/></td>
+	<td colspan="3" align="left" width="70%"><p:inputText id="txtTitulo" value="#{provaController.newProva.titulo_prova}" style="width: 880px"/></td>
 </tr>
-</table>
-<!-- <div class="popup" onclick="myFunction()">Click me! -->
-<!--   <span class="popuptext" id="myPopup">Popup text...</span> -->
-<!-- </div> -->
-<table width="900" border="0">
-<tr><td align="left" width="30%"><h:outputText value="Disciplina:" /></td><td align="left"><h:outputText value="Número de Questões:"/></td></tr>
 <tr>
-<td align="left" width="30%">
-	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width:514px;vertical-align:bottom" value="#{provaController.newProva.disciplina_prova}" converter="entityConverter">
-			<f:selectItem itemLabel="Selecione uma disciplina" itemValue="" ></f:selectItem>
+	<td align="left"><h:outputText value="Disciplina:" /></td><td align="left" width="20%"><h:outputText value="Assunto:"/></td><td align="left" width="15%"><h:outputText value="Número de Questões:"/></td></tr>
+<tr>
+<td align="left">
+	<p:selectOneMenu maxlength="20" id="slmDisciplina" style="width: 344px; vertical-align: bottom;" value="#{provaController.newProva.disciplina_prova}" converter="entityConverter">
+			<f:selectItem itemLabel="Selecione uma disciplina" itemValue=""></f:selectItem>
 			<f:selectItems value="#{disciplinaController.disciplinas}" var="item" itemValue="#{item}" itemLabel="#{item.nome_disciplina}"/>
 	</p:selectOneMenu>
 	<input type="hidden" value="#{provaController.newProva.usuario_professor_prova}" />
 </td>
 <td align="left">
-	<p:inputMask mask="9?999" maxlength="4" value="#{provaController.newProva.numeroQuestoes_prova}" placeHolder=" " style="width:353px"/>
-</td>	
+    <p:selectOneMenu maxlength="20" id="slmAssunto" style="width: 302px; vertical-align: bottom;" value="#{provaController.newProva.assunto_prova}" converter="entityConverter">
+			<f:selectItem itemLabel="Selecione um assunto" itemValue=""></f:selectItem>
+			<f:selectItems value="#{assuntoController.assuntos}" var="itemAssunto" itemValue="#{itemAssunto}" itemLabel="#{itemAssunto.nome_assunto}"/>
+	</p:selectOneMenu>
+</td>
+<td align="left">
+	<p:inputMask mask="9?999" maxlength="4" value="#{provaController.newProva.numeroQuestoes_prova}" placeHolder=" " style="width: 215px;"/>
+</td>
 </tr>
+<tr>
+<td align="left">
+	<h:outputText value="Versão:" />
+</td>
+<td align="left">
+	<h:outputText value="Data de Criação:" />
+</td>
+<td align="left">
+	<h:outputText value="Data da Última Alteração:" />
+</td>
+</tr>
+<tr>
+<td align="left">
+	<p:inputText type="text" value="#{provaController.newProva.versao_prova}" disabled="true" style="width: 336px;" />
+</td>
+<td align="left">
+	<p:inputText type="text" value="#{provaController.newProva.data_criacao_prova}" disabled="true" style="width: 293px;">
+		<f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" type="both" timeZone="America/Sao_Paulo" />
+	</p:inputText>
+</td>
+<td align="left">
+	<p:inputText type="text" value="#{provaController.newProva.data_ultima_alteracao_prova}" disabled="true" style="width: 215px;">
+		<f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" type="both" timeZone="America/Sao_Paulo" />
+	</p:inputText>
+</td>
+</tr>
+
 </table>
 <br />
 <table border="0" style="width: 900px" align="center">

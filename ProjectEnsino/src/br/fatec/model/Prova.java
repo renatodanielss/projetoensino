@@ -3,6 +3,7 @@ package br.fatec.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +37,10 @@ public class Prova implements Serializable{
     @JoinColumn(name="disciplina_prova")
 	private Disciplina disciplina_prova;
 	
+	@ManyToOne
+    @JoinColumn(name="assunto_prova")
+	private Assunto assunto_prova;
+	
 	@Column(name="numeroquestoes_prova")
 	private int numeroQuestoes_prova;
 	
@@ -43,7 +48,16 @@ public class Prova implements Serializable{
 	@JoinColumn(name="usuario_professor_prova")
 	private UsuarioProfessor usuario_professor_prova;
 	
-	@ManyToMany
+	@Column(name="data_criacao_prova")
+	private java.sql.Timestamp data_criacao_prova;
+	
+	@Column(name="data_ultima_alteracao_prova")
+	private java.sql.Timestamp data_ultima_alteracao_prova;
+	
+	@Column(name="versao_prova")
+	private String versao_prova;
+	
+	@ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(name="tbl_questaoprova", joinColumns={@JoinColumn(name="id_prova")}, inverseJoinColumns={@JoinColumn(name="id_questao")})
 	@OrderColumn(name="ordem_questaoprova")
 	private List<Questao> questoes_prova;
@@ -72,6 +86,14 @@ public class Prova implements Serializable{
 		this.disciplina_prova = disciplina_prova;
 	}
 
+	public Assunto getAssunto_prova() {
+		return assunto_prova;
+	}
+
+	public void setAssunto_prova(Assunto assunto_prova) {
+		this.assunto_prova = assunto_prova;
+	}
+
 	public int getNumeroQuestoes_prova() {
 		return numeroQuestoes_prova;
 	}
@@ -87,6 +109,31 @@ public class Prova implements Serializable{
 
 	public void setUsuario_professor_prova(UsuarioProfessor usuario_professor_prova) {
 		this.usuario_professor_prova = usuario_professor_prova;
+	}
+	
+	public java.sql.Timestamp getData_criacao_prova() {
+		return data_criacao_prova;
+	}
+
+	public void setData_criacao_prova(java.sql.Timestamp data_criacao_prova) {
+		this.data_criacao_prova = data_criacao_prova;
+	}
+
+	public java.sql.Timestamp getData_ultima_alteracao_prova() {
+		return data_ultima_alteracao_prova;
+	}
+
+	public void setData_ultima_alteracao_prova(
+			java.sql.Timestamp data_ultima_alteracao_prova) {
+		this.data_ultima_alteracao_prova = data_ultima_alteracao_prova;
+	}
+
+	public String getVersao_prova() {
+		return versao_prova;
+	}
+
+	public void setVersao_prova(String versao_prova) {
+		this.versao_prova = versao_prova;
 	}
 
 	public List<Questao> getQuestoes_prova() {

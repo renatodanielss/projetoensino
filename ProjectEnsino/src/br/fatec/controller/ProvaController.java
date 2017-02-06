@@ -1,7 +1,9 @@
 package br.fatec.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
+import java.util.Date;
 
 import br.fatec.dao.ProvaDAO;
 import br.fatec.dao.QuestaoDAO;
@@ -99,7 +103,11 @@ public class ProvaController {
 
 	public void cadastrar() throws IOException
 	{
-		
+		Date dtDataCriacao = new Date();
+		Calendar calDataCriacao = Calendar.getInstance();
+		calDataCriacao.setTime(dtDataCriacao);
+		this.newProva.setData_criacao_prova(new Timestamp(calDataCriacao.getTimeInMillis()));
+		this.newProva.setData_ultima_alteracao_prova(new Timestamp(calDataCriacao.getTimeInMillis()));
 		this.newProva.setQuestoes_prova(this.questoes);
 		if (provaDao.inserir(this.newProva)){
 			setProvas(null);
@@ -122,7 +130,11 @@ public class ProvaController {
 				this.newProva.setId_prova(this.currentProva.getId_prova());
 				this.newProva.setTitulo_prova(this.currentProva.getTitulo_prova());
 				this.newProva.setDisciplina_prova(this.currentProva.getDisciplina_prova());
+				this.newProva.setAssunto_prova(this.currentProva.getAssunto_prova());
 				this.newProva.setNumeroQuestoes_prova(this.currentProva.getNumeroQuestoes_prova());
+				this.newProva.setData_criacao_prova(this.currentProva.getData_criacao_prova());
+				this.newProva.setData_ultima_alteracao_prova(this.currentProva.getData_ultima_alteracao_prova());
+				this.newProva.setVersao_prova(this.currentProva.getVersao_prova());
 				this.newProva.setQuestoes_prova(this.currentProva.getQuestoes_prova());
 				this.setQuestoes(this.newProva.getQuestoes_prova());
 				
@@ -138,6 +150,10 @@ public class ProvaController {
 	
 	public void alterar() throws IOException
 	{
+		Date dtDataUltimaAlteracao = new Date();
+		Calendar calDataUltimaAlteracao = Calendar.getInstance();
+		calDataUltimaAlteracao.setTime(dtDataUltimaAlteracao);
+		this.newProva.setData_ultima_alteracao_prova(new Timestamp(calDataUltimaAlteracao.getTimeInMillis()));
 		this.newProva.setQuestoes_prova(this.questoes);
 		if (provaDao.alterar(this.newProva)){
 			setProvas(null);
@@ -175,11 +191,20 @@ public class ProvaController {
 		this.questoes = null;
 		this.questoes = new ArrayList<>();
 		List<Questao> questaoAux = null;
+		int id_disciplina;
+		int id_assunto;
 		
 		if (this.newProva.getDisciplina_prova() != null && this.newProva.getDisciplina_prova().getNome_disciplina().length() > 0)
-			questaoAux = this.questaoDao.listar(this.newProva.getDisciplina_prova().getId_disciplina());
+			id_disciplina = this.newProva.getDisciplina_prova().getId_disciplina();
 		else
-			questaoAux = this.questaoDao.listar();
+			id_disciplina = -1;
+		
+		if (this.newProva.getAssunto_prova() != null && this.newProva.getAssunto_prova().getNome_assunto().length() > 0)
+			id_assunto = this.newProva.getAssunto_prova().getId_assunto();
+		else
+			id_assunto = -1;
+			
+		questaoAux = this.questaoDao.listar(id_disciplina, id_assunto);
 		
 		if (this.newProva.getNumeroQuestoes_prova() > 0 && questaoAux.size() >= this.newProva.getNumeroQuestoes_prova()){
 			for (int i=0; i < this.newProva.getNumeroQuestoes_prova(); i++){
@@ -207,6 +232,9 @@ public class ProvaController {
 		this.newProva.setTitulo_prova(null);
 		this.newProva.setDisciplina_prova(null);
 		this.newProva.setNumeroQuestoes_prova(0);
+		this.newProva.setData_criacao_prova(null);
+		this.newProva.setData_ultima_alteracao_prova(null);
+		this.newProva.setVersao_prova(null);
 		this.newProva.setQuestoes_prova(null);
 		this.questoes = null;
 		this.mostrarSalvar();
@@ -214,6 +242,7 @@ public class ProvaController {
 	
 	public void goToProva() throws Exception{
 		limparCampos();
+		this.newProva.setVersao_prova("1");
 		System.out.println("goToProva");
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Prova.xhtml");

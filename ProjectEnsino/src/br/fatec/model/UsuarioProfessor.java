@@ -13,6 +13,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tbl_user_professor")
 public class UsuarioProfessor {
+	
+	@SuppressWarnings("unused")
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_PROFESSOR_ID")

@@ -39,12 +39,19 @@ xmlns:p="http://primefaces.org/ui">
 	            #{prova.id_prova}
 	        </p:column>
 	        
-	        <p:column width="600" headerText="Título" id="titulo_prova">
+	        <p:column width="500" headerText="Título" id="titulo_prova">
 	            #{prova.titulo_prova}
 	        </p:column>
 	        
 	        <p:column width="70" headerText="Qtd. Questões" id="numeroquestoes_prova">
 	            #{prova.numeroQuestoes_prova}
+	        </p:column>
+	        
+	        <p:column width="100" headerText="Última Atualização" id="data_atualizacao_prova">
+	        	<h:outputText value="#{prova.data_ultima_alteracao_prova}" disabled="true" style="width: 293px;">
+					<f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" type="both" timeZone="America/Sao_Paulo" />
+				</h:outputText>
+				
 	        </p:column>
 </p:dataTable>
 </td></tr>

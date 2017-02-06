@@ -12,6 +12,9 @@ import javax.persistence.Table;
 @Table(name="tbl_user_admin")
 public class UsuarioAdmin {
 
+	@SuppressWarnings("unused")
+	private static final long serialVersionUID = 2L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ADMIN_ID")
 	@SequenceGenerator(name="USER_ADMIN_ID", sequenceName="USER_ADMIN_SEQ", allocationSize=1)
