@@ -44,7 +44,7 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 <tr><td>
 <p:dataTable var="questao" value="#{questaoController.questoes}" id="questaoTable" rowKey="#{questao.id_questao}"
-		 selectionMode="single" selection="#{questaoController.currentQuestao}" style="text-align:center" paginator="true" rows="10"
+		 selectionMode="single" selection="#{questaoController.currentQuestao}" style="text-align: center; width: 900px;" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 		 rowsPerPageTemplate="5,10,15" lazy="false" filterEvent="enter">
   
@@ -57,7 +57,7 @@ xmlns:p="http://primefaces.org/ui">
 	            #{questao.id_questao}
 	        </p:column>
 	        
-	        <p:column width="480" headerText="Enunciado" id="enunciado_questao">
+	        <p:column width="480" headerText="Enunciado" id="enunciado_questao" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: 480px;">
 	            #{questao.enunciado_questao}
 	        </p:column>
 	        
