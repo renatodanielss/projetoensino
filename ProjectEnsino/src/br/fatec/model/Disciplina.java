@@ -1,5 +1,7 @@
 package br.fatec.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tbl_disciplina")
 
-public class Disciplina{
+public class Disciplina implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DISCIPLINA_ID")
 	@SequenceGenerator(name="DISCIPLINA_ID", sequenceName="DISCIPLINA_SEQ", allocationSize=1)

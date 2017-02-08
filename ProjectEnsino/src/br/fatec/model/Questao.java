@@ -1,5 +1,6 @@
 package br.fatec.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,11 +17,12 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.fatec.util.SessionUtil;
-
 @Entity
 @Table(name="tbl_questao")
-public class Questao {
+public class Questao implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "QUESTAO_ID")
 	@SequenceGenerator(name="QUESTAO_ID", sequenceName="QUESTAO_SEQ", allocationSize=1)
@@ -103,12 +105,10 @@ public class Questao {
 	}
 
 	public UsuarioProfessor getUsuario_professor_questao() {
-		this.usuario_professor_questao = (UsuarioProfessor)SessionUtil.getParam("user");
 		return this.usuario_professor_questao;
 	}
 
-	public void setUsuario_professor_questao(
-			UsuarioProfessor usuario_professor_questao) {
+	public void setUsuario_professor_questao(UsuarioProfessor usuario_professor_questao) {
 		this.usuario_professor_questao = usuario_professor_questao;
 	}
 

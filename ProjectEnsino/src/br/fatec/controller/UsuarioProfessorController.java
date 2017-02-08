@@ -14,7 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 
+import br.fatec.dao.ProfessorDAO;
 import br.fatec.dao.UsuarioProfessorDAO;
+import br.fatec.model.Professor;
 import br.fatec.model.UsuarioProfessor;
 import br.fatec.util.FacesUtil;
 import br.fatec.util.SessionUtil;
@@ -32,6 +34,8 @@ public class UsuarioProfessorController extends HttpServlet{
 	private List<UsuarioProfessor> usuarioProfessores;
 	private UsuarioProfessor usuarioProfessor;
 	private UsuarioProfessorDAO usuarioProfessorDAO;
+	private List<Professor> professoresSemUsuario; 
+	private String pesquisa;
 	private boolean showNewButton;
 	
 	public UsuarioProfessorController(){
@@ -156,6 +160,22 @@ public class UsuarioProfessorController extends HttpServlet{
 	public void setUsuarioProfessorDAO(UsuarioProfessorDAO usuarioProfessorDAO) {
 		this.usuarioProfessorDAO = usuarioProfessorDAO;
 	}
+	
+	public List<Professor> getProfessoresSemUsuario() {
+		return professoresSemUsuario;
+	}
+
+	public void setProfessoresSemUsuario(List<Professor> professoresSemUsuario) {
+		this.professoresSemUsuario = professoresSemUsuario;
+	}
+
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
 
 	public boolean isShowNewButton() {
 		return showNewButton;
@@ -174,9 +194,16 @@ public class UsuarioProfessorController extends HttpServlet{
 	}
 	
 	public void goToUsuarioProfessor() throws Exception{
-		limparCampos();
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		externalContext.redirect("Usuarioprofessor.xhtml");
+		ProfessorDAO professorDAO = new ProfessorDAO();
+		this.professoresSemUsuario = professorDAO.listarProfessorSemUsuario();
+		if (this.professoresSemUsuario.size() > 0){
+			limparCampos();
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			externalContext.redirect("Usuarioprofessor.xhtml");
+		}
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta!<br/>", "Não há professores a serem cadastrados!<br>&nbsp;Todos os professores possuem usuário."));
+		}
 	}
 	
 	//validar - método cadastrar atualizado. Nesta versï¿½o ï¿½ verificado se o mï¿½todo cadastrarCampos verificou algum erro, caso sim, este mï¿½todo exibirï¿½ os erros na pï¿½gina.
@@ -224,6 +251,9 @@ public class UsuarioProfessorController extends HttpServlet{
 				this.getNewUsuarioProfessor().setProfessor(this.getCurrentUsuarioProfessor().getProfessor());
 				this.getNewUsuarioProfessor().setUsuario(this.getCurrentUsuarioProfessor().getUsuario());
 				this.getNewUsuarioProfessor().setSenha(this.getCurrentUsuarioProfessor().getSenha());
+				ProfessorDAO professorDAO = new ProfessorDAO();
+				this.setProfessoresSemUsuario(professorDAO.listarProfessorSemUsuario());
+				this.professoresSemUsuario.add(professorDAO.buscar(this.getNewUsuarioProfessor().getProfessor().getMatricula_professor()));
 				
 				mostrarAlterar();
 				
@@ -272,11 +302,18 @@ public class UsuarioProfessorController extends HttpServlet{
 		public String validarCampos(UsuarioProfessor usuarioProfessor) throws ParseException{
 			String mensagemErro = "";
 			if (usuarioProfessor.getUsuario().trim().length() == 0)
-				mensagemErro += "<br/>-Preencher campo usuário";
+				mensagemErro += "<br/>-Preencher usuário";
 			if (usuarioProfessor.getSenha().trim().length() == 0)
-				mensagemErro += "<br/>-Preencher campo senha";
+				mensagemErro += "<br/>-Preencher senha";
 			if (usuarioProfessor.getProfessor() == null)
 				mensagemErro += "<br/>-Selecione um professor";
 			return mensagemErro;
+		}
+		
+		public void pesquisar(){
+			this.usuarioProfessores = this.usuarioProfessorDAO.listar(this.pesquisa);
+			if (this.usuarioProfessores == null){
+				this.usuarioProfessores = this.getUsuarioProfessores();
+			}
 		}
 }

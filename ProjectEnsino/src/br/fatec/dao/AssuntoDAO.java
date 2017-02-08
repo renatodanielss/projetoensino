@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import br.fatec.model.Assunto;
 
 public class AssuntoDAO {
@@ -87,6 +88,36 @@ public class AssuntoDAO {
 		List<Assunto> listAssunto = null;
 		String query = "select * from tbl_assunto where iddisciplina_assunto = " + iddisciplina_assunto;
 		
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listAssunto = this.manager.createNativeQuery(query, new Assunto().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listAssunto = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listAssunto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Assunto> listar(String assunto, Integer idDisciplina)
+	{		
+		List<Assunto> listAssunto = null;
+		String query;
+		
+		if (idDisciplina == -1)
+			query = "SELECT * FROM tbl_assunto WHERE lower(nome_assunto) LIKE lower('%" + assunto.toLowerCase() + "%')";
+		else
+			query = "SELECT * FROM tbl_assunto WHERE lower(nome_assunto) LIKE lower('%" + assunto.toLowerCase() + "%') AND iddisciplina_assunto = " + idDisciplina;
+			
 		try
 		{
 			open();

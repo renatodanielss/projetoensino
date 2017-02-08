@@ -105,6 +105,31 @@ public class DisciplinaDAO {
 		return listDisciplina;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Disciplina> listar(String disciplina)
+	{		
+		List<Disciplina> listDisciplina = null;
+		String query = "SELECT * FROM tbl_disciplina WHERE lower(nome_disciplina) LIKE lower('%" + disciplina.toLowerCase() + "%')";
+		
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listDisciplina = this.manager.createNativeQuery(query, new Disciplina().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listDisciplina = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listDisciplina;
+	}
+	
 	public boolean existeDisciplina(Integer id)
 	{
 		Disciplina disciplina = buscar(id);

@@ -1,10 +1,12 @@
 package br.fatec.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -14,6 +16,8 @@ import br.fatec.dao.AlternativaDAO;
 import br.fatec.dao.QuestaoDAO;
 import br.fatec.model.Alternativa;
 import br.fatec.model.Questao;
+import br.fatec.model.UsuarioProfessor;
+import br.fatec.util.SessionUtil;
 
 @ManagedBean(name="questaoController")
 @SessionScoped
@@ -24,6 +28,8 @@ public class QuestaoController {
 	private QuestaoDAO questaoDao;
 	private List<Alternativa> alternativas;
 	private AlternativaDAO alternativaDAO;
+	private String pesquisa;
+	private Integer disciplinaPesquisa;
 	private boolean showNewButton;
 	
 	public QuestaoController()
@@ -96,6 +102,22 @@ public class QuestaoController {
 		this.alternativaDAO = alternativaDAO;
 	}
 	
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
+	public Integer getDisciplinaPesquisa() {
+		return disciplinaPesquisa;
+	}
+
+	public void setDisciplinaPesquisa(Integer disciplinaPesquisa) {
+		this.disciplinaPesquisa = disciplinaPesquisa;
+	}
+
 	public boolean getShowNewButton(){
 		return showNewButton;
 	}
@@ -128,21 +150,28 @@ public class QuestaoController {
 		//this.newQuestao.setAlternativas_questao(this.alternativas);
 	}
 	
-	public void cadastrar() throws IOException
+	public void cadastrar() throws IOException, ParseException
 	{
-		this.newQuestao.setAlternativas_questao(this.alternativas);
-		if (questaoDao.inserir(this.newQuestao)){
-			setQuestoes(null);
-			setAlternativas(null);
-			System.out.println("Questão inserida com sucesso!");
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
-			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("realizarProvaController");
-			
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=questao");
+		String mensagem = validarCampos(this.newQuestao);
+		if (mensagem.length() == 0){
+			this.newQuestao.setUsuario_professor_questao((UsuarioProfessor)SessionUtil.getParam("user"));
+			this.newQuestao.setAlternativas_questao(this.alternativas);
+			if (questaoDao.inserir(this.newQuestao)){
+				setQuestoes(null);
+				setAlternativas(null);
+				System.out.println("Questão inserida com sucesso!");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
+				//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("realizarProvaController");
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=questao");
+			}
+			else{
+				System.out.println("Erro na inserção!");
+			}
 		}
 		else{
-			System.out.println("Erro na inserção!");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
 		}
 	}
 	
@@ -158,6 +187,7 @@ public class QuestaoController {
 				this.newQuestao.setTextobase_questao(this.getCurrentQuestao().getTextobase_questao());
 				this.newQuestao.setEnunciado_questao(this.getCurrentQuestao().getEnunciado_questao());
 				this.newQuestao.setAlternativas_questao(this.getCurrentQuestao().getAlternativas_questao());
+				this.newQuestao.setUsuario_professor_questao(this.getCurrentQuestao().getUsuario_professor_questao());
 				this.setAlternativas(this.newQuestao.getAlternativas_questao());
 				
 				mostrarAlterar();
@@ -170,23 +200,38 @@ public class QuestaoController {
 		}
 	}
 	
-	public void alterar() throws IOException
+	public void alterar() throws IOException, ParseException
 	{
-		System.out.println("Tamanho alternação: " + Integer.toString(this.alternativas.size()));
-		this.newQuestao.setAlternativas_questao(this.alternativas);
-		if (questaoDao.alterar(this.newQuestao)){
-			setQuestoes(null);
-			setAlternativas(null);
-			System.out.println("Questão alterada com sucesso!");
-			this.newQuestao = new Questao();
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
-			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("realizarProvaController");
-			
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=questao");
+		String mensagem = validarCampos(this.newQuestao);
+		if (mensagem.length() == 0){
+			UsuarioProfessor usuarioSessao = (UsuarioProfessor)SessionUtil.getParam("user");
+			System.out.println(usuarioSessao.getUsuario() + " = " + this.getNewQuestao().getUsuario_professor_questao());
+			if (usuarioSessao.equals(this.getNewQuestao().getUsuario_professor_questao())){
+				System.out.println("Tamanho alternação: " + Integer.toString(this.alternativas.size()));
+				this.newQuestao.setUsuario_professor_questao((UsuarioProfessor)SessionUtil.getParam("user"));
+				this.newQuestao.setAlternativas_questao(this.alternativas);
+				if (questaoDao.alterar(this.newQuestao)){
+					setQuestoes(null);
+					setAlternativas(null);
+					System.out.println("Questão alterada com sucesso!");
+					this.newQuestao = new Questao();
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("provaController");
+					//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("realizarProvaController");
+					
+					ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+					externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=questao");
+				}
+				else
+					System.out.println("Erro na alteração!");
+			}
+			else{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!<br/>", "Só é permitido editar questões que você mesmo criou!"));
+			}
 		}
-		else
-			System.out.println("Erro na alteração!");
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
 	}
 	
 	private void limparCampos(){
@@ -204,14 +249,22 @@ public class QuestaoController {
 	
 	public void excluir() throws IOException
 	{
-		if (questaoDao.excluir(this.currentQuestao)){
-			setQuestoes(null);
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("Questaolist.xhtml");
-			System.out.println("Questão excluida com sucesso!");
+		UsuarioProfessor usuarioSessao = (UsuarioProfessor)SessionUtil.getParam("user");
+		if (usuarioSessao.equals(this.getCurrentQuestao().getUsuario_professor_questao())){
+			if (questaoDao.excluir(this.currentQuestao)){
+				setQuestoes(null);
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("Questaolist.xhtml");
+				System.out.println("Questão excluida com sucesso!");
+			}
+			else{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!<br/>", "Não foi possível excluir!<br>&nbsp;Provavelmente há provas ou outros elementos associados a esta questão."));
+				System.out.println("Erro na exclusão!");
+			}
 		}
-		else
-			System.out.println("Erro na exclusão!");
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!<br/>", "Só é permitido excluir questões que você mesmo criou!"));
+		}
 	}
 	
 	public void goToQuestao() throws Exception{
@@ -219,5 +272,25 @@ public class QuestaoController {
 		System.out.println("goToQuestao");
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Questao.xhtml");
+	}
+
+	public String validarCampos(Questao questao) throws ParseException{
+		String mensagemErro = "";
+		if (questao.getEnunciado_questao().trim().length() == 0)
+			mensagemErro += "<br/>-Preencher enunciado";
+		if (questao.getAutor_questao() == null)
+			mensagemErro += "<br/>-Selecionar autor";
+		if (questao.getDisciplina_questao() == null)
+			mensagemErro += "<br/>-Selecionar disciplina";
+		if (questao.getAssunto_questao() == null)
+			mensagemErro += "<br/>-Selecionar assunto";
+		return mensagemErro;
+	}
+	
+	public void pesquisar(){
+		this.questoes = this.questaoDao.listar(this.pesquisa, this.disciplinaPesquisa);
+		if (this.questoes == null){
+			this.questoes = this.getQuestoes();
+		}
 	}
 }

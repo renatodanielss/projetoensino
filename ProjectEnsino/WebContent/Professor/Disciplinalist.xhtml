@@ -28,8 +28,20 @@ xmlns:p="http://primefaces.org/ui">
 	
 <h:form id="form">
 <table align="center" width="900">
+<tr>
+	<td>
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" escape="false" />
+	</td>
+</tr>
+<tr>
+	<td align="right">
+		<p:inputText id="txtPesquisa" value="#{disciplinaController.pesquisa}" style="width: 737px; display: inline-block; vertical-align: middle;"/>&nbsp;
+		<p:watermark for="txtPesquisa" value="Digite sua pesquisa aqui" />
+		<p:focus for="txtPesquisa" />
+		<p:commandButton id="cmdPesquisa" value="Pesquisar" action="#{disciplinaController.pesquisar}" update="disciplinaTable" ajax="true" style="display: inline-block; vertical-align: middle;" />
+	</td>
+</tr>
 <tr><td>
-
 <p:dataTable  var="disciplina" value="#{disciplinaController.disciplinas}" id="disciplinaTable" rowKey="#{disciplina.id_disciplina}"
 		 selectionMode="single" selection="#{disciplinaController.currentDisciplina}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 

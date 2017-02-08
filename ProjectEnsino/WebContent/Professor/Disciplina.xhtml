@@ -25,6 +25,8 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <div align="center">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
+<!-- //validar - componente message é necessário para que a mensagem de erro seja exibida -->
+<tr><td align="left"><p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" escape="false" /></td></tr>
 <tr><td><center><h2>Cadastro de Disciplina</h2></center></td></tr>
 </table>
 <table align="center">
@@ -35,7 +37,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left"><h:outputText value="Disciplina:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left"><p:inputText id="txtNome" size="77" style="width:658px" value="#{disciplinaController.newDisciplina.nome_disciplina}" /></td>
+	<td align="left"><p:inputText id="txtNome" size="77" style="width:658px" value="#{disciplinaController.newDisciplina.nome_disciplina}" binding="#{txtDisciplina}" /></td>
 </tr>
 </table>
 <br />
@@ -47,6 +49,10 @@ xmlns:p="http://primefaces.org/ui">
 </table>
 </div>
 </h:form>
+<script>
+	var txtDisciplina = document.getElementById('#{txtDisciplina.clientId}');
+	txtDisciplina.focus();
+</script>
 </ui:define>
 </ui:decorate>
 </html>

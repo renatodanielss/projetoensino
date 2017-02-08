@@ -14,11 +14,13 @@ xmlns:p="http://primefaces.org/ui">
 <tr><td align="left">
 <div style="background-image: url('../resources/images/menu.png');">
 	<p:button id="dynaButtonHome" value="Home" href="/Pages/index.xhtml" styleClass="menuButtons" />
-	<p:commandButton id="dynaButtonProfessor" value="Professor" type="button" styleClass="menuButtons" />
-    <p:menu overlay="true" trigger="dynaButtonProfessor" my="left top" at="left bottom" styleClass="menuButtonsItens">
-            <p:menuitem value="Professores" url="/Admin/Professorlist.xhtml" icon="ui-icon-disk" style="color: #DFDFDF" styleClass="menuButtonsItens"/>
-    </p:menu>
-	<p:button id="dynaButtonUsuario" value="Usuário" href="/Admin/Usuarioprofessorlist.xhtml" styleClass="menuButtons" />
+	<p:button id="dynaButtonProfessor" value="Professor" href="/Admin/Professorlist.xhtml" styleClass="menuButtons" />
+    <p:button id="dynaButtonUsuario" value="Usuário" href="/Admin/Usuarioprofessorlist.xhtml" styleClass="menuButtons" />
+    
+    <!-- <p:commandButton id="dynaButtonProfessor" value="Professor" type="button" styleClass="menuButtons" />  -->
+    <!-- <p:menu overlay="true" trigger="dynaButtonProfessor" my="left top" at="left bottom" styleClass="menuButtonsItens">  -->
+    <!--         <p:menuitem value="Professores" url="/Admin/Professorlist.xhtml" icon="ui-icon-disk" style="color: #DFDFDF" styleClass="menuButtonsItens"/>  -->
+    <!-- </p:menu>   -->
 </div>
 </td></tr>
 <tr>

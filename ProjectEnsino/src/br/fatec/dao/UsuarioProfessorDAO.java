@@ -1,9 +1,11 @@
 package br.fatec.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import br.fatec.model.UsuarioProfessor;
 
 public class UsuarioProfessorDAO {
@@ -83,6 +85,31 @@ public class UsuarioProfessorDAO {
 	{		
 		List<UsuarioProfessor> listUsuarioProfessor = null;
 		String query = "select * from tbl_user_professor";
+		
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listUsuarioProfessor = this.manager.createNativeQuery(query, new UsuarioProfessor().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listUsuarioProfessor = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listUsuarioProfessor;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<UsuarioProfessor> listar(String nomeUsuarioProfessor)
+	{		
+		List<UsuarioProfessor> listUsuarioProfessor = null;
+		String query = "SELECT * FROM tbl_user_professor WHERE lower(username_user) LIKE lower('%" + nomeUsuarioProfessor.toLowerCase() + "%')";
 		
 		try
 		{

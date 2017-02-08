@@ -1,9 +1,11 @@
 package br.fatec.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -20,6 +22,7 @@ public class DisciplinaController {
 	private DisciplinaDAO disciplinaDao;
 	private Disciplina currentDisciplina;
 	private Disciplina newDisciplina;
+	private String pesquisa;
 	private boolean showNewButton;
 	
 	public DisciplinaController()
@@ -71,18 +74,32 @@ public class DisciplinaController {
 		this.newDisciplina = newDisciplina;
 	}
 	
-	public void cadastrar() throws IOException
-	{	
-		if (disciplinaDao.inserir(this.newDisciplina)){
-			setDisciplinas(null);
-			System.out.println("Disciplina inserida com sucesso!");
-			this.newDisciplina = new Disciplina();
-			
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=disciplina");
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
+	public void cadastrar() throws IOException, ParseException
+	{
+		String mensagem = validarCampos(this.newDisciplina);
+		if (mensagem.length() == 0){
+			if (disciplinaDao.inserir(this.newDisciplina)){
+				setDisciplinas(null);
+				System.out.println("Disciplina inserida com sucesso!");
+				this.newDisciplina = new Disciplina();
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=disciplina");
+			}
+			else
+				System.out.println("Erro na inserção!");
 		}
-		else
-			System.out.println("Erro na inserção!");
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
 	}
 	
 	public void iniciaAlterar() throws IOException
@@ -103,18 +120,29 @@ public class DisciplinaController {
 		}
 	}
 	
-	public void alterar() throws IOException
-	{	
-		if (disciplinaDao.alterar(this.newDisciplina)){
-			setDisciplinas(null);
-			System.out.println("Disciplina alterada com sucesso!");
-			this.newDisciplina = new Disciplina();
-			
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=disciplina");
+	public void alterar() throws IOException, ParseException
+	{
+		String mensagem = validarCampos(this.newDisciplina);
+		if (mensagem.length() == 0){
+			if (disciplinaDao.alterar(this.newDisciplina)){
+				setDisciplinas(null);
+				System.out.println("Disciplina alterada com sucesso!");
+				this.newDisciplina = new Disciplina();
+				
+				//Atualiza referências
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("assuntoController");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("provaController");
+				
+				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=disciplina");
+			}
+			else
+				System.out.println("Erro na alteração!");
 		}
-		else
-			System.out.println("Erro na alteração!");
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erros!<br/>", mensagem));
+		}
 	}
 	
 	public void excluir() throws IOException
@@ -125,8 +153,10 @@ public class DisciplinaController {
 			externalContext.redirect("Disciplinalist.xhtml");
 			System.out.println("Disciplina excluida com sucesso!");
 		}
-		else
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!<br/>", "Não foi possível excluir!<br>&nbsp;Provavelmente há assuntos, questões ou outros elementos associados a este assunto."));
 			System.out.println("Erro na exclusão!");
+		}
 	}
 	
 	private void limparCampos(){
@@ -140,6 +170,20 @@ public class DisciplinaController {
 		System.out.println("goToDisciplina");
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		externalContext.redirect("Disciplina.xhtml");
+	}
+
+	public String validarCampos(Disciplina disciplina) throws ParseException{
+		String mensagemErro = "";
+		if (disciplina.getNome_disciplina().trim().length() == 0)
+			mensagemErro += "<br/>-Preencher disciplina";
+		return mensagemErro;
+	}
+	
+	public void pesquisar(){
+		this.disciplinas = this.disciplinaDao.listar(this.pesquisa);
+		if (this.disciplinas == null){
+			this.disciplinas = this.getDisciplinas();
+		}
 	}
 	
 	public boolean getShowNewButton(){

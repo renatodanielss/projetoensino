@@ -1,9 +1,11 @@
 package br.fatec.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import br.fatec.model.Prova;
 
 public class ProvaDAO {
@@ -86,6 +88,54 @@ public class ProvaDAO {
 		}
 		
 		return listProva;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prova> listar(String tituloProva, Integer idDisciplina)
+	{
+		List<Prova> listProva = null;
+		String query;
+		
+		if (idDisciplina == -1){
+			query = "SELECT * FROM tbl_prova WHERE lower(titulo_prova) LIKE lower('%" + tituloProva.toLowerCase() + "%')";
+		}
+		else{
+			query = "SELECT * FROM tbl_prova WHERE lower(titulo_prova) LIKE lower('%" + tituloProva.toLowerCase() + "%') AND disciplina_prova = " + idDisciplina;
+		}
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+			listProva = this.manager.createNativeQuery(query, new Prova().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listProva = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}
+		
+		return listProva;
+	}
+	
+	public Prova buscar(Integer codigo)
+	{
+		Prova prova = null;
+		
+		try
+		{
+			this.manager.getTransaction().begin();
+			prova = this.manager.find(Prova.class, codigo);
+	 		this.manager.getTransaction().commit();
+		}
+		catch(Exception ex){
+			prova = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}
+
+		return prova;
 	}
 	
 	public void open()

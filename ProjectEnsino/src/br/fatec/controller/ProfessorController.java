@@ -24,9 +24,8 @@ public class ProfessorController {
 	private Professor currentProfessor;
 	private Professor newProfessor;
 	private AutorController autorController;
-	private boolean showNewButton;
 	private String pesquisa;
-	private String pesquisarPor;
+	private boolean showNewButton;
 	private boolean bloquearMatricula;
 	
 	public ProfessorController()
@@ -80,6 +79,14 @@ public class ProfessorController {
 		this.newProfessor = newProfessor;
 	}
 	
+	public String getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
 	public boolean getShowNewButton() {
 		return showNewButton;
 	}
@@ -94,22 +101,6 @@ public class ProfessorController {
 
 	public void setBloquearMatricula(boolean bloquearMatricula) {
 		this.bloquearMatricula = bloquearMatricula;
-	}
-
-	public String getPesquisa() {
-		return pesquisa;
-	}
-
-	public void setPesquisa(String pesquisa) {
-		this.pesquisa = pesquisa;
-	}
-
-	public String getPesquisarPor() {
-		return pesquisarPor;
-	}
-
-	public void setPesquisarPor(String pesquisarPor) {
-		this.pesquisarPor = pesquisarPor;
 	}
 
 	public void mostrarAlterar(){
@@ -196,6 +187,9 @@ public class ProfessorController {
 				System.out.println("Professor alterado com sucesso!");
 				this.newProfessor = new Professor();
 				
+				//Atualiza referências
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuarioProfessorController");
+				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=professor");
 			}
@@ -215,8 +209,10 @@ public class ProfessorController {
 			externalContext.redirect("Professorlist.xhtml");
 			System.out.println("Professor excluido com sucesso!");
 		}
-		else
-			System.out.println("Erro na exclusï¿½o!");
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!<br/>", "Não foi possível excluir!<br>&nbsp;Provavelmente há usuário associado a este professor."));
+			System.out.println("Erro na exclusão!");
+		}
 	}
 	
 	private void limparCampos(){
@@ -260,12 +256,23 @@ public class ProfessorController {
 	//validar - mï¿½todo para validaï¿½ï¿½o de atributos do objeto associado ï¿½ view, este mï¿½todo serï¿½ chamado pelo mï¿½todo cadastrar e alterar
 	public String validarCampos(Professor professor) throws ParseException{
 		String mensagemErro = "";
+		if (professor.getMatricula_professor().trim().length() == 0)
+			mensagemErro += "<br/>-Preencher matrícula";
+		if (professor.getCpf_professor().trim().length() == 0)
+			mensagemErro += "<br/>-Preencher CPF";
 		if (professor.getNome_professor().trim().length() == 0)
-			mensagemErro += "<br/>-Preencher campo nome";
+			mensagemErro += "<br/>-Preencher nome";
 		if (!Date.isDate(professor.getDatanasc_professor()))
-			mensagemErro += "<br/>-Data de nascimento invÃ¡lida";
+			mensagemErro += "<br/>-Data de nascimento inválida";
 		if (!professor.getEmail_professor().trim().matches("[^@ ]*[@][a-zA-Z0-9]*[.][a-zA-Z.]*"))
-			mensagemErro += "<br/>-Email invÃ¡lido";
+			mensagemErro += "<br/>-Email inválido";
 		return mensagemErro;
+	}
+	
+	public void pesquisar(){
+		this.professores = this.professorDao.listar(this.pesquisa);
+		if (this.professores == null){
+			this.professores = this.getProfessores();
+		}
 	}
 }

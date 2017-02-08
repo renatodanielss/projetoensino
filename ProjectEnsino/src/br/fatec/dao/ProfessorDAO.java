@@ -139,6 +139,56 @@ public class ProfessorDAO {
 			return false;
 		return true;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Professor> listar(String nomeProfessor)
+	{		
+		List<Professor> listProfessor = null;
+		String query = "SELECT * FROM tbl_professor WHERE lower(nome_professor) LIKE lower('%" + nomeProfessor.toLowerCase() + "%')";
+		
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listProfessor = this.manager.createNativeQuery(query, new Professor().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listProfessor = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listProfessor;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Professor> listarProfessorSemUsuario()
+	{		
+		List<Professor> listProfessor = null;
+		String query = "SELECT * FROM tbl_professor LEFT JOIN tbl_user_professor ON tbl_user_professor.professor_user = tbl_professor.matricula_professor WHERE tbl_user_professor.username_user IS NULL";
+		
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listProfessor = this.manager.createNativeQuery(query, new Professor().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listProfessor = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listProfessor;
+	}
 		
 	public boolean excluir(Professor professor)
 	{

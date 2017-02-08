@@ -37,7 +37,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left"><h:outputText value="Usuário:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left" ><p:inputText id="txtUsuario" style="width:237px" value="#{usuarioProfessorController.newUsuarioProfessor.usuario}" /></td>
+	<td align="left" ><p:inputText id="txtUsuario" style="width:237px" value="#{usuarioProfessorController.newUsuarioProfessor.usuario}" binding="#{txtUsuario}" /></td>
 </tr>
 <tr>
 	<br />
@@ -58,7 +58,7 @@ xmlns:p="http://primefaces.org/ui">
 	<td align="left" style="width:50px">
 		<p:selectOneMenu maxlength="85" id="slmProfessor" value="#{usuarioProfessorController.newUsuarioProfessor.professor}" converter="entityConverter" style="width:372px;vertical-align:bottom">
 			<f:selectItem itemLabel="Selecione um professor" itemValue="#{null}" ></f:selectItem>
-			<f:selectItems value="#{professorController.professores}" var="professor" itemValue="#{professor}" itemLabel="#{professor.nome_professor}" />
+			<f:selectItems value="#{usuarioProfessorController.professoresSemUsuario}" var="professor" itemValue="#{professor}" itemLabel="#{professor.nome_professor}" />
 		</p:selectOneMenu>
 	</td>
 </tr>
@@ -76,8 +76,11 @@ xmlns:p="http://primefaces.org/ui">
 </table>
 </h:panelGroup>
 </div>
-
 </h:form>
+<script>
+	var txtUsername = document.getElementById('#{txtUsuario.clientId}');
+	txtUsername.focus();
+</script>
 </ui:define>
 </ui:decorate>
 </html>

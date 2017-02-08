@@ -23,12 +23,30 @@ xmlns:p="http://primefaces.org/ui">
 <ui:decorate template="/Template/TemplateProfessor.xhtml">
 <ui:define name="page">
 <h:form id="form">
-<table align="center" style="width: 900px">
+<table align="center" style="width: 900px" border="0">
+<tr>
+	<td>
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" escape="false" />
+	</td>
+</tr>
+<tr>
+	<td align="right">
+		<p:selectOneMenu id="somDisciplina" value="#{questaoController.disciplinaPesquisa}" converter="entityConverter" style="width: 200px; text-align: left; display: inline-block; vertical-align: middle;">
+			<f:selectItem itemLabel="Todas as disciplinas" itemValue="-1" />
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="disciplina" itemValue="#{disciplina.id_disciplina}" itemLabel="#{disciplina.nome_disciplina}" />
+		</p:selectOneMenu>
+		&nbsp;
+		<p:inputText id="txtPesquisa" value="#{questaoController.pesquisa}" style="width: 535px; display: inline-block; vertical-align: middle;"/>&nbsp;
+		<p:watermark for="txtPesquisa" value="Digite sua pesquisa aqui" />
+		<p:focus for="txtPesquisa" />
+		<p:commandButton id="cmdPesquisa" value="Pesquisar" action="#{questaoController.pesquisar}" update="questaoTable" ajax="true" style="display: inline-block; vertical-align: middle;" />
+	</td>
+</tr>
 <tr><td>
 <p:dataTable var="questao" value="#{questaoController.questoes}" id="questaoTable" rowKey="#{questao.id_questao}"
 		 selectionMode="single" selection="#{questaoController.currentQuestao}" style="text-align:center" paginator="true" rows="10"
 		 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-		 rowsPerPageTemplate="5,10,15" lazy="true" filterEvent="enter">
+		 rowsPerPageTemplate="5,10,15" lazy="false" filterEvent="enter">
   
 	        <f:facet name="header">
 	            Questão
@@ -39,7 +57,7 @@ xmlns:p="http://primefaces.org/ui">
 	            #{questao.id_questao}
 	        </p:column>
 	        
-	        <p:column width="600" headerText="Enunciado" id="enunciado_questao">
+	        <p:column width="480" headerText="Enunciado" id="enunciado_questao">
 	            #{questao.enunciado_questao}
 	        </p:column>
 	        
@@ -47,6 +65,10 @@ xmlns:p="http://primefaces.org/ui">
 	            #{questao.disciplina_questao.nome_disciplina}
 	        </p:column>
 
+			<p:column width="120" headerText="Usuário" id="usuario_prova">
+	            #{questao.usuario_professor_questao.usuario}
+	        </p:column>
+	        
 </p:dataTable>
 </td></tr>
 </table>

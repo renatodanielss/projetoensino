@@ -1,9 +1,11 @@
 package br.fatec.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import br.fatec.model.Textobase;
 
 public class TextobaseDAO {
@@ -174,6 +176,36 @@ public class TextobaseDAO {
 			open();
 			this.manager.getTransaction().begin();
 			listTextobase = this.manager.createNativeQuery(query, new Object().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listTextobase = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listTextobase;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Textobase> listar(String textobase, Integer idDisciplina)
+	{		
+		List<Textobase> listTextobase = null;
+		String query;
+		
+		if (idDisciplina == -1)
+			query = "SELECT * FROM tbl_textobase WHERE lower(titulo_textobase) LIKE lower('%" + textobase.toLowerCase() + "%')";
+		else
+			query = "SELECT * FROM tbl_textobase WHERE lower(titulo_textobase) LIKE lower('%" + textobase.toLowerCase() + "%') AND disciplina_textobase = " + idDisciplina;
+			
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listTextobase = this.manager.createNativeQuery(query, new Textobase().getClass()).getResultList();
 			this.manager.getTransaction().commit();
 		}
 		catch(Exception ex)

@@ -1,5 +1,7 @@
 package br.fatec.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +12,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_user_admin")
-public class UsuarioAdmin {
+public class UsuarioAdmin implements Serializable{
 
-	@SuppressWarnings("unused")
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ADMIN_ID")

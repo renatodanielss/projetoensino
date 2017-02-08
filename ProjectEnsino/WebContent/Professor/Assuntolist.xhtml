@@ -27,6 +27,24 @@ xmlns:p="http://primefaces.org/ui">
 <ui:define name="page">
 <h:form id="form">
 <table align="center" width="900">
+<tr>
+	<td>
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" escape="false" />
+	</td>
+</tr>
+<tr>
+	<td align="right">
+		<p:selectOneMenu id="somDisciplina" value="#{assuntoController.disciplinaPesquisa}" converter="entityConverter" style="width: 200px; text-align: left; display: inline-block; vertical-align: middle;">
+			<f:selectItem itemLabel="Todas as disciplinas" itemValue="-1" />
+			<f:selectItems value="#{disciplinaController.disciplinas}" var="disciplina" itemValue="#{disciplina.id_disciplina}" itemLabel="#{disciplina.nome_disciplina}" />
+		</p:selectOneMenu>
+		&nbsp;
+		<p:inputText id="txtPesquisa" value="#{assuntoController.pesquisa}" style="width: 537px; display: inline-block; vertical-align: middle;"/>&nbsp;
+		<p:watermark for="txtPesquisa" value="Digite sua pesquisa aqui" />
+		<p:focus for="txtPesquisa" />
+		<p:commandButton id="cmdPesquisa" value="Pesquisar" action="#{assuntoController.pesquisar}" update="assuntoTable" ajax="true" style="display: inline-block; vertical-align: middle;" />
+	</td>
+</tr>
 <tr><td>
 <p:dataTable  var="assunto" value="#{assuntoController.assuntos}" id="assuntoTable" rowKey="#{assunto.id_assunto}"
 		 selectionMode="single" selection="#{assuntoController.currentAssunto}" style="text-align:center" paginator="true" rows="10"
@@ -43,8 +61,12 @@ xmlns:p="http://primefaces.org/ui">
 	             #{assunto.id_assunto}
 	        </p:column>
 	        
-	        <p:column width="650" headerText="Assunto" id="nome_assunto">
+	        <p:column width="540" headerText="Assunto" id="nome_assunto">
 	           #{assunto.nome_assunto}
+	        </p:column>
+	        
+	        <p:column width="110" headerText="Disciplina" id="disciplina_assunto">
+	           #{assunto.disciplina_assunto.nome_disciplina}
 	        </p:column>
 </p:dataTable>
 </td></tr>

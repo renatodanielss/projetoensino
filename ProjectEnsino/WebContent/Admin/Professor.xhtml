@@ -39,8 +39,8 @@ xmlns:p="http://primefaces.org/ui">
 </tr>
 
 <tr>
-	<td align="left" ><p:inputText id="txtMatricula" style="width:438px" value="#{professorController.newProfessor.matricula_professor}" disabled="#{professorController.bloquearMatricula}"/></td>
-	<td align="left" ><p:inputMask mask="999.999.999-99" id="txtCpf" style="width:438px" value="#{professorController.newProfessor.cpf_professor}"/></td>
+	<td align="left" ><p:inputText id="txtMatricula" style="width:438px" value="#{professorController.newProfessor.matricula_professor}" disabled="#{professorController.bloquearMatricula}" binding="#{txtMatricula}" /></td>
+	<td align="left" ><p:inputMask mask="999.999.999-99" id="txtCpf" style="width:438px" value="#{professorController.newProfessor.cpf_professor}" binding="#{txtCpf}" /></td>
 </tr>
 
 </table>
@@ -153,8 +153,18 @@ xmlns:p="http://primefaces.org/ui">
 </table>
 </h:panelGroup>
 </div>
-
 </h:form>
+<script>
+	var txtMatricula = document.getElementById('#{txtMatricula.clientId}');
+	
+	if (!txtMatricula.disabled){
+		txtMatricula.focus();
+	}
+	else{
+		var txtCpf = document.getElementById('#{txtCpf.clientId}');
+		txtCpf.focus();
+	}
+</script>
 </ui:define>
 </ui:decorate>
 </html>

@@ -25,13 +25,18 @@ xmlns:p="http://primefaces.org/ui">
 <h:form enctype="multipart/form-data">
 <div align="center">
 <table style="width:900px" border="0" align="center" cellpadding="0" cellspacing="0">
+<!-- //validar - componente message é necessário para que a mensagem de erro seja exibida -->
+<tr><td align="left"><p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" escape="false" /></td></tr>
 <tr><td><center><h2>Cadastro de Autor</h2></center></td></tr>
 <tr><td align="left"><h3>Detalhes do Autor</h3></td></tr>
 <tr>
 	<td align="left"><h:outputText value="Nome:"></h:outputText></td>
 </tr>
 <tr>
-	<td align="left"><p:inputText id="txtNome" style="width:900px" value="#{autorController.newAutor.nome_autor}"/></td>
+	<td align="left">
+		<p:inputText id="txtNome" style="width:900px" value="#{autorController.newAutor.nome_autor}"/>
+		<p:focus for="txtNome" />
+	</td>
 </tr>
 </table>
 <br />

@@ -1,6 +1,7 @@
 package br.fatec.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -83,6 +84,31 @@ public class AutorDAO {
 	{		
 		List<Autor> listAutor = null;
 		String query = "select * from tbl_autor";
+		
+		try
+		{
+			open();
+			this.manager.getTransaction().begin();
+			listAutor = this.manager.createNativeQuery(query, new Autor().getClass()).getResultList();
+			this.manager.getTransaction().commit();
+		}
+		catch(Exception ex)
+		{
+			listAutor = null;
+			if (this.manager.getTransaction().isActive())
+				this.manager.getTransaction().rollback();
+		}finally{
+			close();
+		}
+		
+		return listAutor;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Autor> listar(String autor)
+	{		
+		List<Autor> listAutor = null;
+		String query = "SELECT * FROM tbl_autor WHERE lower(nome_autor) LIKE lower('%" + autor.toLowerCase() + "%')";
 		
 		try
 		{

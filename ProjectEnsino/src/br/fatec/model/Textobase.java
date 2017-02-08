@@ -1,27 +1,44 @@
 package br.fatec.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tbl_textobase")
-public class Textobase{
+public class Textobase implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTE_ID")
 	@SequenceGenerator(name="CLIENTE_ID", sequenceName="CLIENTE_SEQ", allocationSize=1)
 	@Column(name="codigo_textobase")
 	private Integer codigo_textobase;
+	
 	@Column(name="titulo_textobase")
 	private String titulo_textobase;
-	@Column(name="disciplina_textobase")
-	private int disciplina_textobase;
-	@Column(name="assunto_textobase")
-	private int assunto_textobase;
+	
+	@ManyToOne
+    @JoinColumn(name="autor_textobase")
+	private Autor autor_textobase;
+	
+	@ManyToOne
+    @JoinColumn(name="disciplina_textobase")
+	private Disciplina disciplina_textobase;
+	
+	@ManyToOne
+    @JoinColumn(name="assunto_textobase")
+	private Assunto assunto_textobase;
+	
 	@Column(name="texto_textobase")
 	private String texto_textobase;
 	
@@ -40,20 +57,28 @@ public class Textobase{
 	public void setTitulo_textobase(String titulo_textobase) {
 		this.titulo_textobase = titulo_textobase;
 	}
+	
+	public Autor getAutor_textobase() {
+		return autor_textobase;
+	}
 
-	public int getDisciplina_textobase() {
+	public void setAutor_textobase(Autor autor_textobase) {
+		this.autor_textobase = autor_textobase;
+	}
+
+	public Disciplina getDisciplina_textobase() {
 		return disciplina_textobase;
 	}
 
-	public void setDisciplina_textobase(int disciplina_textobase) {
+	public void setDisciplina_textobase(Disciplina disciplina_textobase) {
 		this.disciplina_textobase = disciplina_textobase;
 	}
 
-	public int getAssunto_textobase() {
+	public Assunto getAssunto_textobase() {
 		return assunto_textobase;
 	}
 
-	public void setAssunto_textobase(int assunto_textobase) {
+	public void setAssunto_textobase(Assunto assunto_textobase) {
 		this.assunto_textobase = assunto_textobase;
 	}
 

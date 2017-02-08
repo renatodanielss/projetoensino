@@ -3,7 +3,6 @@ package br.fatec.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -23,8 +22,8 @@ public class AssuntoController {
 	private Assunto currentAssunto;
 	private AssuntoDAO assuntoDao;
 	private List<Assunto> assuntos;
-	private List<Assunto> textobaseAssuntos;
-	private TextobaseController textobaseController;
+	private String pesquisa;
+	private Integer disciplinaPesquisa;
 	private boolean showNewButton;
 	
 	public AssuntoController()
@@ -38,7 +37,6 @@ public class AssuntoController {
 		this.assuntoDao = new AssuntoDAO();
 		this.newAssunto = new Assunto();
 		this.currentAssunto = new Assunto();
-		this.textobaseController = this.getTextobaseController();
 		mostrarSalvar();
 	}
 
@@ -51,23 +49,6 @@ public class AssuntoController {
 
 	public void setAssuntos(List<Assunto> assuntos) {
 		this.assuntos = assuntos;
-	}
-
-	public List<Assunto> getTextobaseAssuntos() {
-		textobaseController = this.getTextobaseController();
-		if (textobaseController.getNewTextoBase().getDisciplina_textobase() < 1)
-			this.textobaseAssuntos = null;
-		else{
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			String redirectValue = (String) facesContext.getExternalContext().getRequestParameterMap().get("redirect");
-			if (redirectValue != null && Integer.parseInt(redirectValue) == 1)
-				mudarAssuntos();
-		}
-		return textobaseAssuntos;
-	}
-
-	public void setTextobaseAssuntos(List<Assunto> textobaseAssuntos) {
-		this.textobaseAssuntos = textobaseAssuntos;
 	}
 
 	public AssuntoDAO getAssuntoDao() {
@@ -110,26 +91,20 @@ public class AssuntoController {
 	     this.showNewButton = true;
 	}
 	
-	public TextobaseController getTextobaseController() {
-		try{
-			FacesContext context = FacesContext.getCurrentInstance();
-			@SuppressWarnings("rawtypes")
-			Map sessionMap = context.getExternalContext().getSessionMap();
-			textobaseController = (TextobaseController)sessionMap.get("textobaseController");
-		}catch(Exception e){
-			textobaseController = null;
-			e.printStackTrace();
-		}
-		return textobaseController;
+	public String getPesquisa() {
+		return pesquisa;
 	}
 
-	public void setTextobaseController(TextobaseController textobaseController) {
-		this.textobaseController = textobaseController;
+	public void setPesquisa(String pesquisa) {
+		this.pesquisa = pesquisa;
 	}
 	
-	public void mudarAssuntos() {
-		TextobaseController textobaseController = this.getTextobaseController();
-		this.textobaseAssuntos = assuntoDao.listar(textobaseController.getNewTextoBase().getDisciplina_textobase());
+	public Integer getDisciplinaPesquisa() {
+		return disciplinaPesquisa;
+	}
+
+	public void setDisciplinaPesquisa(Integer disciplinaPesquisa) {
+		this.disciplinaPesquisa = disciplinaPesquisa;
 	}
 	
 	public void cadastrar() throws IOException, ParseException
@@ -163,7 +138,7 @@ public class AssuntoController {
 			try{
 				this.getNewAssunto().setId_assunto(this.getCurrentAssunto().getId_assunto());
 				this.getNewAssunto().setNome_assunto(this.getCurrentAssunto().getNome_assunto());
-				this.getNewAssunto().setIdDisciplina_assunto(this.getCurrentAssunto().getIdDisciplina_assunto());
+				this.getNewAssunto().setDisciplina_assunto(this.getCurrentAssunto().getDisciplina_assunto());
 				
 				mostrarAlterar();
 				
@@ -188,6 +163,11 @@ public class AssuntoController {
 				System.out.println("Assunto alterado com sucesso!");
 				this.newAssunto = new Assunto();
 				
+				//Atualiza referências
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("textobaseController");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("questaoController");
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("provaController");
+				
 				ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();	
 				externalContext.redirect("CadastroConcluido.xhtml?faces-redirect=true&origin=assunto");
 				
@@ -209,13 +189,15 @@ public class AssuntoController {
 			externalContext.redirect("Assuntolist.xhtml");
 			System.out.println("Assunto excluido com sucesso!");
 		}
-		else
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!<br/>", "Não foi possível excluir!<br>&nbsp;Provavelmente há disciplinas, questões ou outros elementos associados a este assunto."));
 			System.out.println("Erro na exclusão!");
+		}
 	}
 	
 	private void limparCampos(){
 		this.newAssunto.setId_assunto(null);
-		this.newAssunto.setIdDisciplina_assunto(null);
+		this.newAssunto.setDisciplina_assunto(null);
 		this.newAssunto.setNome_assunto(null);
 		this.mostrarSalvar();
 	}
@@ -233,9 +215,16 @@ public class AssuntoController {
 		
 		if (assunto.getNome_assunto().trim().length() == 0)
 			mensagemErro += "<br/>-Preencher campo nome";
-		if (assunto.getIdDisciplina_assunto() == 0)	
-			mensagemErro += "<br/>-Preencher campo Disciplina";
+		if (assunto.getDisciplina_assunto() == null)
+			mensagemErro += "<br/>-Preencher campo disciplina";
 		
 		return mensagemErro;
+	}
+	
+	public void pesquisar(){
+		this.assuntos = this.assuntoDao.listar(this.pesquisa, this.disciplinaPesquisa);
+		if (this.assuntos == null){
+			this.assuntos = this.getAssuntos();
+		}
 	}
 }
