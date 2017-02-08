@@ -165,7 +165,7 @@ function PrintElem(elem, title)
 					</table>
 					<br />
 				</h:panelGroup>
-				<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width: 859px;" styleClass="realizarProva" /><br /><br />
+				<p style="text-align: justify;"><p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width: 859px;" styleClass="realizarProva" /></p>
 				<ui:repeat id="rptAlternativas" value="#{provaController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
 					&nbsp;&nbsp;&nbsp;&nbsp;<p:outputLabel value="#{provaController.obterLetra(statusAlternativas.index + 1)} - " /><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].alternativas_questao[statusAlternativas.index].texto_alternativa}" styleClass="realizarProva" /><br />
 				</ui:repeat>
