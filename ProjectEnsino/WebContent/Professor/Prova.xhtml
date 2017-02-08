@@ -154,9 +154,8 @@ function PrintElem(elem, title)
 	<div id="imprimirProva">
 		<h:panelGroup id="pgQuestoes">
 			<ui:repeat id="rptQuestoes" value="#{provaController.questoes}" varStatus="statusQuestoes">
-				<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].textobase_questao.texto_textobase}" style="width: 859px;" styleClass="realizarProva" />
+				<p style="text-align: justify;"><p:outputLabel value="#{provaController.questoes[statusQuestoes.index].textobase_questao.texto_textobase}" style="width: 859px; text-align: justify;" styleClass="realizarProva" /></p>
 				<h:panelGroup rendered="#{not empty provaController.questoes[statusQuestoes.index].textobase_questao}">
-					<br />
 					<table align="right" border="0" cellpading="0" cellspacing="0">
 						<tr>
 							<td>
@@ -164,7 +163,7 @@ function PrintElem(elem, title)
 							</td>
 						</tr>
 					</table>
-					<br /><br />
+					<br />
 				</h:panelGroup>
 				<p:outputLabel value="#{statusQuestoes.index + 1} -" />&nbsp;&nbsp;<p:outputLabel value="#{provaController.questoes[statusQuestoes.index].enunciado_questao}" style="width: 859px;" styleClass="realizarProva" /><br /><br />
 				<ui:repeat id="rptAlternativas" value="#{provaController.questoes[statusQuestoes.index].alternativas_questao}" varStatus="statusAlternativas">
